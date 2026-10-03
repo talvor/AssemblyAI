@@ -1,0 +1,49 @@
+{
+  "round": 1,
+  "destination": "Implementation-ready v1 specification",
+  "first_customer": "Phillip and his development workflow",
+  "factory_deliverable": "An implemented and tested pull request",
+  "requirements": [
+    "One agent the user communicates with, backed by specialist agents",
+    "Include product naming in the grilling process",
+    "Use Openrig and Firstmate as an ideas pool",
+    "Integrate as many Matt Pocock skills as appropriate, particularly wayfinder and grilling; account for where all of them fit",
+    "Present questions through Lavish"
+  ],
+  "hypotheses_to_examine": [
+    "How daemon/session supervision should keep the factory running",
+    "Whether tmux fits session management"
+  ],
+  "next_step": "Breadth-first grilling to map the frontier before creating the wayfinder map",
+  "review_session": "Closed by agent after completing charting",
+  "round_2": {
+    "factory_scope": "Repository-independent factory serving multiple repositories in v1",
+    "cli_responsibility": "Set up factory, ensure necessary agents run and know their responsibilities; possible collaboration tooling",
+    "interaction": "Browser primary; CLI conversation also desirable",
+    "autonomy": "Lead agent drives process and makes reasonable decisions; involves user when path is not obvious",
+    "staffing": "Responsibility-based agents with multiple skills; configurable multiple agents and Codex/Claude per responsibility",
+    "naming_direction": "Crew and navigation",
+    "hypotheses": [
+      "Daemon to keep factory running while user is away",
+      "Lead-and-worker arrangement within each responsibility"
+    ]
+  },
+  "round_3": {
+    "human_decisions": "Keep human grilling; separate delegated decision steps for the lead",
+    "terminology": "Roles, each with one leader at all times and workers spawned as needed; leaders coordinate, make role decisions, and delegate actual work",
+    "runtime_selection": "Leave Claude versus Codex undecided",
+    "hosting": "Both local and remote hosts in v1; investigate tmux",
+    "repository_concurrency": "Concurrent independent jobs across repositories",
+    "work_types": "Feature to tested PR plus standalone engineering tasks"
+  },
+  "map_review": {
+    "confirmed": true,
+    "openrig": "https://github.com/mvschwarz/openrig"
+  },
+  "charting_status": "Complete: 17 tickets, 4 resolved including product name; next Define roles and leader-worker contracts",
+  "product_name": {
+    "name": "AsmAI",
+    "meaning": "AssemblyAI",
+    "status": "Locked by explicit user instruction"
+  }
+}
