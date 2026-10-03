@@ -11,8 +11,10 @@ When a skill says "publish to the issue tracker", create a
 GitHub issue. When it says "fetch the relevant ticket", read
 the issue body, labels, and comments.
 
-Existing .scratch/software-factory files remain local reference
-material; this setup does not migrate them to GitHub.
+The software-factory wayfinder session was migrated to GitHub:
+[Chart AsmAI](https://github.com/talvor/AssemblyAI/issues/1).
+Files in .scratch/software-factory are historical source snapshots;
+maintain the live map, tickets, resolutions, and dependencies on GitHub.
 
 ## Pull requests as a triage surface
 
