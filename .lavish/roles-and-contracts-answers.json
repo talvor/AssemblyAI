@@ -1,0 +1,27 @@
+{
+  "ticket": "https://github.com/talvor/AssemblyAI/issues/5",
+  "rounds": [
+    {
+      "round": 1,
+      "answers": {
+        "Q1": "Use these five roles",
+        "Q2": "One leader per role across the factory",
+        "Q3": "One owning leader controls the assignment"
+      }
+    },
+    {
+      "round": 2,
+      "answers": {
+        "Q4": "Use these workflow homes and one user-facing counterpart",
+        "Q5": "Assignment-scoped workers; reuse only through a new assignment",
+        "Q6": "Explicit acceptance and evidence for every handoff",
+        "Q7": "Domain ownership first; unresolved trade-offs go through Coordination",
+        "Q8": "Leaders coordinate and decide; workers do substantive execution"
+      }
+    }
+  ],
+  "confirmation": {
+    "question": "Q9",
+    "answer": "Confirm and record this decision"
+  }
+}
