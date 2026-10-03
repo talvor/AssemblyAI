@@ -1,0 +1,87 @@
+{
+  "round1": {
+    "questions": [
+      {
+        "id": "Q1",
+        "title": "Must AsmAI preserve compatibility with an existing Firstmate or OpenRig setup?",
+        "body": "For example: must existing commands keep working, existing task history carry across, or existing agents/configuration run unchanged? This is separate from learning from their code. Compatibility can make reuse more valuable, but also constrain AsmAI\u2019s design.",
+        "recommendation": "Treat AsmAI as its own product with no v1 command, configuration, or task-history compatibility requirement. Use the references for useful ideas and consider concrete reuse on its merits. If you need a migration from your current Firstmate installation, name what must carry across.",
+        "options": [
+          "No existing-system compatibility required",
+          "Preserve or migrate my Firstmate setup \u2014 describe what matters",
+          "Preserve OpenRig compatibility \u2014 describe what matters"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q1",
+        "answer": "No existing-system compatibility required"
+      }
+    ]
+  },
+  "round2": {
+    "questions": [
+      {
+        "id": "Q2",
+        "title": "Which foundation should AsmAI take?",
+        "body": "No compatibility with existing installations is required. Both an independent implementation and an OpenRig-backed product are plausible. Choosing independence means owning the runtime and recovery work; choosing reuse means accepting an upstream architecture and proving that it can enforce AsmAI\u2019s policies.",
+        "recommendation": "Build an independent AsmAI core, using both systems as design references. Your five-role ownership model and human-decision rules are already specific, and no compatibility requirement pulls us toward an upstream. This gives control but is likely more work. If reducing initial implementation work matters more, investigate an OpenRig configuration/wrapper before choosing independence.",
+        "options": [
+          "Independent AsmAI core, references for ideas",
+          "Investigate OpenRig configuration/wrapper as the foundation",
+          "Investigate extending or forking Firstmate",
+          "Investigate an OpenRig fork"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q2",
+        "answer": "Independent AsmAI core, references for ideas"
+      }
+    ]
+  },
+  "round3": {
+    "questions": [
+      {
+        "id": "Q3",
+        "title": "Does \u201creferences for ideas\u201d allow copying a small useful component later?",
+        "body": "Suppose an implementation session finds a reusable message-delivery helper in Firstmate. Studying its approach and writing AsmAI\u2019s own helper is inspiration. Copying or adapting that source creates code that AsmAI must attribute, test, and maintain. Neither means adopting the entire runtime.",
+        "recommendation": "Allow a specific extraction only after a separate explicit decision on the concrete component: source revision, license/notice obligations, dependencies, contract, tests, and maintenance/update ownership. No component is approved now, and there is no blanket permission to import reference code. Ordinary third-party libraries and the separately planned skill bundles are outside this reference-system decision.",
+        "options": [
+          "Allow separately approved component reuse",
+          "Ideas only: do not copy or depend on either reference\u2019s code",
+          "Allow small component reuse at the implementing leader\u2019s discretion"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q3",
+        "answer": "Allow separately approved component reuse"
+      }
+    ]
+  },
+  "confirmation": {
+    "questions": [
+      {
+        "id": "Q4",
+        "title": "Does this capture our shared understanding?",
+        "body": "Confirm to publish this resolution and evidence to GitHub, close the decision ticket, and update the map. Describe any correction before publication.",
+        "recommendation": "Confirm if the independent-core direction and separate approval for component reuse match your intent.",
+        "options": [
+          "Confirmed \u2014 publish the resolution",
+          "Needs changes \u2014 describe below"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q4",
+        "answer": "Confirmed \u2014 publish the resolution"
+      }
+    ],
+    "summary": "## Independent foundation\nAsmAI v1 will have an independent core, informed by Firstmate and mvschwarz/openrig. It will not be a fork, extension, or runtime wrapper around either reference. No compatibility with their commands, configuration, agents, or task history is required, and no migration from an existing installation is included in v1.\n\n## Ownership and tradeoff\nThis choice favors control over AsmAI\u2019s five-role model, assignment ownership and human-decision rules. AsmAI takes responsibility for its own runtime integration, durable state, recovery and verification. OpenRig remains a credible packaged alternative with CLI/HTTP/MCP and custom specifications; it was not rejected for lacking integration surfaces. No live comparison established which approach would be faster or more reliable.\n\n## Ideas do not select architecture\nBoth projects remain design references. Their separation of durable work, ownership, notifications, live process state and completion evidence can inform later decisions. This does not adopt their schemas, storage, supervisor, terminal manager, retry rules, permission policy or packaging. The existing hosting, work-state and interactive-CLI feasibility tickets remain authoritative for those choices.\n\n## Selective component reuse\nA concrete component may be copied or adapted only after a separate explicit human decision. Present the source revision, applicable license and notice requirements, dependencies, intended contract, tests, and who maintains it and handles updates. Copied code becomes AsmAI-maintained code; no automatic upstream update policy or blanket import permission is granted. No specific component is approved now.\n\nThis boundary concerns code from the two reference systems. It does not ban ordinary third-party libraries or settle the separate skill-bundle decision. AsmAI\u2019s own open-source license remains unselected.\n\n## Map follow-through\nRecord this resolution, close this decision ticket, and update the map\u2019s reference-system note. No new ticket is needed: runtime feasibility, hosting/lifecycle, work state and skill policy already have tickets. No concrete extraction candidate has been proposed. The next available decision in map order is Validate interactive CLI coordination and intervention.\n\nThis session produces a planning decision only; it authorizes no factory implementation or reference-system installation.\n"
+  }
+}
