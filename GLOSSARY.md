@@ -28,6 +28,21 @@ A bounded piece of work entrusted to one worker by its owning leader, with an ou
 **Handoff**:
 A request for another leader to take responsibility for a defined outcome, carrying the context and acceptance criteria needed to accept, clarify, or decline it.
 
+**Mandate**:
+The authority to pursue a requested outcome within its agreed scope, constraints, and acceptance criteria.
+
+**Grant**:
+An explicit authorization for a decision or action within a recorded scope and set of conditions, reusable while those conditions hold.
+
+**Viable approach**:
+A way of achieving an outcome that satisfies the agreed constraints and differs from alternatives in behavior, dependencies, interfaces, cost, maintenance, or operational consequences. Equivalent expression styles are not distinct approaches.
+
+**Delegated decision**:
+A choice made by an accountable leader within its mandate or an applicable grant, recorded as agent-made rather than attributed to the user.
+
+**Escalation**:
+A decision request carried to the user through Coordination when work requires the user's choice or authority.
+
 **Coordination**:
 The role responsible for the user's conversation with the factory and overall delivery progress.
 

@@ -1,0 +1,126 @@
+{
+  "ticket": "https://github.com/talvor/AssemblyAI/issues/6",
+  "rounds": [
+    {
+      "round": 1,
+      "questions": [
+        {
+          "id": "Q1",
+          "title": "What does asking the factory to deliver a job authorize?",
+          "body": "You ask for a feature implemented as a tested pull request. The agreed roles already decide within their domains and delegate execution. The remaining question is how much room they have to choose the route without returning for permission at each step.",
+          "recommendation": "The requested outcome authorizes ordinary work needed to deliver it: inspect, plan, research, make scoped edits, run checks, commit and push the job branch, and open or update its PR. Leaders may choose reversible implementation details within the agreed scope, repository rules and resource limits. A planning-only or research-only request authorizes that outcome only. Merge, deployment, spending beyond a granted budget, and destructive changes outside the job need separate authorization unless already covered by an explicit standing grant.",
+          "options": [
+            "Use this outcome-based mandate",
+            "Require an approved implementation plan before execution",
+            "Use a different default mandate \u2014 describe below"
+          ]
+        },
+        {
+          "id": "Q2",
+          "title": "How should an approval survive handoffs and restarts?",
+          "body": "You approve a dependency or a test seam, then work passes to another leader, another worker, or a resumed session. Re-asking the same question wastes time; treating every old approval as universal creates a different problem.",
+          "recommendation": "Record the exact decision or action approved, its job/repository scope, conditions, and source. Carry it with assignments and handoffs, and reuse it while those conditions remain true. An approval for one job stays with that job; a reusable repository or factory grant must be explicitly given that wider scope. A changed scope or invalidated condition is a new decision. Runtime tool restrictions still apply independently.",
+          "options": [
+            "Reuse approvals within their recorded scope and conditions",
+            "Require fresh approval after every handoff or restart",
+            "Make approvals reusable across all jobs by default"
+          ]
+        },
+        {
+          "id": "Q3",
+          "title": "When can a leader accept a result without asking you?",
+          "body": "A worker delivers a result with evidence. The role-contract decision already requires its owning or receiving leader to check it. Does every accepted result then need a human sign-off, including routine research and internal handoffs?",
+          "recommendation": "Leaders may accept results against already-agreed, checkable criteria and report the evidence. Ask you when acceptance depends on an unresolved preference, a changed requirement, or a human review explicitly required by the workflow. For a tested-PR job, acceptance means the PR meets its agreed review-ready criteria; it does not authorize merging. A subjective design review still needs your actual response.",
+          "options": [
+            "Leaders accept against agreed criteria; human gates stay human",
+            "Require my sign-off on every completed assignment",
+            "Let Coordination decide all acceptance, including human reviews"
+          ]
+        }
+      ],
+      "answers": {
+        "Q1": "Use this outcome-based mandate",
+        "Q2": "Reuse approvals within their recorded scope and conditions",
+        "Q3": "Leaders accept against agreed criteria; human gates stay human"
+      }
+    },
+    {
+      "round": 2,
+      "questions": [
+        {
+          "id": "Q4",
+          "title": "What makes the path unclear enough to involve you?",
+          "body": "Engineering can use an existing library or write a small helper. Separately, it discovers the requested feature requires changing a user-visible workflow or widening access to data. Both are choices, but they need not interrupt you in the same way.",
+          "recommendation": "Leaders decide when evidence supports an option within the existing mandate, the trade-off stays within agreed requirements, and a mistake is reasonably reversible within the job. Escalate when options materially change user-visible behavior or acceptance criteria, create commitments outside the mandate, conflict with an agreed decision, or lack evidence needed to judge a consequential risk. Investigate knowable facts first; escalate the actual choice with options, a recommendation, impact, and the blocked work. Uncertainty alone is not an approval gate.",
+          "options": [
+            "Use these consequence-based escalation rules",
+            "Ask me whenever more than one viable option exists",
+            "Use a different escalation threshold \u2014 describe below"
+          ]
+        },
+        {
+          "id": "Q5",
+          "title": "How should a delegated decision and its assumptions be recorded?",
+          "body": "A leader chooses a technical approach within its mandate. A later worker needs to know why it was chosen and whether the assumptions still hold. This is a delegated decision, separate from a human answer in grilling or wayfinder.",
+          "recommendation": "For decisions that affect later work, record the accountable leader, job, mandate or grant relied on, choice, rationale and evidence, material assumptions, and the conditions that would reopen the decision. Mark its source as delegated or human; retain the actual source for human answers. Pass the relevant records to workers. Routine edits need no separate decision entry. A delegated decision uses its own step and cannot resolve a ticket or skill gate that explicitly requires a live human exchange.",
+          "options": [
+            "Record consequential delegated decisions with explicit provenance",
+            "Record every small implementation choice separately",
+            "Keep delegated reasoning only in the leader conversation"
+          ]
+        },
+        {
+          "id": "Q6",
+          "title": "What continues while a human decision is pending?",
+          "body": "A job reaches a choice that needs you, but you are away. Other jobs and some independent work in this job are still authorized. Waiting for you does not establish which option you would choose.",
+          "recommendation": "Pause only work dependent on the unanswered choice. Continue independent authorized work and evidence gathering within the existing mandate and limits. Coordination presents a concise decision request and shows what is waiting. Silence or elapsed time is never approval. Escalate a decision once and update it when material new evidence arrives; detailed notification timing belongs to the operating-controls decision.",
+          "options": [
+            "Pause dependent work and continue independent authorized work",
+            "Pause the entire job whenever any human answer is pending",
+            "Pause the entire factory until I answer"
+          ]
+        },
+        {
+          "id": "Q7",
+          "title": "What happens when an approval is narrowed or its assumptions change?",
+          "body": "You withdraw permission to push, or a previously approved approach turns out to need a broader data migration. A worker may still hold the earlier assignment, and an old approval response may arrive after the plan changed.",
+          "recommendation": "Carry current authority into each assignment and re-check it before the affected consequential action. A withdrawal or material context change invalidates the relevant permission for future affected actions. The owning leader pauses or revises affected assignments and obtains a fresh decision when needed; stale replies are matched to the decision version they answered and cannot approve a changed proposal. If an action already happened or is in flight, report the actual state and authorized recovery options rather than claiming revocation undid it. Storage, delivery guarantees, and cancellation mechanics remain later decisions.",
+          "options": [
+            "Invalidate affected authority and re-check before acting",
+            "Let already-assigned work finish under its original approval",
+            "Use another revocation rule \u2014 describe below"
+          ]
+        }
+      ],
+      "answers": {
+        "Q4": "Ask me whenever more than one viable option exists",
+        "Q5": "Record consequential delegated decisions with explicit provenance",
+        "Q6": "Pause dependent work and continue independent authorized work",
+        "Q7": "Invalidate affected authority and re-check before acting"
+      }
+    },
+    {
+      "round": 3,
+      "questions": [
+        {
+          "id": "Q8",
+          "title": "What counts as more than one viable option?",
+          "body": "Your mandate authorizes ordinary execution, while your escalation rule reserves choices between viable options for you. For example, if an existing library and a custom helper both meet the requirements, the leader must ask even if it prefers the library. The remaining boundary is whether equivalent expression styles and routine naming choices also count as separate viable options.",
+          "recommendation": "Count distinct approaches with different behavior, dependencies, interfaces, cost, maintenance, or operational consequences. If two such approaches satisfy the existing constraints, ask you even when both are reversible and one is recommended. Equivalent expression styles and choices already settled by a convention or an applicable grant may proceed. A recommendation does not make the other option non-viable. This narrows the earlier permission to choose reversible details wherever a real approach choice remains.",
+          "options": [
+            "Ask about distinct viable approaches; follow settled conventions for routine details",
+            "Ask about every viable alternative, including equivalent coding styles",
+            "Let leaders choose reversible implementation approaches after all"
+          ]
+        }
+      ],
+      "answers": {
+        "Q8": "Ask about distinct viable approaches; follow settled conventions for routine details"
+      }
+    }
+  ],
+  "confirmation": {
+    "question": "Q9",
+    "answer": "Confirm and record this decision"
+  }
+}
