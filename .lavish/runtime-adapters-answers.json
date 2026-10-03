@@ -1,0 +1,297 @@
+{
+  "round1": {
+    "questions": [
+      {
+        "id": "Q1",
+        "title": "Must both Claude and Codex work at launch?",
+        "body": "This is the product requirement, before choosing an integration API. Supporting both lets you mix providers across leaders and workers, but adds two integrations to validate and maintain.",
+        "recommendation": "Require both at launch, with configurable provider staffing. This directly supports the mixed-staffing question raised during charting; choose one provider if a smaller first release matters more.",
+        "options": [
+          "Both Claude and Codex at launch",
+          "Codex only at launch",
+          "Claude only at launch"
+        ]
+      },
+      {
+        "id": "Q2",
+        "title": "Who must be able to install v1?",
+        "body": "A personal installation operated by you and a distributable tool installed by other people can face different authentication requirements. This choice scopes the runtime decision; packaging mechanics remain a later decision.",
+        "recommendation": "Make v1 a self-hosted tool other individuals can install with their own provider accounts or credentials. Do not require a hosted service or centrally supplied provider access.",
+        "options": [
+          "Self-hosted for me and other individuals",
+          "Only my own personal installation for v1",
+          "Include a hosted service for other users"
+        ]
+      },
+      {
+        "id": "Q3",
+        "title": "Is usage-billed API access acceptable?",
+        "body": "We are verifying which documented authentication routes each integration permits. This question sets your preference; it does not assume a subscription can be used through every integration. No credentials or payment are requested here.",
+        "recommendation": "Prefer existing subscriptions where the chosen integration officially supports them, but allow API billing as a fallback with explicit configuration and spending limits. Never silently switch a job to a separately billed route.",
+        "options": [
+          "Prefer subscriptions; allow explicitly configured API billing",
+          "Subscription-backed operation is a hard requirement",
+          "Prefer API billing for all factory work"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q1",
+        "answer": "Both Claude and Codex at launch"
+      },
+      {
+        "question": "Q2",
+        "answer": "Self-hosted for me and other individuals"
+      },
+      {
+        "question": "Q3",
+        "answer": "",
+        "notes": "I am not sure what this is about, can you explain more about this"
+      }
+    ]
+  },
+  "billing": {
+    "questions": [
+      {
+        "id": "Q3a",
+        "title": "May AsmAI use separately billed provider access?",
+        "body": "For example, you might pay for a monthly Claude subscription and still receive a separate Anthropic API bill for Claude work performed by AsmAI. An API key is the credential that connects those requests to that billing account. Each person installing AsmAI would supply their own credentials. This is a product preference only; we are not creating a billing account or buying anything.",
+        "recommendation": "Allow separately billed API access when you explicitly configure it. Prefer subscriptions where officially supported, but never silently switch to API billing. This keeps a documented route available for both providers in a distributable v1. We would decide spending controls separately.",
+        "options": [
+          "Allow API billing when explicitly configured",
+          "Require subscriptions only, even if launch is blocked",
+          "I need more explanation \u2014 describe below"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q3a",
+        "answer": "Require subscriptions only, even if launch is blocked",
+        "notes": "So it is up the me (the developer) to ensure claude and codex are signed into their account."
+      }
+    ]
+  },
+  "round2": {
+    "questions": [
+      {
+        "id": "Q4",
+        "title": "What should AsmAI do when sign-in or subscription access is unavailable?",
+        "body": "The installer signs into each provider on the machine running the agents, including a remote host. Credentials can expire or usage limits can be reached during a job.",
+        "recommendation": "AsmAI checks readiness without exposing credentials. If access is missing, expired, or exhausted, pause affected work and give instructions to sign in or restore access; keep independent authorized work running. Never switch billing sources or providers automatically. Do not copy login tokens between machines; the installer establishes access on each execution host.",
+        "options": [
+          "Use this installer-owned sign-in and pause policy",
+          "Automatically switch to another configured subscription provider",
+          "Use a different policy \u2014 describe below"
+        ]
+      },
+      {
+        "id": "Q5",
+        "title": "How configurable should provider staffing be in v1?",
+        "body": "Both providers will be supported. We still need to decide whether a factory must use one provider everywhere or may assign providers differently across roles and workers.",
+        "recommendation": "Allow a configured provider/model for each role leader and a worker default for each role, with explicit assignment overrides. A started assignment keeps its chosen provider/model; changing configuration affects new assignments. Do not promise provider-native conversation portability between Claude and Codex.",
+        "options": [
+          "Mixed leaders and workers with explicit assignment overrides",
+          "One provider per role, shared by its leader and workers",
+          "One provider for the whole factory at a time"
+        ]
+      },
+      {
+        "id": "Q6",
+        "title": "How should supported runtime versions be defined?",
+        "body": "The local versions observed are Codex 0.157.0 and Claude Code 2.1.283. Seeing a version installed does not prove the adapter works with it. Provider updates can change events, approvals, or resume behavior.",
+        "recommendation": "Publish explicit tested runtime/adapter combinations and record actual versions. Treat the observed versions as candidates only. Refuse unsupported combinations with an actionable message rather than promising all future versions work. Qualify upgrades deliberately; do not silently update provider runtimes.",
+        "options": [
+          "Explicit tested combinations; deliberate upgrades",
+          "Allow untested versions with a warning",
+          "Always follow the latest installed provider version"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q4",
+        "answer": "Use this installer-owned sign-in and pause policy"
+      },
+      {
+        "question": "Q5",
+        "answer": "Mixed leaders and workers with explicit assignment overrides",
+        "notes": "However, if an assigned provider's access is unavailable due to things like those covered in Q4 and the other provider is available, then fall back to the provider that is available"
+      },
+      {
+        "question": "Q6",
+        "answer": "Explicit tested combinations; deliberate upgrades"
+      }
+    ]
+  },
+  "round3": {
+    "questions": [
+      {
+        "id": "Q7",
+        "title": "How should automatic provider fallback preserve an assignment?",
+        "body": "Your Q5 note adds an exception to the Q4 pause rule: use the other provider when available. A failed provider may already have edited files or opened a PR, and its native conversation cannot simply resume in the other provider.",
+        "recommendation": "Treat your rule as a standing grant: on an access failure, use the other configured subscription provider/model if it can meet the assignment requirements. Before takeover, stop or fence the old attempt and reconcile its effects. Start a fresh provider session from AsmAI\u2019s assignment context, evidence, grants, and pending human decisions; keep the same owning leader. For a leader itself, preserve role authority and fence the old leader. Record and notify you of the switch without waiting for approval. If access, capability, or safe takeover is uncertain, pause affected work. Stay on the fallback for this assignment; do not automatically switch back mid-assignment.",
+        "options": [
+          "Use this automatic fallback and safe takeover policy",
+          "Fallback only before an assignment starts; otherwise ask me",
+          "Use a different fallback policy \u2014 describe below"
+        ]
+      },
+      {
+        "id": "Q8",
+        "title": "May v1 be an open-source, user-operated application?",
+        "body": "Current Codex app-server guidance permits its native authentication for local/open-source applications and excludes commercial or hosted services. Your own remote machine is an execution host, not a service AsmAI sells. The chosen route must be rechecked if distribution changes.",
+        "recommendation": "Scope v1 to an open-source, user-operated application, with no hosted service or resale of provider access. Each installer runs the unmodified CLIs and signs in directly on their execution hosts. Leave commercial distribution as a separate future decision requiring a supported authentication route. This does not choose a license yet.",
+        "options": [
+          "Open-source and user-operated for v1",
+          "Keep commercial/proprietary distribution in v1 \u2014 investigate further",
+          "Clarify this boundary before deciding"
+        ]
+      },
+      {
+        "id": "Q9",
+        "title": "Which integration direction should we qualify?",
+        "body": "Codex app-server provides structured conversation, approval and interruption events. Claude\u2019s standard CLI supports structured streaming and resume with existing login; the richer Agent SDK has different authentication constraints. A shared interface does not require both adapters to use identical mechanisms.",
+        "recommendation": "Qualify Codex app-server over local stdio using Codex-managed sign-in, plus unmodified standard Claude Code CLI using structured input/output and its own sign-in. Do not use bare mode, scrape terminal text, or extract tokens. Keep provider-specific adapter internals. Require a focused feasibility prototype before declaring this pair supported, particularly Claude human permission handling and subscription-only enforcement. If it fails, reopen this choice rather than silently using API billing or bypassing human gates.",
+        "options": [
+          "Qualify app-server for Codex and standard CLI for Claude",
+          "Investigate a common CLI-based approach for both first",
+          "Investigate SDK-based alternatives before choosing"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q7",
+        "answer": "Fallback only before an assignment starts; otherwise ask me"
+      },
+      {
+        "question": "Q8",
+        "answer": "Open-source and user-operated for v1",
+        "notes": "I do not want the cli to do any signin's to claude or codex, leave that up to the developer/user."
+      },
+      {
+        "question": "Q9",
+        "answer": "Investigate a common CLI-based approach for both first"
+      }
+    ]
+  },
+  "round4": {
+    "questions": [
+      {
+        "id": "Q10",
+        "title": "Should we take the CLI-first route to a focused feasibility prototype?",
+        "body": "The common approach would run Codex exec with JSON events and standard Claude Code with structured streaming, behind provider-specific adapters. They can share assignment/result concepts without sharing identical flags. Codex exec is intended for noninteractive runs; we have not established a native interactive tool-approval reply channel. A genuine planning question can instead end a turn, wait in AsmAI for your real answer, and resume afterward. That is different from approving a provider tool request.",
+        "recommendation": "Choose this CLI-first candidate and create a separate prototype decision ticket. Test real human question/resume, tool denial and approval boundaries, structured completion/failure, interruption, session recovery, subscription-only detection, and fallback before dispatch. Do not certify exact versions or declare the adapter choice final until it passes. If CLI integration cannot preserve required gates, bring back a concrete alternative for your choice; do not use bypass flags or silently switch to app-server/SDK/API billing.",
+        "options": [
+          "Choose CLI-first candidate and create the feasibility ticket",
+          "Use Codex app-server instead of exec, with Claude CLI",
+          "Continue documentation research before any prototype"
+        ]
+      },
+      {
+        "id": "Q11",
+        "title": "Where exactly does automatic fallback stop?",
+        "body": "A worker may have been dispatched but produced no visible output. A leader may be unavailable even though it is not executing a worker assignment. Both cases need a clear boundary.",
+        "recommendation": "Treat first dispatch to the provider as assignment start. Before dispatch, use the other configured, compatible subscription provider/model if the primary lacks access; record and report it. Once dispatched, pause and ask you before changing providers, even if no output arrived. Use the same rule for leaders: automatic selection before a leader first starts; after it has started, ask before replacing its provider. Keep independent work moving. After you approve a replacement, reconcile effects and preserve grants, context and single ownership; resume with the same provider when access returns remains allowed.",
+        "options": [
+          "Use first dispatch and the same boundary for leaders",
+          "Use first confirmed side effect as the boundary",
+          "Use another boundary \u2014 describe below"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q10",
+        "answer": "",
+        "notes": "I am not really sure what problem this is trying to address.  Can you explain this some more"
+      },
+      {
+        "question": "Q11",
+        "answer": "Use first dispatch and the same boundary for leaders"
+      }
+    ]
+  },
+  "explanation": {
+    "questions": [
+      {
+        "id": "Q10a",
+        "title": "Should we prove this with a small throwaway experiment?",
+        "body": "The proposed experiment is a tiny controller that starts each CLI, gives it a harmless task, captures a question, waits for your answer in the browser, and continues correctly. It also checks what happens when a tool is denied, a process stops, or access is missing. We would inspect the result together in a separate Wayfinder session.",
+        "recommendation": "Yes: create a focused prototype ticket to test the CLI route before relying on it in the final specification. This is an evidence check, not a decision to build the whole factory. If it fails, return to you with the exact missing behavior and concrete alternatives.",
+        "options": [
+          "Yes, create that prototype ticket",
+          "No, continue researching the CLI route first",
+          "I mean driving the interactive terminal CLIs \u2014 explore that instead"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q10a",
+        "answer": "",
+        "notes": "Would it help if we dropped the \"talk to Coordination in browser\" and instead we provide a way to connect to the agents terminal and interact directly."
+      }
+    ]
+  },
+  "terminal": {
+    "questions": [
+      {
+        "id": "Q12",
+        "title": "Should the normal conversation move to an interactive terminal?",
+        "body": "This would revise the map\u2019s earlier browser-primary preference. You would connect to a running Claude or Codex terminal to converse and answer its native prompts. A browser could still show status or open Lavish reviews, without being the chat interface.",
+        "recommendation": "Make the interactive terminal the primary conversation surface for v1. Keep browser-based Lavish artifacts for skill reviews, and leave any factory dashboard as a separate scope decision. Explore terminal attachment and lifecycle in the hosting ticket; do not assume tmux is already chosen.",
+        "options": [
+          "Yes: terminal conversation, keep Lavish reviews",
+          "Keep browser conversation, add terminal access for exceptions",
+          "I mean a terminal embedded inside the browser"
+        ]
+      },
+      {
+        "id": "Q13",
+        "title": "Which agents should you interact with directly?",
+        "body": "The existing role decision says Coordination is your single counterpart and each worker has one owning leader. Opening a terminal for inspection is different from giving that worker new instructions or answering on the owner\u2019s behalf.",
+        "recommendation": "Use Coordination\u2019s terminal for normal work. Allow inspection of any agent\u2019s terminal and explicit intervention when needed; before intervention, pause automated input to that agent and record resulting answers or changes for its owner. Preserve the owner\u2019s control over worker scope and priority. Native permission prompts may be answered directly in the affected terminal, with the decision captured. This reduces translation while keeping one coherent job conversation.",
+        "options": [
+          "Coordination normally; explicit recorded intervention elsewhere",
+          "Let me freely direct any leader or worker",
+          "Only Coordination is interactive; others stay managed"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q12",
+        "answer": "Yes: terminal conversation, keep Lavish reviews",
+        "notes": "Also use lavish for grilling/wayfinder questions"
+      },
+      {
+        "question": "Q13",
+        "answer": "Coordination normally; explicit recorded intervention elsewhere"
+      }
+    ]
+  },
+  "confirmation": {
+    "questions": [
+      {
+        "id": "Q14",
+        "title": "Does this capture our shared understanding and next evidence step?",
+        "body": "Review the settled choices and the proposed focused prototype below. Confirming will publish this resolution, update the affected map tickets, and create the feasibility ticket. No provider integration is being certified or built in this session.",
+        "recommendation": "Confirm if this matches your intent, including the new interactive-CLI feasibility ticket. Otherwise describe the correction; I will revise before publishing.",
+        "options": [
+          "Confirmed \u2014 publish this resolution and create the feasibility ticket",
+          "Needs changes \u2014 describe below"
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "question": "Q14",
+        "answer": "Confirmed \u2014 publish this resolution and create the feasibility ticket"
+      }
+    ],
+    "summary": "## Providers and accounts\nBoth Claude and Codex are required at launch. AsmAI v1 is open-source and user-operated, including individuals running their own local or remote hosts. A hosted service, commercial distribution, and resale of provider access are outside this v1 direction; the specific open-source license remains to be chosen.\n\nSubscription access only: each installer installs and signs into the unmodified provider CLIs themselves on the execution host. AsmAI must not initiate sign-in, collect or transfer provider tokens, or fall back to API billing. It may check readiness without exposing secrets and give actionable instructions. The provider CLI retains its own built-in authentication methods; AsmAI's supported operating mode is subscription-backed use.\n\n## Terminal conversation and human decisions\nThe primary conversation is the provider's interactive terminal, normally Coordination's. This supersedes browser-primary chat. Lavish remains required for reviews and all grilling/Wayfinder questions. A separate browser dashboard is not selected here.\n\nAny agent can be inspected. Direct intervention outside Coordination is explicit: pause automated input, capture resulting answers or changes for the owner, and preserve the owner's control of worker scope and priority. Native permission prompts can be answered in the affected terminal with the decision recorded. Human input and automated input must not compete.\n\n## Staffing and fallback\nConfigure provider/model per role leader and a worker default per role, with explicit assignment overrides. Use the other configured, compatible subscription provider/model automatically only before first dispatch when the primary lacks access. Record and report the selection. If no suitable provider is available, pause affected work and continue independent authorized work.\n\nAfter first dispatch, ask Phillip before changing provider, even if no output or side effect has been observed. For leaders, automatic selection is allowed before the leader first starts; replacing its provider afterward needs the same human decision. Resuming on the same provider after access returns is allowed. An approved replacement must reconcile existing effects and retain assignment context, grants, pending human decisions, and single ownership. Provider-native conversations are not assumed portable.\n\n## Integration direction and evidence still needed\nPursue a common approach based on the providers' unmodified interactive CLIs and attachable terminals, with provider-specific integration where necessary. The earlier unattended Codex-exec/Claude-print proposal and app-server/SDK pair are not selected. Choosing a terminal does not choose tmux, a supervisor, or a transport.\n\nSupport only explicitly tested runtime/adapter combinations, record versions, reject unsupported combinations with an actionable message, and qualify upgrades deliberately. Codex 0.157.0 and Claude Code 2.1.283 are observed candidate baselines only, not certified supported versions.\n\nProposed next evidence step: create \u201cValidate interactive CLI coordination and intervention,\u201d a focused prototype decision ticket to demonstrate both providers' own-login use, attachment, real human prompts and Lavish return, exclusive human/automated input, trustworthy waiting/completion signals, interruption/resume, and subscription-only readiness. It must establish a feasible adapter contract and tested candidate versions, or return a specific limitation for a new choice. No approval bypass, silent API fallback, or automatic replacement of the chosen integration. This prototype remains a future Wayfinder session.\n\n## Changes to the map\nResolve this ticket as the product requirements and integration direction; the new feasibility ticket retains the unresolved adapter mechanics and exact supported versions. Make it a blocker of hosting/lifecycle so those decisions do not assume unproven runtime behavior. Reframe the browser-conversation prototype around terminal conversation and Lavish handoff, and update the CLI setup question accordingly. Hosting/lifecycle and work-state tickets retain supervision, recovery, event-storage, and ownership mechanics.\n\nThis is a planning resolution, not an implementation or deployment authorization. The factory's route is not fully clear until the feasibility ticket resolves.\n"
+  }
+}

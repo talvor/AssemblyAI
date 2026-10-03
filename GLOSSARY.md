@@ -61,3 +61,6 @@ The role responsible for independent review and validation.
 **Skill**:
 A reusable working method an agent applies while fulfilling a role; a role may use several skills.
 _Avoid_: Agent (a skill is not itself an agent)
+
+**Intervention**:
+An explicit period of direct human interaction with an agent outside the normal Coordination conversation, with automated input paused and resulting decisions or changes recorded for its owner.
