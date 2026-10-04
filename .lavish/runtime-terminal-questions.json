@@ -1,0 +1,24 @@
+[
+  {
+    "id": "Q12",
+    "title": "Should the normal conversation move to an interactive terminal?",
+    "body": "This would revise the map\u2019s earlier browser-primary preference. You would connect to a running Claude or Codex terminal to converse and answer its native prompts. A browser could still show status or open Lavish reviews, without being the chat interface.",
+    "recommendation": "Make the interactive terminal the primary conversation surface for v1. Keep browser-based Lavish artifacts for skill reviews, and leave any factory dashboard as a separate scope decision. Explore terminal attachment and lifecycle in the hosting ticket; do not assume tmux is already chosen.",
+    "options": [
+      "Yes: terminal conversation, keep Lavish reviews",
+      "Keep browser conversation, add terminal access for exceptions",
+      "I mean a terminal embedded inside the browser"
+    ]
+  },
+  {
+    "id": "Q13",
+    "title": "Which agents should you interact with directly?",
+    "body": "The existing role decision says Coordination is your single counterpart and each worker has one owning leader. Opening a terminal for inspection is different from giving that worker new instructions or answering on the owner\u2019s behalf.",
+    "recommendation": "Use Coordination\u2019s terminal for normal work. Allow inspection of any agent\u2019s terminal and explicit intervention when needed; before intervention, pause automated input to that agent and record resulting answers or changes for its owner. Preserve the owner\u2019s control over worker scope and priority. Native permission prompts may be answered directly in the affected terminal, with the decision captured. This reduces translation while keeping one coherent job conversation.",
+    "options": [
+      "Coordination normally; explicit recorded intervention elsewhere",
+      "Let me freely direct any leader or worker",
+      "Only Coordination is interactive; others stay managed"
+    ]
+  }
+]

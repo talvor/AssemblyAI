@@ -1,0 +1,13 @@
+[
+  {
+    "id": "Q3a",
+    "title": "May AsmAI use separately billed provider access?",
+    "body": "For example, you might pay for a monthly Claude subscription and still receive a separate Anthropic API bill for Claude work performed by AsmAI. An API key is the credential that connects those requests to that billing account. Each person installing AsmAI would supply their own credentials. This is a product preference only; we are not creating a billing account or buying anything.",
+    "recommendation": "Allow separately billed API access when you explicitly configure it. Prefer subscriptions where officially supported, but never silently switch to API billing. This keeps a documented route available for both providers in a distributable v1. We would decide spending controls separately.",
+    "options": [
+      "Allow API billing when explicitly configured",
+      "Require subscriptions only, even if launch is blocked",
+      "I need more explanation \u2014 describe below"
+    ]
+  }
+]

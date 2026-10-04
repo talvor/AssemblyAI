@@ -1,0 +1,13 @@
+[
+  {
+    "id": "Q3",
+    "title": "Does \u201creferences for ideas\u201d allow copying a small useful component later?",
+    "body": "Suppose an implementation session finds a reusable message-delivery helper in Firstmate. Studying its approach and writing AsmAI\u2019s own helper is inspiration. Copying or adapting that source creates code that AsmAI must attribute, test, and maintain. Neither means adopting the entire runtime.",
+    "recommendation": "Allow a specific extraction only after a separate explicit decision on the concrete component: source revision, license/notice obligations, dependencies, contract, tests, and maintenance/update ownership. No component is approved now, and there is no blanket permission to import reference code. Ordinary third-party libraries and the separately planned skill bundles are outside this reference-system decision.",
+    "options": [
+      "Allow separately approved component reuse",
+      "Ideas only: do not copy or depend on either reference\u2019s code",
+      "Allow small component reuse at the implementing leader\u2019s discretion"
+    ]
+  }
+]

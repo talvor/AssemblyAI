@@ -1,0 +1,13 @@
+[
+  {
+    "id": "Q1",
+    "title": "Must AsmAI preserve compatibility with an existing Firstmate or OpenRig setup?",
+    "body": "For example: must existing commands keep working, existing task history carry across, or existing agents/configuration run unchanged? This is separate from learning from their code. Compatibility can make reuse more valuable, but also constrain AsmAI\u2019s design.",
+    "recommendation": "Treat AsmAI as its own product with no v1 command, configuration, or task-history compatibility requirement. Use the references for useful ideas and consider concrete reuse on its merits. If you need a migration from your current Firstmate installation, name what must carry across.",
+    "options": [
+      "No existing-system compatibility required",
+      "Preserve or migrate my Firstmate setup \u2014 describe what matters",
+      "Preserve OpenRig compatibility \u2014 describe what matters"
+    ]
+  }
+]

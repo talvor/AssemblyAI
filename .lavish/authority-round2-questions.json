@@ -1,0 +1,46 @@
+[
+  {
+    "id": "Q4",
+    "title": "What makes the path unclear enough to involve you?",
+    "body": "Engineering can use an existing library or write a small helper. Separately, it discovers the requested feature requires changing a user-visible workflow or widening access to data. Both are choices, but they need not interrupt you in the same way.",
+    "recommendation": "Leaders decide when evidence supports an option within the existing mandate, the trade-off stays within agreed requirements, and a mistake is reasonably reversible within the job. Escalate when options materially change user-visible behavior or acceptance criteria, create commitments outside the mandate, conflict with an agreed decision, or lack evidence needed to judge a consequential risk. Investigate knowable facts first; escalate the actual choice with options, a recommendation, impact, and the blocked work. Uncertainty alone is not an approval gate.",
+    "options": [
+      "Use these consequence-based escalation rules",
+      "Ask me whenever more than one viable option exists",
+      "Use a different escalation threshold \u2014 describe below"
+    ]
+  },
+  {
+    "id": "Q5",
+    "title": "How should a delegated decision and its assumptions be recorded?",
+    "body": "A leader chooses a technical approach within its mandate. A later worker needs to know why it was chosen and whether the assumptions still hold. This is a delegated decision, separate from a human answer in grilling or wayfinder.",
+    "recommendation": "For decisions that affect later work, record the accountable leader, job, mandate or grant relied on, choice, rationale and evidence, material assumptions, and the conditions that would reopen the decision. Mark its source as delegated or human; retain the actual source for human answers. Pass the relevant records to workers. Routine edits need no separate decision entry. A delegated decision uses its own step and cannot resolve a ticket or skill gate that explicitly requires a live human exchange.",
+    "options": [
+      "Record consequential delegated decisions with explicit provenance",
+      "Record every small implementation choice separately",
+      "Keep delegated reasoning only in the leader conversation"
+    ]
+  },
+  {
+    "id": "Q6",
+    "title": "What continues while a human decision is pending?",
+    "body": "A job reaches a choice that needs you, but you are away. Other jobs and some independent work in this job are still authorized. Waiting for you does not establish which option you would choose.",
+    "recommendation": "Pause only work dependent on the unanswered choice. Continue independent authorized work and evidence gathering within the existing mandate and limits. Coordination presents a concise decision request and shows what is waiting. Silence or elapsed time is never approval. Escalate a decision once and update it when material new evidence arrives; detailed notification timing belongs to the operating-controls decision.",
+    "options": [
+      "Pause dependent work and continue independent authorized work",
+      "Pause the entire job whenever any human answer is pending",
+      "Pause the entire factory until I answer"
+    ]
+  },
+  {
+    "id": "Q7",
+    "title": "What happens when an approval is narrowed or its assumptions change?",
+    "body": "You withdraw permission to push, or a previously approved approach turns out to need a broader data migration. A worker may still hold the earlier assignment, and an old approval response may arrive after the plan changed.",
+    "recommendation": "Carry current authority into each assignment and re-check it before the affected consequential action. A withdrawal or material context change invalidates the relevant permission for future affected actions. The owning leader pauses or revises affected assignments and obtains a fresh decision when needed; stale replies are matched to the decision version they answered and cannot approve a changed proposal. If an action already happened or is in flight, report the actual state and authorized recovery options rather than claiming revocation undid it. Storage, delivery guarantees, and cancellation mechanics remain later decisions.",
+    "options": [
+      "Invalidate affected authority and re-check before acting",
+      "Let already-assigned work finish under its original approval",
+      "Use another revocation rule \u2014 describe below"
+    ]
+  }
+]

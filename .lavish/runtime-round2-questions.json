@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Q4",
+    "title": "What should AsmAI do when sign-in or subscription access is unavailable?",
+    "body": "The installer signs into each provider on the machine running the agents, including a remote host. Credentials can expire or usage limits can be reached during a job.",
+    "recommendation": "AsmAI checks readiness without exposing credentials. If access is missing, expired, or exhausted, pause affected work and give instructions to sign in or restore access; keep independent authorized work running. Never switch billing sources or providers automatically. Do not copy login tokens between machines; the installer establishes access on each execution host.",
+    "options": [
+      "Use this installer-owned sign-in and pause policy",
+      "Automatically switch to another configured subscription provider",
+      "Use a different policy \u2014 describe below"
+    ]
+  },
+  {
+    "id": "Q5",
+    "title": "How configurable should provider staffing be in v1?",
+    "body": "Both providers will be supported. We still need to decide whether a factory must use one provider everywhere or may assign providers differently across roles and workers.",
+    "recommendation": "Allow a configured provider/model for each role leader and a worker default for each role, with explicit assignment overrides. A started assignment keeps its chosen provider/model; changing configuration affects new assignments. Do not promise provider-native conversation portability between Claude and Codex.",
+    "options": [
+      "Mixed leaders and workers with explicit assignment overrides",
+      "One provider per role, shared by its leader and workers",
+      "One provider for the whole factory at a time"
+    ]
+  },
+  {
+    "id": "Q6",
+    "title": "How should supported runtime versions be defined?",
+    "body": "The local versions observed are Codex 0.157.0 and Claude Code 2.1.283. Seeing a version installed does not prove the adapter works with it. Provider updates can change events, approvals, or resume behavior.",
+    "recommendation": "Publish explicit tested runtime/adapter combinations and record actual versions. Treat the observed versions as candidates only. Refuse unsupported combinations with an actionable message rather than promising all future versions work. Qualify upgrades deliberately; do not silently update provider runtimes.",
+    "options": [
+      "Explicit tested combinations; deliberate upgrades",
+      "Allow untested versions with a warning",
+      "Always follow the latest installed provider version"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "Q2",
+    "title": "Which foundation should AsmAI take?",
+    "body": "No compatibility with existing installations is required. Both an independent implementation and an OpenRig-backed product are plausible. Choosing independence means owning the runtime and recovery work; choosing reuse means accepting an upstream architecture and proving that it can enforce AsmAI\u2019s policies.",
+    "recommendation": "Build an independent AsmAI core, using both systems as design references. Your five-role ownership model and human-decision rules are already specific, and no compatibility requirement pulls us toward an upstream. This gives control but is likely more work. If reducing initial implementation work matters more, investigate an OpenRig configuration/wrapper before choosing independence.",
+    "options": [
+      "Independent AsmAI core, references for ideas",
+      "Investigate OpenRig configuration/wrapper as the foundation",
+      "Investigate extending or forking Firstmate",
+      "Investigate an OpenRig fork"
+    ]
+  }
+]

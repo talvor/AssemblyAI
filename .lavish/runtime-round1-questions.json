@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Q1",
+    "title": "Must both Claude and Codex work at launch?",
+    "body": "This is the product requirement, before choosing an integration API. Supporting both lets you mix providers across leaders and workers, but adds two integrations to validate and maintain.",
+    "recommendation": "Require both at launch, with configurable provider staffing. This directly supports the mixed-staffing question raised during charting; choose one provider if a smaller first release matters more.",
+    "options": [
+      "Both Claude and Codex at launch",
+      "Codex only at launch",
+      "Claude only at launch"
+    ]
+  },
+  {
+    "id": "Q2",
+    "title": "Who must be able to install v1?",
+    "body": "A personal installation operated by you and a distributable tool installed by other people can face different authentication requirements. This choice scopes the runtime decision; packaging mechanics remain a later decision.",
+    "recommendation": "Make v1 a self-hosted tool other individuals can install with their own provider accounts or credentials. Do not require a hosted service or centrally supplied provider access.",
+    "options": [
+      "Self-hosted for me and other individuals",
+      "Only my own personal installation for v1",
+      "Include a hosted service for other users"
+    ]
+  },
+  {
+    "id": "Q3",
+    "title": "Is usage-billed API access acceptable?",
+    "body": "We are verifying which documented authentication routes each integration permits. This question sets your preference; it does not assume a subscription can be used through every integration. No credentials or payment are requested here.",
+    "recommendation": "Prefer existing subscriptions where the chosen integration officially supports them, but allow API billing as a fallback with explicit configuration and spending limits. Never silently switch a job to a separately billed route.",
+    "options": [
+      "Prefer subscriptions; allow explicitly configured API billing",
+      "Subscription-backed operation is a hard requirement",
+      "Prefer API billing for all factory work"
+    ]
+  }
+]

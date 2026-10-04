@@ -1,0 +1,24 @@
+[
+  {
+    "id": "Q10",
+    "title": "Should we take the CLI-first route to a focused feasibility prototype?",
+    "body": "The common approach would run Codex exec with JSON events and standard Claude Code with structured streaming, behind provider-specific adapters. They can share assignment/result concepts without sharing identical flags. Codex exec is intended for noninteractive runs; we have not established a native interactive tool-approval reply channel. A genuine planning question can instead end a turn, wait in AsmAI for your real answer, and resume afterward. That is different from approving a provider tool request.",
+    "recommendation": "Choose this CLI-first candidate and create a separate prototype decision ticket. Test real human question/resume, tool denial and approval boundaries, structured completion/failure, interruption, session recovery, subscription-only detection, and fallback before dispatch. Do not certify exact versions or declare the adapter choice final until it passes. If CLI integration cannot preserve required gates, bring back a concrete alternative for your choice; do not use bypass flags or silently switch to app-server/SDK/API billing.",
+    "options": [
+      "Choose CLI-first candidate and create the feasibility ticket",
+      "Use Codex app-server instead of exec, with Claude CLI",
+      "Continue documentation research before any prototype"
+    ]
+  },
+  {
+    "id": "Q11",
+    "title": "Where exactly does automatic fallback stop?",
+    "body": "A worker may have been dispatched but produced no visible output. A leader may be unavailable even though it is not executing a worker assignment. Both cases need a clear boundary.",
+    "recommendation": "Treat first dispatch to the provider as assignment start. Before dispatch, use the other configured, compatible subscription provider/model if the primary lacks access; record and report it. Once dispatched, pause and ask you before changing providers, even if no output arrived. Use the same rule for leaders: automatic selection before a leader first starts; after it has started, ask before replacing its provider. Keep independent work moving. After you approve a replacement, reconcile effects and preserve grants, context and single ownership; resume with the same provider when access returns remains allowed.",
+    "options": [
+      "Use first dispatch and the same boundary for leaders",
+      "Use first confirmed side effect as the boundary",
+      "Use another boundary \u2014 describe below"
+    ]
+  }
+]

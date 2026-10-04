@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Q1",
+    "title": "What does asking the factory to deliver a job authorize?",
+    "body": "You ask for a feature implemented as a tested pull request. The agreed roles already decide within their domains and delegate execution. The remaining question is how much room they have to choose the route without returning for permission at each step.",
+    "recommendation": "The requested outcome authorizes ordinary work needed to deliver it: inspect, plan, research, make scoped edits, run checks, commit and push the job branch, and open or update its PR. Leaders may choose reversible implementation details within the agreed scope, repository rules and resource limits. A planning-only or research-only request authorizes that outcome only. Merge, deployment, spending beyond a granted budget, and destructive changes outside the job need separate authorization unless already covered by an explicit standing grant.",
+    "options": [
+      "Use this outcome-based mandate",
+      "Require an approved implementation plan before execution",
+      "Use a different default mandate \u2014 describe below"
+    ]
+  },
+  {
+    "id": "Q2",
+    "title": "How should an approval survive handoffs and restarts?",
+    "body": "You approve a dependency or a test seam, then work passes to another leader, another worker, or a resumed session. Re-asking the same question wastes time; treating every old approval as universal creates a different problem.",
+    "recommendation": "Record the exact decision or action approved, its job/repository scope, conditions, and source. Carry it with assignments and handoffs, and reuse it while those conditions remain true. An approval for one job stays with that job; a reusable repository or factory grant must be explicitly given that wider scope. A changed scope or invalidated condition is a new decision. Runtime tool restrictions still apply independently.",
+    "options": [
+      "Reuse approvals within their recorded scope and conditions",
+      "Require fresh approval after every handoff or restart",
+      "Make approvals reusable across all jobs by default"
+    ]
+  },
+  {
+    "id": "Q3",
+    "title": "When can a leader accept a result without asking you?",
+    "body": "A worker delivers a result with evidence. The role-contract decision already requires its owning or receiving leader to check it. Does every accepted result then need a human sign-off, including routine research and internal handoffs?",
+    "recommendation": "Leaders may accept results against already-agreed, checkable criteria and report the evidence. Ask you when acceptance depends on an unresolved preference, a changed requirement, or a human review explicitly required by the workflow. For a tested-PR job, acceptance means the PR meets its agreed review-ready criteria; it does not authorize merging. A subjective design review still needs your actual response.",
+    "options": [
+      "Leaders accept against agreed criteria; human gates stay human",
+      "Require my sign-off on every completed assignment",
+      "Let Coordination decide all acceptance, including human reviews"
+    ]
+  }
+]

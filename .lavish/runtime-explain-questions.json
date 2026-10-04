@@ -1,0 +1,13 @@
+[
+  {
+    "id": "Q10a",
+    "title": "Should we prove this with a small throwaway experiment?",
+    "body": "The proposed experiment is a tiny controller that starts each CLI, gives it a harmless task, captures a question, waits for your answer in the browser, and continues correctly. It also checks what happens when a tool is denied, a process stops, or access is missing. We would inspect the result together in a separate Wayfinder session.",
+    "recommendation": "Yes: create a focused prototype ticket to test the CLI route before relying on it in the final specification. This is an evidence check, not a decision to build the whole factory. If it fails, return to you with the exact missing behavior and concrete alternatives.",
+    "options": [
+      "Yes, create that prototype ticket",
+      "No, continue researching the CLI route first",
+      "I mean driving the interactive terminal CLIs \u2014 explore that instead"
+    ]
+  }
+]

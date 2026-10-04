@@ -1,0 +1,13 @@
+[
+  {
+    "id": "Q8",
+    "title": "What counts as more than one viable option?",
+    "body": "Your mandate authorizes ordinary execution, while your escalation rule reserves choices between viable options for you. For example, if an existing library and a custom helper both meet the requirements, the leader must ask even if it prefers the library. The remaining boundary is whether equivalent expression styles and routine naming choices also count as separate viable options.",
+    "recommendation": "Count distinct approaches with different behavior, dependencies, interfaces, cost, maintenance, or operational consequences. If two such approaches satisfy the existing constraints, ask you even when both are reversible and one is recommended. Equivalent expression styles and choices already settled by a convention or an applicable grant may proceed. A recommendation does not make the other option non-viable. This narrows the earlier permission to choose reversible details wherever a real approach choice remains.",
+    "options": [
+      "Ask about distinct viable approaches; follow settled conventions for routine details",
+      "Ask about every viable alternative, including equivalent coding styles",
+      "Let leaders choose reversible implementation approaches after all"
+    ]
+  }
+]

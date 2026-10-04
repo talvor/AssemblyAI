@@ -1,0 +1,12 @@
+[
+  {
+    "id": "Q4",
+    "title": "Does this capture our shared understanding?",
+    "body": "Confirm to publish this resolution and evidence to GitHub, close the decision ticket, and update the map. Describe any correction before publication.",
+    "recommendation": "Confirm if the independent-core direction and separate approval for component reuse match your intent.",
+    "options": [
+      "Confirmed \u2014 publish the resolution",
+      "Needs changes \u2014 describe below"
+    ]
+  }
+]

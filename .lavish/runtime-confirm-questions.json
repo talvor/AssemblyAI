@@ -1,0 +1,12 @@
+[
+  {
+    "id": "Q14",
+    "title": "Does this capture our shared understanding and next evidence step?",
+    "body": "Review the settled choices and the proposed focused prototype below. Confirming will publish this resolution, update the affected map tickets, and create the feasibility ticket. No provider integration is being certified or built in this session.",
+    "recommendation": "Confirm if this matches your intent, including the new interactive-CLI feasibility ticket. Otherwise describe the correction; I will revise before publishing.",
+    "options": [
+      "Confirmed \u2014 publish this resolution and create the feasibility ticket",
+      "Needs changes \u2014 describe below"
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Q7",
+    "title": "How should automatic provider fallback preserve an assignment?",
+    "body": "Your Q5 note adds an exception to the Q4 pause rule: use the other provider when available. A failed provider may already have edited files or opened a PR, and its native conversation cannot simply resume in the other provider.",
+    "recommendation": "Treat your rule as a standing grant: on an access failure, use the other configured subscription provider/model if it can meet the assignment requirements. Before takeover, stop or fence the old attempt and reconcile its effects. Start a fresh provider session from AsmAI\u2019s assignment context, evidence, grants, and pending human decisions; keep the same owning leader. For a leader itself, preserve role authority and fence the old leader. Record and notify you of the switch without waiting for approval. If access, capability, or safe takeover is uncertain, pause affected work. Stay on the fallback for this assignment; do not automatically switch back mid-assignment.",
+    "options": [
+      "Use this automatic fallback and safe takeover policy",
+      "Fallback only before an assignment starts; otherwise ask me",
+      "Use a different fallback policy \u2014 describe below"
+    ]
+  },
+  {
+    "id": "Q8",
+    "title": "May v1 be an open-source, user-operated application?",
+    "body": "Current Codex app-server guidance permits its native authentication for local/open-source applications and excludes commercial or hosted services. Your own remote machine is an execution host, not a service AsmAI sells. The chosen route must be rechecked if distribution changes.",
+    "recommendation": "Scope v1 to an open-source, user-operated application, with no hosted service or resale of provider access. Each installer runs the unmodified CLIs and signs in directly on their execution hosts. Leave commercial distribution as a separate future decision requiring a supported authentication route. This does not choose a license yet.",
+    "options": [
+      "Open-source and user-operated for v1",
+      "Keep commercial/proprietary distribution in v1 \u2014 investigate further",
+      "Clarify this boundary before deciding"
+    ]
+  },
+  {
+    "id": "Q9",
+    "title": "Which integration direction should we qualify?",
+    "body": "Codex app-server provides structured conversation, approval and interruption events. Claude\u2019s standard CLI supports structured streaming and resume with existing login; the richer Agent SDK has different authentication constraints. A shared interface does not require both adapters to use identical mechanisms.",
+    "recommendation": "Qualify Codex app-server over local stdio using Codex-managed sign-in, plus unmodified standard Claude Code CLI using structured input/output and its own sign-in. Do not use bare mode, scrape terminal text, or extract tokens. Keep provider-specific adapter internals. Require a focused feasibility prototype before declaring this pair supported, particularly Claude human permission handling and subscription-only enforcement. If it fails, reopen this choice rather than silently using API billing or bypassing human gates.",
+    "options": [
+      "Qualify app-server for Codex and standard CLI for Claude",
+      "Investigate a common CLI-based approach for both first",
+      "Investigate SDK-based alternatives before choosing"
+    ]
+  }
+]

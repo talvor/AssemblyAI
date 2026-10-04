@@ -1,0 +1,50 @@
+{
+  "versions": {
+    "codex": "0.157.0",
+    "claude": "2.1.283"
+  },
+  "human_answer": {
+    "channel": "Lavish",
+    "question": "Which short label should both test sessions remember?",
+    "answer": "pigscanfly"
+  },
+  "observations": [
+    "Both native interactive UIs started using existing subscription logins.",
+    "Codex read-only sandbox and on-request approval. Claude safe-mode and manual permission mode.",
+    "Both returned requested readiness text.",
+    "Initial sandbox restrictions prevented session writes/network; approved retries outside sandbox succeeded.",
+    "Human supplied pigscanfly in Lavish; both interactive sessions returned it.",
+    "Both providers exited cleanly and resumed by exact native session ID. Both recalled pigscanfly; Claude verified in its scoped saved transcript.",
+    "Relay rejected stale automated input for both providers; Codex was attached by a human during this check.",
+    "Phillip reported direct attach, recall and native permission denial in both terminals. Both sentinel files absent.",
+    "Codex native rollout records turn_aborted for both denied touch requests despite the UI displaying Ran.",
+    "Phillip confirmed revised Ctrl-] works for both clients.",
+    "Human reattachment during an automated draft changed the epoch; automated submit was rejected. Partial prompt reconciliation remains a production requirement.",
+    "Both old runtime processes exited with status 0; relay still reported assignment unaccepted.",
+    "Passive hooks on both exact native versions emitted SessionStart, UserPromptSubmit, Stop with structured recall envelope, and PermissionRequest.",
+    "Codex emitted Interrupt when the harness canceled a pending native permission request.",
+    "Both live structured recall envelopes passed separate owner checks for expected native session, assignment ID and human-selected label.",
+    "Claude ran harmless sleep 15 without a prompt; manual permission mode does not imply every command prompts. A Write request produced the permission event.",
+    "Both provider hooks produced explicit waiting_for_user envelopes for the actual adapter decision. A stopped turn can therefore mean waiting, not completed.",
+    "Claude tool-result transcript records harness cancellation as an error; no Interrupt hook was observed in this configured probe.",
+    "A stale-result bug was found and corrected: a new UserPromptSubmit invalidates the previous Stop candidate. Both interrupted/current incomplete probes now remain unaccepted.",
+    "Final decision acknowledged by Claude. Codex did not acknowledge: a native rate-limit model-switch dialog intercepted input. Visible selection retained current model and chose never show again. Native dispatch confirmation must not be inferred from PTY write success.",
+    "Both hook-probe runtime processes exited with status 0.",
+    "Confirmed hide_rate_limit_model_nudge=true after dialog interception; restored false with user-approved scoped repair so rate-limit reminders remain visible."
+  ],
+  "unproven": [
+    "Remote hosts and other operating systems",
+    "Expired/revoked/exhausted subscriptions and automatic before-first-dispatch fallback",
+    "StopFailure under induced provider faults",
+    "Lost, duplicate, reordered or delayed lifecycle events",
+    "Crash recovery and durable dispatch/result deduplication",
+    "Safe takeover during active generation or a partially composed automatic prompt",
+    "Production observer authentication and fencing across processes",
+    "Native modal detection and dispatch acceptance, including quota/model-switch dialogs"
+  ],
+  "sessions": {
+    "codex": "01a1040d-cd11-7470-b7bb-fee870c160f3",
+    "claude": "136b9894-a43e-4907-8580-7e7e196e8875"
+  },
+  "qualification": "Local feasibility only. These versions and probe configurations are not launch-certified."
+}
