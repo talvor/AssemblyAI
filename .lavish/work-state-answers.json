@@ -1,0 +1,21 @@
+{
+ "round1": {
+  "Q1": "A: Job as proposed (\u22641 repository)",
+  "Q2": "A: daemon-owned SQLite, journal + current state",
+  "Q3": "A: asmai CLI over a local socket",
+  "Q4": "A: durable inbox + correlated nudge, agent pulls",
+  "Q5": "B: auto-retry only declared side-effect-free assignments",
+  "Q6": "A: fence factory state; terminate superseded processes first",
+  "Q7": "A: terminate leftovers, reconcile; workers outlive leader restarts"
+ },
+ "round2": {
+  "R2-Q1": "Adopt Dispatch + both life cycles",
+  "R2-Q2": "A: record as they happen",
+  "R2-Q3": "A: owning leader decides under existing authority rules",
+  "R2-Q4": "A: mark unknown, notify leader, no auto action",
+  "R2-Q5": "A: store briefs are canonical; native resume optional"
+ },
+ "round3": {
+  "CONFIRM": "Confirm and record"
+ }
+}

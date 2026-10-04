@@ -15,6 +15,10 @@ _Avoid_: Repository (a factory is not tied to one repository)
 The machine on which a factory and all of its agents run. Each user runs at most one factory per host; factories on different hosts are independent.
 _Avoid_: Server, machine (when meaning the factory's execution host)
 
+**Job**:
+One outcome the user requested through Coordination, with its mandate and acceptance criteria, against at most one repository or none. A job owns its handoffs, assignments, decisions, and grants; later follow-up work is a new job linked to it.
+_Avoid_: Task, request, work item
+
 **Role**:
 A defined area of factory responsibility, such as orchestration, planning, implementation, research, or testing, with one leader and workers as needed.
 _Avoid_: Responsibility (use role as the canonical name)
@@ -28,6 +32,14 @@ An agent spawned to carry out one bounded assignment at a time under one owning 
 
 **Assignment**:
 A bounded piece of work entrusted to one worker by its owning leader, with an outcome and acceptance criteria.
+
+**Dispatch**:
+One identified delivery of work to a specific agent session. Only evidence tied to the current dispatch counts; a retry, correction, or resumption is always a new dispatch.
+_Avoid_: Attempt, run
+
+**Reconciliation**:
+The owning leader's determination of what actually happened when a dispatch's outcome is unknown, recorded with what is known, what is not, and the chosen way forward.
+_Avoid_: Retry (reconciliation decides whether anything is retried)
 
 **Handoff**:
 A request for another leader to take responsibility for a defined outcome, carrying the context and acceptance criteria needed to accept, clarify, or decline it.
