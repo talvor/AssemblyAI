@@ -59,6 +59,13 @@ A choice made by an accountable leader within its mandate or an applicable grant
 **Escalation**:
 A decision request carried to the user through Coordination when work requires the user's choice or authority.
 
+**Registered repository**:
+A repository the user has explicitly added to a factory. Jobs can target only registered repositories.
+
+**Conversation**:
+The user's ongoing exchange with Coordination in its interactive terminal. Unlike an intervention, leaving it never pauses automated delivery.
+_Avoid_: Chat, session
+
 **Coordination**:
 The role responsible for the user's conversation with the factory and overall delivery progress.
 
