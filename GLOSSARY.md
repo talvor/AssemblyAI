@@ -11,6 +11,10 @@ The product name of the personal software factory, meaning AssemblyAI.
 The coordinated group of agents that carries out software engineering work for the user across repositories.
 _Avoid_: Repository (a factory is not tied to one repository)
 
+**Host**:
+The machine on which a factory and all of its agents run. Each user runs at most one factory per host; factories on different hosts are independent.
+_Avoid_: Server, machine (when meaning the factory's execution host)
+
 **Role**:
 A defined area of factory responsibility, such as orchestration, planning, implementation, research, or testing, with one leader and workers as needed.
 _Avoid_: Responsibility (use role as the canonical name)

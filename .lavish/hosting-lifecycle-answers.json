@@ -1,0 +1,23 @@
+{
+ "round1": {
+  "Q1": "A: one factory per user per host",
+  "Q2": "Linux + macOS",
+  "Q3": "A: AsmAI daemon owns PTYs (systemd user unit optional)",
+  "Q4": "A: SSH + local-on-host attach, port-forward Lavish",
+  "Q5": "A: at most one, with fencing; gap tolerated",
+  "Q6": "Up to 4: host reboot",
+  "Q7": "B: qualified allow-list, else pause (starts empty)"
+ },
+ "round2": {
+  "R2-Q1": "B: per-platform certification, Linux may lead",
+  "R2-Q2": "B: explicit start + opt-in service install",
+  "R2-Q3": "B: auto-restart leaders; owning leader handles dead workers",
+  "R2-Q4": "A: drain with timeout, plus --now",
+  "R2-Q5": "A: observe by default; explicit take; wait-or-interrupt",
+  "R2-Q6": "A: stop-upgrade-start, validate at start"
+ },
+ "round3": {
+  "R3-Q1": "A: daemon supervises Lavish",
+  "R3-CONFIRM": "Confirm and record"
+ }
+}
