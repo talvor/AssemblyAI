@@ -1,0 +1,258 @@
+{
+  "codex": [
+    {
+      "time": 1791069878.0389435,
+      "kind": "started",
+      "epoch": 0,
+      "pid": 3484695,
+      "command": [
+        "codex",
+        "resume",
+        "01a1040d-cd11-7470-b7bb-fee870c160f3",
+        "--no-daemon",
+        "--no-alt-screen",
+        "-s",
+        "read-only",
+        "-a",
+        "on-request"
+      ]
+    },
+    {
+      "time": 1791070008.6822307,
+      "kind": "human_attached",
+      "epoch": 1,
+      "owner": "human"
+    },
+    {
+      "time": 1791070238.2314758,
+      "kind": "rejected",
+      "epoch": 1,
+      "operation": "input",
+      "owner": "human"
+    },
+    {
+      "time": 1791070357.600259,
+      "kind": "human_disconnected",
+      "epoch": 1,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070364.6690223,
+      "kind": "human_attached",
+      "epoch": 2,
+      "owner": "human"
+    },
+    {
+      "time": 1791070369.841544,
+      "kind": "human_disconnected",
+      "epoch": 2,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070395.5793507,
+      "kind": "human_attached",
+      "epoch": 3,
+      "owner": "human"
+    },
+    {
+      "time": 1791070415.629787,
+      "kind": "human_disconnected",
+      "epoch": 3,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070650.501514,
+      "kind": "intervention_released",
+      "epoch": 4,
+      "summary": "Phillip attached, recalled pigscanfly, denied the native request to create the probe file, detached and reattached. Both probe files are absent. Codex recorded interrupted turns. Initial detach client needed a keyboard-protocol fix.",
+      "owner": "automation"
+    },
+    {
+      "time": 1791070814.2838962,
+      "kind": "human_attached",
+      "epoch": 5,
+      "owner": "human"
+    },
+    {
+      "time": 1791070817.8368788,
+      "kind": "human_disconnected",
+      "epoch": 5,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070832.6484077,
+      "kind": "rejected",
+      "epoch": 5,
+      "operation": "input",
+      "owner": "paused"
+    },
+    {
+      "time": 1791070974.9854772,
+      "kind": "intervention_released",
+      "epoch": 6,
+      "summary": "Phillip confirmed fixed Ctrl-] works in both clients. Final reattachment/detachment recorded. Clear remaining test drafts before clean shutdown; do not retry denied writes.",
+      "owner": "automation"
+    },
+    {
+      "time": 1791070976.2680736,
+      "kind": "process_exited",
+      "epoch": 6,
+      "wait_status": 0,
+      "assignment": "unaccepted"
+    },
+    {
+      "time": 1791071019.0984511,
+      "kind": "started",
+      "epoch": 0,
+      "pid": 3595538,
+      "command": [
+        "python3",
+        "/home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/launch_hooks.py",
+        "codex"
+      ]
+    },
+    {
+      "time": 1791071194.4445996,
+      "kind": "human_attached",
+      "epoch": 1,
+      "owner": "human"
+    },
+    {
+      "time": 1791071221.1260145,
+      "kind": "human_disconnected",
+      "epoch": 1,
+      "owner": "paused"
+    },
+    {
+      "time": 1791071224.011168,
+      "kind": "human_attached",
+      "epoch": 2,
+      "owner": "human"
+    },
+    {
+      "time": 1791071227.4812222,
+      "kind": "human_disconnected",
+      "epoch": 2,
+      "owner": "paused"
+    },
+    {
+      "time": 1791071309.6933503,
+      "kind": "intervention_released",
+      "epoch": 3,
+      "summary": "Phillip reviewed and trusted the six passive hooks through native Codex review, then detached.",
+      "owner": "automation"
+    },
+    {
+      "time": 1791072177.9859357,
+      "kind": "process_exited",
+      "epoch": 3,
+      "wait_status": 0,
+      "assignment": "unaccepted"
+    }
+  ],
+  "claude": [
+    {
+      "time": 1791069881.3600469,
+      "kind": "started",
+      "epoch": 0,
+      "pid": 3486391,
+      "command": [
+        "claude",
+        "--resume",
+        "136b9894-a43e-4907-8580-7e7e196e8875",
+        "--safe-mode",
+        "--permission-mode",
+        "manual"
+      ]
+    },
+    {
+      "time": 1791070238.231933,
+      "kind": "rejected",
+      "epoch": 0,
+      "operation": "input",
+      "owner": "automation"
+    },
+    {
+      "time": 1791070444.467129,
+      "kind": "human_attached",
+      "epoch": 1,
+      "owner": "human"
+    },
+    {
+      "time": 1791070505.0884585,
+      "kind": "human_disconnected",
+      "epoch": 1,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070507.1482801,
+      "kind": "human_attached",
+      "epoch": 2,
+      "owner": "human"
+    },
+    {
+      "time": 1791070553.5492249,
+      "kind": "human_disconnected",
+      "epoch": 2,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070650.50195,
+      "kind": "intervention_released",
+      "epoch": 3,
+      "summary": "Phillip attached, recalled pigscanfly, denied the native request to create the probe file, detached and reattached. Both probe files are absent. Codex recorded interrupted turns. Initial detach client needed a keyboard-protocol fix.",
+      "owner": "automation"
+    },
+    {
+      "time": 1791070820.6189394,
+      "kind": "human_attached",
+      "epoch": 4,
+      "owner": "human"
+    },
+    {
+      "time": 1791070823.9806778,
+      "kind": "human_disconnected",
+      "epoch": 4,
+      "owner": "paused"
+    },
+    {
+      "time": 1791070832.6486223,
+      "kind": "rejected",
+      "epoch": 4,
+      "operation": "input",
+      "owner": "paused"
+    },
+    {
+      "time": 1791070976.4880116,
+      "kind": "intervention_released",
+      "epoch": 5,
+      "summary": "Phillip confirmed fixed Ctrl-] works in both clients. Final reattachment/detachment recorded. Clear remaining test drafts before clean shutdown; do not retry denied writes.",
+      "owner": "automation"
+    },
+    {
+      "time": 1791070978.0843735,
+      "kind": "process_exited",
+      "epoch": 5,
+      "wait_status": 0,
+      "assignment": "unaccepted"
+    },
+    {
+      "time": 1791071021.2681346,
+      "kind": "started",
+      "epoch": 0,
+      "pid": 3596149,
+      "command": [
+        "python3",
+        "/home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/launch_hooks.py",
+        "claude"
+      ]
+    },
+    {
+      "time": 1791072179.5039845,
+      "kind": "process_exited",
+      "epoch": 0,
+      "wait_status": 0,
+      "assignment": "unaccepted"
+    }
+  ]
+}

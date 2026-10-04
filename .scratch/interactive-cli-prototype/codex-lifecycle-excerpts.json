@@ -1,0 +1,296 @@
+[
+  {
+    "timestamp": "2026-10-03T23:17:02.442Z",
+    "ordinal": 1,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a1040e-834c-7792-9f22-c432b7c6abac",
+      "root_turn_id": "01a1040e-834c-7792-9f22-c432b7c6abac",
+      "started_at": 1791069422,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:17:07.762Z",
+    "ordinal": 17,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a1040e-834c-7792-9f22-c432b7c6abac",
+      "last_agent_message": "PROBE_CODEX_READY",
+      "started_at": 1791069422,
+      "completed_at": 1791069427,
+      "duration_ms": 5341,
+      "time_to_first_token_ms": 5015
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:18:12.846Z",
+    "ordinal": 19,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a1040f-9668-76f2-b4ff-e2e490e826cf",
+      "root_turn_id": "01a1040f-9668-76f2-b4ff-e2e490e826cf",
+      "started_at": 1791069492,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:18:15.290Z",
+    "ordinal": 27,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a1040f-9668-76f2-b4ff-e2e490e826cf",
+      "last_agent_message": "Phillip, which short label should both test sessions remember?",
+      "started_at": 1791069492,
+      "completed_at": 1791069495,
+      "duration_ms": 2444,
+      "time_to_first_token_ms": 1847
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:21:35.164Z",
+    "ordinal": 29,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10412-acaf-72a3-8052-fc142f3a08d4",
+      "root_turn_id": "01a10412-acaf-72a3-8052-fc142f3a08d4",
+      "started_at": 1791069695,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:21:39.069Z",
+    "ordinal": 37,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a10412-acaf-72a3-8052-fc142f3a08d4",
+      "last_agent_message": "pigscanfly",
+      "started_at": 1791069695,
+      "completed_at": 1791069699,
+      "duration_ms": 3905,
+      "time_to_first_token_ms": 3650
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:25:20.314Z",
+    "ordinal": 40,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10416-1c31-7e62-ac06-fb92010470ba",
+      "root_turn_id": "01a10416-1c31-7e62-ac06-fb92010470ba",
+      "started_at": 1791069920,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:25:25.710Z",
+    "ordinal": 53,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a10416-1c31-7e62-ac06-fb92010470ba",
+      "last_agent_message": "pigscanfly",
+      "started_at": 1791069920,
+      "completed_at": 1791069925,
+      "duration_ms": 5396,
+      "time_to_first_token_ms": 5286
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:27:08.215Z",
+    "ordinal": 55,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10417-c1b0-7b10-b131-725093dba5e6",
+      "root_turn_id": "01a10417-c1b0-7b10-b131-725093dba5e6",
+      "started_at": 1791070028,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:27:11.597Z",
+    "ordinal": 63,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a10417-c1b0-7b10-b131-725093dba5e6",
+      "last_agent_message": "pigscanfly",
+      "started_at": 1791070028,
+      "completed_at": 1791070031,
+      "duration_ms": 3382,
+      "time_to_first_token_ms": 3007
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:29:02.792Z",
+    "ordinal": 65,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10419-8142-76f3-b08c-b87193a9b103",
+      "root_turn_id": "01a10419-8142-76f3-b08c-b87193a9b103",
+      "started_at": 1791070142,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:29:18.074Z",
+    "ordinal": 76,
+    "type": "event_msg",
+    "payload": {
+      "type": "turn_aborted",
+      "turn_id": "01a10419-8142-76f3-b08c-b87193a9b103",
+      "reason": "interrupted",
+      "started_at": 1791070142,
+      "completed_at": 1791070158,
+      "duration_ms": 15282
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:32:07.020Z",
+    "ordinal": 78,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a1041c-50e3-7ef1-b36d-47b69229fb83",
+      "root_turn_id": "01a1041c-50e3-7ef1-b36d-47b69229fb83",
+      "started_at": 1791070327,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:32:12.005Z",
+    "ordinal": 89,
+    "type": "event_msg",
+    "payload": {
+      "type": "turn_aborted",
+      "turn_id": "01a1041c-50e3-7ef1-b36d-47b69229fb83",
+      "reason": "interrupted",
+      "started_at": 1791070327,
+      "completed_at": 1791070332,
+      "duration_ms": 4986
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:38:08.893Z",
+    "ordinal": 91,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10421-d674-7402-8c0f-23c807bdaf00",
+      "root_turn_id": "01a10421-d674-7402-8c0f-23c807bdaf00",
+      "started_at": 1791070688,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:38:13.403Z",
+    "ordinal": 99,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a10421-d674-7402-8c0f-23c807bdaf00",
+      "last_agent_message": "pigscanfly",
+      "started_at": 1791070688,
+      "completed_at": 1791070693,
+      "duration_ms": 4509,
+      "time_to_first_token_ms": 4471
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:48:30.224Z",
+    "ordinal": 102,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a1042b-5175-7c53-ab56-68747d13591b",
+      "root_turn_id": "01a1042b-5175-7c53-ab56-68747d13591b",
+      "started_at": 1791071310,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:48:38.113Z",
+    "ordinal": 113,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a1042b-5175-7c53-ab56-68747d13591b",
+      "last_agent_message": "{\"assignment_id\":\"probe-recall-1\",\"outcome\":\"succeeded\",\"label\":\"pigscanfly\"}",
+      "started_at": 1791071310,
+      "completed_at": 1791071318,
+      "duration_ms": 7889,
+      "time_to_first_token_ms": 6546
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:49:43.106Z",
+    "ordinal": 115,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a1042c-6e35-7b11-bef3-fcc23fb8a149",
+      "root_turn_id": "01a1042c-6e35-7b11-bef3-fcc23fb8a149",
+      "started_at": 1791071383,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:54:33.993Z",
+    "ordinal": 126,
+    "type": "event_msg",
+    "payload": {
+      "type": "turn_aborted",
+      "turn_id": "01a1042c-6e35-7b11-bef3-fcc23fb8a149",
+      "reason": "interrupted",
+      "started_at": 1791071383,
+      "completed_at": 1791071673,
+      "duration_ms": 290886
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:56:58.666Z",
+    "ordinal": 128,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_started",
+      "turn_id": "01a10433-139c-7870-9c95-7d23e712ee49",
+      "root_turn_id": "01a10433-139c-7870-9c95-7d23e712ee49",
+      "started_at": 1791071818,
+      "model_context_window": 258400,
+      "collaboration_mode_kind": "default"
+    }
+  },
+  {
+    "timestamp": "2026-10-03T23:57:06.519Z",
+    "ordinal": 136,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a10433-139c-7870-9c95-7d23e712ee49",
+      "last_agent_message": "{\"assignment_id\":\"adapter-decision-1\",\"status\":\"waiting_for_user\",\"decision_id\":\"interactive-adapter\",\"question\":\"Should AsmAI adopt the demonstrated interactive CLI, exclusive terminal input and passive hook approach, with ambiguous states paused for reconciliation and launch qualification still required?\"}",
+      "started_at": 1791071818,
+      "completed_at": 1791071826,
+      "duration_ms": 7853,
+      "time_to_first_token_ms": 4161
+    }
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ],
+    "Interrupt": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/phillip/Development/assembly-ai/.scratch/interactive-cli-prototype/observe_hook.py codex"
+          }
+        ]
+      }
+    ]
+  }
+}
