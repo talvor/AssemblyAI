@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AsmAI · Conversation and Lavish flow</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
+<style>*{box-sizing:border-box}body{margin:0;background:#0f1729;color:#e2e8f0;font-family:system-ui,sans-serif}main{max-width:900px;margin:auto;padding:40px 24px}p,h1,h2,label,span,li{overflow-wrap:anywhere}.card{min-width:0}label.choice{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #334155;border-radius:10px;cursor:pointer}label.choice:has(:checked){border-color:#38bdf8;background:#132e43}textarea{max-width:100%}.rec{border-left:3px solid #38bdf8;padding:8px 12px;background:#0b2233;border-radius:6px}.try{border-left:3px solid #fbbf24;padding:6px 12px;background:#2a2210;border-radius:6px;font-size:.92rem}code{font-size:.88em;color:#bae6fd}</style></head>
+<body>
+<main class="pb-0"><header class="mb-6"><p class="text-primary text-sm tracking-widest uppercase mb-3">AsmAI / Wayfinder / Explore terminal conversation and Lavish decision flow</p>
+<h1 class="text-4xl font-bold mb-4">Confirmed: conversation and Lavish decision flow</h1><p class="text-lg opacity-80">Phillip confirmed this resolution in Lavish on 2026-10-05 after three rounds. The prototype is kept below as the primary source.</p></header>
+<details class="card bg-base-300 p-5 mb-6"><summary class="font-bold cursor-pointer">Settled by earlier tickets (this round builds on these)</summary><ul class="list-disc ml-6 mt-3 opacity-90 space-y-2"><li><b>Conversation:</b> Coordination's provider screen (Claude Code or Codex) is the conversation, and bare <code>asmai</code> opens it. It is not an intervention: detaching returns Coordination to automated delivery, and the daemon never types into it while you have unsent text. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/9">Define CLI setup and management experience</a>)</span></li><li><b>Delivery:</b> The daemon types only a one-line nudge carrying a dispatch ID, at an input-ready boundary. The agent's <code>asmai inbox</code> fetch is the delivery evidence; content never travels through the terminal. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/8">Define work state and coordination contracts</a>)</span></li><li><b>Lavish:</b> Required for reviews and for all grilling and Wayfinder questions. The daemon supervises the Lavish server on localhost; remote hosts use SSH forwarding, and <code>asmai lavish</code> lists pending pages. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/7">Choose factory hosting and lifecycle</a>)</span></li><li><b>Decisions:</b> Versioned: a stale reply cannot approve a changed request. Escalate once and update when material new evidence arrives. Dependent work pauses and independent work continues. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/6">Define delegated authority and human escalation</a>)</span></li><li><b>Intervention:</b> Attaching observes; taking input is explicit and waits for a boundary (or <code>--interrupt</code>); automated drafts are recorded and cleared; native prompts are a boundary and are answered in place; release is explicit, and detaching without releasing keeps automation paused. A Ctrl-] menu offers detach, take, release and interrupt. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/7">Choose factory hosting and lifecycle</a>)</span></li><li><b>Roles:</b> Coordination is your single counterpart and carries each exchange faithfully; the owning leader owns the substance; agents never supply your side. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/5">Define roles and leader-worker contracts</a>)</span></li><li><b>Elsewhere:</b> Notifications while you are away, and what job cancel, pause and resume do, belong to Define operating limits and visibility. A separate browser dashboard is not assumed. <span class="opacity-60">(<a class="link" href="https://github.com/talvor/AssemblyAI/issues/14">Define operating limits and visibility</a>)</span></li></ul></details>
+<details class="card bg-base-300 p-5 mb-6"><summary class="font-bold cursor-pointer">Settled in this ticket so far</summary><ul class="list-disc ml-6 mt-3 opacity-90"><li><b>Q1</b>: B: daemon status line in every attached terminal</li><li><b>Q2</b>: B: one job-tagged line per item; a flagged block when it needs me</li><li><b>Q3</b>: A: a focused job with explicit switching</li><li><b>Q4</b>: B: terminal for single choices; Lavish for the rest; one surface per version</li><li><b>Q5</b>: A: daemon-witnessed messages, cited by every record attributed to me</li><li><b>Q6</b>: A: the daemon collects and routes answers</li><li><b>Q7</b>: A: daemon catch-up digest</li><li><b>Q8</b>: A: save it and clear the input box</li><li><b>Q9</b>: A: prompt answers only, same dispatch; typed messages, owner reconciles and issues a new dispatch</li><li><b>R2-Q1</b>: A: Ctrl-] menu switches this terminal between the conversation and any agent</li><li><b>R2-Q2</b>: A: newest attach takes over; the old terminal observes and its unsent text is saved</li><li><b>R2-Q3</b>: A: yes; the interrupted automated turn is re-nudged and checked, never blindly repeated</li><li><b>R2-Q4</b>: A: structured questions rendered by the daemon, plus optional agent content</li><li><b>R3-Q1</b>: A: keep it as fog, judged with notifications</li><li><b>R3-Q2</b>: A: record ADR 0004 as proposed</li><li><b>CONFIRM</b>: Confirm and record</li></ul></details>
+</main>
+<style>
+.proto{max-width:1240px;margin:0 auto 40px;padding:0 24px}
+.proto .intro{background:#172238;border-radius:16px;padding:20px 24px;margin-bottom:12px}
+.proto .intro p{line-height:1.6;opacity:.92}
+.eyebrow{color:#fbbf24;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.pol{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:10px;margin:14px 0 4px}
+.pol label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:#94a3b8}
+.pol select{background:#0b1220;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:6px 8px;font-size:.85rem;max-width:100%}
+.pol select.off{border-color:#fbbf24;color:#fde68a}
+.polnote{font-size:.78rem;color:#94a3b8;margin-top:4px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 8px}
+.tab{padding:6px 12px;border-radius:999px;border:1px solid #334155;background:#0b1220;color:#cbd5e1;font-size:.85rem;cursor:pointer}
+.tab.on{background:#38bdf8;color:#0b1220;border-color:#38bdf8;font-weight:700}
+.scn{background:#131d31;border:1px solid #233150;border-radius:14px;padding:16px 18px}
+.scn p{line-height:1.55}
+.scn .watch{color:#fde68a;font-size:.88rem;margin-top:6px}
+.steps{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.stepbtn{text-align:left;padding:7px 12px;border-radius:8px;border:1px solid #334155;background:#0b1220;color:#e2e8f0;font-size:.86rem;cursor:pointer}
+.stepbtn.next{border-color:#38bdf8;box-shadow:0 0 0 1px #38bdf8 inset}
+.stepbtn.done{opacity:.5}
+.stepbtn:disabled{cursor:default}
+.scnbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.stage{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-top:16px}
+@media (max-width:920px){.stage{grid-template-columns:minmax(0,1fr)}}
+.win{border-radius:12px;overflow:hidden;border:1px solid #2b3a55;background:#0a0e15;display:flex;flex-direction:column;min-height:520px}
+.titlebar{background:#1b2333;color:#94a3b8;font:12px ui-monospace,Menlo,monospace;padding:7px 12px;display:flex;gap:8px;align-items:center}
+.dots{display:flex;gap:5px}.dots span{width:10px;height:10px;border-radius:50%;background:#334155}
+.titlebar .ttl{flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.titlebar .ttl.flag{color:#fbbf24}
+.screen{flex:1;overflow:auto;padding:12px 14px;font:12.5px/1.5 ui-monospace,'JetBrains Mono',Menlo,monospace;color:#d1d5db;max-height:500px}
+.ln{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 2px}
+.blk{margin:0 0 8px}
+.who-you .ln:first-child::before{content:'> ';color:#38bdf8}
+.who-you{color:#f1f5f9}
+.who-coord{color:#cbd5e1}
+.who-coord.auto{color:#94a3b8}
+.who-nudge{color:#64748b;font-style:italic}
+.who-digest{color:#a7f3d0;border:1px dashed #1f5f4a;border-radius:6px;padding:6px 8px}
+.who-attach{color:#93c5fd}
+.flagln{color:#fbbf24}
+.queued{color:#64748b;font-size:11px}
+.inputrow{border-top:1px solid #1f2a3d;padding:8px 12px;display:flex;gap:8px;align-items:center;font:12.5px ui-monospace,Menlo,monospace;color:#38bdf8}
+.inputrow input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#e2e8f0;font:inherit}
+.inputrow input:disabled{color:#475569}
+.statusline{background:#38bdf8;color:#0b1220;font:12px ui-monospace,Menlo,monospace;padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.statusline.flag{background:#fbbf24}
+.awaybox{padding:28px 18px;color:#64748b;font:12.5px/1.6 ui-monospace,Menlo,monospace}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{background:#131d31;border:1px solid #233150;border-radius:12px;padding:12px 14px;font-size:.84rem;min-width:0}
+.panel h3{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin:0 0 8px;font-weight:700}
+.panel.changed{border-left:3px solid #38bdf8}
+.panel.warnp{border-left:3px solid #f87171;background:#2a1420;color:#fecaca}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px}
+.kv dt{color:#94a3b8}
+.kv dd{margin:0;overflow-wrap:anywhere}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.7rem;font-weight:700;white-space:nowrap}
+.p-you{background:#0e3a2f;color:#6ee7b7}.p-auto{background:#1e293b;color:#94a3b8}.p-held{background:#3b2a0b;color:#fbbf24}.p-bad{background:#3b1420;color:#fca5a5}.p-ok{background:#0c3346;color:#7dd3fc}
+.mini{width:100%;border-collapse:collapse;font-size:.8rem}
+.mini td,.mini th{padding:3px 6px;border-bottom:1px solid #1f2a3d;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.mini th{color:#94a3b8;font-weight:600}
+.jr{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;max-height:280px;overflow:auto}
+.jr li{border-left:3px solid #334155;padding-left:8px;line-height:1.4;overflow-wrap:anywhere}
+.jr li.src-you{border-color:#34d399}.jr li.src-daemon{border-color:#38bdf8}.jr li.src-agent{border-color:#a78bfa}.jr li.src-refused{border-color:#f87171;color:#fecaca}
+.jr .src{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-right:6px}
+.lavcard{border:1px dashed #a78bfa;border-radius:10px;padding:10px;margin-top:6px}
+.lavcard .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fp{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px;margin-top:10px}
+.fp .grp{background:#131d31;border:1px solid #233150;border-radius:12px;padding:12px;min-width:0}
+.fp .grp h4{font-size:.72rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px;font-weight:700}
+.fp .grp .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}
+.fp select{background:#0b1220;color:#e2e8f0;border:1px solid #334155;border-radius:6px;padding:3px 6px;font-size:.8rem}
+.xbtn{padding:4px 10px;border-radius:7px;border:1px solid #475569;background:#0b1220;color:#e2e8f0;font-size:.8rem;cursor:pointer}
+.xbtn:hover{border-color:#38bdf8}
+.xbtn.lav{border-color:#a78bfa}
+</style>
+
+<section class="proto" id="proto" data-lavish-section="prototype">
+  <div class="intro">
+    <p class="eyebrow">Throwaway prototype · a simulation, not the product</p>
+    <h2 class="text-2xl font-bold mb-2">Coordination's terminal with three jobs running</h2>
+    <p><b>The question it explores:</b> while you talk to Coordination in its interactive terminal, how should other jobs' progress, outcomes and decisions show up; how is what you type tied to the right decision and recorded as yours; how do grilling rounds and reviews go to Lavish and come back; what do you see when you return; and what happens when you step into a worker's terminal?</p>
+    <p class="mt-2">The left pane imitates the terminal: Coordination's conversation, or a worker's terminal when you attach to one. The right side shows what the daemon knows: who owns each terminal's input, what is waiting to be delivered, the decision records, and the journal. Each setting below matches one question further down, and the default is my recommendation. Change a setting and replay a scenario to compare. Amber settings differ from the recommendation.</p>
+  </div>
+
+  <div class="pol" id="policies"></div>
+  <p class="polnote">Changing a setting applies immediately; restart a scenario to replay it from the beginning.</p>
+
+  <div class="tabs" id="scn-tabs"></div>
+  <div class="scn" id="scn-panel"></div>
+
+  <div class="stage">
+    <div class="win" id="win">
+      <div class="titlebar"><div class="dots"><span></span><span></span><span></span></div><div class="ttl" id="ttl"></div></div>
+      <div class="screen" id="screen"></div>
+      <div class="inputrow"><span id="prompt-mark">›</span><input id="term-input" autocomplete="off" spellcheck="false" placeholder="Type to Coordination, Enter to send"></div>
+      <div class="statusline" id="statusline"></div>
+    </div>
+    <div class="side">
+      <div class="panel changed" id="changed"></div>
+      <div class="panel warnp" id="warn" hidden></div>
+      <div class="panel" id="owners"></div>
+      <div class="panel" id="inboxp"></div>
+      <div class="panel" id="decisions"></div>
+      <div class="panel" id="lavishp"></div>
+      <div class="panel" id="journal"></div>
+    </div>
+  </div>
+
+  <details class="mt-4" open>
+    <summary class="font-bold cursor-pointer">Free play: press anything, in any order</summary>
+    <div class="fp" id="freeplay"></div>
+  </details>
+</section>
+
+<script>
+(() => {
+// ================= Portable model: pure functions, no DOM =================
+// step(state, action) -> new state. Everything the page shows is derived from state.
+const Model = (() => {
+  const DEFAULTS = { status: 'line', turns: 'quiet', surface: 'single', words: 'witnessed', catchup: 'digest', draft: 'save', release: 'split' };
+  const WORKER = 'worker1@engineering';
+  const PAGES = { 'D-17': 'http://127.0.0.1:4387/session/3c1e8a…', 'D-21': 'http://127.0.0.1:4387/session/9f2c41…' };
+  const URGENT = new Set(['decision', 'needs-you', 'attached']);
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+
+  function init(policy) {
+    return {
+      policy: Object.assign({}, DEFAULTS, policy || {}),
+      t: 1, nTurn: 0, nMsg: 0, nDispatch: 51,
+      where: 'conversation', focus: 12, pendingFocus: null,
+      jobs: {
+        12: { repo: 'asmai-site', title: 'Fix login redirect loop' },
+        14: { repo: 'billing-api', title: 'Add invoice CSV export' },
+        15: { repo: null, title: 'Plan offline sync' },
+      },
+      coord: { busy: false, trigger: null, queued: [] },
+      draft: '', saved: [], lastLeft: null,
+      inbox: [], decisions: {}, turns: {},
+      worker: { addr: WORKER, owner: 'leader@engineering', job: 14, assignment: 'A-7', dispatch: 'd-41', input: 'automation', state: 'working', prompt: null, held: [], screen: ['⏺ Writing the invoice CSV export (assignment A-7, dispatch d-41)…'], intervention: null, takePending: false },
+      convo: [{ who: 'coord', text: ['Coordination here. Running: #12 login redirect loop (asmai-site), #14 invoice CSV export (billing-api), #15 offline-sync plan (no repository). Focus: #12.'] }],
+      journal: [], changed: 'Fresh start: three jobs are running and you are in the conversation.', warn: null,
+    };
+  }
+
+  const log = (s, src, text) => s.journal.push({ t: s.t, src, text });
+  const say = (s, line) => s.convo.push(line);
+  function addMsg(s, kind, job, extra) {
+    const m = Object.assign({ id: 'm-' + (++s.nMsg), kind, job, state: 'waiting', at: s.t }, extra || {});
+    s.inbox.push(m);
+    return m;
+  }
+  function newTurn(s, who, where, text, job) {
+    const id = 'T-' + (++s.nTurn);
+    s.turns[id] = { id, who, where, text, at: s.t, job };
+    return id;
+  }
+  function lastTurn(s, who, where) {
+    const ts = Object.values(s.turns).filter((t) => t.who === who && (!where || t.where === where));
+    return ts.length ? ts[ts.length - 1].id : null;
+  }
+  function jobOf(s, text) {
+    const m = text.match(/^\s*#?(\d{2})\s*[:,]/) || text.match(/\bjob\s+#?(\d{2})\b/i) || text.match(/#(\d{2})\b/);
+    return m && s.jobs[m[1]] ? Number(m[1]) : s.focus;
+  }
+
+  // ---- derived facts (what the daemon knows for certain) ----
+  function facts(s) {
+    const waiting = [];
+    for (const d of Object.values(s.decisions)) if (d.status === 'waiting') waiting.push({ kind: 'decision', d });
+    if (s.worker.state === 'permission') waiting.push({ kind: 'prompt', addr: s.worker.addr, job: s.worker.job, text: s.worker.prompt });
+    return {
+      waiting,
+      youHold: s.worker.input === 'you' ? [s.worker.addr] : [],
+      ownerHold: s.worker.input === 'owner' ? [s.worker.addr] : [],
+      forCoord: s.inbox.filter((m) => m.state === 'waiting'),
+    };
+  }
+  function statusLine(s) {
+    const f = facts(s);
+    const parts = ['AsmAI'];
+    if (f.waiting.length) parts.push('⚑ ' + f.waiting.length + ' waiting on you: ' + f.waiting.map((w) => w.kind === 'decision' ? w.d.id + ' v' + w.d.version + ' #' + w.d.job + (w.d.surface === 'lavish' ? ' (Lavish)' : '') : w.addr + ' prompt').join(', '));
+    else parts.push('nothing waiting on you');
+    parts.push('focus #' + s.focus);
+    parts.push('jobs #12 #14 #15');
+    if (f.youHold.length) parts.push('✋ you hold ' + f.youHold.join(', '));
+    parts.push('^] menu');
+    return { text: parts.join('  │  '), flag: f.waiting.length > 0 || f.youHold.length > 0 };
+  }
+  function windowTitle(s) {
+    const f = facts(s);
+    return { text: (f.waiting.length ? '⚑' + f.waiting.length + ' ' : '') + (f.youHold.length ? '✋ ' : '') + 'AsmAI · #' + s.focus + ' · 3 jobs', flag: f.waiting.length > 0 || f.youHold.length > 0 };
+  }
+  function deliveryNote(s, m) {
+    if (m.state !== 'waiting') return 'delivered ' + (m.dispatch || '');
+    if (s.draft) return 'held: your unsent text is in the input box';
+    if (s.policy.turns === 'defer' && s.where === 'conversation' && !URGENT.has(m.kind)) return 'held: routine items wait while you are here';
+    if (s.coord.busy) return 'next boundary (Coordination is mid-turn)';
+    return 'deliverable now';
+  }
+
+  // ---- daemon: deliver to Coordination only at a boundary, never over your unsent text ----
+  function daemon(s) {
+    if (s.coord.busy || s.draft) return;
+    let ready = s.inbox.filter((m) => m.state === 'waiting');
+    if (s.policy.turns === 'defer' && s.where === 'conversation') ready = ready.filter((m) => URGENT.has(m.kind));
+    if (!ready.length) return;
+    const d = 'd-' + (++s.nDispatch);
+    const text = '▸ asmai: ' + ready.length + ' new for leader@coordination · ' + d + ' · run asmai inbox';
+    const turn = newTurn(s, 'daemon', 'conversation', text, null);
+    say(s, { who: 'nudge', text: [text], turn });
+    ready.forEach((m) => { m.state = 'delivered'; m.dispatch = d; m.deliveredAt = s.t; });
+    log(s, 'daemon', 'Nudged leader@coordination at a boundary (' + d + '). Its asmai inbox fetch is the delivery evidence for ' + ready.map((m) => m.id).join(', ') + '.');
+    s.coord.busy = true;
+    s.coord.trigger = { kind: 'nudge', dispatch: d, items: ready.map((m) => m.id), turn };
+  }
+
+  // ---- what Coordination writes for fetched items ----
+  function decisionBlock(s, d, revised) {
+    const head = revised
+      ? '⚑ ' + d.id + ' changed to v' + d.version + ' (#' + d.job + '): ' + d.note + '. Earlier answers no longer apply.'
+      : '⚑ ' + d.id + ' v' + d.version + ' (#' + d.job + ') · ' + d.owner + ' needs your choice: ' + d.title;
+    if (d.status !== 'waiting') return ['#' + d.job + ' · ' + d.id + ' is already answered.'];
+    if (d.surface === 'lavish') return [head, '   Answer in Lavish: ' + d.page, '   (remote host: asmai lavish prints the ssh -L forwarding command)', d.kind === 'grilling' ? '   Grilling answers can only come from you, in Lavish.' : '   This decision is answered in Lavish only.'];
+    return [head].concat(d.options.map((o, i) => '   ' + 'AB'[i] + '  ' + o), ['   Reply here, for example "' + d.job + ': A", or ask me for detail.']);
+  }
+  function describe(s, m, full, seen) {
+    const tag = m.job ? '#' + m.job : '';
+    switch (m.kind) {
+      case 'handoff': return full
+        ? [tag + ': Planning finished the offline-sync spec. I have handed it to leader@engineering with its acceptance criteria and asked them to accept, clarify or decline. Nothing is needed from you yet.']
+        : [tag + ' · Planning\'s spec handed to leader@engineering'];
+      case 'progress': return full ? [tag + ': ' + m.from + ' reports progress: ' + m.text + '. I will tell you when there is a result to review.'] : [tag + ' · ' + m.text];
+      case 'outcome': return full ? [tag + ': ✓ ' + m.text + '. It is ready for your review; merging still needs your approval.'] : [tag + ' ✓ ' + m.text];
+      case 'decision': {
+        if (seen.has(m.ref)) return [];
+        seen.add(m.ref);
+        return decisionBlock(s, s.decisions[m.ref], m.revised);
+      }
+      case 'needs-you': return ['⚑ ' + m.agent + ' (#' + m.job + ') waits on a native permission prompt: ' + m.text, '   Answer it in that terminal: asmai take ' + m.agent + '  (or the Ctrl-] menu)'];
+      case 'lavish-answer': return [tag + ' · your Lavish answers for ' + m.ref + ' v' + m.version + ' reached ' + m.owner];
+      case 'attached': return narrate(s);
+      default: return [tag + ' · ' + (m.text || m.kind)];
+    }
+  }
+  function narrate(s) {
+    const since = s.inbox.filter((m) => m.state === 'delivered' && m.kind !== 'attached' && s.lastLeft != null && m.deliveredAt >= s.lastLeft);
+    const bits = since.map((m) => m.kind === 'decision' ? m.ref + ' needs your choice' : m.kind === 'needs-you' ? m.agent + ' waits on a prompt' : '#' + m.job + ' ' + (m.text || m.kind));
+    return ['Welcome back. While you were away: ' + (bits.length ? bits.join('; ') : 'nothing much happened') + '.',
+      '(Written by Coordination from what it has fetched. Items still in its inbox, and your saved text, are not in it.)'];
+  }
+  function digest(s) {
+    const f = facts(s);
+    const out = [];
+    f.waiting.forEach((w) => out.push(w.kind === 'decision'
+      ? '⚑ ' + w.d.id + ' v' + w.d.version + ' #' + w.d.job + ' ' + w.d.title + ' → ' + (w.d.surface === 'lavish' ? 'answer in Lavish: ' + w.d.page : 'reply in this conversation')
+      : '⚑ ' + w.addr + ' #' + w.job + ' native prompt: ' + w.text + ' → asmai take ' + w.addr));
+    s.inbox.filter((m) => m.kind === 'outcome' && s.lastLeft != null && m.at >= s.lastLeft).forEach((m) => out.push('✓ #' + m.job + ' ' + m.text));
+    f.youHold.forEach((a) => out.push('✋ You still hold ' + a + '\'s input; its automation stays paused until you release it.'));
+    s.saved.filter((x) => !x.shown).forEach((x) => { x.shown = true; out.push('✎ Saved unsent text: "' + x.text + '" (copy it back if you still want it)'); });
+    if (s.draft) out.push('✎ Your unsent text is still in the input box. ' + f.forCoord.length + ' item(s) wait for Coordination until you send or clear it.');
+    if (!out.length) return ['asmai · nothing new since you left'];
+    return ['── asmai · since you left ──'].concat(out, ['── conversation continues below ──']);
+  }
+
+  function finishTurn(s, text) {
+    const tr = s.coord.trigger;
+    let lines;
+    const seen = new Set();
+    if (text) lines = Array.isArray(text) ? text : [text];
+    else if (tr.kind === 'nudge') lines = tr.items.flatMap((id) => describe(s, s.inbox.find((x) => x.id === id), s.policy.turns === 'full', seen));
+    else lines = ['(Coordination answers your turn ' + tr.turn + ' about #' + s.turns[tr.turn].job + ')'];
+    if (tr.kind === 'you' && s.pendingFocus) {
+      s.focus = s.pendingFocus; s.pendingFocus = null;
+      lines = ['Focus is now #' + s.focus + ' (' + s.jobs[s.focus].title + '); I loaded its brief.'].concat(lines);
+    }
+    say(s, { who: 'coord', text: lines, auto: tr.kind === 'nudge', job: tr.kind === 'you' ? s.turns[tr.turn].job : null });
+    if (tr.kind === 'nudge') tr.items.forEach((id) => {
+      const m = s.inbox.find((x) => x.id === id);
+      if (m.kind === 'decision') { const d = s.decisions[m.ref]; if (d.surface === 'terminal' && d.status === 'waiting') d.shownAt = s.t; }
+    });
+    if (s.coord.queued.length) {
+      const next = s.coord.queued.shift();
+      s.convo.forEach((l) => { if (l.turn === next) l.queued = false; });
+      s.coord.trigger = { kind: 'you', turn: next };
+    } else { s.coord.busy = false; s.coord.trigger = null; }
+    return tr;
+  }
+
+  function leaveConversation(s) {
+    if (s.where !== 'conversation') return;
+    if (s.draft) {
+      if (s.policy.draft === 'save') {
+        s.saved.push({ text: s.draft, at: s.t, shown: false });
+        log(s, 'daemon', 'Saved your unsent text "' + s.draft + '" and cleared Coordination\'s input box at a boundary.');
+        s.draft = '';
+      } else log(s, 'daemon', 'Your unsent text stays in Coordination\'s input box, so nothing can be delivered to Coordination until you return.');
+    }
+    s.lastLeft = s.t;
+    log(s, 'daemon', 'You left the conversation. That is not an intervention: automated delivery to Coordination resumes.');
+  }
+  function deliverHeld(s) {
+    const w = s.worker;
+    w.held.forEach((txt) => {
+      const d = 'd-' + (++s.nDispatch);
+      w.screen.push('▸ asmai: 1 new for ' + w.addr + ' · ' + d + ' · run asmai inbox');
+      log(s, 'daemon', 'Delivered the held message from ' + w.owner + ' ("' + txt + '") to ' + w.addr + ' (' + d + ').');
+    });
+    w.held = [];
+  }
+
+  function step(prev, a) {
+    const s = clone(prev);
+    s.t++; s.changed = ''; s.warn = null;
+    const w = s.worker;
+    switch (a.type) {
+      case 'TYPE': {
+        if (s.where === 'conversation') {
+          s.draft = a.text;
+          s.changed = a.text ? 'You have unsent text in Coordination\'s input box. The daemon will not type into the conversation until you send or clear it.' : 'Input box cleared.';
+        } else if (s.where === w.addr && w.input === 'you') { s.changed = 'You are typing into ' + w.addr + '.'; }
+        else s.changed = 'You are only observing here; take input first.';
+        break;
+      }
+      case 'SEND': {
+        if (s.where === 'conversation') {
+          const text = (a.text != null ? a.text : s.draft).trim();
+          if (!text) { s.changed = 'Nothing to send.'; break; }
+          const job = jobOf(s, text);
+          const turn = newTurn(s, 'you', 'conversation', text, job);
+          s.draft = '';
+          const queued = s.coord.busy;
+          say(s, { who: 'you', text: [text], turn, job, queued });
+          if (queued) s.coord.queued.push(turn); else { s.coord.busy = true; s.coord.trigger = { kind: 'you', turn }; }
+          const sw = text.match(/switch to #?(\d{2})/i);
+          if (sw && s.jobs[sw[1]]) s.pendingFocus = Number(sw[1]);
+          const witnessed = s.policy.words === 'witnessed' ? ' The daemon journals your exact words, typed at your keyboard, as ' + turn + '.' : '';
+          s.changed = (queued ? 'Coordination is mid-turn, so the provider queued your message behind it.' : 'Your message went to Coordination (about #' + job + ').') + witnessed;
+        } else if (s.where === w.addr && w.input === 'you') {
+          const text = (a.text || '').trim();
+          if (!text) { s.changed = 'Nothing to send.'; break; }
+          const turn = newTurn(s, 'you', w.addr, text, w.job);
+          w.screen.push('> ' + text);
+          w.intervention.turns.push(turn);
+          log(s, 'you', 'Your turn ' + turn + ' in ' + w.addr + ' journaled verbatim: "' + text + '".');
+          s.changed = 'You told ' + w.addr + ' something directly. Its owner, ' + w.owner + ', will receive your exact words.';
+        } else s.changed = 'You are only observing here; take input first.';
+        break;
+      }
+      case 'REPLY': {
+        if (!s.coord.busy) { s.changed = 'Coordination is already waiting for input; nothing to finish.'; break; }
+        const tr = finishTurn(s, a.text);
+        s.changed = tr.kind === 'nudge'
+          ? 'Coordination finished its automated turn (' + tr.dispatch + ').'
+          : 'Coordination finished answering you. It is at a boundary, so the daemon may now deliver waiting items.';
+        break;
+      }
+      case 'RECORD': {
+        const d = s.decisions[a.ref];
+        const turnId = a.cite === 'nudge' ? lastTurn(s, 'daemon', 'conversation') : lastTurn(s, 'you', 'conversation');
+        const t = turnId ? s.turns[turnId] : null;
+        let reply;
+        if (!d || d.status !== 'waiting') reply = [a.ref + ' is not waiting on you.'];
+        else if (d.surface === 'lavish') {
+          reply = ['I can\'t record that from here: ' + d.id + (d.kind === 'grilling' ? ' is a grilling round and needs your own answers' : ' is answered') + ' in Lavish: ' + d.page];
+          log(s, 'refused', 'Refused ' + d.id + ' v' + d.version + ' → ' + a.option + ': its answer surface is Lavish, so a conversation reply cannot answer it.');
+        } else if (s.policy.words === 'witnessed' && (!t || t.who !== 'you')) {
+          reply = ['(The daemon refused my record: ' + turnId + ' was typed by the daemon, not by you. ' + d.id + ' is still waiting on you.)'];
+          log(s, 'refused', 'Refused ' + d.id + ' → ' + a.option + ' attributed to you: it cites ' + turnId + ', which the daemon typed (a nudge).');
+        } else if (s.policy.words === 'witnessed' && (d.shownAt == null || t.at < d.shownAt)) {
+          s.inbox.filter((m) => m.state === 'waiting' && m.ref === d.id).forEach((m) => { m.state = 'delivered'; m.deliveredAt = s.t; m.dispatch = 'with ' + turnId; });
+          d.shownAt = s.t;
+          reply = ['Before I record that: ' + d.id + ' changed to v' + d.version + ' while you were typing (' + d.note + ').', 'Your "' + t.text + '" answered v' + (d.version - 1) + '. Choose again:']
+            .concat(d.options.map((o, i) => '   ' + 'AB'[i] + '  ' + o), ['   Reply here, for example "' + d.job + ': B".']);
+          log(s, 'refused', 'Refused ' + d.id + ' v' + d.version + ' → ' + a.option + ': ' + turnId + ' was submitted before v' + d.version + ' was shown to you.');
+        } else {
+          const notYours = !t || t.who !== 'you';
+          const stale = !notYours && (d.shownAt == null || t.at < d.shownAt);
+          d.status = 'answered';
+          d.answer = { option: a.option, version: d.version, source: s.policy.words === 'witnessed' ? 'your turn ' + turnId + ': "' + t.text + '"' : 'leader@coordination says you chose it' };
+          log(s, 'you', d.id + ' v' + d.version + ' → ' + a.option + '. Source: ' + d.answer.source + '. Sent to ' + d.owner + ' with Coordination\'s reading of it.');
+          if (s.policy.words === 'trust' && notYours) s.warn = 'Recorded as your decision, but you never typed it: ' + turnId + ' was the daemon\'s nudge.';
+          else if (s.policy.words === 'trust' && stale) s.warn = 'Recorded against v' + d.version + ', but your words answered v' + (d.version - 1) + '. Nothing checked the order.';
+          reply = ['Recorded ' + d.id + ' v' + d.version + ' → ' + a.option + ' for #' + d.job + (s.policy.words === 'witnessed' ? ', from your words in ' + turnId : '') + '. ' + d.owner + ' continues.'];
+        }
+        if (s.coord.busy && s.coord.trigger.kind === 'you') finishTurn(s, reply); else say(s, { who: 'coord', text: reply });
+        s.changed = 'Coordination tried to record ' + a.ref + ' → ' + a.option + ' as your answer.';
+        break;
+      }
+      case 'LAVISH': {
+        const d = s.decisions[a.ref];
+        const v = a.version != null ? a.version : d && d.version;
+        if (!d || d.surface !== 'lavish') { s.changed = 'There is no Lavish page for ' + a.ref + '.'; break; }
+        if (d.status !== 'waiting') { s.changed = a.ref + ' is already answered.'; break; }
+        if (v !== d.version) {
+          log(s, 'refused', 'Refused your answer from the ' + d.id + ' v' + v + ' page: ' + d.id + ' is now v' + d.version + ', and its page was reissued.');
+          s.changed = 'You answered on an old Lavish page (v' + v + '). The daemon refused it.';
+          break;
+        }
+        d.status = 'answered';
+        d.answer = { option: a.option, version: v, source: 'your answer on the ' + d.id + ' v' + v + ' Lavish page' };
+        log(s, 'you', d.id + ' v' + v + ' answered in Lavish. The daemon captured what you sent and routed it to ' + d.owner + '.');
+        addMsg(s, 'lavish-answer', d.job, { ref: d.id, version: v, owner: d.owner });
+        s.changed = 'You answered ' + d.id + ' in Lavish. The daemon, not an agent, collected the answer.';
+        break;
+      }
+      case 'ASK': {
+        const surface = (a.kind === 'grilling' || s.policy.surface === 'lavish') ? 'lavish' : 'terminal';
+        s.decisions[a.ref] = { id: a.ref, job: a.job, owner: a.owner, kind: a.kind, title: a.title, options: a.options, version: 1, surface, status: 'waiting', shownAt: surface === 'lavish' ? s.t : null, page: PAGES[a.ref], note: null, answer: null };
+        addMsg(s, 'decision', a.job, { ref: a.ref, version: 1 });
+        log(s, 'agent', a.owner + ' requested ' + a.ref + ' v1 for #' + a.job + '. Answer surface: ' + (surface === 'lavish' ? 'Lavish' : 'the conversation') + '.');
+        s.changed = a.owner + ' asked for your decision ' + a.ref + ' (#' + a.job + '). The daemon knows at once; Coordination learns at its next boundary.';
+        break;
+      }
+      case 'REVISE': {
+        const d = s.decisions[a.ref];
+        if (!d) { s.changed = 'No such decision.'; break; }
+        d.version++; d.note = a.note; if (a.options) d.options = a.options;
+        d.status = 'waiting'; d.answer = null; d.shownAt = d.surface === 'lavish' ? s.t : null;
+        addMsg(s, 'decision', d.job, { ref: d.id, version: d.version, revised: true });
+        log(s, 'agent', d.owner + ' revised ' + d.id + ' to v' + d.version + ' (' + a.note + '). Answers to v' + (d.version - 1) + ' can no longer approve it.');
+        s.changed = d.id + ' changed to v' + d.version + '.';
+        break;
+      }
+      case 'EVENT': {
+        addMsg(s, a.kind, a.job, { text: a.text, from: a.from });
+        log(s, 'agent', (a.from || 'A leader') + ' → leader@coordination: ' + a.kind + ' for #' + a.job + ' (' + a.text + ').');
+        s.changed = (/^[aeiou]/.test(a.kind) ? 'An ' : 'A ') + a.kind + ' message for #' + a.job + ' is waiting in Coordination\'s inbox.';
+        break;
+      }
+      case 'PROMPT': {
+        if (w.state === 'permission') { s.changed = 'The worker is already waiting on a prompt.'; break; }
+        w.state = 'permission'; w.prompt = 'Bash(rm -rf dist && npm run build)';
+        w.screen.push('⏺ ' + w.prompt, '  ┌ Allow this command?  1 Yes   2 No ┐');
+        addMsg(s, 'needs-you', w.job, { agent: w.addr, text: w.prompt });
+        log(s, 'daemon', 'PermissionRequest hook from ' + w.addr + ': a native prompt is open. Escalated through Coordination; the worker waits.');
+        s.changed = w.addr + ' stopped at a native permission prompt. Only someone in its terminal can answer it.';
+        break;
+      }
+      case 'LEAVE': {
+        if (s.where === 'conversation') leaveConversation(s);
+        else if (s.where === w.addr && w.input === 'you') log(s, 'daemon', 'You left ' + w.addr + ' without releasing it; its automation stays paused.');
+        s.where = 'away';
+        s.changed = 'You are away. The factory keeps working.';
+        break;
+      }
+      case 'COME_BACK': {
+        const from = s.where;
+        if (from === 'conversation') { s.changed = 'You are already in the conversation.'; break; }
+        s.where = 'conversation';
+        if (s.policy.catchup === 'digest') say(s, { who: 'digest', text: digest(s) });
+        else if (s.policy.catchup === 'narrate') addMsg(s, 'attached', null, {});
+        log(s, 'daemon', 'You opened the conversation (' + (from === 'away' ? 'asmai' : 'Ctrl-] menu from ' + from) + ').');
+        s.changed = 'You are back in Coordination\'s conversation.' + (s.policy.catchup === 'narrate' ? ' The daemon asked Coordination for a summary; it arrives when its turn finishes.' : '');
+        break;
+      }
+      case 'OPEN_WORKER': {
+        if (s.where === w.addr) { s.changed = 'Already attached.'; break; }
+        leaveConversation(s);
+        s.where = w.addr;
+        log(s, 'daemon', 'You attached to ' + w.addr + ' as an observer. Its automated input continues.');
+        s.changed = 'You are watching ' + w.addr + '. Observing does not pause anything.';
+        break;
+      }
+      case 'TAKE': {
+        if (s.where !== w.addr) { s.changed = 'Attach to the worker first.'; break; }
+        if (w.input === 'you') { s.changed = 'You already hold its input.'; break; }
+        if (w.input === 'owner') { s.changed = 'It is waiting for its owner to reconcile.'; break; }
+        if (w.state === 'working') { w.takePending = true; s.changed = 'Take requested. The daemon waits for the worker\'s turn boundary (or use --interrupt).'; log(s, 'daemon', 'Take of ' + w.addr + ' waits for its next boundary.'); break; }
+        w.input = 'you'; w.takePending = false;
+        w.intervention = { since: s.t, turns: [], prompts: [] };
+        w.screen.push('── you hold input · automated input paused ──');
+        log(s, 'daemon', 'You took ' + w.addr + '\'s input at a boundary (' + (w.state === 'permission' ? 'its native prompt' : 'turn ended') + '). Automated input is fenced. No unsent automated draft to clear.');
+        s.changed = 'You hold ' + w.addr + '\'s input. Nothing automated can type into it now.';
+        break;
+      }
+      case 'OWNER_MSG': {
+        if (w.input === 'you' || w.input === 'owner') {
+          w.held.push(a.text);
+          log(s, 'daemon', 'Held durably: ' + w.owner + '\'s message for ' + w.addr + ' ("' + a.text + '"). ' + (w.input === 'you' ? 'You hold its input,' : 'It awaits reconciliation,') + ' so the daemon types nothing.');
+          s.changed = 'Automation wanted to type into ' + w.addr + ', and the daemon held it back.';
+        } else {
+          const d = 'd-' + (++s.nDispatch);
+          w.screen.push('▸ asmai: 1 new for ' + w.addr + ' · ' + d + ' · run asmai inbox');
+          log(s, 'daemon', 'Delivered ' + w.owner + '\'s message to ' + w.addr + ' (' + d + ').');
+          s.changed = w.owner + '\'s message reached the worker at a boundary.';
+        }
+        break;
+      }
+      case 'ANSWER_PROMPT': {
+        if (w.state !== 'permission') { s.changed = 'No native prompt is open.'; break; }
+        if (w.input !== 'you') { s.changed = 'Take input first: whoever holds input answers the prompt.'; break; }
+        w.screen.push('  ⎿ ' + (a.allow ? 'Allowed' : 'Denied') + ' by you');
+        w.intervention.prompts.push((a.allow ? 'allowed ' : 'denied ') + w.prompt);
+        log(s, 'you', 'You ' + (a.allow ? 'allowed' : 'denied') + ' ' + w.prompt + ' at ' + w.addr + '\'s native prompt. Recorded for ' + w.owner + '.');
+        w.state = 'working'; w.prompt = null;
+        w.screen.push(a.allow ? '⏺ Build finished. Continuing the export…' : '⏺ Command denied. Continuing without it…');
+        s.changed = 'You answered the native prompt. The worker carries on under your input ownership.';
+        break;
+      }
+      case 'RELEASE': {
+        if (w.input !== 'you') { s.changed = 'You do not hold its input.'; break; }
+        const it = w.intervention;
+        const typed = it.turns.length;
+        const heavy = s.policy.release === 'always' || (s.policy.release === 'split' && typed > 0);
+        log(s, 'you', 'Intervention record for ' + w.owner + ': ' + typed + ' turn(s) you typed' + (typed ? ' (' + it.turns.map((id) => '"' + s.turns[id].text + '"').join('; ') + ')' : '') + ', ' + it.prompts.length + ' prompt answer(s)' + (it.prompts.length ? ' (' + it.prompts.join('; ') + ')' : '') + ', automated drafts cleared: none' + (a.note ? ', your note: "' + a.note + '"' : '') + '.');
+        if (heavy) {
+          w.input = 'owner'; w.state = 'needs-reconciliation';
+          w.screen.push('── released · waiting for ' + w.owner + ' to reconcile ──');
+          log(s, 'daemon', 'Released. ' + w.dispatch + ' is superseded; automated input stays fenced until ' + w.owner + ' reconciles and issues a new dispatch.');
+          s.changed = 'Released. The owner decides how the worker continues.';
+        } else {
+          w.input = 'automation';
+          w.screen.push('── released · automation resumes on ' + w.dispatch + ' ──');
+          log(s, 'daemon', 'Released. ' + w.dispatch + ' continues and automation resumes.');
+          deliverHeld(s);
+          if (typed > 0) s.warn = 'Your instruction changed the worker\'s course inside ' + w.dispatch + ', and its owner only learns afterwards from the record. This conflicts with "a correction is always a new dispatch".';
+          s.changed = 'Released. The same dispatch continues.';
+        }
+        w.intervention = null;
+        break;
+      }
+      case 'RECONCILE': {
+        if (w.state !== 'needs-reconciliation') { s.changed = 'Nothing for the owner to reconcile.'; break; }
+        const d = 'd-' + (++s.nDispatch);
+        log(s, 'agent', w.owner + ' reconciled the intervention (checked effects and your turns) and issued ' + d + ' for ' + w.assignment + ', carrying your instruction.');
+        w.dispatch = d; w.input = 'automation'; w.state = 'working';
+        w.screen.push('▸ asmai: new dispatch ' + d + ' for ' + w.assignment + ' · run asmai inbox');
+        deliverHeld(s);
+        s.changed = w.owner + ' resumed the worker with a new dispatch that includes what you told it.';
+        break;
+      }
+      default: s.changed = 'Unknown action.';
+    }
+    daemon(s);
+    return s;
+  }
+
+  return { init, step, facts, statusLine, windowTitle, deliveryNote, DEFAULTS, WORKER };
+})();
+
+// ================= Scenarios =================
+const D17 = { type: 'ASK', ref: 'D-17', job: 14, owner: 'leader@engineering', kind: 'choice', title: 'How should invoices be exported?', options: ['Existing csv library (adds a dependency)', 'Small in-house exporter (more code to maintain)'] };
+const D21 = { type: 'ASK', ref: 'D-21', job: 15, owner: 'leader@planning', kind: 'grilling', title: 'Offline sync: grilling round 1 (3 questions)', options: ['Send my answers'] };
+const SCENARIOS = [
+  { id: 's1', name: 'Two jobs, one decision', qs: 'Q1 Q2 Q3 Q4 Q5',
+    desc: 'You ask about #12. While Coordination answers, Planning hands #15\'s spec to Coordination and Engineering asks you to choose for #14.',
+    watch: 'The status line flags D-17 before Coordination can say anything. Compare the automated turn under each Q2 setting; under "hold routine items", #15\'s handoff sits undelivered. Your reply is tied to D-17 and to your exact words.',
+    steps: [
+      ['You type a question about #12', { type: 'TYPE', text: 'How is the login redirect fix going?' }],
+      ['You send it', { type: 'SEND' }],
+      ['Meanwhile Planning hands #15\'s spec to Coordination', { type: 'EVENT', kind: 'handoff', job: 15, text: 'offline-sync spec ready for Engineering', from: 'leader@planning' }],
+      ['Meanwhile Engineering asks you to choose (D-17, #14)', D17],
+      ['Coordination finishes answering you', { type: 'REPLY', text: ['#12 · Engineering reproduced the loop and wrote a failing test; the fix is in progress.'] }],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+      ['You answer: "14: A, the csv library is fine"', { type: 'SEND', text: '14: A, the csv library is fine' }],
+      ['Coordination records your answer', { type: 'RECORD', ref: 'D-17', option: 'A' }],
+    ] },
+  { id: 's2', name: 'Grilling goes to Lavish', qs: 'Q4 Q6',
+    desc: 'Planning needs a grilling round for #15. Coordination hands it to Lavish; you first try to wave it through in the terminal, then answer in Lavish.',
+    watch: 'A grilling answer cannot be recorded from the conversation. Your Lavish answer is collected by the daemon and confirmed in one line.',
+    steps: [
+      ['Planning asks for grilling round 1 (D-21, #15)', D21],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+      ['You type: "15: just go with whatever Planning recommends"', { type: 'SEND', text: '15: just go with whatever Planning recommends' }],
+      ['Coordination tries to record that as your answer', { type: 'RECORD', ref: 'D-21', option: 'Planning\'s recommendations' }],
+      ['You answer the round in Lavish', { type: 'LAVISH', ref: 'D-21', option: 'Send my answers' }],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+    ] },
+  { id: 's3', name: 'Typing while it changes', qs: 'Q5',
+    desc: 'D-17 is on screen. While you type "A", Engineering finds the library\'s licence is incompatible and revises D-17 to v2.',
+    watch: 'With witnessed turns your "A" cannot approve v2, because it was typed before v2 was shown. Switch Q5 to "Coordination\'s word" to see the mistake go through.',
+    steps: [
+      ['Engineering asks you to choose (D-17, #14)', D17],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+      ['You start typing "14: A"', { type: 'TYPE', text: '14: A' }],
+      ['Engineering revises D-17 to v2', { type: 'REVISE', ref: 'D-17', note: 'the csv library\'s licence is incompatible with billing-api', options: ['Vendor a permissively licensed csv library', 'Small in-house exporter (more code to maintain)'] }],
+      ['You press Enter', { type: 'SEND' }],
+      ['Coordination tries to record "A"', { type: 'RECORD', ref: 'D-17', option: 'A' }],
+      ['You answer again: "14: B then"', { type: 'SEND', text: '14: B then' }],
+      ['Coordination records your answer', { type: 'RECORD', ref: 'D-17', option: 'B' }],
+    ] },
+  { id: 's4', name: 'Leave and come back', qs: 'Q7 Q8',
+    desc: 'You are half-way through a sentence when your laptop lid closes. #12 finishes, Engineering asks D-17, and a worker stops at a permission prompt. Then you run asmai again.',
+    watch: 'Under "save and clear", Coordination keeps receiving work while you are away and your text comes back in the catch-up. Under "keep", nothing reaches Coordination until you return. Compare the daemon digest with Coordination\'s own summary.',
+    steps: [
+      ['You type, but don\'t send, a thought about #12', { type: 'TYPE', text: 'Also for #12, could we add a test for expired sessions' }],
+      ['Your laptop lid closes (you leave)', { type: 'LEAVE' }],
+      ['#12 finishes: PR ready for review', { type: 'EVENT', kind: 'outcome', job: 12, text: 'PR #88 ready for review; tests pass; accepted by leader@quality', from: 'leader@quality' }],
+      ['Coordination finishes its automated turn (if it got one)', { type: 'REPLY' }],
+      ['Engineering asks you to choose (D-17, #14)', D17],
+      ['Coordination finishes its automated turn (if it got one)', { type: 'REPLY' }],
+      ['worker1@engineering stops at a native permission prompt', { type: 'PROMPT' }],
+      ['Coordination finishes its automated turn (if it got one)', { type: 'REPLY' }],
+      ['You run asmai again', { type: 'COME_BACK' }],
+      ['Coordination finishes its turn (if it is writing a summary)', { type: 'REPLY' }],
+    ] },
+  { id: 's5', name: 'Step into a worker', qs: 'Q9 Q1',
+    desc: 'worker1@engineering waits on a native permission prompt. You open its terminal, take input, answer the prompt, tell it to use a different directory, and release it.',
+    watch: 'Automation cannot type into the worker while you hold it. Under the recommended release rule, your instruction supersedes the dispatch and the owner resumes the worker with a new one. Try "always resume" to see what is lost.',
+    steps: [
+      ['worker1@engineering stops at a native permission prompt', { type: 'PROMPT' }],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+      ['You open worker1@engineering (Ctrl-] menu or asmai attach)', { type: 'OPEN_WORKER' }],
+      ['You take its input', { type: 'TAKE' }],
+      ['Its owner tries to send it a message', { type: 'OWNER_MSG', text: 'Also update the README export section' }],
+      ['You allow the command', { type: 'ANSWER_PROMPT', allow: true }],
+      ['You type: "Keep dist/; write the export to tmp/export instead."', { type: 'SEND', text: 'Keep dist/; write the export to tmp/export instead.' }],
+      ['You release it, with a note for its owner', { type: 'RELEASE', note: 'Changed the export directory to tmp/export' }],
+      ['leader@engineering reconciles', { type: 'RECONCILE' }],
+      ['You go back to the conversation (Ctrl-] menu)', { type: 'COME_BACK' }],
+    ] },
+  { id: 's6', name: 'Things that must fail', qs: 'Q4 Q5 Q6',
+    desc: 'A run of attempts the design must refuse: an agent attributing a nudge to you, delivery over your unsent text, and an answer from an outdated Lavish page.',
+    watch: 'Each refusal appears in red in the journal. Switch Q5 to "Coordination\'s word" and the first one goes through.',
+    steps: [
+      ['Engineering asks you to choose (D-17, #14)', D17],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+      ['Coordination records "A" citing the daemon\'s nudge as your words', { type: 'RECORD', ref: 'D-17', option: 'A', cite: 'nudge' }],
+      ['You start typing about #12 (unsent)', { type: 'TYPE', text: 'One more thing about #12' }],
+      ['#14 progress arrives', { type: 'EVENT', kind: 'progress', job: 14, text: 'CSV export tests passing', from: 'leader@engineering' }],
+      ['Planning asks for grilling round 1 (D-21, #15)', D21],
+      ['Planning revises D-21 to v2', { type: 'REVISE', ref: 'D-21', note: 'Planning added a question about conflict resolution' }],
+      ['You answer on the old v1 Lavish tab', { type: 'LAVISH', ref: 'D-21', option: 'Send my answers', version: 1 }],
+      ['You send your #12 message', { type: 'SEND' }],
+      ['Coordination finishes answering you', { type: 'REPLY', text: ['#12 · noted; I will pass it to Engineering with the PR review.'] }],
+      ['Coordination finishes its automated turn', { type: 'REPLY' }],
+    ] },
+];
+
+const POLICY_UI = [
+  ['status', 'Q1 · Status while you talk', [['line', 'Status line in every attached terminal'], ['title', 'Terminal window title'], ['chat', 'Conversation only (+ asmai status)']]],
+  ['turns', 'Q2 · Coordination\'s automated turns', [['quiet', 'One job-tagged line; flagged block if it needs you'], ['full', 'Full replies'], ['defer', 'Hold routine items while you are attached']]],
+  ['surface', 'Q4 · Where decisions are answered', [['single', 'Terminal for single choices; Lavish for the rest'], ['lavish', 'Lavish for every decision']]],
+  ['words', 'Q5 · What counts as your words', [['witnessed', 'Daemon-witnessed turns, cited by every record'], ['trust', 'Coordination\'s word']]],
+  ['catchup', 'Q7 · When you come back', [['digest', 'Daemon catch-up digest'], ['narrate', 'Coordination narrates'], ['none', 'Nothing automatic']]],
+  ['draft', 'Q8 · Unsent text when you leave', [['save', 'Save it and clear the input box'], ['keep', 'Keep it; Coordination receives nothing']]],
+  ['release', 'Q9 · Releasing a worker', [['split', 'Typed turns → owner reconciles, new dispatch'], ['always', 'Owner always reconciles'], ['resume', 'Always resume the same dispatch']]],
+];
+
+// ================= Page shell =================
+const $ = (id) => document.getElementById(id);
+const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let policy = Object.assign({}, Model.DEFAULTS);
+let state = Model.init(policy);
+let scn = SCENARIOS[0];
+let stepIx = 0;
+
+function dispatch(action) { state = Model.step(state, action); render(); }
+function startScenario(sc) { scn = sc; stepIx = 0; state = Model.init(policy); render(); }
+
+function renderPolicies() {
+  $('policies').innerHTML = POLICY_UI.map(([key, label, opts]) =>
+    '<label>' + esc(label) + '<select data-pol="' + key + '" class="' + (policy[key] !== Model.DEFAULTS[key] ? 'off' : '') + '">' +
+    opts.map(([v, l]) => '<option value="' + v + '"' + (policy[key] === v ? ' selected' : '') + '>' + esc(l) + (v === Model.DEFAULTS[key] ? ' (recommended)' : '') + '</option>').join('') +
+    '</select></label>').join('');
+  $('policies').querySelectorAll('select').forEach((sel) => sel.addEventListener('change', () => {
+    policy[sel.dataset.pol] = sel.value;
+    state.policy = Object.assign({}, policy);
+    renderPolicies(); render();
+  }));
+}
+function renderTabs() {
+  $('scn-tabs').innerHTML = SCENARIOS.map((sc) => '<button type="button" class="tab' + (sc === scn ? ' on' : '') + '" data-scn="' + sc.id + '">' + esc(sc.name) + '</button>').join('');
+  $('scn-tabs').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => startScenario(SCENARIOS.find((x) => x.id === b.dataset.scn))));
+}
+function renderScenario() {
+  const p = $('scn-panel');
+  p.innerHTML = '<p class="text-sm opacity-70">Shows: ' + esc(scn.qs) + '</p><p class="mt-1">' + esc(scn.desc) + '</p><p class="watch">Watch: ' + esc(scn.watch) + '</p>' +
+    '<div class="steps">' + scn.steps.map(([label], i) => '<button type="button" class="stepbtn' + (i < stepIx ? ' done' : '') + (i === stepIx ? ' next' : '') + '" data-i="' + i + '"' + (i !== stepIx ? ' disabled' : '') + '>' + (i < stepIx ? '✓ ' : (i + 1) + '. ') + esc(label) + '</button>').join('') + '</div>' +
+    '<div class="scnbar"><button type="button" class="xbtn" id="scn-restart">Restart this scenario</button>' + (stepIx >= scn.steps.length ? '<span class="text-sm" style="color:#6ee7b7">Scenario complete. Try it again with a different setting.</span>' : '') + '</div>';
+  p.querySelectorAll('.stepbtn').forEach((b) => b.addEventListener('click', () => { const i = Number(b.dataset.i); if (i !== stepIx) return; stepIx++; dispatch(scn.steps[i][1]); }));
+  $('scn-restart').addEventListener('click', () => startScenario(scn));
+}
+
+function lineHtml(l) {
+  const cls = l.who === 'coord' ? 'who-coord' + (l.auto ? ' auto' : '') : 'who-' + l.who;
+  const body = l.text.map((t) => '<p class="ln' + (/^\s*⚑/.test(t) ? ' flagln' : '') + '">' + esc(t) + '</p>').join('');
+  const meta = l.who === 'you' ? '<p class="queued">' + esc(l.turn) + (l.job ? ' · #' + l.job : '') + (l.queued ? ' · queued behind Coordination\'s running turn' : '') + '</p>' : '';
+  return '<div class="blk ' + cls + '">' + body + meta + '</div>';
+}
+function renderTerminal() {
+  const s = state, w = s.worker, inp = $('term-input');
+  const showTitle = s.policy.status === 'title';
+  const t = Model.windowTitle(s);
+  $('ttl').textContent = showTitle ? t.text : (s.where === w.addr ? 'asmai attach ' + w.addr : s.where === 'away' ? 'Terminal' : (s.coord.busy ? '✳ Claude Code' : 'Claude Code') + ' — leader@coordination');
+  $('ttl').className = 'ttl' + (showTitle && t.flag ? ' flag' : '');
+  let html = '';
+  if (s.where === 'away') {
+    html = '<div class="awaybox">You are not attached to anything.<br>The factory keeps running; Coordination\'s conversation continues without you.<br><br>Run <b>asmai</b> (free play, or the scenario step) to come back.</div>';
+  } else if (s.where === w.addr) {
+    const own = w.input === 'you' ? 'YOU HOLD INPUT · automation paused' : w.input === 'owner' ? 'released · waiting for ' + w.owner + ' to reconcile' : 'observing · automation owns input' + (w.takePending ? ' · take waits for a boundary' : '');
+    html = '<div class="blk who-attach"><p class="ln">asmai attach ' + esc(w.addr) + ' — ' + esc(own) + '</p><p class="ln">owner ' + esc(w.owner) + ' · #' + w.job + ' · ' + esc(w.assignment) + ' · ' + esc(w.dispatch) + ' · Ctrl-] menu: take · release · interrupt · detach · conversation</p></div>' +
+      w.screen.map((x) => '<p class="ln' + (/^>/.test(x) ? ' who-you' : '') + (/^▸/.test(x) ? ' who-nudge' : '') + '">' + esc(x) + '</p>').join('');
+  } else {
+    html = s.convo.map(lineHtml).join('') + (s.coord.busy ? '<p class="ln" style="color:#fbbf24">✳ Coordination is working… (' + esc(s.coord.trigger.kind === 'nudge' ? 'automated turn ' + s.coord.trigger.dispatch : 'answering ' + s.coord.trigger.turn) + ')</p>' : '');
+  }
+  const scr = $('screen');
+  scr.innerHTML = html;
+  scr.scrollTop = scr.scrollHeight;
+  // input row
+  const inConv = s.where === 'conversation';
+  const inWorker = s.where === w.addr && w.input === 'you';
+  inp.disabled = !(inConv || inWorker);
+  inp.placeholder = inConv ? 'Type to Coordination, Enter to send' : inWorker ? 'Type to ' + w.addr + ', Enter to send' : s.where === 'away' ? 'Not attached' : 'Observing: take input first';
+  if (document.activeElement !== inp) inp.value = inConv ? s.draft : '';
+  $('prompt-mark').textContent = inWorker ? '✋' : '›';
+  // status line
+  const sl = $('statusline');
+  if (s.policy.status === 'line' && s.where !== 'away') { const st = Model.statusLine(s); sl.hidden = false; sl.textContent = st.text; sl.className = 'statusline' + (st.flag ? ' flag' : ''); }
+  else sl.hidden = true;
+}
+function renderSide() {
+  const s = state, w = s.worker, f = Model.facts(s);
+  $('changed').innerHTML = '<h3>What just changed</h3><p>' + esc(s.changed || '—') + '</p>';
+  $('warn').hidden = !s.warn;
+  $('warn').innerHTML = s.warn ? '<h3 style="color:#fca5a5">What went wrong</h3><p>' + esc(s.warn) + '</p>' : '';
+  const pill = (txt, c) => '<span class="pill ' + c + '">' + esc(txt) + '</span>';
+  const convOwner = s.where === 'conversation' ? (s.draft ? pill('you are typing (unsent)', 'p-you') : pill('you are here', 'p-you')) : pill(s.draft ? 'away, unsent text left in box' : 'away; automated delivery', 'p-auto');
+  const wOwner = w.input === 'you' ? pill('you hold input', 'p-you') : w.input === 'owner' ? pill('fenced until owner reconciles', 'p-held') : pill('automation', 'p-auto');
+  $('owners').innerHTML = '<h3>Input ownership (daemon)</h3><dl class="kv"><dt>Coordination\'s conversation</dt><dd>' + convOwner + ' ' + (s.coord.busy ? pill('mid-turn', 'p-held') : pill('at a boundary', 'p-ok')) + '</dd>' +
+    '<dt>' + esc(w.addr) + '</dt><dd>' + wOwner + ' ' + pill(w.state === 'permission' ? 'native prompt open' : w.state, w.state === 'permission' ? 'p-held' : 'p-auto') + ' <span class="opacity-70">' + esc(w.dispatch) + '</span>' + (w.held.length ? ' ' + pill(w.held.length + ' message held', 'p-held') : '') + '</dd>' +
+    '<dt>Focus</dt><dd>#' + s.focus + ' ' + esc(s.jobs[s.focus].title) + '</dd>' +
+    (s.saved.length ? '<dt>Saved text</dt><dd>' + s.saved.map((x) => '"' + esc(x.text) + '"').join('<br>') + '</dd>' : '') + '</dl>';
+  const msgs = s.inbox.slice(-6);
+  $('inboxp').innerHTML = '<h3>Coordination\'s inbox</h3>' + (msgs.length ? '<table class="mini"><tr><th>id</th><th>what</th><th>delivery</th></tr>' + msgs.map((m) => '<tr><td>' + esc(m.id) + '</td><td>' + esc((m.job ? '#' + m.job + ' ' : '') + (m.ref ? m.ref + (m.revised ? ' revised' : '') : m.kind)) + '</td><td>' + (m.state === 'waiting' ? pill(Model.deliveryNote(s, m), /held/.test(Model.deliveryNote(s, m)) ? 'p-held' : 'p-auto') : esc(Model.deliveryNote(s, m))) + '</td></tr>').join('') + '</table>' : '<p class="opacity-70">Empty.</p>');
+  const ds = Object.values(s.decisions);
+  $('decisions').innerHTML = '<h3>Decision records</h3>' + (ds.length ? '<table class="mini"><tr><th>id</th><th>job</th><th>answered in</th><th>status</th></tr>' + ds.map((d) => '<tr><td>' + esc(d.id) + ' v' + d.version + '</td><td>#' + d.job + '</td><td>' + (d.surface === 'lavish' ? 'Lavish' : 'conversation') + '</td><td>' + (d.status === 'waiting' ? pill('waiting on you', 'p-held') : pill('→ ' + d.answer.option, 'p-you') + '<br><span class="opacity-75">' + esc(d.answer.source) + '</span>') + '</td></tr>').join('') + '</table>' : '<p class="opacity-70">None yet.</p>');
+  const pages = ds.filter((d) => d.surface === 'lavish');
+  $('lavishp').innerHTML = '<h3>Lavish pages (served by the daemon)</h3>' + (pages.length ? pages.map((d) => '<div class="lavcard"><b>' + esc(d.id) + ' v' + d.version + '</b> · #' + d.job + ' · ' + esc(d.owner) + '<br><span class="opacity-80">' + esc(d.title) + '</span><br><span class="opacity-60 text-xs">' + esc(d.page) + '</span>' +
+    (d.status === 'waiting' ? '<div class="opts">' + d.options.map((o) => '<button type="button" class="xbtn lav" data-lav="' + esc(d.id) + '" data-opt="' + esc(o) + '">' + esc(o) + '</button>').join('') + '</div>' : '<p class="mt-1" style="color:#6ee7b7">Answered: ' + esc(d.answer.option) + '</p>') + '</div>').join('') : '<p class="opacity-70">No pages open.</p>');
+  $('lavishp').querySelectorAll('[data-lav]').forEach((b) => b.addEventListener('click', () => dispatch({ type: 'LAVISH', ref: b.dataset.lav, option: b.dataset.opt })));
+  $('journal').innerHTML = '<h3>Journal (newest first)</h3><ul class="jr">' + s.journal.slice().reverse().slice(0, 14).map((e) => '<li class="src-' + e.src + '"><span class="src">' + ({ you: 'yours', daemon: 'daemon', agent: 'agent', refused: 'refused' }[e.src]) + '</span>' + esc(e.text) + '</li>').join('') + '</ul>';
+}
+function renderFreeplay() {
+  const B = (label, action, cls) => ({ label, action, cls });
+  const groups = [
+    ['You', [B('Leave (detach)', { type: 'LEAVE' }), B('Come back: asmai', { type: 'COME_BACK' }), B('Send: "switch to 14"', { type: 'SEND', text: 'switch to 14' })]],
+    ['Coordination', [B('Finish its current turn', { type: 'REPLY' })]],
+    ['Other roles', [
+      B('#14 progress', { type: 'EVENT', kind: 'progress', job: 14, text: 'CSV export tests passing', from: 'leader@engineering' }),
+      B('#12 outcome: PR ready', { type: 'EVENT', kind: 'outcome', job: 12, text: 'PR #88 ready for review; tests pass', from: 'leader@quality' }),
+      B('#15 handoff from Planning', { type: 'EVENT', kind: 'handoff', job: 15, text: 'offline-sync spec ready for Engineering', from: 'leader@planning' }),
+      B('Engineering asks D-17 (#14)', D17), B('Revise D-17', { type: 'REVISE', ref: 'D-17', note: 'new evidence from Engineering', options: ['Vendor a permissively licensed csv library', 'Small in-house exporter (more code to maintain)'] }),
+      B('Planning asks D-21 grilling (#15)', D21)]],
+    ['worker1@engineering', [B('Native permission prompt', { type: 'PROMPT' }), B('Open (observe)', { type: 'OPEN_WORKER' }), B('Take input', { type: 'TAKE' }), B('Owner sends it a message', { type: 'OWNER_MSG', text: 'Also update the README export section' }),
+      B('Allow prompt', { type: 'ANSWER_PROMPT', allow: true }), B('Deny prompt', { type: 'ANSWER_PROMPT', allow: false }), B('Release', { type: 'RELEASE', note: '' }), B('Owner reconciles', { type: 'RECONCILE' })]],
+  ];
+  $('freeplay').innerHTML = groups.map(([h, bs], gi) => '<div class="grp"><h4>' + esc(h) + '</h4><div class="row">' + bs.map((b, i) => '<button type="button" class="xbtn" data-g="' + gi + '" data-i="' + i + '">' + esc(b.label) + '</button>').join('') + '</div>' +
+    (h === 'Coordination' ? '<div class="row"><span class="text-sm opacity-80">Record your last message as</span><select id="fp-dec"><option>D-17</option><option>D-21</option></select><select id="fp-opt"><option>A</option><option>B</option></select><button type="button" class="xbtn" id="fp-record">Record</button></div><p class="text-xs opacity-70">Type in the terminal\'s input line and press Enter to talk to Coordination.</p>' : '') +
+    '</div>').join('') + '<div class="grp"><h4>Reset</h4><button type="button" class="xbtn" id="fp-reset">Start over with the current settings</button></div>';
+  $('freeplay').querySelectorAll('[data-g]').forEach((el) => el.addEventListener('click', () => dispatch(groups[el.dataset.g][1][el.dataset.i].action)));
+  $('fp-record').addEventListener('click', () => dispatch({ type: 'RECORD', ref: $('fp-dec').value, option: $('fp-opt').value }));
+  $('fp-reset').addEventListener('click', () => { stepIx = 0; state = Model.init(policy); render(); });
+}
+function render() { renderTabs(); renderScenario(); renderTerminal(); renderSide(); }
+
+const inp = $('term-input');
+inp.addEventListener('input', () => { if (state.where === 'conversation') { state = Model.step(state, { type: 'TYPE', text: inp.value }); renderSide(); renderTerminal(); } });
+inp.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const text = inp.value; inp.value = '';
+  dispatch({ type: 'SEND', text });
+});
+
+renderPolicies(); renderFreeplay(); render();
+})();
+</script>
+
+<main class="pt-0">
+<h2 class="text-2xl font-bold mb-4">Resolution</h2>
+<section class="card bg-base-200 p-6 mb-5"><p class="text-success text-sm font-bold mb-1">RESOLUTION</p><h2 class="text-xl font-bold mb-3">Recorded resolution</h2><p class="mb-3 opacity-90">Confirmed by Phillip in Lavish on 2026-10-05: all fifteen answers as recommended, ADR 0004 recorded, and the browser dashboard kept as fog to be judged with notifications in Define operating limits and visibility. This is a planning decision and authorizes no implementation.</p><ol class="list-decimal ml-6 mb-4 space-y-2 opacity-95"><li>Status line: every attached terminal shows a one-row AsmAI status line drawn from daemon state: what is waiting on you, the focused job, the running jobs, and any agent whose input you hold. The attach client renders the provider&#x27;s screen one row shorter.</li><li>Automated turns: Coordination keeps delivering while you talk. Each automated item gets one line tagged with its job, and anything that needs you gets a flagged block. Detail is given on request.</li><li>Jobs: the conversation has one focused job. Your messages apply to it unless you name another job. &#x27;Switch to N&#x27; moves the focus and loads that job&#x27;s brief. A new request opens a job, which takes the focus. Every line about a job carries its number.</li><li>Answer surfaces: single-choice escalations are answered in the conversation. Reviews, grilling and Wayfinder questions, and requests with several questions go to Lavish. Each decision version has exactly one answer surface, shown with it.</li><li>Your words: the daemon journals, word for word, every message you submit in any agent&#x27;s terminal. Anything recorded as yours must cite such a witnessed message, submitted after the decision version it answers was shown. Coordination&#x27;s reading is stored next to your words. This guards against mistakes, not against a hostile process running as you.</li><li>Lavish: a decision request carries structured questions that the daemon renders and keys to the decision version, with optional agent content above them. The daemon collects your answers, comments and annotations word for word and routes them to the owning leader, and Coordination confirms in one line. A new version reissues the page, and answers from an old page are refused.</li><li>Coming back: the attach client first prints a catch-up from the journal: what is waiting on you (with links and the forwarding command), jobs finished, failed or paused, agents waiting in their own terminal, input you still hold, and your saved text. It is one line when nothing changed. Coordination narrates only if you ask.</li><li>Unsent text: leaving the conversation saves your unsent text and clears the input box, and delivery resumes. The catch-up offers the text back; it is never retyped.</li><li>Release: if you only answered native prompts, the same dispatch continues. If you typed any message, that dispatch is superseded. The owner receives the intervention record (your messages, prompt answers, cleared drafts, effects recorded meanwhile, and an optional note), reconciles, and resumes the worker with a new dispatch. Messages held during the intervention are delivered after that.</li><li>Moving between terminals: the Ctrl-] menu lists the conversation and every agent, those waiting on you first, and moves this terminal there. Leaving the conversation this way counts as leaving it.</li><li>A second terminal: the newest attach (or take) wins. The older terminal shows a notice and only observes, and its unsent text is saved.</li><li>Interrupting Coordination: your keys always reach the conversation. An automated turn you interrupt is nudged again afterwards; Coordination re-reads the same messages and checks its own recorded calls, so nothing is blindly repeated.</li><li>Glossary gains Focused job, Witnessed message, Answer surface and Catch-up.</li><li>Deferred to existing tickets: new qualification cases go to Define v1 acceptance scenarios and evidence (the status line at reduced height, detecting and clearing unsent text, recognizing an interrupted Claude turn, capturing witnessed messages, second-attach takeover). Skills emitting structured questions goes to Choose skill bundles and update policy. Notifications while you are away go to Define operating limits and visibility. No new ticket.</li></ol></section>
+
+</main></body></html>
