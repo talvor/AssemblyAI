@@ -124,5 +124,19 @@ The role responsible for independent review and validation.
 A reusable working method an agent applies while fulfilling a role; a role may use several skills.
 _Avoid_: Agent (a skill is not itself an agent)
 
+**Skill bundle**:
+The set of skills an AsmAI release ships, pinned to one upstream release.
+_Avoid_: Skill pack, skill set
+
+**Skill list**:
+The skills a role's leader, or its workers, may use. An assignment may narrow its worker's list.
+
+**Added skill**:
+A skill the user adds to a role's skill list through the configuration rather than one AsmAI ships. It may replace a shipped skill of the same name and is never qualified.
+_Avoid_: Custom skill, local override, personal skill
+
+**Repository skill**:
+A skill a registered repository carries, used only where the user has switched it on for that repository and role.
+
 **Intervention**:
 An explicit period of direct human interaction with an agent outside the normal Coordination conversation, with automated input paused and resulting decisions or changes recorded for its owner.

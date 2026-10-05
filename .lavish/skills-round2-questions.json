@@ -1,0 +1,63 @@
+[
+ {
+  "id": "R2-Q1",
+  "title": "Do leaders run skills, or only route to workers who do?",
+  "body": "Your Q2 note: planning skills such as wayfinder and grill-me are run by workers, and the leader needs to know when to hand the work to a worker to start the skill, the way you tell Firstmate 'Use the wayfinder skill in <repo> for ticket #1'. Define roles and leader-worker contracts already says substantive research, implementation, prototypes and independent validation are worker assignments, yet the round 1 table had the Quality leader running code-review and the Engineering leader running diagnosing-bugs. Because agents see only their own list (Q6), a leader cannot read its workers' skills unless AsmAI tells it about them. Options: (A) Every role, as in the revised table above: workers run the skills. Each leader gets an index of its workers' skills (name, what it is for, when it applies, and whether it starts only on request as in Q4) and names the skill in the assignment. A leader's own list holds only what it uses in its own conversation: Coordination keeps ask-matt (the map of flows it routes by) and wait-what (re-explaining in its own conversation). (B) Planning only, as your note says; the Research, Engineering and Quality leaders keep their round 1 lists.",
+  "rec": "A. It is the role contract you already chose, applied evenly, and it is how you already work with Firstmate: the leader decides which skill and gives it to a worker as an assignment.",
+  "options": [
+   "A: every role: workers run skills; leaders get an index of their workers' skills",
+   "B: Planning only; other leaders keep their round 1 lists"
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "Where does implement-spec go?",
+  "body": "implement-spec builds a whole spec in one run: it reads the tickets as a task graph, starts implementers in their own worktrees across the ready tickets, merges them into one integration branch and finishes with code-review. In AsmAI that is what the Engineering leader already does with assignments, workspaces, the daemon's fast-forward on acceptance and a handoff to Quality, and only a leader can assign workers, so a worker cannot run it. Options: (A) On no list; shipped as optional. The Engineering leader's own AsmAI instructions cover working through a ticket graph, assigning each ready ticket to a worker with implement and tdd. (B) On the Engineering leader's list as its method for a ticket graph, mapped by the operating guide: implementers become assignments, worktrees become workspaces, the merge becomes the daemon's fast-forward and the closing review becomes a handoff to Quality. It would be the only skill a leader runs besides Coordination's.",
+  "rec": "A. Most of implement-spec describes things AsmAI's daemon and leader contract already do, so running it would be mostly translation, and it keeps every leader free of skills it would run.",
+  "options": [
+   "A: optional, on no list; the Engineering leader's own instructions cover ticket graphs",
+   "B: on the Engineering leader's list, mapped by the operating guide"
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "When and how is a new repository set up for the skills?",
+  "body": "Your Q2 note moves setup-matt-pocock-skills to Coordination and runs it when a repository is added or introduced to the factory. That replaces the timing in Q9 ('inside the first job that needs it'); the files still live in the repository. With R2-Q1 A, a Coordination worker runs it. Options: (A) When you add a repository with asmai repo add and it lacks the setup, Coordination opens a setup job for it straight away. A Coordination worker runs setup-matt-pocock-skills; its questions reach you as decision requests; the files go on that job's branch and PR for you to merge. Your answers are recorded for that repository, so a job that starts before you merge still receives them as repository instructions. A repository that already has the setup needs nothing. (B) As A, but jobs in that repository that need the setup wait until you merge the setup PR.",
+  "rec": "A. You answer once, when you introduce the repository, and no job has to wait on a merge to use answers you have already given.",
+  "options": [
+   "A: setup job when the repository is added; recorded answers usable before the PR merges",
+   "B: as A, but dependent jobs wait for the setup PR to merge"
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "What happens to running jobs when an AsmAI upgrade brings a new skill bundle?",
+  "body": "Q1 settled that skills change only with AsmAI releases. An upgrade is stop, upgrade, start, and jobs carry on after the start. Options: (A) Each dispatch records the bundle version it ran with (and a fingerprint of any skill of yours or of the repository), so evidence always shows which skill text produced it. After an upgrade, work continues on the new bundle from the next dispatch; no job is held back on an old one. asmai doctor lists what changed in the bundle. (B) Each job keeps the bundle it started with until it ends, so AsmAI carries old bundles alongside the new one.",
+  "rec": "A. An old bundle was only qualified with the old provider pins, so keeping it would run an untested combination; recording the version keeps the evidence honest.",
+  "options": [
+   "A: record the bundle version per dispatch; continue on the new bundle",
+   "B: each job keeps the bundle it started with"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "Add these terms to the glossary?",
+  "body": "Proposed GLOSSARY.md entries (definitions only, no mechanism). Skill bundle: the set of skills an AsmAI release ships, pinned to one upstream release; avoid skill pack, skill set. Skill list: the skills a role's leader, or its workers, may use; an assignment may narrow its worker's list. Added skill: a skill the user adds to a role's skill list through the configuration rather than one AsmAI ships; it may replace a shipped skill of the same name and is never qualified; avoid custom skill, local override, personal skill. Repository skill: a skill a registered repository carries, used only where the user has switched it on for that repository and role. Personal skills stay unnamed: they are the user's own provider skills, which agents never see. Options: (A) Add the four as written. (B) Add them with the changes in my notes.",
+  "rec": "A. The four are the nouns this decision and the configuration schema will use, and each separates something easy to confuse: the bundle versus a role's list, and your additions versus your personal skills.",
+  "options": [
+   "A: add the four terms as written",
+   "B: with the changes in my notes"
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "Record ADR 0006 as drafted above?",
+  "body": "The draft in the panel above records the parts of this decision that are hard to reverse and would surprise a future reader: agents use only AsmAI's pinned bundle with upstream text unchanged, the user's personal skills are hidden, and Codex finds its skills inside the workspace. It follows ADR 0003, which deferred skill isolation to this ticket. Options: (A) Record it as drafted (adjusted to your round 2 answers). (B) Record it with the changes in my notes. (C) No ADR; the resolution comment is enough.",
+  "rec": "A. Someone reading the code later will ask why agents ignore the skills you have installed and why skill folders appear in workspaces; the ADR answers that.",
+  "options": [
+   "A: record ADR 0006 as drafted",
+   "B: with the changes in my notes",
+   "C: no ADR"
+  ]
+ }
+]

@@ -1,0 +1,29 @@
+{
+ "round1": {
+  "Q1": "A: bundled in each AsmAI release; updates arrive with AsmAI releases",
+  "Q2": "B: as listed, with the changes in my notes. Note: \"setup-matt-pocock-skills should move to coordinator and is used when a new repository is added or introduced to the factory.\nFor the \"planning\" skills, the actual work should be done by the workers, so skills like \"wayfinder\", \"grillme\" should be actually run by the worker.  So the leader needs to know when to forward the job to the worker to initiate the skill.  E.g. When I am using \"firstmate\" I will say to firstmate something like \"Use the wayfinder skill in <repo> for ticket #1\"\"",
+  "Q3": "A: upstream text unchanged plus an AsmAI operating guide; listed patches only where needed",
+  "Q4": "A: the request or mandate invokes it; otherwise Coordination proposes it",
+  "Q5": "A: add or replace per role; copied at agent start; marked as mine and unqualified",
+  "Q6": "A: only their list; hide personal and built-in skills where possible; doctor lists the rest",
+  "Q7": "A: written into the workspace's .agents/skills, excluded from git",
+  "Q8": "A: off unless switched on per repository and role",
+  "Q9": "A: in the repository, set up inside the first job that needs it (timing superseded by the Q2 note: set up when a repository is added; see round 2)",
+  "Q10": "A: satisfied from recorded decisions and grants; leader escalates only what they do not cover"
+ },
+ "round2": {
+  "R2-Q1": "A: every role: workers run skills; leaders get an index of their workers' skills",
+  "R2-Q2": "(not answered; asked again in round 3)",
+  "R2-Q3": "A: setup job when the repository is added; recorded answers usable before the PR merges. Note: \"Only required if the repo does not have the \"docs/agent/issue-tracker.md\" file\"",
+  "R2-Q4": "A: record the bundle version per dispatch; continue on the new bundle",
+  "R2-Q5": "A: add the four terms as written",
+  "R2-Q6": "A: record ADR 0006 as drafted"
+ },
+ "round3": {
+  "R3-Q1": "A: optional, on no list; the Engineering leader's own instructions cover ticket graphs",
+  "R3-Q2": "A: docs/agents/issue-tracker.md alone decides"
+ },
+ "confirm": {
+  "CONFIRM": "Confirm and record"
+ }
+}
