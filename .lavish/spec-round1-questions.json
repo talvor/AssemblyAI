@@ -1,0 +1,133 @@
+[
+ {
+  "id": "Q1",
+  "title": "Where does the specification live?",
+  "body": "Settled: the destination is an implementation-ready v1 specification built from the resolved tickets, ADRs and glossary. Planning's to-spec skill normally publishes a spec as one issue, and to-tickets can work from an issue or a file path.\n\nFact: an issue body holds at most 65,536 characters, and the decisions alone come to about 110,000, so the specification cannot fit in one issue.\n\nOptions: (A) Markdown documents in the repository under docs/spec/: an overview plus one document per area, as listed above. They are reviewed and merged by PR, later changes to a rule land in the PR that changes its code, and implementation tickets link to the section they implement. (B) GitHub issues: one spec issue per area in to-spec's form, as sub-issues of a parent spec issue. (C) One long Markdown document in the repository.",
+  "rec": "A. The specification describes code that will live in the same repository, so it should change with it: a change to a rule and the code that implements it can land in one PR, with history. Issues (B) spread the text across many bodies, and a change to a rule cannot travel in the same PR as the code that implements it. One document (C) would run past 100,000 characters, too long to review in one sitting or for one agent session to load.",
+  "options": [
+   "A: Markdown documents in the repository under docs/spec/, reviewed by PR",
+   "B: one spec issue per area, under a parent spec issue",
+   "C: one long document in the repository"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Does the specification restate the decisions or point to them?",
+  "body": "Settled: during wayfinding each decision lives in exactly one place, its ticket, and the map only points at it. Several later tickets changed earlier ones. Define operating limits and visibility made every leader except Coordination start on demand, where Choose factory hosting and lifecycle had them always running. Choose license, release packaging and upgrade migration dropped the Homebrew tap that Define CLI setup and management experience listed. Choose validation and delivery ownership ruled out any merge, which Define delegated authority and human escalation had allowed under a grant. And the factory's own stops were renamed holds.\n\nOptions: (A) Self-contained: the specification states every decision in its final form, and each rule cites the ticket or ADR it comes from. Once you confirm it, it is the authority for implementation: a later change is made in the specification by PR, while the tickets, ADRs and glossary stay as the record of why. Glossary terms and ADRs are cited, not copied. (B) A thin layer: the specification adds structure, interfaces and the sequence, and links each decision to its ticket's resolution for the detail.",
+  "rec": "A. With B, an implementer has to replay the tickets in order to learn which rule still holds, and the examples above show how easy that is to get wrong. Writing each rule once, in its final form, is also where contradictions between tickets surface, so they reach you as questions before any code depends on them.",
+  "options": [
+   "A: self-contained; it states each rule in its final form, cites its source, and becomes the authority once confirmed",
+   "B: a thin layer that links to the tickets for each decision"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How is the specification organized?",
+  "body": "The panel above lists the documents option A would produce, and which tickets each is drawn from.\n\nOptions: (A) By component: an overview in to-spec's form (problem, solution, user stories, out of scope) plus eleven component documents, each with the same sections: rules, interfaces (commands, store records, files), settings and defaults, failure handling, the qualification cases and proving scenarios it serves, and its sources. The overview also holds the traceability tables: each resolved ticket to its documents, each qualification case to its document and milestone, and each proving scenario to its milestone. (B) By decision ticket: one document per resolved ticket, mirroring the map. (C) By user journey: install and set up, converse, run a job, deliver, recover, upgrade. (D) to-spec's form as it is, for the whole of v1: one problem, one solution, one list of user stories, implementation and testing decisions.",
+  "rec": "A. Implementers build components, and most components draw on several tickets: the daemon alone draws on hosting, work state and limits. Organizing by ticket (B) scatters one component across many documents, and a journey (C) crosses the same components again and again. The traceability tables let you, and anyone checking a release, confirm that nothing from the map or the 47 cases was dropped.",
+  "options": [
+   "A: by component, with an overview in to-spec's form and traceability tables",
+   "B: one document per decision ticket",
+   "C: by user journey",
+   "D: to-spec's form as it is, for all of v1"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "What happens to the configuration schema and agent instructions fog?",
+  "body": "Settled: the configuration is one TOML file, and what every setting means, with the default of every number, is settled across six tickets. Still fog on the map: the field names, including the per-repository fields, and the agent instructions (each role's instructions, the skill operating guide, the leaders' skill indexes, the PR section in workers' results, and Coordination's wording).\n\nOptions: (A) The specification settles them. Its configuration section lists every field with its name, type, default and meaning, drawn from those decisions, and you review it with the rest. Its agent-instructions section says what each role's instructions, the operating guide and the indexes must contain; the exact wording is written during implementation and proved by the proving scenarios. The fog item is cleared, with no new ticket. (B) A new grilling ticket, 'Define the configuration schema and agent instructions', settles both before the specification is written. (C) Both are left to implementation; the specification gives only the meanings and defaults already decided.",
+  "rec": "A. Nothing foundational is left in the item: the meanings, defaults and required content are decided, and choosing field names from them is drafting that you still review. Fixing prompt wording before the code exists (B) would be rewritten once the proving scenarios show how agents behave. Leaving field names to implementation (C) lets each ticket invent its own, and config.toml is a public interface that AsmAI never rewrites.",
+  "options": [
+   "A: the specification sets the field names and the required content of the instructions; wording is written in implementation",
+   "B: a new grilling ticket settles both first",
+   "C: both are left to implementation"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "How is the specification written and confirmed?",
+  "body": "This ticket decides the structure. Writing the specification is the step after it, outside this session.\n\nOptions: (A) Whole specification first. Planning sessions draft it one document at a time from its tickets, ADRs and the glossary. You review each document on a Lavish board, where any contradiction between tickets reaches you as a question, and then confirm the whole before it merges. Implementation starts once it is confirmed. (B) Just in time: write and confirm the documents the walking skeleton needs, start building, and write the rest alongside. (C) One session writes the whole specification, and you review it once as a PR.",
+  "rec": "A. The decisions are already made, so writing the specification is consolidation, which is quick next to building. Finishing it first means a contradiction between tickets can still change the skeleton's architecture cheaply; with B, the first milestones are built on documents whose neighbours are not yet written. One document per review keeps each review readable, which a single review of the whole (C) would not.",
+  "options": [
+   "A: whole specification first, one document per Lavish review, then confirm the whole",
+   "B: just in time, the skeleton's documents first",
+   "C: one session writes it all; one PR review"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "In what order is v1 implemented?",
+  "body": "Settled: v1 launches when Linux is certified, with all 47 qualification cases passing, and the nine proving scenarios pass on a release candidate with your verdicts. The second panel above shows the order option A would follow.\n\nOptions: (A) Walking skeleton first, then widen in scenario order. M0 groundwork. M1 a walking skeleton that delivers a tested PR on the fixture repository: Claude only, Coordination, Engineering and Quality, no Lavish yet. Then milestones that each widen it toward the scenarios: both providers and skills; decisions, Lavish, Planning and Research; the conversation and interventions; concurrency and limits; recovery; remote hosts; release and upgrade. Each milestone ends with its qualification cases passing in the harness on this host. Then the release candidate, the proving scenarios and v1.0.0. (B) Layer by layer: the store and daemon, then provider sessions and terminals, then roles and decisions, then repositories and delivery, then limits and recovery, then release; the harness and scenarios at the end. (C) Harness first: build the harness with all 47 cases failing, then implement until they pass, then run the scenarios.",
+  "rec": "A. The riskiest parts are the seams between the daemon, the provider terminals and their hooks, git and GitHub. A skeleton crosses every one of them in the first milestone, and each later milestone stays demoable. Layering (B) shows nothing end to end until late and finds integration problems last. Writing all 47 cases before the code (C) means designing the harness around interfaces that do not exist yet; growing it milestone by milestone keeps the same test-first discipline.",
+  "options": [
+   "A: walking skeleton to a tested PR first, then widen in scenario order; the harness grows with each milestone",
+   "B: layer by layer; harness and scenarios at the end",
+   "C: harness and all 47 cases first, then implement until they pass"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "What tests run on every PR while AsmAI is built?",
+  "body": "Settled: qualification runs only the real pinned providers on a real host, never simulated providers or hosted CI (ADR 0008). That leaves open what tests every PR during development.\n\nOptions: (A) A scripted fake provider CLI for development tests in hosted CI. It plays hook payloads and screens recorded from the real pinned versions, so the daemon, store and delivery logic are tested on every PR. It never counts toward qualification. (B) No fake provider: hosted CI runs only the tests that need no provider, and anything involving a provider is tested only by the harness on the host. (C) No hosted CI tests: every test runs on the host with the real providers.",
+  "rec": "A. The harness uses real allowance and real time, so it suits the end of a milestone, not every PR. A fake built from recorded payloads catches regressions in the daemon's logic fast and at no cost, and ADR 0008 is unchanged because the fake never certifies anything. B leaves most of the daemon untested between harness runs; C makes every PR wait on your host and allowance.",
+  "options": [
+   "A: a scripted fake provider, from recorded payloads, in hosted CI; never counts as qualification",
+   "B: hosted CI runs only provider-free tests",
+   "C: no hosted CI tests; everything on the host with real providers"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "Where does the qualification harness live?",
+  "body": "Settled: the harness drives a development build of the candidate commit under a separate OS user, and the release workflow checks that the qualification record is the only change since the qualified commit. Delivery cases run against a GitHub fixture repository you own.\n\nOptions: (A) In the asmai repository, in its own directory, built only into development builds and never into a release executable, so the harness and the code it qualifies always share a commit. The fixture repository is a separate small repository you own, for example talvor/asmai-fixture. (B) A separate repository that takes the candidate commit as its input.",
+  "rec": "A. The record belongs to one commit, so the harness that produced it should be at that same commit. A separate repository (B) adds a second version to pin and keep in step. Keeping it out of release builds means users never receive harness code.",
+  "options": [
+   "A: in the asmai repository, development builds only; a separate fixture repository",
+   "B: a separate harness repository"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "Who builds AsmAI before it can build itself?",
+  "body": "Today you run Firstmate crews and no-mistakes. AsmAI cannot work on its own code until enough of it exists.\n\nOptions: (A) Firstmate crews implement the tickets with the implement and tdd skills, each ticket a PR gated by no-mistakes that you merge. AsmAI first works on its own code at the release candidate, in the proving scenarios: the v2 notify command in S1 and a real defect fix in S4. You can still try development builds on side tasks whenever you like. (B) Firstmate builds the walking skeleton; after that, development builds of AsmAI implement their own later milestones, with Firstmate as the fallback. (C) You implement by hand, with agents helping.",
+  "rec": "A. A half-built factory building itself gets stuck exactly when one of its own defects blocks the fix, and its unqualified development builds would be carrying your main work. A keeps the proving scenarios as the first real test of AsmAI on its own code, which is what they are for, and still lets you try it earlier.",
+  "options": [
+   "A: Firstmate crews build it, PRs gated by no-mistakes; AsmAI works on itself from the release candidate",
+   "B: Firstmate builds the skeleton; AsmAI builds its later milestones",
+   "C: by hand, with agents helping"
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "When is the repository renamed to talvor/asmai?",
+  "body": "Settled: talvor/AssemblyAI is renamed to talvor/asmai before the first release, and the map's issues and history move with it. Its timing was left to this ticket.\n\nFact: after a rename GitHub redirects the old web, issue and git URLs, unless a new repository later takes the old name. A Go module path is written into every import, so renaming after code exists means rewriting all of them.\n\nOptions: (A) Now, before the specification is written. (B) As the first implementation step, in M0, before the first code commit. (C) Just before the first release candidate.",
+  "rec": "B. The specification can be written under either name, because the links redirect, but the code should start with its final module path, github.com/talvor/asmai. C forces a rewrite of every import path late in the work, and A gains nothing over B.",
+  "options": [
+   "A: now, before the specification is written",
+   "B: in M0, before the first code commit",
+   "C: just before the first release candidate"
+  ]
+ },
+ {
+  "id": "Q11",
+  "title": "When is macOS built?",
+  "body": "Settled: the planned platforms are Linux x86_64 and macOS on Apple silicon. v1 launches when Linux is certified, and macOS follows in a release that certifies it.\n\nOptions: (A) Linux only until v1.0.0, with the platform specifics (the service manager, the PTY, sign-in checks) kept behind one seam from the start. macOS is the first milestone after launch and ends in a minor release that certifies it. (B) Build macOS support alongside every milestone, and certify it after Linux. (C) Schedule no macOS work; it waits for a later effort.",
+  "rec": "A. Building for macOS in every milestone (B) doubles the testing before launch for a platform that does not gate it. A seam from the start keeps the later port small, and scheduling it straight after launch, unlike C, keeps both planned platforms in the plan.",
+  "options": [
+   "A: Linux only until v1.0.0, behind a platform seam; macOS is the first milestone after launch",
+   "B: macOS alongside every milestone, certified after Linux",
+   "C: no macOS work scheduled"
+  ]
+ },
+ {
+  "id": "Q12",
+  "title": "From when are the store's migrations kept?",
+  "body": "Settled: each release embeds forward-only migrations, any v1 release upgrades straight to any later one, and every release keeps all migrations since v1.0. The proving scenarios run on release candidates (v1.0.0-rc.N), and one scenario, such as S1 or S8, may span several days.\n\nOptions: (A) From the first release candidate: development builds may reset their store, but from rc.1 every schema change is a kept migration, so a proving-scenario factory survives an upgrade to the next release candidate. (B) From v1.0.0: a new release candidate may need a fresh store, after exporting the journal. (C) From the first commit.",
+  "rec": "A. A defect found during the proving scenarios leads to a new release candidate, and that scenario's factory, journal and evidence should survive the upgrade. Before the first candidate there is nothing worth keeping, so starting earlier (C) only adds migrations nobody needs.",
+  "options": [
+   "A: from the first release candidate",
+   "B: from v1.0.0; candidates may need a fresh store",
+   "C: from the first commit"
+  ]
+ }
+]

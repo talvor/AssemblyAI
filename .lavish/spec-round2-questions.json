@@ -1,0 +1,95 @@
+[
+ {
+  "id": "R2-Q1",
+  "title": "Is this what your Q10 note means?",
+  "body": "On Q10 you chose B (in M0, before the first code commit) and added: \"I am planning to start the new repo \"talvor/asmai\" for implementation and will not bring across anything from this repo.  I will be running the \"to-tickets\" skill in the new repo on each of the spec files to generate the tickets in the new repositories issue tracker.  So any links in the specs that will get added to the tickets should refer to the current \"talvor/AssemblyAI\" repo\"\n\nYour note overrides the rename that Choose license, release packaging and upgrade migration decided (\"talvor/AssemblyAI is renamed to talvor/asmai before the first release ... The map's issues and history move with it\"). My reading of it is below. The last point is my inference, not something your note says.",
+  "rec": "A, if it matches what you meant. Otherwise choose B and correct it in the notes.",
+  "options": [
+   "A: yes, as read",
+   "B: not quite (see my notes)"
+  ],
+  "points": [
+   "No rename. talvor/AssemblyAI stays as it is and keeps the map, the decision tickets, the ADRs, the glossary, the Lavish records and the specification under docs/spec/.",
+   "M0 creates talvor/asmai as a new repository for AsmAI's code, its implementation tickets and its releases. Releases are still published at github.com/talvor/asmai/releases, so the install command is unchanged.",
+   "Every link in the specification points at talvor/AssemblyAI, so the tickets that to-tickets copies them into lead back here.",
+   "The resolution records this as a change to Choose license, release packaging and upgrade migration.",
+   "My inference: the proving scenarios that work on AsmAI's own code (S1's notify command, S4's defect fix) run in talvor/asmai, and the record of the proving scenarios, which Define v1 acceptance scenarios and evidence put \"in the AssemblyAI repository\" when that was to be the code's home, lives in talvor/asmai beside the releases it judges."
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "Does the new repository get the glossary and ADRs?",
+  "body": "Settled by your note: nothing is brought across to talvor/asmai. But the skills that will build it (implement, tdd, to-tickets, code-review, domain-modeling) read the glossary and ADRs only from the repository they work in, and record new terms and decisions there. So a term or decision found during implementation needs a home.\n\nOptions: (A) One exception at M0: talvor/asmai starts with a copy of GLOSSARY.md and ADRs 0001 to 0009 as they stand when the specification is confirmed, and they evolve there from then on, with new ADRs numbered from 0010. The copies in talvor/AssemblyAI stay as the record of the planning. (B) Nothing is copied. talvor/asmai's domain docs point agents at talvor/AssemblyAI's glossary and ADRs by link, and new terms and decisions are added there, in talvor/AssemblyAI, by PR. (C) Nothing is copied, and talvor/asmai starts its own glossary and ADRs empty, from the first new term or decision.",
+  "rec": "A. Implementation agents use the glossary for every ticket title, test name and review, and they look only in their own repository. With B, every new term needs a pull request in a second repository; with C, the vocabulary the specification uses is missing exactly where the code is written. A one-time copy keeps the planning record intact and gives the code its own domain model.",
+  "options": [
+   "A: copy the glossary and ADRs once at M0; they evolve in talvor/asmai",
+   "B: copy nothing; link to talvor/AssemblyAI and add new terms there",
+   "C: copy nothing; talvor/asmai starts its own, empty"
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "What does to-tickets run on?",
+  "body": "Settled: the specification is organized by component (Q3), and v1 is built as a walking skeleton followed by milestones that each cut across several components (Q6). Your note says you will run to-tickets in talvor/asmai on each of the specification's files. to-tickets slices only what it is given, and links blocking edges only among the tickets of one run. The walking skeleton crosses six component documents, so no single component file would produce it.\n\nOptions: (A) Add one milestone document per milestone (docs/spec/milestones/, M0 to M8), saying which rules of which component documents it delivers and how its end is checked. You run to-tickets on the milestone documents in order, one milestone at a time. Its tickets are vertical slices that link into the component documents, and each is blocked by tickets of its own run or by the previous milestone. The component documents stay the reference. (B) Run to-tickets on each component document. Each component document gains a section saying which of its parts land in which milestone, the tickets carry a GitHub milestone, and the blocking edges between documents are wired by hand afterwards. (C) Drop the milestones and build component by component.",
+  "rec": "A. You still run to-tickets once per specification file, but the files it runs on are the milestones, so the tickets come out as the vertical slices the skeleton needs. With B, each component is sliced in isolation, and the edges between them, which are what make a walking skeleton, are added by hand. C undoes Q6.",
+  "options": [
+   "A: one milestone document per milestone; to-tickets runs on those, in order",
+   "B: to-tickets runs on each component document; edges between them wired by hand",
+   "C: no milestones; build component by component"
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "Where do changes to the specification go once code exists?",
+  "body": "Settled: once confirmed, the specification is the authority, and a later change is made in it by PR (Q2). The code now lives in another repository, so a rule change found while building means a PR in talvor/AssemblyAI, while the code change lands in talvor/asmai.\n\nOptions: (A) The specification in talvor/AssemblyAI stays the authority until v1.0.0. A rule change found while building is made there by PR first, and the asmai ticket or PR links it. At v1.0.0 the specification is frozen as the record of v1, and later changes are recorded in talvor/asmai. (B) The specification is frozen once confirmed. Changes found while building are recorded in talvor/asmai, in its tickets and ADRs, and from then on the specification is history. (C) As A, with no freeze: the specification stays the authority for every later release.",
+  "rec": "A. Keeping it current through v1 means the proving scenarios and the 47 cases are judged against one up-to-date description. After launch, the code and its own records are the better authority, and freezing at v1.0.0 avoids keeping two repositories in step for ever.",
+  "options": [
+   "A: the authority until v1.0.0, changed by PR here first; then frozen",
+   "B: frozen once confirmed; changes recorded in talvor/asmai",
+   "C: the authority for every release, never frozen"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "How is macOS checked in each milestone?",
+  "body": "Your answer to Q11 was B: macOS support is built alongside every milestone, and macOS is certified after Linux. v1.0.0 still launches on Linux alone (Define v1 acceptance scenarios and evidence). Hosted macOS runners can run the development tests on every PR, but the harness needs a real Apple silicon Mac with a separate OS user signed in to the providers.\n\nOptions: (A) Every PR builds for both platforms and runs the development tests on Linux and on hosted macOS runners. At the end of each milestone, its cases also run in the harness on a Mac. A macOS failure becomes a ticket in the next milestone and never holds up the Linux release candidate. (B) As A, but the harness runs on a Mac only once, before the release that certifies macOS; during the milestones, macOS is checked only by the development tests. (C) As A, but macOS must pass each milestone's cases before the next milestone starts.\n\nFor A or C, name in the notes the Mac the harness will run on.",
+  "rec": "A. Building macOS alongside pays off only if its problems show up while the code is fresh, and the PTY, the service manager and sign-in differ in ways only the real providers show. Keeping a macOS failure off Linux's path keeps the launch order you chose.",
+  "options": [
+   "A: hosted macOS tests on every PR; the harness on a Mac at each milestone's end; never holds up Linux",
+   "B: hosted macOS tests on every PR; the harness on a Mac only before macOS is certified",
+   "C: as A, and macOS gates each next milestone"
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "Are these the milestones, and how does each one end?",
+  "body": "The panel above shows the milestones with round 1 applied: M0 now creates talvor/asmai, and every milestone includes its macOS side.\n\nOptions: (A) As shown. A milestone ends when its tickets are closed, the development tests are green on both platforms, its qualification cases pass in the harness on Linux (and on the Mac as R2-Q5 decides), and its demo path has run once on the fixture repository, with the terminal recording kept for you to watch. (B) As A, but you sign off each milestone after watching its demo run live. (C) Change the milestones (say how in the notes).",
+  "rec": "A. Apart from the demo, the checks are mechanical, and a kept recording lets you look when it suits you instead of each milestone waiting on your time. Use C if a milestone is in the wrong place or holds the wrong work.",
+  "options": [
+   "A: as shown; each ends on closed tickets, green tests, passing cases and a recorded demo",
+   "B: as shown, and I sign off each milestone after a live demo",
+   "C: change the milestones (see my notes)"
+  ]
+ },
+ {
+  "id": "R2-Q7",
+  "title": "What goes into the glossary and ADRs?",
+  "body": "No new glossary term: everything in this ticket is about how AsmAI is built, not the factory's own language, and \"milestone\" and \"walking skeleton\" are general terms. Two candidates for the record:\n\nFirst, ADR 0008 says simulated providers never qualify a combination, and Q7 adds a scripted fake provider for development tests, so a later reader could take ADR 0008 to forbid it. Second, the split between talvor/AssemblyAI (the planning record and the specification) and talvor/asmai (the code, its tickets and releases) will surprise someone who finds the code first.\n\nOptions: (A) A dated line in ADR 0008: development tests may use a scripted fake provider built from recorded payloads, and it never counts toward qualification. No new ADR: the repository split is explained in this resolution, the specification's overview, and talvor/asmai's README. (B) As A, plus ADR 0010 for the repository split. (C) Neither; this resolution records both.",
+  "rec": "A. The line in ADR 0008 stops someone removing the fake provider, or worse, letting it count. The repository split is best explained where people meet it, and it does not shape the code in a way an ADR needs to guard.",
+  "options": [
+   "A: a dated line in ADR 0008 for the fake provider; no new ADR",
+   "B: as A, plus ADR 0010 for the repository split",
+   "C: neither; the resolution records both"
+  ]
+ },
+ {
+  "id": "R2-Q8",
+  "title": "What happens to the map?",
+  "body": "With your answers, nothing on the map is left to decide. The configuration and agent-instructions fog item is settled into the specification (Q4), no new decision has surfaced, and this is the last open ticket.\n\nOptions: (A) Record this resolution and close the ticket; remove the fog item; add the Decisions so far line and a Notes pointer; record that a new repository replaces the rename. The map then holds no open tickets and no fog: the way to the specification is clear, and writing it (Q5) is the next step, outside the map. (B) As A, plus one task ticket on the map, 'Write and confirm the v1 specification', closed when the whole specification is confirmed and merged.",
+  "rec": "A. A wayfinder map is finished when the way is clear. Writing the specification is doing the work, and its PRs and Lavish reviews track it. A task ticket (B) would keep the map open only to track work whose route is already settled.",
+  "options": [
+   "A: no new ticket; the way to the specification is clear",
+   "B: add a task ticket to write and confirm the specification"
+  ]
+ }
+]

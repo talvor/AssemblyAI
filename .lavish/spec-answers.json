@@ -1,0 +1,30 @@
+{
+ "round1": {
+  "Q1 Where it lives": "A: Markdown documents in the repository under docs/spec/, reviewed by PR",
+  "Q2 Restate or point": "A: self-contained; it states each rule in its final form, cites its source, and becomes the authority once confirmed",
+  "Q3 Organization": "A: by component, with an overview in to-spec's form and traceability tables",
+  "Q4 Configuration and instructions fog": "A: the specification sets the field names and the required content of the instructions; wording is written in implementation",
+  "Q5 Writing and confirming": "A: whole specification first, one document per Lavish review, then confirm the whole",
+  "Q6 Implementation order": "A: walking skeleton to a tested PR first, then widen in scenario order; the harness grows with each milestone",
+  "Q7 Development tests": "A: a scripted fake provider, from recorded payloads, in hosted CI; never counts as qualification",
+  "Q8 Harness location": "A: in the asmai repository, development builds only; a separate fixture repository",
+  "Q9 Who builds AsmAI": "A: Firstmate crews build it, PRs gated by no-mistakes; AsmAI works on itself from the release candidate",
+  "Q10 The repository": "B: in M0, before the first code commit, note: \"I am planning to start the new repo \"talvor/asmai\" for implementation and will not bring across anything from this repo.  I will be running the \"to-tickets\" skill in the new repo on each of the spec files to generate the tickets in the new repositories issue tracker.  So any links in the specs that will get added to the tickets should refer to the current \"talvor/AssemblyAI\" repo\"",
+  "Q11 macOS": "B: macOS alongside every milestone, certified after Linux",
+  "Q12 Migrations kept from": "A: from the first release candidate"
+ },
+ "round2": {
+  "R2-Q1 The new repository": "A: yes, as read",
+  "R2-Q2 Glossary and ADRs in talvor/asmai": "A: copy the glossary and ADRs once at M0; they evolve in talvor/asmai",
+  "R2-Q3 What to-tickets runs on": "A: one milestone document per milestone; to-tickets runs on those, in order",
+  "R2-Q4 Changes once code exists": "A: the authority until v1.0.0, changed by PR here first; then frozen",
+  "R2-Q5 macOS checks": "A: hosted macOS tests on every PR; the harness on a Mac at each milestone's end; never holds up Linux",
+  "R2-Q6 Milestones": "A: as shown; each ends on closed tickets, green tests, passing cases and a recorded demo",
+  "R2-Q7 Glossary and ADRs": "A: a dated line in ADR 0008 for the fake provider; no new ADR",
+  "R2-Q8 The map": "A: no new ticket; the way to the specification is clear"
+ },
+ "round3": {
+  "R3-Q1 The Mac": "A: a Mac I already have (named in my notes), with the notes left empty",
+  "CONFIRM": "Confirm and record"
+ }
+}
