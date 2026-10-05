@@ -1,0 +1,67 @@
+[
+ {"group": "Platform and installation", "cases": [
+  ["C1", "Platform certification on Linux and on macOS; an uncertified platform refuses to start agents and says what to do.", [7]],
+  ["C2", "An unqualified provider version is refused before any dispatch; a provider CLI that upgraded itself holds its agent at the next restart.", [7]],
+  ["C3", "The pinned provider copies reuse your existing sign-in without a new login.", [9]],
+  ["C4", "Every agent session starts without provider API-key variables.", [9]],
+  ["C5", "Codex hook trust survives an AsmAI upgrade.", [9]]
+ ]},
+ {"group": "Terminals, input and intervention", "cases": [
+  ["C6", "Native modals: any input state not on the allow-list (which starts empty) holds the agent instead of being typed over.", [19, 7]],
+  ["C7", "Positive acknowledgment of each automated submission, never inferred from a successful PTY write.", [19]],
+  ["C8", "Taking an agent mid-turn and with an unsent automated draft: wait for the boundary or interrupt; the draft is recorded and cleared.", [19, 7]],
+  ["C9", "The attach client's rendering of each provider's screen under the status line, at reduced height.", [10, 19]],
+  ["C10", "Detecting your unsent text in the conversation and clearing the input box.", [10]],
+  ["C11", "Capturing witnessed messages and telling them apart from the daemon's nudges.", [10]],
+  ["C12", "Recognising an interrupted Claude turn (the probe saw no Interrupt hook from Claude).", [10]],
+  ["C13", "A second attach takes over; the older terminal only observes and its unsent text is saved.", [10]],
+  ["C14", "Terminal recording per dispatch, and replay.", [14]]
+ ]},
+ {"group": "Signals and work state", "cases": [
+  ["C15", "Lost, duplicate, reordered and late hooks and observations.", [8, 19]],
+  ["C16", "A superseded leader or worker generation is rejected.", [8, 7]],
+  ["C17", "Agent processes left by a previous daemon are terminated at start.", [8]],
+  ["C18", "A crash during an effect is recovered through reconciliation.", [8]],
+  ["C19", "Dispatches and results stay correlated and reconcilable across restarts.", [19]],
+  ["C20", "A working dispatch with no observation for 30 minutes becomes unknown.", [14]]
+ ]},
+ {"group": "Recovery and stopping", "cases": [
+  ["C21", "Agent crash: a leader restarts within its bound; a worker's assignment needs reconciliation.", [7]],
+  ["C22", "Daemon crash.", [7]],
+  ["C23", "Host reboot with the service installed.", [7]],
+  ["C24", "Terminal and SSH disconnect.", [7]],
+  ["C25", "`asmai stop` drains; `asmai stop --now` interrupts.", [7]]
+ ]},
+ {"group": "Providers, access and allowance", "cases": [
+  ["C26", "Expired or revoked sign-in holds work, shows the native sign-in command, and resumes when sign-in is back.", [19, 14]],
+  ["C27", "Allowance used and reset times, for each provider.", [14]],
+  ["C28", "Allowance used up: agents hold, then resume at the reset.", [14, 19]],
+  ["C29", "A reported provider error resumes with backoff (Claude's StopFailure; Codex's equivalent is unknown); past the bound the provider is unavailable.", [14, 19]],
+  ["C30", "Fallback to the other provider only before first dispatch, including a leader's on-demand start; afterwards you are asked.", [19, 14, 15]],
+  ["C31", "Leaders start when a message for their role arrives and stop after the idle grace.", [14]],
+  ["C32", "Below the free-space floor no new workspace is created.", [14]]
+ ]},
+ {"group": "Skills", "cases": [
+  ["C33", "Personal, provider built-in and repository skills are hidden, including Claude's built-in code-review next to the shipped one.", [17]],
+  ["C34", "Per-session skill delivery works although Claude namespaces plugin skills and upstream skills call each other by bare name.", [17]],
+  ["C35", "Codex finds the skills written into its workspace.", [17]]
+ ]},
+ {"group": "Repository work", "cases": [
+  ["C36", "Instruction files load without the repository's provider configuration.", [11]],
+  ["C37", "Provider write guards are switched on.", [11]],
+  ["C38", "Concurrent jobs in one repository.", [11]],
+  ["C39", "Outside commits are merged in and never force-pushed over.", [11]],
+  ["C40", "A crash during a push.", [11]]
+ ]},
+ {"group": "Delivery", "cases": [
+  ["C41", "The daemon's push, and its refusal when origin holds commits AsmAI did not make.", [18]],
+  ["C42", "A draft PR, and the \"[not ready]\" fallback when GitHub refuses a draft.", [18]],
+  ["C43", "CI watched through gh: green; red with one judged re-run; a newer push replacing the wait.", [18]],
+  ["C44", "The 15-minute wait for a first check, and the hold for a repository with no declared CI.", [18]],
+  ["C45", "Marking the PR ready when CI is green.", [18]],
+  ["C46", "A leader-opened PR reconciled as an effect, including a crash between the push and the PR.", [18]]
+ ]},
+ {"group": "Remote hosts", "cases": [
+  ["C47", "Remote use over SSH: `--host`, Lavish through port forwarding, and plain `ssh -t host asmai`.", [9, 7]]
+ ]}
+]

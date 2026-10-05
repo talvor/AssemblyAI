@@ -1,0 +1,137 @@
+[
+ {
+  "id": "Q1",
+  "title": "What has to pass before v1 launches?",
+  "body": "Settled: AsmAI supports only qualified combinations of its pinned providers and refuses others before any dispatch. Each platform is certified separately, and Linux may launch before macOS (Choose factory hosting and lifecycle). Both Claude and Codex are launch requirements. Nine earlier tickets left the 47 cases above to qualify, and this ticket's own question is which real tasks prove that v1 is useful.\n\nOptions: (A) Two gates. Qualification: the cases pass for the release's pinned Claude Code, Codex and Lavish on a platform, which certifies that platform. Acceptance: a set of scenarios runs end to end on real repositories with real tasks, on a certified platform, and you give a verdict on each. v1 launches when Linux is certified and every scenario has passed; macOS follows when it is certified. (B) As A, plus a burn-in: after the scenarios pass, you use AsmAI for your own work for a set period, such as two weeks, with no open blocking defect before launch. (C) Scenarios only: the qualification cases become steps inside the scenarios. (D) Qualification only: whether v1 is useful is judged informally after launch.",
+  "rec": "A. The two gates answer different questions. Qualification proves that one combination of versions behaves safely, including in failures you would rarely meet. The scenarios prove that the factory does useful work for you. Folding the cases into scenarios (C) would mean rerunning long real jobs every time a pinned version moves. Q7 and Q8 cover the events that cannot be produced on demand, so a burn-in (B) mostly delays launch, and whatever it would find becomes a fix in a later release.",
+  "options": [
+   "A: two gates: qualification certifies the platform; the scenarios pass with my verdict",
+   "B: as A, plus a burn-in period of my own use",
+   "C: scenarios only, with the cases as steps inside them",
+   "D: qualification only"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Which repositories and which headline feature are the proving ground?",
+  "body": "The scenario that matters most is a feature going from your request to a tested PR. Its task has to be real and still open when v1 is ready. Concurrent repository work needs at least two registered repositories, and the no-CI path needs a repository declared as having no CI (Choose validation and delivery ownership). The facts above describe your candidate repositories. Jobs work in AsmAI's own clone (ADR 0005), so AsmAI working on its own code never touches the running executable.\n\nOptions: (A) Headline: AsmAI's v2 notify command, whose design is kept in Define operating limits and visibility. You ask for it in the conversation as a new feature on the AssemblyAI repository. Planning asks you its questions in Lavish and writes the spec and tickets, Engineering implements them in several assignments, Quality validates, and it ends as a tested PR that you may merge or keep for v2. otman carries concurrent work in a second repository, and dev-setup the no-CI path. (B) Headline: a real otman feature you name when v1 is ready, with dev-setup for the no-CI path. AssemblyAI is not used, so AsmAI never works on its own code during acceptance. (C) Headline chosen when v1 is ready, against criteria: several writing assignments, at least one decision for you, tests and CI. (D) A purpose-built sample repository for everything.",
+  "rec": "A. The notify command is real, designed in outline, certain to be open still, and big enough to need Planning, several Engineering assignments and Quality. Fixing it now also gives the specification a running example. The three repositories cover Go with CI twice, a repository without CI, and two different trackers. otman's backlog holds only test items today, so B would depend on a feature that does not exist yet. A sample repository (D) proves mechanics, which qualification already does.",
+  "options": [
+   "A: AsmAI's v2 notify command on AssemblyAI; otman for a second repository; dev-setup for no CI",
+   "B: a real otman feature I name later; dev-setup for no CI; AssemblyAI not used",
+   "C: headline chosen when v1 is ready, against criteria",
+   "D: a purpose-built sample repository"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "Which real tasks prove research, planning and diagnosis?",
+  "body": "The ticket asks for standalone research, planning and diagnosis besides the feature. Settled: a repository job whose outcome is notes still delivers them as a PR, and a job without a repository works in a scratch workspace (Define concurrent repository work and integration). Notes jobs get no Quality validation unless the mandate asks, so the owning leader's acceptance is their evidence (Choose validation and delivery ownership).\n\nOptions: (A) Real AsmAI work. Research: an open fact AsmAI needs, such as whether a newer Codex offers a StopFailure-like signal or a per-session skill folder, delivered as notes. Planning: you and a Planning worker resolve one real Wayfinder ticket of AsmAI's next map, with its questions in Lavish. Diagnosis: the first real defect found during qualification or acceptance, diagnosed and then fixed as a tested PR. One of the research or diagnosis jobs runs without a repository. (B) Tasks you name when v1 is ready, from any of your repositories. (C) Planted tasks with a known answer, such as a seeded bug and a research question already answered, so the result can be checked objectively.",
+  "rec": "A. These are questions AsmAI will genuinely need answered, so your verdict on the result means something. Planted tasks (C) measure whether AsmAI finds an answer you already hold, not whether its work is useful to you. A defect found during qualification is certain to exist, and diagnosing it is exactly the work you would ask for.",
+  "options": [
+   "A: real AsmAI work: a research question it needs, a Wayfinder ticket of its next map, the first real defect",
+   "B: tasks I name when v1 is ready",
+   "C: planted tasks with a known answer"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "Which scenarios make up acceptance?",
+  "body": "The ticket names a feature-to-tested-PR job, standalone research, planning and diagnosis, concurrent repositories, human escalation, and local and remote continuity. This is the proposed set. Across all of them each role runs at least once on Claude and once on Codex, and S1 mixes providers inside one job, for example Engineering workers on Codex and Quality on Claude.",
+  "points": [
+   "S1 Feature to tested PR: the headline feature, from your request to a tested PR. Planning's questions in Lavish, a spec and tickets, several Engineering assignments, Quality validation at the exact head, the daemon's push, a draft PR, green CI, marked ready, and the link reported.",
+   "S2 Research: a research job delivered as notes, with its sources.",
+   "S3 Planning: a Wayfinder ticket resolved with you in Lavish, its resolution recorded in the tracker.",
+   "S4 Diagnosis: a real defect diagnosed, then fixed as a tested PR.",
+   "S5 Concurrent repositories: S1 runs while jobs run in two other repositories. A second job in S1's repository meets a conflict that a worker resolves, and full worker caps queue assignments.",
+   "S6 No CI: a small real change in a repository declared as having no CI, delivered with Quality's checks standing in and the gap stated in the PR.",
+   "S7 Human decisions: during the other scenarios, a choice between distinct viable approaches answered in the conversation; a request with several questions answered in Lavish; an intervention where you take a worker, type a correction and release it; independent work continuing while a decision is pending; one job paused and resumed, and another cancelled.",
+   "S8 Local continuity: during S1 you leave and come back to a catch-up, the daemon is killed, and the host reboots with the service installed. Work continues after reconciliation, and no effect is repeated.",
+   "S9 Remote continuity: a job on a remote host driven with `asmai --host`. SSH drops mid-turn, you reconnect and answer a Lavish decision through port forwarding, and the remote host reboots."
+  ],
+  "rec": "A. These are exactly what the ticket names, and running escalation and continuity during real work shows they hold with real context, not only in the harness. B would leave the parts you will meet most often, leaving and coming back and answering decisions, proven only against a test harness.",
+  "options": [
+   "A: S1 to S9 as listed",
+   "B: S1 to S6 only; decisions and continuity left to qualification",
+   "C: change the set (see my notes)"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "What evidence shows a scenario passed, and who judges it?",
+  "body": "Settled: the journal is AsmAI's canonical record and `asmai export` exports it; every terminal is recorded per dispatch; a tested PR's body states its evidence and gaps. 'Useful' is a judgement, and only you can make it for your own work.\n\nOptions: (A) Each scenario has a checklist of observable evidence, checked from the job's journal export, the PR and its CI, and the terminal recordings. You also give a verdict on the outcome: 'usable as delivered', 'usable after my changes' or 'not usable'. A scenario passes when its checklist is complete and your verdict is not 'not usable'. Each release's results go in an acceptance record in the AssemblyAI repository, quoting your verdicts. (B) As A, but only 'usable as delivered' passes. (C) The checklist only, with no verdict. (D) Your verdict only.",
+  "rec": "A. Your verdict decides usefulness, and the checklist stops a scenario passing on a good impression when the mechanics underneath went wrong. B would fail a scenario over a small edit you would make to any colleague's PR. Keeping the record in the repository puts it next to the specification it proves.",
+  "options": [
+   "A: evidence checklist plus my verdict; passes unless I say 'not usable'; recorded in the repository",
+   "B: as A, but only 'usable as delivered' passes",
+   "C: evidence checklist only",
+   "D: my verdict only"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "Is this the v1 qualification list?",
+  "body": "The table above gathers the 47 cases that nine earlier tickets left here. Some depend on the provider version (modals, hooks, skills, allowance signals) and some only on the platform or on GitHub (the daemon's push, CI watching, the free-space floor).\n\nOptions: (A) All 47 cases. A case that depends on the provider runs for each combination of pinned versions, and the others run once per platform. (B) A launch-critical subset gates launch (the input fence, decisions, recovery and delivery), and the rest are qualified after launch. (C) Change the list (see my notes).",
+  "rec": "A. Each case was deferred because an earlier decision relies on it being true. A combination certified without one of them would rest on an assumption, and the safe default for a missing signal (Q8) keeps the list achievable.",
+  "options": [
+   "A: all 47 cases; per version combination where the provider matters, per platform otherwise",
+   "B: a launch-critical subset first; the rest after launch",
+   "C: change the list (see my notes)"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "How are the cases exercised?",
+  "body": "Settled: a qualified combination is one that was actually tested, and observed behaviour, not documentation alone, bounds what is claimed (Validate interactive CLI coordination and intervention). The facts above list what cannot be produced on demand.\n\nOptions: (A) Real pinned providers on a real host, run by a qualification harness under a separate OS user with its own sign-in and its own factory, so sign-out and crash tests never touch your own sessions or factory. Crashes, and lost, duplicate, reordered and late hooks, are injected. Provider outages come from blocking an agent's network. Native modals are opened on purpose. Recorded provider payloads are replayed only for what cannot be produced on demand (an allowance running out, a modal the provider chooses to show), and those cases are marked as replayed. Delivery cases run against a GitHub fixture repository you own, whose CI can be made red, slow or absent. (B) Real triggers only, including actually using up an allowance window. (C) Simulated providers for the failure cases; real providers only for normal operation.",
+  "rec": "A. Using up an allowance on purpose spends your own usage for hours or days, and a simulated provider (C) would certify behaviour no real CLI showed. Replay is limited to the two events that cannot be caused safely, and the record says so. A separate OS user keeps qualification from disturbing your real factory, which is one per user per host.",
+  "options": [
+   "A: real providers under a separate OS user; injected faults; replay only for what cannot be caused; a GitHub fixture repository",
+   "B: real triggers only, including using up an allowance",
+   "C: simulated providers for the failure cases"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "What does a combination need to pass?",
+  "body": "Some signals do not exist in a provider version: the probe saw no Interrupt hook from Claude, and no Codex equivalent of StopFailure is known. Earlier decisions already route a missing signal to a safe default: an unexplained stop is unknown and its owning leader reconciles, and an unknown input state holds the agent.\n\nOptions: (A) A case passes when AsmAI behaves as decided, through the provider's own signal or through the safe default when the signal is missing. The missing signal is recorded as a known limitation, which `asmai doctor` lists. A case fails when AsmAI does anything unsafe: types over a modal or over you, loses or misattributes a decision, repeats an effect blindly, force-pushes over commits it did not make, or reports work as done when it is not. Any failing case leaves the combination unqualified. (B) Every case must pass through the provider's own signal, so a missing signal leaves the combination unqualified. (C) As A, but a combination may be qualified with failing cases you accept by name.",
+  "rec": "A. B would block Codex at launch until OpenAI adds a signal, although the safe default already keeps the work correct, only slower to recover. C would let a release ship with an unsafe behaviour known in advance.",
+  "options": [
+   "A: the safe default passes and is listed as a known limitation; any unsafe behaviour fails",
+   "B: the provider's own signal is required for every case",
+   "C: as A, plus failing cases I accept by name"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "Who runs qualification, and what does a release carry?",
+  "body": "Settled: there is no hot upgrade, and the daemon validates provider versions at start and refuses unqualified combinations (Choose factory hosting and lifecycle). Each AsmAI release pins its own Claude Code, Codex and Lavish (ADR 0003).\n\nOptions: (A) The maintainer runs the harness on a real host of each certified platform before each AsmAI release, and again whenever a pinned version changes. The release carries a qualification record: the qualified combinations, the certified platforms and the known limitations. `asmai start` refuses anything else, and `asmai doctor` shows the record. A platform is an operating system and CPU architecture, Linux x86_64 first. A user's own host is not qualified again; `asmai doctor` runs a short read-only self-check there. (B) As A, plus an `asmai qualify` command, so a user can qualify a platform or version that is not in the record on their own host. (C) Qualification runs in hosted CI.",
+  "rec": "A. C would need a provider sign-in inside CI, which AsmAI may not handle. B invites self-certified combinations nobody else has checked; someone who wants a new platform can run the harness from the repository and propose a change to the record.",
+  "options": [
+   "A: maintainer-run before each release and on any pinned-version change; the release carries the record",
+   "B: as A, plus asmai qualify for users",
+   "C: hosted CI"
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "Which machine is the remote host for S9?",
+  "body": "Settled: a remote host runs its own factory, reached over SSH only, with Lavish through port forwarding (Choose factory hosting and lifecycle). Spending needs your grant (Define operating limits and visibility).\n\nOptions: (A) One of your own Linux machines, reached from this one over SSH. Say which in the notes. (B) A cloud VM created for acceptance, which needs your spending grant. (C) SSH from this host to itself.",
+  "rec": "A. Remote continuity is about a separate host whose connection can drop and which reboots on its own. Loopback (C) proves the commands but not the disconnect, and a cloud VM costs money while adding nothing a spare machine of yours does not.",
+  "options": [
+   "A: one of my own Linux machines (named in my notes)",
+   "B: a cloud VM, with a spending grant",
+   "C: SSH from this host to itself"
+  ]
+ },
+ {
+  "id": "Q11",
+  "title": "Which terminals are qualified?",
+  "body": "Settled: the attach client draws each agent's screen under the status line (ADR 0004), so rendering, the reduced height and the Ctrl-] menu all depend on the terminal. The feasibility probe's Ctrl-] failed under extended keyboard encoding until it was patched. You use Ghostty here, and tmux is not installed.\n\nOptions: (A) Ghostty on each certified platform, both locally and over SSH to a remote host. Other terminals and multiplexers are best effort, and `asmai doctor` says so. (B) A wider list: Ghostty, each platform's default terminal (GNOME Terminal, macOS Terminal), iTerm2 and tmux. (C) No list: any terminal that reports xterm-256color.",
+  "rec": "A. It covers the terminal you actually use, including over SSH, which is where keyboard encoding and terminal type most often differ. Every terminal added to the list multiplies the terminal cases rerun for each release. Another terminal joins the list once someone qualifies it.",
+  "options": [
+   "A: Ghostty, locally and over SSH; others best effort",
+   "B: a wider list including tmux and the platform defaults",
+   "C: no list"
+  ]
+ }
+]

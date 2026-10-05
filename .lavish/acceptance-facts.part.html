@@ -1,0 +1,16 @@
+<section class="card bg-base-300 p-5 mb-6">
+<h2 class="text-xl font-bold mb-1">Facts for choosing a proving ground</h2>
+<p class="text-sm opacity-70 mb-3">Checked on 2026-10-05 on this host and on GitHub. These are observations, not qualification.</p>
+<div class="overflow-x-auto"><table class="table table-sm"><thead><tr><th>Repository</th><th>What it is</th><th>Tests and CI</th><th>Tracker</th></tr></thead><tbody>
+<tr><td class="align-top"><b>AssemblyAI</b></td><td class="align-top">This map and AsmAI's specification today; AsmAI's own Go code once implementation starts.</td><td class="align-top">None yet. A Go executable will have Go tests, and CI can be added with it.</td><td class="align-top">GitHub issues</td></tr>
+<tr><td class="align-top"><b>otman</b></td><td class="align-top">Your Go CLI that runs an Obsidian vault as an issue tracker. Active: last push 2026-10-05, 52 PRs, 125 commits.</td><td class="align-top"><code>go vet</code>, <code>go test</code> and a cross-platform build in GitHub Actions, green on 2026-10-05; a GoReleaser release workflow.</td><td class="align-top">otman itself, which writes to your Obsidian vault outside any workspace. Its OTM backlog holds only four test items.</td></tr>
+<tr><td class="align-top"><b>dev-setup</b></td><td class="align-top">Your Shell and Nix machine setup. Last push 2026-10-03, 64 commits.</td><td class="align-top">One test script (<code>tests/vault_test.sh</code>); no CI workflow.</td><td class="align-top">None configured</td></tr>
+<tr><td class="align-top"><b>card-vault</b></td><td class="align-top">A private fork: Next.js, TypeScript and Supabase.</td><td class="align-top">A CI workflow.</td><td class="align-top">Issues disabled</td></tr>
+</tbody></table></div>
+<ul class="list-disc ml-6 mt-4 space-y-2 opacity-90">
+<li><b>This host:</b> Linux x86_64 (Pop!_OS), Ghostty terminal, no tmux installed. Installed provider CLIs are Claude Code 2.1.283 and Codex 0.157.0, the candidate baselines; Lavish is 0.1.79.</li>
+<li><b>Things that cannot be produced on demand:</b> a provider's allowance running out (it would spend your own usage for hours or days), and a native modal the provider chooses to show, such as the Codex rate-limit model-switch prompt the feasibility probe met. A modal can be opened on purpose, and sign-out, crashes, reboots, lost hooks and network loss can all be caused deliberately.</li>
+<li><b>Provider sign-in cannot go into hosted CI:</b> AsmAI never collects or transfers provider tokens (Choose runtime adapters and authentication), so anything needing a real signed-in provider runs on a real host.</li>
+<li><b>Draft PRs:</b> the "[not ready]" fallback needs GitHub to refuse a draft, which depends on the account's plan and the repository's visibility. If no repository available to the harness refuses drafts, the refusal has to be simulated at the <code>gh</code> boundary.</li>
+</ul>
+</section>

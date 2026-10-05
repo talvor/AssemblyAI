@@ -1,0 +1,95 @@
+[
+ {
+  "id": "R2-Q1",
+  "title": "There is no remote Linux machine yet. What does S9 run on?",
+  "body": "In Q10 you chose one of your own Linux machines and noted: \"I do not have that setup yet.\" Remote hosts are in v1 scope, and S9 and case C47 need one. Facts: this host has QEMU with KVM, so it can run a Linux virtual machine at no cost. Such a machine has its own OS and network, can lose its network or reboot on its own, and is reached over SSH like any remote host. It is still Linux x86_64, the same platform as this host.\n\nOptions: (A) A Linux virtual machine on this host, reached over SSH, is your own Linux machine for S9. Setting it up is a step of acceptance, and a separate physical machine can replace it later. (B) S9 and C47 wait until you set up a separate physical Linux machine, and v1 launch waits with them. (C) v1 launches without S9: remote use stays uncertified, and `asmai doctor` says so, until your machine exists and S9 passes.",
+  "rec": "A. What S9 has to prove is a separate host whose connection drops and which reboots independently of your terminal, and a virtual machine does both today at no cost. It also leaves this host's reboot to S8. C would launch v1 without one of its scope promises, and B ties the launch date to buying or repurposing hardware.",
+  "options": [
+   "A: a Linux virtual machine on this host counts as my own Linux machine for S9",
+   "B: S9 waits for a separate physical machine; launch waits too",
+   "C: launch without S9; remote use stays uncertified until it passes"
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "Are these the evidence checklists for S1 to S9?",
+  "body": "Q5 settled that each scenario has a checklist of observable evidence, checked from the job's journal export, the PR and its CI, and the terminal recordings, plus your verdict. These are the proposed checklists. Every scenario also runs on a certified platform with a qualified combination, and its journal export and recordings are kept with the acceptance record.",
+  "points": [
+   "S1 Feature to tested PR: the job opened from your witnessed message, with its mandate and acceptance criteria. Planning's questions reached you in Lavish, and your answers are recorded word for word. The spec and tickets are in the tracker. At least two writing assignments were accepted, each result naming its tests and checks, and at least one role ran on each provider. Quality's report names the exact head commit, with no blocking finding left. The push, the draft PR, green CI on that head and the ready mark are each in the journal. The PR body carries the AsmAI section. Coordination reported the link, and the job ended.",
+   "S2 Research: the notes are delivered (as a PR, or in the scratch workspace for a job without a repository), with every claim tied to a cited source. The Research leader accepted them against the mandate.",
+   "S3 Planning: every question reached you as a Lavish decision request, and each recorded answer cites your own Lavish answer or witnessed message. No agent supplied an answer. The resolution is recorded in the tracker.",
+   "S4 Diagnosis: a reproduction is recorded before the fix, and the fix meets S1's tested-PR evidence.",
+   "S5 Concurrent repositories: the journal shows dispatches overlapping in three repositories. A worker resolved the conflict inside an assignment. Queued assignments were shown as queued, started first come first served, and never overflowed to the other provider.",
+   "S6 No CI: the repository's no-CI declaration is recorded, the PR body says that Quality's checks stand in, and there was no 15-minute wait and no hold.",
+   "S7 Human decisions: each decision version had one answer surface. Each record attributed to you cites a witnessed message or Lavish answer given after that version was shown. The journal shows independent work continuing while a decision was pending. The intervention record reached the owning leader, followed by a new dispatch. Pause, resume and cancel each left their reported state.",
+   "S8 Local continuity: the catch-up was shown on your return. After the daemon was killed and the host rebooted, each affected assignment either continued or has a recorded reconciliation. No effect appears twice in the journal or on GitHub, and the job still ended as a tested PR.",
+   "S9 Remote continuity: S8's evidence for the remote host, plus a Lavish answer given through the forwarded port and recorded, and the SSH drop leaving delivery running."
+  ],
+  "rec": "B. The checklists are what Q5 asked for. Elapsed time, the time you spent answering and the allowance used are already in the journal, so recording them costs nothing. They do not decide a pass, but they tell you whether the factory saved you work, which your verdict is about.",
+  "options": [
+   "A: the checklists as drafted",
+   "B: as drafted, plus each record states elapsed time, my time answering, and allowance used (recorded, not a pass condition)",
+   "C: change them (see my notes)"
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "Do later releases rerun the scenarios?",
+  "body": "Q9 settled that qualification runs before every release and whenever a pinned version changes. The scenarios are long real jobs; S1 alone is a whole feature with planning.\n\nOptions: (A) The scenarios gate v1. A later release reruns a scenario only when it changes what that scenario proves, for example a delivery change reruns S1; qualification covers everything else. (B) Every release reruns all nine. (C) Every release reruns S1 as a smoke run, plus any scenario whose behaviour changed.",
+  "rec": "A. Qualification already guards each release against regressions in the mechanics. Rerunning real jobs costs days and your attention, and is worth it only where a release changes what a scenario proves.",
+  "options": [
+   "A: scenarios gate v1; later releases rerun only the scenarios they change",
+   "B: every release reruns all nine",
+   "C: every release reruns S1, plus any changed scenario"
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "What are the scenarios called?",
+  "body": "The ticket says 'acceptance scenarios', but the glossary and every earlier decision already use acceptance for a leader's verdict on a result (`asmai accept`) and for a job's or assignment's acceptance criteria. 'S1 passed acceptance' and 'the leader's acceptance' would then mean different things in one specification. The ticket also asks for a 'proving-ground task'.\n\nOptions: (A) Proving scenario, with proving ground for the real repositories and tasks they run on: 'A real job run end to end on the proving ground whose evidence and the user's verdict show the factory is useful.' Avoid: acceptance scenario, acceptance test. (B) Acceptance scenario, defined so that acceptance alone still means a leader's verdict. (C) Launch scenario.",
+  "rec": "A. It removes the clash with acceptance and pairs with the ticket's own proving ground. C reads wrongly when a later release reruns one (R2-Q3).",
+  "options": [
+   "A: proving scenario and proving ground",
+   "B: acceptance scenario",
+   "C: launch scenario"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "Add these qualification terms to the glossary?",
+  "body": "Earlier tickets use qualified, certified and qualification without defining them, and this ticket settles what they mean. These are the proposed entries.",
+  "points": [
+   "Qualification: the recorded proof, by running the qualification cases with real provider CLIs, that one combination of pinned provider versions behaves as the factory relies on, on one platform. Avoid: certification (for a combination), testing.",
+   "Certified platform: an operating system and CPU architecture on which a release's qualification has passed. Agents start only on certified platforms.",
+   "Qualification record: the list a release carries of its qualified combinations, certified platforms and known limitations.",
+   "Known limitation: a provider signal missing from a qualified combination, for which the factory's safe default stands in."
+  ],
+  "rec": "A. These four are used across the specification. Defining them once stops 'qualified' from drifting toward 'it worked once'.",
+  "options": [
+   "A: add all four as written",
+   "B: add them with changes (see my notes)",
+   "C: none"
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "Record ADR 0008: qualification runs real provider CLIs on real hosts?",
+  "body": "Proposed text: 'AsmAI certifies only combinations it has actually tested, so qualification runs the release's pinned provider CLIs on a real host of each platform, under a separate OS user with its own sign-in, with faults injected deliberately. Recorded provider payloads are replayed only for events that cannot be caused safely, and those cases say so. Simulated providers never qualify a combination, and qualification never runs in hosted CI, because provider sign-in never leaves the user's host. A missing provider signal passes when AsmAI's safe default holds and is listed as a known limitation; any unsafe behaviour leaves the combination unqualified.'\n\nAn ADR is offered only when a decision is hard to reverse, surprising without context and the result of a real trade-off. A future reader will expect release checks to run in CI, and the harness built around real CLIs would take real work to replace.",
+  "rec": "A. All three conditions hold. Without the ADR, the first contributor to see qualification outside CI would try to move it into CI with mocked providers.",
+  "options": [
+   "A: record ADR 0008 as drafted",
+   "B: no ADR"
+  ]
+ },
+ {
+  "id": "R2-Q7",
+  "title": "How does the map change after this ticket?",
+  "body": "After this ticket, only Choose license, release packaging and upgrade migration is left on the frontier. Two items remain in Not yet specified besides the configuration fields and prompts: 'The final specification's structure and implementation sequencing once the foundational route is clear', and 'How much workflow variation is needed for different engineering tasks and skill combinations'. The second has been narrowed three times (repository instructions, skill lists, validation per kind of job), and the proving scenarios now name the kinds of job v1 must handle.\n\nOptions: (A) Graduate the first into a new grilling ticket, 'Choose the specification's structure and implementation sequence', blocked by Choose license, release packaging and upgrade migration, so it is the last ticket on the map. It can use the proving scenarios to order the implementation, for example a walking skeleton that reaches S1 first. Remove the workflow-variation item as settled. (B) Graduate the first ticket as in A, but leave the workflow-variation item as fog. (C) No new ticket: keep both as fog.",
+  "rec": "A. With this ticket resolved, the question about the specification's structure can be stated sharply, which is the test for graduating fog into a ticket. The workflow-variation question has no part left that the proving scenarios do not answer.",
+  "options": [
+   "A: new ticket for the specification's structure and sequence, last on the map; workflow-variation fog removed",
+   "B: the new ticket, but the workflow-variation fog stays",
+   "C: no new ticket; both stay as fog"
+  ]
+ }
+]

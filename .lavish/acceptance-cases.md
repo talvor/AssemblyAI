@@ -1,0 +1,56 @@
+- **Platform and installation**, deferred by [Choose factory hosting and lifecycle](https://github.com/talvor/AssemblyAI/issues/7); [Define CLI setup and management experience](https://github.com/talvor/AssemblyAI/issues/9):
+  - C1: Platform certification on Linux and on macOS; an uncertified platform refuses to start agents and says what to do.
+  - C2: An unqualified provider version is refused before any dispatch; a provider CLI that upgraded itself holds its agent at the next restart.
+  - C3: The pinned provider copies reuse your existing sign-in without a new login.
+  - C4: Every agent session starts without provider API-key variables.
+  - C5: Codex hook trust survives an AsmAI upgrade.
+- **Terminals, input and intervention**, deferred by [Validate interactive CLI coordination and intervention](https://github.com/talvor/AssemblyAI/issues/19); [Choose factory hosting and lifecycle](https://github.com/talvor/AssemblyAI/issues/7); [Explore terminal conversation and Lavish decision flow](https://github.com/talvor/AssemblyAI/issues/10); [Define operating limits and visibility](https://github.com/talvor/AssemblyAI/issues/14):
+  - C6: Native modals: any input state not on the allow-list (which starts empty) holds the agent instead of being typed over.
+  - C7: Positive acknowledgment of each automated submission, never inferred from a successful PTY write.
+  - C8: Taking an agent mid-turn and with an unsent automated draft: wait for the boundary or interrupt; the draft is recorded and cleared.
+  - C9: The attach client's rendering of each provider's screen under the status line, at reduced height.
+  - C10: Detecting your unsent text in the conversation and clearing the input box.
+  - C11: Capturing witnessed messages and telling them apart from the daemon's nudges.
+  - C12: Recognising an interrupted Claude turn (the probe saw no Interrupt hook from Claude).
+  - C13: A second attach takes over; the older terminal only observes and its unsent text is saved.
+  - C14: Terminal recording per dispatch, and replay.
+- **Signals and work state**, deferred by [Define work state and coordination contracts](https://github.com/talvor/AssemblyAI/issues/8); [Validate interactive CLI coordination and intervention](https://github.com/talvor/AssemblyAI/issues/19); [Choose factory hosting and lifecycle](https://github.com/talvor/AssemblyAI/issues/7); [Define operating limits and visibility](https://github.com/talvor/AssemblyAI/issues/14):
+  - C15: Lost, duplicate, reordered and late hooks and observations.
+  - C16: A superseded leader or worker generation is rejected.
+  - C17: Agent processes left by a previous daemon are terminated at start.
+  - C18: A crash during an effect is recovered through reconciliation.
+  - C19: Dispatches and results stay correlated and reconcilable across restarts.
+  - C20: A working dispatch with no observation for 30 minutes becomes unknown.
+- **Recovery and stopping**, deferred by [Choose factory hosting and lifecycle](https://github.com/talvor/AssemblyAI/issues/7):
+  - C21: Agent crash: a leader restarts within its bound; a worker's assignment needs reconciliation.
+  - C22: Daemon crash.
+  - C23: Host reboot with the service installed.
+  - C24: Terminal and SSH disconnect.
+  - C25: `asmai stop` drains; `asmai stop --now` interrupts.
+- **Providers, access and allowance**, deferred by [Validate interactive CLI coordination and intervention](https://github.com/talvor/AssemblyAI/issues/19); [Define operating limits and visibility](https://github.com/talvor/AssemblyAI/issues/14); [Choose runtime adapters and authentication](https://github.com/talvor/AssemblyAI/issues/15):
+  - C26: Expired or revoked sign-in holds work, shows the native sign-in command, and resumes when sign-in is back.
+  - C27: Allowance used and reset times, for each provider.
+  - C28: Allowance used up: agents hold, then resume at the reset.
+  - C29: A reported provider error resumes with backoff (Claude's StopFailure; Codex's equivalent is unknown); past the bound the provider is unavailable.
+  - C30: Fallback to the other provider only before first dispatch, including a leader's on-demand start; afterwards you are asked.
+  - C31: Leaders start when a message for their role arrives and stop after the idle grace.
+  - C32: Below the free-space floor no new workspace is created.
+- **Skills**, deferred by [Choose skill bundles and update policy](https://github.com/talvor/AssemblyAI/issues/17):
+  - C33: Personal, provider built-in and repository skills are hidden, including Claude's built-in code-review next to the shipped one.
+  - C34: Per-session skill delivery works although Claude namespaces plugin skills and upstream skills call each other by bare name.
+  - C35: Codex finds the skills written into its workspace.
+- **Repository work**, deferred by [Define concurrent repository work and integration](https://github.com/talvor/AssemblyAI/issues/11):
+  - C36: Instruction files load without the repository's provider configuration.
+  - C37: Provider write guards are switched on.
+  - C38: Concurrent jobs in one repository.
+  - C39: Outside commits are merged in and never force-pushed over.
+  - C40: A crash during a push.
+- **Delivery**, deferred by [Choose validation and delivery ownership](https://github.com/talvor/AssemblyAI/issues/18):
+  - C41: The daemon's push, and its refusal when origin holds commits AsmAI did not make.
+  - C42: A draft PR, and the "[not ready]" fallback when GitHub refuses a draft.
+  - C43: CI watched through gh: green; red with one judged re-run; a newer push replacing the wait.
+  - C44: The 15-minute wait for a first check, and the hold for a repository with no declared CI.
+  - C45: Marking the PR ready when CI is green.
+  - C46: A leader-opened PR reconciled as an effect, including a crash between the push and the PR.
+- **Remote hosts**, deferred by [Define CLI setup and management experience](https://github.com/talvor/AssemblyAI/issues/9); [Choose factory hosting and lifecycle](https://github.com/talvor/AssemblyAI/issues/7):
+  - C47: Remote use over SSH: `--host`, Lavish through port forwarding, and plain `ssh -t host asmai`.
