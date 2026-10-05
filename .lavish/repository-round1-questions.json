@@ -1,0 +1,123 @@
+[
+ {
+  "id": "Q1",
+  "title": "Where does this ticket stop and Choose validation and delivery ownership begin?",
+  "body": "Both tickets mention integration. Choose validation and delivery ownership asks which role owns integration, review, tests and PR readiness, and whether no-mistakes runs the delivery pipeline. It is blocked on this ticket. Options: (A) This ticket decides workspaces, branches, how work comes together on a job's branch, keeping that branch current, and conflicts between jobs. Choose validation and delivery ownership keeps who validates, reviews and tests, PR readiness and completion evidence, no-mistakes custody, and the line between a tested PR and a merge. Its question is narrowed to say so. (B) This ticket decides only workspaces and branch isolation. Combining work, updating branches and conflicts all move to Choose validation and delivery ownership.",
+  "rec": "A. Who may write a branch at any moment is a custody rule, and it cannot be separated from how branches are laid out. Validation ownership stays with the other ticket, and its no-mistakes custody question then builds on the branch rules decided here.",
+  "options": [
+   "A: branches, combining work, keeping current and conflicts are decided here; validation and PR readiness stay there",
+   "B: only workspaces and branch isolation here; all integration moves there"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Where do jobs get their copy of a repository?",
+  "body": "A registered repository records its location on the host, its origin remote and its default branch. Jobs need working copies of their own. Options: (A) AsmAI keeps its own clone of each registered repository in its state directory, fetched from origin. Every job and assignment workspace is a git worktree of that clone. Your own checkout is never touched: your branches, stashes and uncommitted work never enter a job, and factory branches never appear in it. (B) Worktrees of your own registered checkout, as Firstmate does with its worktree pool. They share refs and objects with your checkout, so factory branches show up in your git branch and your unpushed local commits are reachable. (C) A separate full clone for every job.",
+  "rec": "A. Jobs start from what is on origin, which is also what a reviewer sees. Your checkout stays yours, just as AsmAI never writes your personal provider configuration. It works the same whether you registered a path or a URL. It costs one extra clone per repository; C costs one per job.",
+  "options": [
+   "A: an AsmAI-owned clone per repository; workspaces are its worktrees",
+   "B: worktrees of my own checkout",
+   "C: a full clone per job"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How are branches and workspaces laid out inside one job?",
+  "body": "A repository job ends in one pull request, and Engineering may want several workers on it at once. The implement-spec skill, for example, runs parallel implementers in separate worktrees and merges each into one integration branch. Research and review workers also need to read the code. Options: (A) Each repository job has one job branch, which becomes its PR. Every writing assignment gets its own workspace on its own branch, made from the job branch's tip. Read-only assignments (research, review, diagnosis) get a workspace detached at the exact commit they examine, so their evidence names that commit. Only one party writes a given branch at any time. (B) One workspace and one job branch per job. Writing assignments in a job take turns in it, one at a time. Read-only assignments get detached workspaces as in A. (C) No job branch. Each assignment's branch stands alone, and the last one becomes the PR.",
+  "rec": "A. Parallel workers in one job cannot step on each other, the job branch only ever receives accepted work, and review evidence is tied to a commit. B is simpler but limits Engineering to one worker at a time per job. How accepted work reaches the job branch is a next-round question.",
+  "options": [
+   "A: one job branch; a branch and workspace per writing assignment; read-only work pinned to a commit",
+   "B: one workspace per job; writers take turns",
+   "C: no job branch; the last assignment branch becomes the PR"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "What does a job start from?",
+  "body": "Options: (A) The registered default branch as just fetched from origin, unless you name another branch on origin when you ask for the job, such as a release branch. The job records the commit it started from. (B) Always the default branch. (C) As A, or another open job's unmerged branch, so jobs can stack. The later job is linked to the earlier one and has to be brought up to date if that PR changes or is squash-merged.",
+  "rec": "A. Naming a branch covers release and maintenance work. Stacking (C) creates dependencies between jobs, and the v1 scope you chose is concurrent independent jobs.",
+  "options": [
+   "A: the default branch from origin, or another origin branch I name",
+   "B: always the default branch",
+   "C: A, or stacked on another open job's branch"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "What happens when two jobs change the same repository at once?",
+  "body": "Example: job 12 adds a configuration option and job 14 renames the configuration loader, in the same repository. Each works on its own branch, so neither can damage the other's work, but whichever PR merges second may conflict. Options: (A) Run both with no locks. When two open jobs in one repository have changed the same files, Coordination reports the overlap once, as a one-line update naming both jobs. The conflict is resolved in whichever job meets it when its branch is brought up to date. (B) As A, without the overlap report. (C) One writing job per repository at a time; the others wait in a queue. (D) Planning declares the areas each job will change, and jobs whose areas overlap wait.",
+  "rec": "A. Concurrent independent jobs is the scope you chose. Most overlaps never become real conflicts, and the report lets you pick the merge order or pause one job. C and D give up concurrency, and D relies on guesses made before anyone has read the code. How many jobs may run at once is a limit for Define operating limits and visibility.",
+  "options": [
+   "A: no locks; report an overlap once",
+   "B: no locks and no report",
+   "C: one writing job per repository at a time",
+   "D: declared areas; overlapping jobs wait"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "How does a job's branch keep up with its base?",
+  "body": "The base branch moves while a job runs, and a PR has to apply cleanly to the current base and pass its checks there. Options: (A) The job's branch takes in the latest base before it is offered as ready for review, and again before each later push. It merges the base in, unless the repository's instructions ask for a rebase. History that is already pushed is rewritten only when the repository's instructions require it, and then with force-with-lease. Resolving a conflict is a writing assignment like any other, and a conflict whose resolution means choosing between distinct viable approaches comes to you. (B) Always rebase onto the base and force-push with lease. (C) Never update automatically: report the conflict and wait for you.",
+  "rec": "A. Merging never rewrites history that you or a reviewer may already have fetched, and the repository's conventions still win. It follows your rule on distinct approaches: routine conflicts are resolved, and real design choices come to you.",
+  "options": [
+   "A: merge the base in before offering and before each push; follow the repository's convention; escalate design choices",
+   "B: always rebase and force-push with lease",
+   "C: never update automatically; ask me"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "What if someone else pushes to a job's branch?",
+  "body": "You might push a fixup to the PR branch yourself, or apply a suggestion in GitHub's review page. The factory's copy of the branch then lacks commits that are on origin. Options: (A) The job fetches its branch from origin before every push. Commits it did not make are kept and merged in, never overwritten. They are recorded as an outside change and reported in one line. Force-pushing over them is never allowed. (B) The job branch belongs to the factory alone. Outside commits pause the job for reconciliation, and you are asked what to do.",
+  "rec": "A. Your own fixups are the usual cause, and they should simply be kept. Effects and reconciliation already treat the real GitHub state, not the factory's records, as the truth.",
+  "options": [
+   "A: keep and merge outside commits; never force-push over them; report in one line",
+   "B: outside commits pause the job and ask me"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "Which repository instructions do agents follow?",
+  "body": "Repositories carry their own instructions (AGENTS.md, CLAUDE.md, CONTRIBUTING.md and the documents they point to). Some also carry provider configuration: .claude/settings.json with hooks and permission rules, MCP servers, or .codex/ configuration. AsmAI already passes hooks, the asmai allow-list, role instructions and skills per session. Options: (A) Agents follow the repository's instruction files, and both providers see the same ones: AGENTS.md and CLAUDE.md, whichever exist. The repository's provider configuration is not loaded. Repository instructions decide how work is done in that repository (commands, conventions, branch and commit style). They cannot widen a job's mandate, and when one conflicts with it, such as 'push straight to main', the leader escalates. You can also keep per-repository notes in AsmAI's configuration for instructions that are not committed to the repository. (B) As A, but the repository's provider configuration loads once you approve it for that repository, as a repository-wide grant; any change to it needs approval again. (C) Load everything the repository provides, the way each provider does natively. (D) Ignore the repository's files; only per-repository notes in AsmAI's configuration count.",
+  "rec": "A. Instruction files are written for agents and are the repository's conventions. Repository hooks and permission rules would run commands and change permissions outside AsmAI's qualified provider setup, and could clash with the passive-hook contract. B can be added later if a repository needs it. Whether a provider can load instruction files without project configuration is qualified per provider; AsmAI can always pass the files' content itself. Skills a repository provides belong to Choose skill bundles and update policy.",
+  "options": [
+   "A: instruction files yes, provider configuration no; instructions cannot widen the mandate; optional per-repository notes",
+   "B: A, plus provider configuration after I approve it per repository",
+   "C: load everything natively",
+   "D: only per-repository notes in AsmAI's configuration"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "Whose name is on the commits, and how are they traced?",
+  "body": "Agents commit, push and open PRs. Options: (A) Agents use your git identity and your existing git and gh credentials, exactly as on your machine; AsmAI handles no tokens. Every commit carries trailers naming the job, the agent and the dispatch, for example 'AsmAI-Job: 12', 'AsmAI-Agent: worker1@engineering', 'AsmAI-Dispatch: d-481', so reconciliation can match commits to dispatches. (B) Your identity and credentials, with no trailers: the effect ledger alone links commits to dispatches. (C) A separate bot identity as committer, with you as author, configured per factory.",
+  "rec": "A. Reconciliation already checks the effect ledger against the real repository, and trailers let it find a dispatch's commits even when the recorded effect was lost in a crash. Using your identity and credentials matches the decision that AsmAI never handles tokens. A repository whose conventions forbid trailers can switch them off.",
+  "options": [
+   "A: my identity and credentials; trailers naming job, agent and dispatch",
+   "B: my identity and credentials; no trailers",
+   "C: a bot identity as committer"
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "Who makes workspaces, and how firmly are agents kept inside them?",
+  "body": "Options: (A) The daemon creates each workspace when it dispatches the assignment, starts the worker inside it, and is the only one that creates or removes worktrees. Staying inside the workspace is part of every worker's instructions, and any write outside it is an effect to record. Where a provider's own write restrictions are qualified, they are switched on as a guard against mistakes, as the agent command restriction already is. They are not a security boundary. (B) As A, with instructions only and no provider restrictions. (C) An OS sandbox per worker, such as containers, bubblewrap or macOS sandbox-exec.",
+  "rec": "A. The daemon already knows which dispatch owns which workspace, so it can keep each branch to one writer and clean up afterwards. Provider restrictions catch mistakes cheaply. C is a project of its own and would need qualifying on both platforms.",
+  "options": [
+   "A: the daemon makes workspaces; instructions plus qualified provider write guards",
+   "B: the daemon makes workspaces; instructions only",
+   "C: an OS sandbox per worker"
+  ]
+ },
+ {
+  "id": "Q11",
+  "title": "What about things outside git that concurrent workspaces share?",
+  "body": "Two workspaces of one repository running checks at the same time can collide: the same dev-server port, the same local test database, a shared build cache or lock file. Options: (A) Every workspace gets a slot number and its own temporary directory in its environment (ASMAI_SLOT and TMPDIR), which repository instructions can use to choose ports or database names. A repository whose checks cannot run side by side says so, and agents run those checks through an asmai command that waits its turn, one workspace at a time for that repository. (B) Nothing special. A collision shows up as a failing check and is diagnosed like any other failure. (C) One writing job per repository at a time, as in option C of Q5.",
+  "rec": "A. A flaky failure caused by a collision costs far more to diagnose than a slot number costs to provide. Most repositories need nothing extra.",
+  "options": [
+   "A: a slot number and temp directory per workspace; declared checks take turns",
+   "B: nothing special",
+   "C: one writing job per repository at a time"
+  ]
+ }
+]

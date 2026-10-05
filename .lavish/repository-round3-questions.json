@@ -1,0 +1,53 @@
+[
+ {
+  "id": "R3-Q1",
+  "title": "One notes branch per job, or one side branch per assignment?",
+  "body": "You chose to commit results that are not code (research notes, diagnosis logs, review reports, prototypes) to the repository on a side branch. Read-only workspaces are fixed at the commit they examine, and a side branch never reaches the job branch. Options: (A) One notes branch per repository job, such as asmai/12-notes, holding only that job's results that are not code, in a folder per assignment. Workers write them into a results folder in their workspace. When the owning leader accepts the result, the daemon commits them onto the notes branch, the same way it moves the job branch forward. Each commit names the code commit it describes. (B) One side branch per assignment, made from the commit it examined, with the deliverable committed on top, as the research skill does; for example asmai/12/a33-notes.",
+  "rec": "A. One branch per job keeps origin tidy, and it holds what is worth keeping: the job's evidence, not another copy of the code. B makes a branch for every research or review assignment, which soon means several per job once reviews repeat.",
+  "options": [
+   "A: one notes branch per job; the daemon commits accepted results onto it",
+   "B: one side branch per assignment, made from the examined commit"
+  ]
+ },
+ {
+  "id": "R3-Q2",
+  "title": "Are side branches pushed to origin?",
+  "body": "Under your answer to R2-Q3, local branches in AsmAI's clone are removed when the job ends. Options: (A) Pushed to origin as soon as each result is accepted, and recorded as an effect, so results can link to them on GitHub and they outlive the job. They are never merged and never opened as PRs, and deleting them is up to you. This becomes part of every repository job's mandate, including research-only and planning-only jobs. A repository whose instructions forbid extra branches keeps them local instead, as in B. (B) Kept only in AsmAI's clone and exempt from job-end cleanup, until you delete them or remove the repository. (C) Kept locally while the job runs, and pushed only when you ask.",
+  "rec": "A. You chose the repository as the home for this evidence. On origin it is backed up, reviewable, and linkable from the PR. B leaves it on one host, inside AsmAI's own clone.",
+  "options": [
+   "A: pushed when accepted; never merged; deleting them is mine",
+   "B: kept only in AsmAI's clone until I delete them",
+   "C: local while the job runs; pushed only when I ask"
+  ]
+ },
+ {
+  "id": "R3-Q3",
+  "title": "Do the scratch workspaces of a job without a repository outlive the job?",
+  "body": "You chose to keep the results of a job without a repository in its scratch workspaces, and also that everything local to a job is removed when it ends. Those two answers meet here. Options: (A) The scratch workspaces of a job without a repository are kept after it ends, as its results, until you remove them. Disk limits belong to Define operating limits and visibility. (B) They are removed when the job ends like any other workspace, so anything worth keeping has to be in the result text.",
+  "rec": "A. Keeping the results there only works if they survive the job.",
+  "options": [
+   "A: kept after the job ends until I remove them",
+   "B: removed when the job ends"
+  ]
+ },
+ {
+  "id": "R3-Q4",
+  "title": "Do these glossary terms say what you mean?",
+  "body": "These are now in GLOSSARY.md. Job branch: 'The one branch that carries a repository job's accepted work and becomes its pull request.' Avoid: integration branch, feature branch. Workspace: 'The directory set aside for one assignment, where its worker works: the factory's own checkout of the job's repository, or an empty scratch directory for a job without one. A writing assignment's workspace has its own branch; a read-only one is fixed at the commit it examines. Writes outside it are effects.' Avoid: worktree, sandbox, checkout (when meaning an assignment's working copy). Repository instructions: 'The instructions a registered repository gives agents, plus the user's own notes for it in the factory's configuration. They govern how work is done in that repository but never widen a mandate.' Avoid: repository rules, project settings. The leaders' read-only view of a job is deliberately not called a workspace, because no worker works in it.",
+  "rec": "A. Later tickets will use each one: Choose validation and delivery ownership will talk about who holds the job branch, and Define operating limits and visibility about workspace disk use.",
+  "options": [
+   "A: keep the three terms as written",
+   "B: change them (say how in the notes)"
+  ]
+ },
+ {
+  "id": "R3-Q5",
+  "title": "Record ADR 0005 for the clone and the job branch?",
+  "body": "An ADR records a decision that is hard to reverse, surprising without context, and a real trade-off. Proposed text: 'Each registered repository has an AsmAI-owned clone in the state directory, and every assignment works in its own workspace made from it. The user's checkout is never used, even though the registry records its location. A repository job has one job branch, which moves only when the daemon fast-forwards it to a result the owning leader accepted. Workers take in its tip before submitting and resolve conflicts in their own workspace. Considered: worktrees of the user's checkout, as Firstmate's pool does; a full clone per job; a merge assignment after each acceptance; the leader merging itself.' Options: (A) Record ADR 0005 as proposed. (B) Do not record an ADR; the resolution comment is enough.",
+  "rec": "A. A reader who sees the registry's recorded location will expect worktrees of your checkout, and a reader who knows implement-spec will expect a merger. The ADR says why neither is used.",
+  "options": [
+   "A: record ADR 0005 as proposed",
+   "B: no ADR"
+  ]
+ }
+]

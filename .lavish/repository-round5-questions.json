@@ -1,0 +1,44 @@
+[
+ {
+  "id": "R5-Q1",
+  "title": "When is a worker's branch pushed to origin?",
+  "body": "You now want every worker branch committed and pushed to origin, always, so prototypes and other work are kept. This replaces your round-3 note that worker branches stay local. Pushing becomes part of every repository job's mandate, research-only and planning-only jobs included, and each push is recorded as an effect. Options: (A) The worker commits and pushes its branch whenever it submits a result, reports that it is blocked, or is cancelled; uncommitted changes are committed first. (B) After every commit. (C) Only when it submits a result.",
+  "rec": "A. Every point where a worker stops is covered, so work is on origin before anyone looks at it or it is abandoned. B pushes far more often for little gain, because the workspace of a crashed worker is kept for reconciliation anyway. C would lose cancelled work.",
+  "options": [
+   "A: on result, blocked report or cancellation, committing first",
+   "B: after every commit",
+   "C: only when a result is submitted"
+  ]
+ },
+ {
+  "id": "R5-Q2",
+  "title": "Are worker branches ever deleted from origin?",
+  "body": "A job with a few workers, reviews and corrections pushes several branches, such as asmai/12/a31, asmai/12/a32 and asmai/12/a33. Once the job's PR is merged, the commits of most of them are already on the default branch. Options: (A) Every worker branch stays on origin until you delete it. (B) Once the job's PR is merged, worker branches whose commits are all on the default branch are deleted from origin. Prototypes, cancelled work and anything else not merged stay until you delete them.",
+  "rec": "B. Nothing is lost, because a deleted branch's commits are all on the default branch already. What stays on origin is exactly what you wanted kept: prototypes and work that never merged.",
+  "options": [
+   "A: keep every worker branch until I delete it",
+   "B: delete only fully merged worker branches after the PR merges; keep the rest"
+  ]
+ },
+ {
+  "id": "R5-Q3",
+  "title": "Where on the job branch do notes go?",
+  "body": "Asked last round but not answered. Your rule from round 3 still applies: a note that its workflow already records in the issue tracker, such as a resolution comment or a PR review, is not copied anywhere, and any other note, such as research findings or a diagnosis log, is committed to the job branch. A prototype stays on its own worker branch on origin, and the verdict with a pointer to that branch is a note. Options: (A) Where the repository already keeps such notes, according to its repository instructions or existing folders, as the research skill does. If there is no convention, under docs/ by kind (docs/research/, docs/diagnosis/), and the result says where. (B) Always one fixed folder in every repository, such as .asmai/notes/<job>/.",
+  "rec": "A. Notes merged into the repository should look like the repository's own. This repository already keeps research under docs/research/.",
+  "options": [
+   "A: the repository's convention; otherwise docs/<kind>/",
+   "B: one fixed folder such as .asmai/notes/<job>/"
+  ]
+ },
+ {
+  "id": "R5-Q4",
+  "title": "What does a repository job that changes no code deliver?",
+  "body": "Asked last round but not answered. Example: 'Research how our retry logic behaves under load' in a repository. Its findings are a note, so under your rule they go on the job branch, and its worker branches are on origin now too. The authority decision says research-only and planning-only jobs authorize only those outcomes. Options: (A) It delivers like any other repository job: its job branch is pushed and opened as a PR holding only its notes, for you to review and merge. (B) Its job branch is pushed, but no PR is opened; the result links to the branch. (C) No job branch: the findings stay on the worker branches on origin, and the result links to them.",
+  "rec": "A. A PR is how notes reach the default branch under review, and every repository job keeps one delivery path. C would leave notes off the job branch, against your round-3 rule. When and by whom the PR is opened stays with Choose validation and delivery ownership.",
+  "options": [
+   "A: push the job branch and open a PR with the notes",
+   "B: push the job branch; no PR",
+   "C: no job branch; link the worker branches"
+  ]
+ }
+]

@@ -1,0 +1,46 @@
+{
+ "round1": {
+  "Q1": "A: branches, combining work, keeping current and conflicts are decided here; validation and PR readiness stay there",
+  "Q2": "A: an AsmAI-owned clone per repository; workspaces are its worktrees",
+  "Q3": "A: one job branch; a branch and workspace per writing assignment; read-only work pinned to a commit",
+  "Q4": "A: the default branch from origin, or another origin branch I name",
+  "Q5": "B: no locks and no report",
+  "Q6": "A: merge the base in before offering and before each push; follow the repository's convention; escalate design choices",
+  "Q7": "A: keep and merge outside commits; never force-push over them; report in one line",
+  "Q8": "A: instruction files yes, provider configuration no; instructions cannot widen the mandate; optional per-repository notes",
+  "Q9": "A: my identity and credentials; trailers naming job, agent and dispatch",
+  "Q10": "A: the daemon makes workspaces; instructions plus qualified provider write guards",
+  "Q11": "A: a slot number and temp directory per workspace; declared checks take turns"
+ },
+ "round2": {
+  "R2-Q1": "A: workers take in the tip first; the daemon fast-forwards the job branch on acceptance",
+  "R2-Q2": "A: one read-only view per job at the job branch tip, for leaders",
+  "R2-Q3": "A: remove when merged or ended; keep for reconciliation; cancelled work saved until the job ends",
+  "R2-Q4": "B: committed to the repository on a side branch",
+  "R2-Q5": "A: continue the open PR's branch; one open job per branch; fresh branch after merge or close"
+ },
+ "round3": {
+  "R3-Q1": "(no option) Notes: OK, so I think what I want is the following, if there are notes that are created that are not stored somewhere else by the issue tracker, then they should be included in the job branch",
+  "R3-Q2": "C: local while the job runs; pushed only when I ask | Notes: The branches the workers use, should be local only.  Only the job branch gets pushed to origin.",
+  "R3-Q3": "A: kept after the job ends until I remove them",
+  "R3-Q4": "A: keep the three terms as written",
+  "R3-Q5": "A: record ADR 0005 as proposed"
+ },
+ "round4": {
+  "R4-Q3": "(no option) Notes: I did not consider prototypes.  Its important that these are kept, so it actually makes more sense that workers branches are committed and pushed to origin.  This should always happen.",
+  "R4-Q1": "(not answered; asked again as R5-Q3)",
+  "R4-Q2": "(not answered; asked again as R5-Q4)"
+ },
+ "round5": {
+  "R5-Q1": "A: on result, blocked report or cancellation, committing first",
+  "R5-Q2": "A: keep every worker branch until I delete it",
+  "R5-Q3": "A: the repository's convention; otherwise docs/<kind>/",
+  "R5-Q4": "A: push the job branch and open a PR with the notes"
+ },
+ "round6": {
+  "R6-Q1": "A: Assignment branch; avoid 'worker branch'"
+ },
+ "round7": {
+  "CONFIRM": "Confirm and record"
+ }
+}
