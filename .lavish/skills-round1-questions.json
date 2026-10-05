@@ -1,0 +1,113 @@
+[
+ {
+  "id": "Q1",
+  "title": "Where do agents' skills come from, and how are they pinned and updated?",
+  "body": "Agents already run AsmAI's own pinned copies of Claude Code, Codex and Lavish, never your personal copies (Define CLI setup and management experience), and only tested combinations are supported (Choose runtime adapters and authentication). Upstream skills change behaviour between releases: v1.3.0 (4 October) renamed CONTEXT.md to GLOSSARY.md, graduated three skills and removed one. Upstream is MIT-licensed and tagged (now v1.3.1). Options: (A) Bundled: each AsmAI release embeds one upstream release of the skills (with its MIT notice) plus AsmAI's own adaptations, inside the executable. Agents use only that bundle. A newer upstream release reaches agents only through a newer AsmAI release, after it is qualified; asmai doctor says when upstream has a newer release. (B) Fetched: as A, but asmai init downloads the upstream release this AsmAI version pins, instead of carrying it in the executable. (C) Your pin: the configuration names an upstream release or commit that you can move yourself; AsmAI warns that the combination is unqualified. (D) Your personal copies under ~/.agents/skills.",
+  "rec": "A. The skill text, AsmAI's adaptations to it and the provider pins are qualified together, so they should move together. It works offline, adds no second download channel, and MIT allows bundling with the notice. C creates untested combinations; D lets your personal updates change the factory under running jobs, the same reason agents do not run your personal provider copies.",
+  "options": [
+   "A: bundled in each AsmAI release; updates arrive with AsmAI releases",
+   "B: downloaded at setup at the version AsmAI pins",
+   "C: a pin I can move myself, with a warning",
+   "D: my personal copies"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Which skills ship, and which are on each role's lists by default?",
+  "body": "Each role has a leader skill list and a worker skill list, and an assignment may narrow the worker list (Define CLI setup and management experience). The table above accounts for all 37 Matt Pocock skills and the three other integrations. Default means on a role's list unless you remove it in the configuration. Optional means shipped but on no list until you add it. Not shipped means AsmAI does not carry it; you could still add it as your own skill (Q5). The shipped set is exactly what upstream itself promotes (its engineering and productivity folders, 27 skills); upstream's misc and in-progress skills are not shipped, and an in-progress skill enters the bundle when upstream graduates it. A skill's description costs little until it is used, so the lists aim to stop unrelated workflows (course content, writing, JavaScript or TypeScript setup) from being picked for software work, not to save context. no-mistakes is placed by Choose validation and delivery ownership. Options: (A) As listed. (B) As listed, with the changes in my notes. (C) Ship every upstream skill, with misc and in-progress as optional. (D) Ship only what is on a default list; nothing optional.",
+  "rec": "A. It follows upstream's own promoted set, places each skill where the role contracts put that kind of work, and keeps course, writing and language-specific setup skills out unless you add them.",
+  "options": [
+   "A: as listed",
+   "B: as listed, with the changes in my notes",
+   "C: ship every upstream skill; misc and in-progress optional",
+   "D: ship only the default lists; nothing optional"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How does AsmAI fit upstream skills to the factory?",
+  "body": "Upstream skills assume one agent talking to one human. They say 'ask the user', 'wait for the user', 'tell the human to run /setup-matt-pocock-skills', 'run subagents in their own worktrees', 'land everything on one integration branch'. In AsmAI those mean a structured decision request the daemon renders (Explore terminal conversation and Lavish decision flow), a worker assignment, a workspace and assignment branch, and the job branch the daemon fast-forwards (Define concurrent repository work and integration). Options: (A) Ship upstream text unchanged, so each file can be checked against upstream. AsmAI's role instructions carry one operating guide that maps those phrases to AsmAI's mechanisms. A skill is patched only where the guide cannot work, and each patch is listed with its reason and checked again whenever the pinned release moves. (B) Ship maintained patched copies of every skill that needs a change. (C) Write AsmAI's own skills, using upstream as inspiration.",
+  "rec": "A. Unchanged text keeps upgrades cheap and provenance checkable; the mapping is small and stable, and it lives with the role instructions AsmAI already passes per session. Patches stay the visible exception.",
+  "options": [
+   "A: upstream text unchanged plus an AsmAI operating guide; listed patches only where needed",
+   "B: maintained patched copies",
+   "C: AsmAI's own rewritten skills"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "When may an agent start a skill its author marked user-invoked?",
+  "body": "22 of the 40 skills are marked user-invoked: the author intends a human to start them. They include wayfinder, grill-with-docs, to-spec, to-tickets, implement, implement-spec, triage and retro. In AsmAI nobody types /to-spec to the Planning leader, so the factory needs a rule. Choosing between workflows that lead to different results (for example wayfinder versus a single grilling session) is already a choice between distinct viable approaches, which is yours (Define delegated authority and human escalation). Options: (A) The job is the invocation: a leader may start a user-invoked skill, or name it in an assignment, when your request or the job's mandate calls for that kind of outcome (a tested PR covers to-spec, to-tickets, implement and code-review). Where it does not, Coordination proposes the skill to you as a decision. (B) Leaders start any skill on their list whenever they judge it fits. (C) Only when you name the skill yourself.",
+  "rec": "A. It keeps the author's intent that a human chooses to start these flows, without making you type skill names: your request and its mandate already say what you want, and anything beyond that comes back to you.",
+  "options": [
+   "A: the request or mandate invokes it; otherwise Coordination proposes it",
+   "B: leaders start any listed skill when they judge it fits",
+   "C: only when I name it"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "Can you add your own skills or replace a shipped one?",
+  "body": "'Local overrides' and 'additional integrations' in the ticket. Options: (A) The configuration can add skill directories of your own (your own skill, a third-party one, or an upstream misc or in-progress skill) to any role's leader or worker list. One with the same name as a shipped skill replaces it for that role. AsmAI copies them when an agent starts, so editing your files never changes an agent mid-session; config apply shows which agents pick them up. asmai doctor and asmai status mark every added or replaced skill as yours and unqualified. (B) As A, but additions only; shipped skills cannot be replaced. (C) No skills of your own in v1.",
+  "rec": "A. You keep full control of your own factory, and every change is visible and never silent. A change to a skill's text is then a configuration change, applied the same way as any other.",
+  "options": [
+   "A: add or replace per role; copied at agent start; marked as mine and unqualified",
+   "B: additions only",
+   "C: none in v1"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "Should agents see skills that are not on their list?",
+  "body": "Checked on this host today. Claude Code 2.1.283: leaving out the user setting source hides your personal skills, and a per-session plugin adds AsmAI's skills, named like asmai-planning:grilling; Claude's built-in skills stay visible, one of them also called code-review. Codex 0.157.0: your personal skills under ~/.agents/skills are visible to every session, but a per-session setting hid a named one by its path; Codex's own built-in skills (image generation, skill installer and others) are visible too. These were probes, not qualification. Options: (A) Agents see only their list. AsmAI hides your personal skills, and provider built-ins wherever the provider allows, every time it starts an agent. Whatever cannot be hidden for a pinned provider version is listed by asmai doctor, and the operating guide tells agents to use only their list. Qualification proves the hiding for each provider version. (B) Hide your personal skills only; leave provider built-ins. (C) Hide nothing; agents may use any skill they can see.",
+  "rec": "A. A role's list should mean what it says, and your personal skills include ones that conflict with AsmAI (find-skills installs skills; git-guardrails blocks pushes). Same-named built-ins such as Claude's code-review must not stand in for the shipped one.",
+  "options": [
+   "A: only their list; hide personal and built-in skills where possible; doctor lists the rest",
+   "B: hide personal skills only",
+   "C: hide nothing"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "How do Codex agents receive their skills?",
+  "body": "Claude takes a per-session plugin directory. Codex 0.157.0 has no per-session skill directory setting: in the probe, skills.extra_roots was not accepted, while a skill placed under .agents/skills inside the session's directory was found. AsmAI never writes ~/.codex and does not use a separate Codex home, because that needs a second sign-in (Define CLI setup and management experience). Options: (A) AsmAI writes the agent's skills into .agents/skills/asmai-<name>/ inside the workspace when it creates it, and hides those folders from git through the clone's own exclude file, so they are never committed. A leader gets the same inside its own AsmAI directory. A repository that already has .agents/skills keeps its own folders untouched. AsmAI switches to a native per-session option once a qualified Codex version offers one. (B) Paste the text of every listed skill into the Codex agent's instructions. (C) No skills for Codex agents in v1; staff skill-heavy roles with Claude.",
+  "rec": "A. It is the one place Codex reliably looks, keeps skills loading on demand rather than all at once, and touches neither your Codex home nor the repository's history. B fills every Codex session with every skill's full text; C undoes mixed staffing.",
+  "options": [
+   "A: written into the workspace's .agents/skills, excluded from git",
+   "B: pasted into the agent's instructions",
+   "C: no skills for Codex agents in v1"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "Do skills a repository provides apply to its jobs?",
+  "body": "A registered repository may carry its own skills (in .claude/skills or .agents/skills). Define concurrent repository work and integration loads a repository's instruction files but not its provider configuration (.claude settings, hooks, MCP servers, .codex), and left repository skills to this ticket. Codex finds a repository's .agents/skills by itself unless AsmAI hides them. Options: (A) Off by default; hidden like personal skills. Per-repository configuration can switch them on, for named roles, for jobs in that repository, and they are then marked as the repository's and unqualified. (B) Always on, like repository instructions. (C) Never.",
+  "rec": "A. A repository skill is code that changes how agents work, like the provider configuration that is already off by default; your per-repository switch keeps it available where you trust it.",
+  "options": [
+   "A: off unless switched on per repository and role",
+   "B: always on",
+   "C: never"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "Where does a repository's skill setup live?",
+  "body": "setup-matt-pocock-skills asks a human for a repository's issue tracker, triage label vocabulary and domain-document layout, then writes docs/agents/issue-tracker.md, triage-labels.md, domain.md and a short block in AGENTS.md or CLAUDE.md. to-spec, to-tickets, triage, wayfinder and implement-spec cannot work without it; other skills only use it to sharpen their output. This repository already has it. Options: (A) In the repository, where the skills look. When a job needs it and it is missing, Planning runs the setup inside that job: its questions reach you as decision requests, and the files go on that job's branch and PR. Later jobs read them as repository instructions. (B) In AsmAI's configuration as per-repository notes, asked when you run asmai repo add, never committed. (C) Nowhere: skills that need it ask on every job.",
+  "rec": "A. The files are where the skills and your own sessions already look, they are reviewed like any other change, and you answer once per repository.",
+  "options": [
+   "A: in the repository, set up inside the first job that needs it",
+   "B: in AsmAI's per-repository notes, asked at repo add",
+   "C: asked on every job"
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "How does a worker reuse decisions you already made when a skill reaches a human step?",
+  "body": "Skills stop for a human at fixed points: tdd and to-spec confirm test seams; to-tickets has the split approved; code-review needs the comparison point and spec; wizard confirms its stages. Define delegated authority and human escalation already says approvals are recorded with their scope and reused while they hold, and workers ask their owning leader first. Options: (A) A skill's human step is satisfied by a recorded decision of yours, or a grant, whose scope covers it: the job's decisions (in its brief), the repository's setup (Q9), or a factory-wide grant. The worker never asks you directly: it sends a decision request to its owning leader, who answers from the records or escalates through Coordination. The result names the record it relied on. A step the records do not cover goes to you, and your answer is recorded for the rest of the job. (B) Every human step in a skill goes to you, even when you answered it before.",
+  "rec": "A. You answer each question once per scope, workers can show which of your answers they used, and anything new still reaches you.",
+  "options": [
+   "A: satisfied from recorded decisions and grants; leader escalates only what they do not cover",
+   "B: always ask me"
+  ]
+ }
+]

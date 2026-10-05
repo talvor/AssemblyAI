@@ -1,0 +1,22 @@
+[
+ {
+  "id": "R3-Q1",
+  "title": "Where does implement-spec go?",
+  "body": "Asked again: R2-Q2 came back without an answer. implement-spec builds a whole spec in one run. It reads the tickets as a task graph, starts implementers in their own worktrees across the ready tickets, merges them into one integration branch and finishes with code-review. In AsmAI the Engineering leader already does that with assignments, workspaces, the daemon's fast-forward on acceptance and a handoff to Quality. Only a leader can assign workers, so a worker cannot run it. Options: (A) Shipped as optional and on no list. The Engineering leader's own AsmAI instructions cover working through a ticket graph, assigning each ready ticket to a worker with implement and tdd. (B) On the Engineering leader's list as its method for a ticket graph, mapped by the operating guide. It would be the only skill a leader runs besides Coordination's ask-matt and wait-what.",
+  "rec": "A. Most of implement-spec describes what AsmAI's daemon and leader contract already do, so running it would be mostly translation. With R2-Q1 A, leaders outside Coordination run no skills.",
+  "options": [
+   "A: optional, on no list; the Engineering leader's own instructions cover ticket graphs",
+   "B: on the Engineering leader's list, mapped by the operating guide"
+  ]
+ },
+ {
+  "id": "R3-Q2",
+  "title": "Which file decides whether a new repository needs setup?",
+  "body": "Your R2-Q3 note: setup is only required if the repository does not have docs/agent/issue-tracker.md. setup-matt-pocock-skills writes that file as docs/agents/issue-tracker.md (agents, plural), alongside triage-labels.md and domain.md. Options: (A) docs/agents/issue-tracker.md: when you add a repository without it, Coordination opens the setup job; with it, nothing happens, even if the other two files are missing. (B) As A, but also run the setup when triage-labels.md or domain.md is missing.",
+  "rec": "A, read as the plural folder the skill uses. The issue tracker is the setup the dependent skills cannot work without, and it is what your note named.",
+  "options": [
+   "A: docs/agents/issue-tracker.md alone decides",
+   "B: any of the three setup files missing triggers the setup"
+  ]
+ }
+]
