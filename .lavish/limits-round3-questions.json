@@ -1,0 +1,32 @@
+[
+ {
+  "id": "R3-Q1",
+  "title": "Which provider does a leader use when it starts again?",
+  "body": "Choose runtime adapters and authentication lets a leader automatically use the other configured, compatible provider only before it first starts; after that, replacing its provider needs your decision. Leaders now start and stop on demand, so a leader starts many times. Example: your Claude allowance is used up for the week. Planning stopped on Tuesday with no open work. On Wednesday Coordination hands Planning a new job. Options: (A) Only a leader's first start ever counts. Afterwards, a leader whose provider is limited when it starts holds until the reset, and the status line offers you the provider change. In the example, the new job waits for the weekly reset unless you switch Planning. (B) A leader that starts while its role has no open work in any job, paused or not, counts as before first dispatch. It may start on the other configured, compatible provider automatically, recorded and shown in status, and it returns to its configured provider at a later start once access is back. A leader whose role still has open work keeps its provider, and a change needs your decision. In the example, Planning starts on Codex.",
+  "rec": "B. The earlier rule protects work in flight: a provider's native conversation does not carry over, and effects must be reconciled. A leader with no open work has nothing in flight, and what it needs to know is in the store's job briefs. Holding new jobs for days on a weekly limit would gain nothing.",
+  "options": [
+   "A: only the first start ever; afterwards a limited provider holds the leader",
+   "B: a start with no open work counts as before first dispatch"
+  ]
+ },
+ {
+  "id": "R3-Q2",
+  "title": "What does the worker cap count?",
+  "body": "The cap limits running workers per provider, and round 1 already lets a paused job's workers stop counting. Workers also sit idle in other ways: waiting for their leader to accept or reject a result, waiting on a decision they asked for, or held by a limit. An idle worker keeps its provider process (memory) but spends no allowance. Options: (A) The cap counts only workers whose dispatch is in progress. A worker waiting on its leader, on you or on a hold does not count, and its session stays alive. (B) The cap counts every live worker session except those in a paused job, so a worker waiting on its leader or on you keeps its place.",
+  "rec": "A. The cap exists to pace allowance, and idle workers spend none. Under B, three workers waiting on your decisions would stop every other job, which works against the rule that independent work continues while a decision is pending. Idle sessions then are not bounded by the cap; if host memory becomes a problem, a second limit can be added after v1.",
+  "options": [
+   "A: only workers with a dispatch in progress",
+   "B: every live worker session outside paused jobs"
+  ]
+ },
+ {
+  "id": "R3-Q3",
+  "title": "When one provider's cap is full, does work move to the other?",
+  "body": "Round 1 lets queued work start on the other configured, compatible provider when its own provider's allowance is used up, applying the before-first-dispatch rule. A full cap is different: the provider has access, just no free place. Example: three Claude workers are running and an assignment configured for Claude is queued while Codex has free places. Options: (A) It waits for a Claude place. A full cap is not lack of access, so the role's configured provider is kept. (B) It overflows to the other configured, compatible provider when that has a free place, recorded and shown in status.",
+  "rec": "A. Staffing each role with a provider is a deliberate choice, and the automatic switch was agreed only for lack of access. If you want more Claude work at once, raising the Claude cap does that directly.",
+  "options": [
+   "A: it waits for its configured provider",
+   "B: it overflows to the other provider"
+  ]
+ }
+]

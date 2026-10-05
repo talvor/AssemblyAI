@@ -1,0 +1,33 @@
+{
+ "round1": {
+  "Q1": "A: spending budget zero unless granted; no per-job token budgets; allowance shown in status",
+  "Q2": "A: worker cap per provider; leaders exempt; extra assignments queue first come first served. Note: \"Also, I do not think we need to have all leaders running all the time.  We need at least the coordinator running, and the coordinator will need to ensure required leaders to complete the in flight jobs are running.  The leaders can be removed when they are no longer needed.\"",
+  "Q3": "A: hold that provider's agents, resume at reset; queued work may use the other provider",
+  "Q4": "C: no reserve",
+  "Q5": "A: daemon resumes the live session after a reported error; outages and lost sign-in hold, then resume automatically",
+  "Q6": "A: per-assignment dispatch limit; hold it and escalate",
+  "Q7": "A: as listed",
+  "Q8": "D: no notifications in v1. Note: \"Document this as a future v2 feature\"",
+  "Q9": "A: full status, a --check exit code, periodic daemon checks",
+  "Q10": "A: free-space floor, reporting and a clean command; no per-job quotas",
+  "Q11": "A: rotating daemon log; per-dispatch terminal recordings deleted after the job ends"
+ },
+ "round2": {
+  "R2-Q1": "A: the daemon starts a leader when a message for its role arrives, and stops it when no longer needed",
+  "R2-Q2": "A: when its role has no open work in any unpaused job, after an idle grace period",
+  "R2-Q3": "A: only dispatches that redo or correct the work",
+  "R2-Q4": "A: approve as listed",
+  "R2-Q5": "A: no dashboard in v1; a v2 candidate like notifications",
+  "R2-Q6": "A: the map's Out of scope section plus the design kept in the resolution",
+  "R2-Q7": "A: add Allowance and Hold as written",
+  "R2-message": "Freeform question before answering: \"Does the daemon know what jobs each leader have inflight?\" (answered in Lavish; see limits-round2-clarification.md)"
+ },
+ "round3": {
+  "R3-Q1": "B: a start with no open work counts as before first dispatch",
+  "R3-Q2": "A: only workers with a dispatch in progress",
+  "R3-Q3": "A: it waits for its configured provider"
+ },
+ "confirm": {
+  "CONFIRM": "Confirm and record"
+ }
+}

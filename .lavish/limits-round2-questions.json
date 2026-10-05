@@ -1,0 +1,104 @@
+[
+ {
+  "id": "R2-Q0",
+  "title": "How your round 1 answers changed the picture",
+  "body": "Recorded as you answered, including both notes. Three consequences carry into this round.",
+  "points": [
+   "No notifications in v1 (Q8), so wherever round 1 said 'notifies you' (allowance used up, provider unavailable, lost sign-in, low disk, a held assignment), the event instead appears in the status line, in the catch-up when you return, and in `asmai status`, whose `--check` exit code you can wire into your own monitoring. A lost sign-in shows the native sign-in command there.",
+   "No reserve (Q4), so the factory uses allowance until the provider stops it, and Q3's hold-and-resume-at-reset handles that.",
+   "Your Q2 note changes an assumption in Choose factory hosting and lifecycle, which had every role's leader running all the time: only Coordination always runs, and other leaders run while in-flight jobs need them. R2-Q1 and R2-Q2 pin down how. At most one leader per role still holds, and a crashed leader with open work still restarts with bounded retries."
+  ],
+  "options": []
+ },
+ {
+  "id": "R2-Q1",
+  "title": "Who starts and stops leaders other than Coordination?",
+  "body": "Your note: Coordination must ensure the leaders that in-flight jobs need are running, and leaders are removed when no longer needed. Coordination always runs while the factory runs. Every other role's work reaches it as a message in its durable inbox: a handoff from Coordination, a result or decision request from one of its workers, an answer to a decision it asked, a handoff from another leader. Options: (A) Coordination ensures a leader by handing work to its role; the daemon starts that role's leader when a message for it arrives and nobody is running it, and stops it when it is no longer needed (R2-Q2). Coordination never manages processes, and a role with no running leader and no work is normal, not a fault. (B) Coordination starts and stops leaders explicitly with an agent command (`asmai leader start|stop <role>`). The daemon refuses to stop a leader that still has open work, and still restarts one that crashed.",
+  "rec": "A. A handoff is already how Coordination asks a role for something, so starting on arrival means it cannot forget a leader. A leader can also be needed without Coordination knowing, such as a worker's result arriving overnight. Process management stays with the daemon, which already owns every agent terminal.",
+  "options": [
+   "A: the daemon starts a leader when a message for its role arrives, and stops it when no longer needed",
+   "B: Coordination starts and stops leaders with an agent command"
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "When is a leader no longer needed?",
+  "body": "Stopping costs nothing while the leader is idle; restarting costs a cold start (it reloads each job's brief, resuming its native session where possible). Example: Planning asks you a grilling question on Friday, and you answer on Monday. Options: (A) When its role has no open work in any job that is not paused: no open handoffs to it, no assignments it owns, no decision it requested still pending, and nothing waiting in its inbox. It stops after an idle grace period at a boundary. In the example, Planning stays up over the weekend. (B) Whenever it is idle at a boundary with nothing in its inbox and none of its workers running, even mid-job; the next message starts it again. In the example, Planning stops on Friday and starts again when your answer arrives. (C) Only when no job at all is open.",
+  "rec": "A. It matches your wording, the leaders that in-flight jobs need, and avoids a cold start each time a worker reports in the middle of a job. Work in a paused job does not count, so a job you parked does not keep leaders up. An idle leader spends no allowance, only memory.",
+  "options": [
+   "A: when its role has no open work in any unpaused job, after an idle grace period",
+   "B: whenever it is idle with nothing waiting, even mid-job",
+   "C: only when no job is open"
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "Which dispatches count toward an assignment's dispatch limit?",
+  "body": "Round 1 put the limit at a number of dispatches without acceptance, for any reason. Example: a long Engineering assignment runs into the five-hour allowance twice and is resumed at each reset, and once after an overloaded-provider error. That is four dispatches without the work ever having failed. Options: (A) Only dispatches that redo or correct the work count: a rejection sent back to the worker, a re-dispatch chosen in reconciliation, and a new dispatch after you typed into the agent during an intervention. Resumptions after an allowance reset, a reported provider error, a job pause or `asmai stop` do not count; provider errors already have their own bound. (B) Every dispatch counts, as round 1 stated.",
+  "rec": "A. The limit is there to catch work that keeps failing, and a resumption that only continues after an interruption is not a failure. Counting it would hold long assignments for reasons that have nothing to do with the work.",
+  "options": [
+   "A: only dispatches that redo or correct the work",
+   "B: every dispatch"
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "Default limits",
+  "body": "Every value is a factory-wide setting in the configuration file and shows in `asmai config show`.",
+  "points": [
+   "Worker cap per provider: Claude 3, Codex 3 running workers at once.",
+   "Leader idle grace before it stops (R2-Q2): 10 minutes.",
+   "Silence before a working dispatch becomes unknown: 30 minutes with no correlated observation.",
+   "Leader crash restarts: 3 within 15 minutes, then the role holds and the status line shows it.",
+   "Automatic retries of a side-effect-free assignment: 2, so 3 dispatches in all.",
+   "Resuming after a reported provider error: up to 5 times, waiting 30 seconds and doubling to at most 8 minutes; then the provider is marked unavailable.",
+   "Rechecking an unavailable provider or a lost sign-in: every 5 minutes.",
+   "Per-assignment dispatch limit (counting per R2-Q3): 5 dispatches without acceptance.",
+   "`asmai stop` drain timeout: 10 minutes, then the rest are interrupted.",
+   "Free-space floor on the state directory's volume: 5 GB.",
+   "Daemon log: 5 rotated files of 20 MB.",
+   "Terminal recordings: deleted 14 days after their job ends."
+  ],
+  "rec": "A. Each is a starting point to tune once real jobs run. If a number looks wrong, choose B and write the change in the notes.",
+  "options": [
+   "A: approve as listed",
+   "B: approve with the changes in my notes"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "Is a separate browser dashboard part of v1?",
+  "body": "The map's fog asks whether a browser dashboard is useful alongside the terminal conversation and Lavish, judged together with notifications while you are away. You chose no notifications in v1. What remains for visibility: the status line in every attached terminal, the catch-up when you return, `asmai status` with its `--check` exit code, `asmai jobs`, `journal` and `replay`, and Lavish pages for decisions. Options: (A) No dashboard in v1. Like notifications, it is recorded as a future v2 candidate, out of scope for this map, and the fog item is cleared. (B) A read-only status page in v1, served by the factory's Lavish server, which is already reached through the SSH port forward. A new ticket would settle its scope. (C) Keep it as fog for now.",
+  "rec": "A. Both serve the same need, seeing the factory while you are not in the terminal, and you chose to leave that need for v2. Keeping visibility to the terminal and Lavish keeps v1 small.",
+  "options": [
+   "A: no dashboard in v1; a v2 candidate like notifications",
+   "B: a read-only status page in v1, scoped by a new ticket",
+   "C: keep it as fog"
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "Where is the v2 notification feature documented?",
+  "body": "Your note asked for notifications to be documented as a future v2 feature. Wayfinder records work ruled beyond a map's destination in the map's Out of scope section; this map's destination is the v1 specification. Options: (A) A line in the map's Out of scope section marking notifications while you are away, and the dashboard if R2-Q5 is A, as v2 candidates, with the round 1 design (a notify command run on the host, sent only while detached, batched, with no code or credentials in AsmAI) kept in this ticket's resolution so v2 can start from it. (B) As A, plus a separate GitHub issue outside the map, 'v2: notifications while away', to collect v2 features.",
+  "rec": "A. The map is already where scope boundaries live, and the resolution keeps the design. A v2 issue can be opened when v2 planning starts, from that line.",
+  "options": [
+   "A: the map's Out of scope section plus the design kept in the resolution",
+   "B: A plus a separate v2 issue"
+  ]
+ },
+ {
+  "id": "R2-Q7",
+  "title": "Which words go into the glossary?",
+  "body": "Two terms came out of round 1. Proposed entries:",
+  "points": [
+   "Allowance: the usage a provider subscription permits in its rolling windows, shared between the factory and your own use. Avoid: quota, budget, credits.",
+   "Hold: a stop the factory itself places on work when a limit is reached (allowance used up, provider unavailable, dispatch limit, low disk, repeated leader crashes), recorded with its cause and lifted when that cause clears or is resolved. Avoid: pause, when the factory did it. A pause is always yours, through `asmai job pause` or by telling Coordination. Earlier tickets' factory-initiated 'pauses', such as a role after repeated leader crashes or an agent at unknown input, read as holds."
+  ],
+  "rec": "A. In `asmai status` and the catch-up, 'held: allowance until 15:00' and 'paused by you' tell you at once whether anything is needed from you.",
+  "options": [
+   "A: add Allowance and Hold as written",
+   "B: add Allowance only; keep pause for both",
+   "C: neither"
+  ]
+ }
+]

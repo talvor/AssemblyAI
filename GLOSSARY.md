@@ -15,6 +15,10 @@ _Avoid_: Repository (a factory is not tied to one repository)
 The machine on which a factory and all of its agents run. Each user runs at most one factory per host; factories on different hosts are independent.
 _Avoid_: Server, machine (when meaning the factory's execution host)
 
+**Allowance**:
+The usage a provider subscription permits in its rolling windows, shared between the factory and the user's own use.
+_Avoid_: Quota, budget, credits
+
 **Job**:
 One outcome the user requested through Coordination, with its mandate and acceptance criteria, against at most one repository or none. A job owns its handoffs, assignments, decisions, and grants; later follow-up work is a new job linked to it.
 _Avoid_: Task, request, work item
@@ -40,6 +44,10 @@ _Avoid_: Attempt, run
 **Reconciliation**:
 The owning leader's determination of what actually happened when a dispatch's outcome is unknown, recorded with what is known, what is not, and the chosen way forward.
 _Avoid_: Retry (reconciliation decides whether anything is retried)
+
+**Hold**:
+A stop the factory itself places on work when a limit is reached, recorded with its cause and lifted when that cause clears or is resolved. A pause is always the user's.
+_Avoid_: Pause (when the factory stopped the work)
 
 **Handoff**:
 A request for another leader to take responsibility for a defined outcome, carrying the context and acceptance criteria needed to accept, clarify, or decline it.

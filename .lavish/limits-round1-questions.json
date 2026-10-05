@@ -1,0 +1,128 @@
+[
+ {
+  "id": "Q1",
+  "title": "What does \"budget\" mean for AsmAI v1?",
+  "body": "The ticket asks about exhausted budgets, but AsmAI runs only on your subscriptions and never pays for API use (Choose runtime adapters and authentication). Two different things get called a budget. Money: an agent action that would spend it, such as a paid API, a cloud resource or a purchase; Define delegated authority and human escalation already says spending beyond a granted budget needs separate authorization. Allowance: the usage your Claude and Codex subscriptions permit in rolling windows, shared with your own personal use. Fact checked on this host: Claude Code 2.1.283 gives a status-line command its five-hour and seven-day used percentage and reset time, and Codex 0.157.0 writes used percent, window length and reset time to its session log. Both record token counts per turn. Neither has been qualified yet. I propose the words 'spending budget' for money and 'allowance' for subscription usage. Options: (A) The spending budget is zero by default, so any action that spends money needs your grant naming the amount and scope. There are no per-job token budgets: allowance is managed through concurrency caps (Q2), a reserve (Q4) and what happens when a provider reports its limit (Q3). AsmAI records token counts per dispatch and shows each provider's allowance in status. (B) As A, plus per-job token budgets: a job whose recorded tokens pass a cap you set pauses and asks you.",
+  "rec": "A. Tokens on a subscription do not map to money, so a per-job token cap is hard to set well and pauses jobs for no real cost. What runs out is the provider's window, which Q2 to Q4 handle directly. A zero spending budget keeps any real money behind your explicit grant.",
+  "options": [
+   "A: spending budget zero unless granted; no per-job token budgets; allowance shown in status",
+   "B: A plus per-job token budgets that pause the job"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "What limits how much runs at once?",
+  "body": "Five leaders always run, one per role. Each worker is a full provider CLI process, and each subscription is metered separately. Define concurrent repository work and integration already chose no locks between jobs in one repository. Options: (A) A cap on concurrently running workers per provider (for example Claude 3, Codex 3), because each subscription runs out on its own. Leaders do not count. There is no cap on jobs or per repository. An assignment that finds no free slot is queued: its dispatch waits, first come first served across jobs, and its leader and the status line show it as queued. Pausing a job is how you make room. (B) One factory-wide worker cap, whatever the provider. (C) A cap on running jobs (later jobs wait whole) plus a worker cap per job. (D) No caps; leaders decide.",
+  "rec": "A. The thing that runs out is per provider, so the cap should be too. Capping jobs would hold back a small job behind a large one, and per-repository caps would contradict treating each job like a separate developer. The numbers are set in round 2.",
+  "options": [
+   "A: worker cap per provider; leaders exempt; extra assignments queue first come first served",
+   "B: one factory-wide worker cap",
+   "C: cap on running jobs plus a per-job worker cap",
+   "D: no caps"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "What happens when a provider says your allowance is used up?",
+  "body": "Already settled: before first dispatch AsmAI may automatically use the other configured, compatible provider; after first dispatch, changing provider needs your decision; resuming on the same provider once access returns is allowed. Options: (A) Agents on that provider stop at their boundary (a turn that ended on the limit is already stopped) and hold. At the reported reset time AsmAI resumes each on the same provider with a new dispatch and tells its owning leader. Queued assignments not yet dispatched may start on the other configured provider, as already allowed; otherwise they wait for the reset. You get one notification per provider per limit, with the reset time. A leader on that provider leaves its role waiting until the reset; Coordination, or the daemon's status line if Coordination itself is limited, offers you the provider change, which stays your decision. (B) As A, but queued assignments never move to the other provider automatically; everything waits for the reset unless you choose. (C) The whole factory pauses until you resume it.",
+  "rec": "A. It applies the fallback rule already chosen and keeps every change after first dispatch in your hands. Resuming at a reported reset time needs no guess, and the daemon's status line keeps you informed even when Coordination is the one waiting.",
+  "options": [
+   "A: hold that provider's agents, resume at reset; queued work may use the other provider",
+   "B: hold and resume at reset; nothing moves provider automatically",
+   "C: pause the whole factory until I resume"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "Should AsmAI keep part of your allowance for you?",
+  "body": "Your own Claude Code and Codex use draws on the same subscriptions as the factory. The five-hour window resets within hours; the seven-day window, once spent, can leave you without your own tools for days. Options: (A) A reserve on the weekly window only: once a provider reports the weekly window above a threshold, AsmAI starts no new dispatches on it. Running dispatches finish, and work resumes when that window resets. The five-hour window is used fully and handled by Q3. (B) A reserve on every window. (C) No reserve: the factory uses allowance until the provider stops it.",
+  "rec": "A. Running into the five-hour limit costs a few hours, which Q3 handles. Running out of the weekly window costs days of your own use. The threshold is set in round 2, and setting it to 100% turns the reserve off.",
+  "options": [
+   "A: reserve on the weekly window only",
+   "B: reserve on every window",
+   "C: no reserve"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "What happens when a provider fails or becomes unavailable?",
+  "body": "Four cases: (1) a turn ends on a provider error such as overload, a server error or a dropped connection; (2) the provider stays down; (3) your sign-in is lost or expires; (4) the pinned CLI fails to start. Already settled: AsmAI never starts a login, refuses unqualified versions, and retries automatically only work its leader declared side-effect-free; everything else goes through reconciliation. Case 1 is different from a crash: the session is still alive with its whole context, and Claude Code positively reports it through its StopFailure hook (Codex's equivalent still needs qualifying). Options: (A) Case 1: when the provider positively reports the error, the daemon waits with backoff and resumes the same live session with a new dispatch, up to a bound; the agent can see what it already did, so this is not a blind retry. An unexplained stop is still unknown. Past the bound, and in case 2, the provider is marked unavailable: its agents hold, queued work may use the other provider before first dispatch, and the daemon checks the provider periodically and resumes held agents when it answers. Case 3: the same hold, plus one notification with the native sign-in command; work resumes when a check sees sign-in restored. Case 4: the leader crash rules apply to a leader; a worker's assignment needs reconciliation. (B) As A, but the owning leader reconciles every case-1 stop instead of the daemon resuming it. (C) As A, but nothing resumes automatically after an outage or lost sign-in; you resume each provider with a command.",
+  "rec": "A. An overloaded provider is common and short, and resuming a live session that saw its own work is not the blind retry the earlier tickets ruled out. Sending each one to a leader costs leader turns, often on the same failing provider. Unexplained stops keep the existing unknown path.",
+  "options": [
+   "A: daemon resumes the live session after a reported error; outages and lost sign-in hold, then resume automatically",
+   "B: as A, but the owning leader reconciles every reported error",
+   "C: as A, but I resume each provider by command after an outage or lost sign-in"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "What stops work that keeps failing?",
+  "body": "Unattended, an assignment can loop: rejected and redone, re-dispatched after reconciliation, or resumed after errors, burning allowance without progress. A leader's own crashes already have a bounded restart, after which the role pauses and Coordination tells you. Options: (A) A per-assignment limit: when an assignment reaches a set number of dispatches without acceptance, for any reason, it holds, and its owning leader escalates to you with what was tried. The rest of the job and other jobs continue. (B) A per-job limit: total dispatches or worker hours above a cap pause the whole job. (C) No factory limit; owning leaders judge, and reconciliation escalates when they are stuck.",
+  "rec": "A. It catches the loop where it happens and leaves independent work running, which matches the rule that independent authorized work continues while a decision is pending. The number is set in round 2.",
+  "options": [
+   "A: per-assignment dispatch limit; hold it and escalate",
+   "B: per-job limit that pauses the whole job",
+   "C: no factory limit"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "What do job pause, resume and cancel do?",
+  "body": "Define CLI setup and management experience reserved `asmai job pause|resume|cancel`. Already settled: cancelling stops a job's workers at a boundary and reports effects rather than claiming them undone; branches on origin stay; a cancelled assignment's workspace is kept until the job ends.",
+  "points": [
+   "Pause: nothing new is dispatched for the job. Running turns finish to their boundary and hold. Held workers keep their session but free their concurrency slot. Queued assignments stay queued. Pending decisions stay answerable, and answers apply on resume. Leaders do not act on the job until it resumes.",
+   "Resume: each held assignment continues with a new dispatch after its owning leader reloads the job's brief. Resume also lifts a hold placed by a limit (Q3 to Q6) once its cause has cleared.",
+   "Cancel: asks you to confirm, then stops all of the job's work at a boundary (`--now` interrupts instead), withdraws its pending decisions, ends its assignments as cancelled, and reports effects, pushed branches and any open PR. The PR is left open for you to close. The job ends.",
+   "Who: you, with `asmai job pause|resume|cancel`, or by telling Coordination, which acts citing your witnessed message. No other agent pauses or cancels a whole job. There is no factory-wide pause in v1 beyond `asmai stop`."
+  ],
+  "rec": "A, as listed. Pausing at a boundary avoids interrupting a turn mid-effect, and leaving the PR open keeps a change on GitHub in your hands.",
+  "options": [
+   "A: as listed",
+   "B: as listed, but pause interrupts running turns immediately",
+   "C: as listed, but cancel also closes the job's open PR"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "How do you hear about things while you are away?",
+  "body": "While you are attached, the status line shows what is waiting, and when you return the catch-up tells you what changed (Explore terminal conversation and Lavish decision flow). The factory opens no network listener, reaches remote hosts only over SSH, and handles no tokens. Options: (A) A notify command you configure: the daemon runs it on the host with a short message when something needs you or a job ends: decision waiting, an agent stopped at a prompt or unknown input, job finished, failed or paused, role paused, provider limited or unavailable, sign-in lost, low disk. You point it at ntfy, Pushover, email, Slack or a desktop notification, and `asmai init` offers a desktop preset on local hosts. It works the same on a remote host because it runs there. Notifications go out only while no terminal is attached and are batched, at most one every few minutes. Each carries the event, the job number and title, and a decision's title, never code or diffs. Any credentials live in your command, not in AsmAI. (B) Built-in desktop notifications only; remote hosts rely on the catch-up. (C) Built-in integration with one push service such as ntfy. (D) None in v1: catch-up and `asmai status` only.",
+  "rec": "A. One small hook covers local and remote hosts and every channel you might want, without AsmAI holding anyone's credentials or picking a service. The batching interval is set in round 2.",
+  "options": [
+   "A: a notify command I configure; only while detached; batched",
+   "B: desktop notifications only",
+   "C: built-in push service",
+   "D: no notifications in v1"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "What does health reporting cover?",
+  "body": "`asmai status` and `asmai doctor` exist (Define CLI setup and management experience), and there is no listener, so no health endpoint. Options: (A) `asmai status` shows: the daemon and its version, platform certification, each leader (running, restarting, paused), workers running against each provider's cap, queued assignments, each provider's state (ready with allowance used and reset times, limited until, unavailable, signed out), the Lavish server, held or paused jobs and why, and disk use. `asmai status --check` exits non-zero when anything needs you, so you can wire it into your own monitoring, for example a cron job over SSH. The daemon itself checks periodically that the Lavish server is alive (and restarts it), provider sign-in, free disk and leader liveness, and reports problems through the status line, catch-up and notifications. (B) As A, without `--check`: status is for reading only.",
+  "rec": "A. An exit code costs nothing and lets you monitor a remote host with tools you already have, without AsmAI opening a port.",
+  "options": [
+   "A: full status, a --check exit code, periodic daemon checks",
+   "B: as A without --check"
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "How is disk and other host capacity controlled?",
+  "body": "Define concurrent repository work and integration keeps some workspaces after use: cancelled work until its job ends, and scratch workspaces of jobs without a repository until you remove them. The journal keeps everything in v1. Options: (A) No per-job quotas. `asmai status` reports disk use by clones, workspaces, kept workspaces, recordings and the store. When free space on the state directory's volume falls below a threshold, the daemon creates no new workspaces (assignments wait), notifies you, and continues when space returns. You remove kept workspaces with `asmai job clean <n>`, refused while the job is open. No CPU or memory limits: the concurrency caps are the control. (B) As A, plus a disk quota per job.",
+  "rec": "A. A quota per job needs a size nobody can predict for a repository. A free-space floor protects the host and the store, which matters more. The threshold is set in round 2.",
+  "options": [
+   "A: free-space floor, reporting and a clean command; no per-job quotas",
+   "B: A plus per-job disk quotas"
+  ]
+ },
+ {
+  "id": "Q11",
+  "title": "What logs does AsmAI keep, and for how long?",
+  "body": "Already settled: the journal is append-only, kept in full in v1 and exported with `asmai export`, and your witnessed messages are journaled word for word. Reconciliation reads the provider's own transcript where available. Options: (A) The daemon's own operational log is a size-bounded rotating file, read with `asmai log [--follow]`. Every agent terminal is recorded per dispatch (compressed), so you and a reconciling leader can replay what happened while you were away with `asmai replay <agent> [--dispatch <id>]`; recordings are deleted a set number of days after their job ends. Provider transcripts stay where the provider writes them; the journal records their location per dispatch. Nothing records environment variables. (B) As A, without terminal recordings: provider transcripts and the journal are enough. (C) As A, but recordings are kept for good, like the journal.",
+  "rec": "A. A recording is the only record of what the screen actually showed, which is what you need when an agent stopped at an unexpected prompt or a takeover went wrong, and those are exactly the cases v1 still has to qualify. Deleting them after their job ends keeps disk bounded. The retention period is set in round 2.",
+  "options": [
+   "A: rotating daemon log; per-dispatch terminal recordings deleted after the job ends",
+   "B: no terminal recordings",
+   "C: recordings kept for good"
+  ]
+ }
+]
