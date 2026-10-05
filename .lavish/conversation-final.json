@@ -1,0 +1,25 @@
+[
+ {
+  "id": "RESOLUTION",
+  "title": "Recorded resolution",
+  "body": "Confirmed by Phillip in Lavish on 2026-10-05: all fifteen answers as recommended, ADR 0004 recorded, and the browser dashboard kept as fog to be judged with notifications in Define operating limits and visibility. This is a planning decision and authorizes no implementation.",
+  "points": [
+   "Status line: every attached terminal shows a one-row AsmAI status line drawn from daemon state: what is waiting on you, the focused job, the running jobs, and any agent whose input you hold. The attach client renders the provider's screen one row shorter.",
+   "Automated turns: Coordination keeps delivering while you talk. Each automated item gets one line tagged with its job, and anything that needs you gets a flagged block. Detail is given on request.",
+   "Jobs: the conversation has one focused job. Your messages apply to it unless you name another job. 'Switch to N' moves the focus and loads that job's brief. A new request opens a job, which takes the focus. Every line about a job carries its number.",
+   "Answer surfaces: single-choice escalations are answered in the conversation. Reviews, grilling and Wayfinder questions, and requests with several questions go to Lavish. Each decision version has exactly one answer surface, shown with it.",
+   "Your words: the daemon journals, word for word, every message you submit in any agent's terminal. Anything recorded as yours must cite such a witnessed message, submitted after the decision version it answers was shown. Coordination's reading is stored next to your words. This guards against mistakes, not against a hostile process running as you.",
+   "Lavish: a decision request carries structured questions that the daemon renders and keys to the decision version, with optional agent content above them. The daemon collects your answers, comments and annotations word for word and routes them to the owning leader, and Coordination confirms in one line. A new version reissues the page, and answers from an old page are refused.",
+   "Coming back: the attach client first prints a catch-up from the journal: what is waiting on you (with links and the forwarding command), jobs finished, failed or paused, agents waiting in their own terminal, input you still hold, and your saved text. It is one line when nothing changed. Coordination narrates only if you ask.",
+   "Unsent text: leaving the conversation saves your unsent text and clears the input box, and delivery resumes. The catch-up offers the text back; it is never retyped.",
+   "Release: if you only answered native prompts, the same dispatch continues. If you typed any message, that dispatch is superseded. The owner receives the intervention record (your messages, prompt answers, cleared drafts, effects recorded meanwhile, and an optional note), reconciles, and resumes the worker with a new dispatch. Messages held during the intervention are delivered after that.",
+   "Moving between terminals: the Ctrl-] menu lists the conversation and every agent, those waiting on you first, and moves this terminal there. Leaving the conversation this way counts as leaving it.",
+   "A second terminal: the newest attach (or take) wins. The older terminal shows a notice and only observes, and its unsent text is saved.",
+   "Interrupting Coordination: your keys always reach the conversation. An automated turn you interrupt is nudged again afterwards; Coordination re-reads the same messages and checks its own recorded calls, so nothing is blindly repeated.",
+   "Glossary gains Focused job, Witnessed message, Answer surface and Catch-up.",
+   "Deferred to existing tickets: new qualification cases go to Define v1 acceptance scenarios and evidence (the status line at reduced height, detecting and clearing unsent text, recognizing an interrupted Claude turn, capturing witnessed messages, second-attach takeover). Skills emitting structured questions goes to Choose skill bundles and update policy. Notifications while you are away go to Define operating limits and visibility. No new ticket."
+  ],
+  "rec": "",
+  "options": []
+ }
+]

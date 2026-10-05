@@ -66,6 +66,21 @@ A repository the user has explicitly added to a factory. Jobs can target only re
 The user's ongoing exchange with Coordination in its interactive terminal. Unlike an intervention, leaving it never pauses automated delivery.
 _Avoid_: Chat, session
 
+**Focused job**:
+The job the conversation is currently about. The user's messages apply to it unless they name another job.
+_Avoid_: Current job, active job
+
+**Witnessed message**:
+A message the factory observed the user submit from their own keyboard in an agent's terminal. It is the only conversation evidence that a decision, grant or mandate came from the user.
+_Avoid_: Turn, prompt (when meaning the user's attributable words)
+
+**Answer surface**:
+The one place where a given version of a decision request can be answered: the conversation or Lavish.
+
+**Catch-up**:
+The factory's account of what changed since the user last left the conversation, shown when they return.
+_Avoid_: Digest, recap, summary
+
 **Coordination**:
 The role responsible for the user's conversation with the factory and overall delivery progress.
 

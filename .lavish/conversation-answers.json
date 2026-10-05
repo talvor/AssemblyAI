@@ -1,0 +1,24 @@
+{
+ "round1": {
+  "Q1": "B: daemon status line in every attached terminal",
+  "Q2": "B: one job-tagged line per item; a flagged block when it needs me",
+  "Q3": "A: a focused job with explicit switching",
+  "Q4": "B: terminal for single choices; Lavish for the rest; one surface per version",
+  "Q5": "A: daemon-witnessed messages, cited by every record attributed to me",
+  "Q6": "A: the daemon collects and routes answers",
+  "Q7": "A: daemon catch-up digest",
+  "Q8": "A: save it and clear the input box",
+  "Q9": "A: prompt answers only, same dispatch; typed messages, owner reconciles and issues a new dispatch"
+ },
+ "round2": {
+  "R2-Q1": "A: Ctrl-] menu switches this terminal between the conversation and any agent",
+  "R2-Q2": "A: newest attach takes over; the old terminal observes and its unsent text is saved",
+  "R2-Q3": "A: yes; the interrupted automated turn is re-nudged and checked, never blindly repeated",
+  "R2-Q4": "A: structured questions rendered by the daemon, plus optional agent content"
+ },
+ "round3": {
+  "R3-Q1": "A: keep it as fog, judged with notifications",
+  "R3-Q2": "A: record ADR 0004 as proposed",
+  "CONFIRM": "Confirm and record"
+ }
+}
