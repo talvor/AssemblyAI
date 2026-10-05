@@ -1,0 +1,20 @@
+<section class="card bg-base-300 p-5 mb-6">
+<h2 class="text-xl font-bold mb-1">A release, and an upgrade</h2>
+<p class="text-sm opacity-70 mb-4">Green steps are settled by earlier tickets or by round 1. Amber steps are what round 2 decides.</p>
+<p class="font-bold mb-2">Release</p>
+<ol class="flow mb-5">
+<li class="settled"><b>Qualify each certified platform</b><span>maintainer, real host, real pinned providers</span></li>
+<li class="settled"><b>Commit the record, tag</b><span>only the maintainer; rc tags are prereleases</span></li>
+<li class="settled"><b>Build and attest</b><span>GitHub Actions; no C compiler; checksums; notices embedded</span></li>
+<li class="settled"><b>Publish</b><span>talvor/asmai; certified platforms only; Apache-2.0</span></li>
+<li class="open"><b>Install script</b><span>R2-Q1 · version numbers R2-Q3</span></li>
+</ol>
+<p class="font-bold mb-2">Upgrade</p>
+<ol class="flow">
+<li class="settled"><b>asmai stop</b><span>a running factory keeps its version until then</span></li>
+<li class="open"><b>Rerun the install script</b><span>R2-Q1; refuses a running factory unless --force</span></li>
+<li class="settled"><b>asmai start: checks</b><span>store usable · config honoured · new pins offered</span></li>
+<li class="settled"><b>Back up and migrate</b><span>checked backup; forward-only; one transaction</span></li>
+<li class="settled"><b>Recover and reconcile</b><span>new bundle from the next dispatch</span></li>
+</ol>
+</section>

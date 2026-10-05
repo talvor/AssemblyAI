@@ -15,6 +15,14 @@ _Avoid_: Repository (a factory is not tied to one repository)
 The machine on which a factory and all of its agents run. Each user runs at most one factory per host; factories on different hosts are independent.
 _Avoid_: Server, machine (when meaning the factory's execution host)
 
+**Release**:
+A published version of AsmAI: its executables for the platforms it certifies, with its skill bundle, pinned provider versions and qualification record inside them. A release candidate is a release published for the proving scenarios before it is offered for install.
+_Avoid_: Build (a development build is not a release)
+
+**Upgrade**:
+Replacing the installed AsmAI with a later release: stop the factory, install the release, start it again. A running factory keeps its version until it is restarted, and skills and pinned providers change only through upgrades.
+_Avoid_: Update, self-update
+
 **Allowance**:
 The usage a provider subscription permits in its rolling windows, shared between the factory and the user's own use.
 _Avoid_: Quota, budget, credits
@@ -44,6 +52,10 @@ _Avoid_: Attempt, run
 **Reconciliation**:
 The owning leader's determination of what actually happened when a dispatch's outcome is unknown, recorded with what is known, what is not, and the chosen way forward.
 _Avoid_: Retry (reconciliation decides whether anything is retried)
+
+**Store**:
+The factory's durable record, kept by the daemon alone: the current state of its jobs and agents, and the journal of everything that happened. Backups, restores and migrations act on the whole store.
+_Avoid_: Database, state (when meaning the durable record)
 
 **Hold**:
 A stop the factory itself places on work when a limit is reached, recorded with its cause and lifted when that cause clears or is resolved. A pause is always the user's.

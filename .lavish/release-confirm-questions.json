@@ -1,0 +1,12 @@
+[
+ {
+  "id": "CONFIRM",
+  "title": "Confirm the full resolution above?",
+  "body": "This is the complete resolution, built from your answers in rounds 1 and 2, with your notes on Q6 (no Homebrew) and Q13 (no names claimed) applied. I added one detail you were not asked about, so that qualification case C5 can pass: the daemon's copy of its executable lives at one fixed path, so hook definitions never name a versioned path (under Upgrading). If you confirm, I will post the resolution on Choose license, release packaging and upgrade migration and close the ticket. On the map I will add a line to Decisions so far, a pointer to Notes, and the Out of scope line. No new ticket is created, and Choose the specification's structure and implementation sequence becomes unblocked. If anything is wrong or missing, choose the second option and say what in the notes.",
+  "rec": "Confirm and record, if it matches what you decided.",
+  "options": [
+   "Confirm and record",
+   "Change something (see my notes)"
+  ]
+ }
+]

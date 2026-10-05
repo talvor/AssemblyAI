@@ -1,0 +1,102 @@
+[
+ {
+  "id": "R2-Q1",
+  "title": "How does the install script behave?",
+  "body": "Settled in round 1: there is no Homebrew tap. The install script, fetching the latest release from GitHub Releases, is the one install channel (your note on Q6), and no name is claimed anywhere (your note on Q13). Releases come from talvor/asmai, only for certified platforms, with checksums and attestations. The script skips release candidates unless asked, and refuses to replace a running factory's executable unless given --force. Upgrading is stop, rerun the script, start. Facts: GitHub's 'latest release' address never points at a prerelease. Any host that runs repository jobs already needs gh, because agents use your gh credentials and the daemon watches CI through gh. Options:",
+  "rec": "A. Serving the script from the release ties it to the files it installs and to their attestation, whereas a script on main can change between releases. Checksums always, plus the attestation whenever gh can check it, is strong without making a first install depend on gh. AsmAI never writes your personal configuration elsewhere either (ADR 0003), so the script does not edit your shell profile.",
+  "options": [
+   "A: one curl command from the latest release; checksum always, attestation when gh can; ~/.local/bin; --version; no profile edits",
+   "B: as A, but the script is served from the main branch",
+   "C: as A, but the attestation check is required (no gh, no install)",
+   "D: as A, but it adds ~/.local/bin to PATH in my shell profile"
+  ],
+  "points": [
+   "(A) One command: curl -fsSL https://github.com/talvor/asmai/releases/latest/download/install.sh | sh. The script is itself a release file, attested with the release. It detects the platform and refuses one the release does not certify, naming those it does. It downloads that platform's archive and the checksums file and checks the SHA-256, failing closed. When gh is installed and signed in, it also runs gh attestation verify and fails on a mismatch; otherwise it says how to check by hand. It installs into ~/.local/bin (or ASMAI_INSTALL_DIR), never with sudo. If that folder is not on PATH, it prints the line to add and leaves your shell files alone. --version v1.2.3 installs a specific release: a release candidate, or an older release to go back to. Rerunning it upgrades. It ends by naming asmai init after a first install, or asmai start after an upgrade.",
+   "(B) As A, but the script is served from the repository's main branch (raw.githubusercontent.com/talvor/asmai/main/install.sh) rather than from the release.",
+   "(C) As A, but the attestation check is required: without gh, the script refuses.",
+   "(D) As A, but the script adds ~/.local/bin to PATH in your shell profile."
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "How are outside contributions licensed?",
+  "body": "Settled in round 1: Apache-2.0, with the copyright held by Phillip Hall. Its section 5 already puts any contribution submitted for inclusion under Apache-2.0 unless the contributor says otherwise. AsmAI's own jobs on its repository, such as proving scenario S1, commit as you, with AsmAI's trailers. Options:",
+  "rec": "A. Section 5 already gives what a sign-off would, without an extra step on every commit, AsmAI's own included. C suits projects that may relicense, and D turns away help for nothing.",
+  "options": [
+   "A: no agreement and no sign-off; section 5 covers it; LICENSE, NOTICE and SPDX lines",
+   "B: as A, plus a DCO sign-off on every commit",
+   "C: a contributor license agreement",
+   "D: no outside contributions in v1"
+  ],
+  "points": [
+   "(A) No contributor agreement and no sign-off; section 5 covers contributions. Outside pull requests are welcome, and only the maintainer merges. The repository has LICENSE, a short NOTICE naming AsmAI and its copyright, and an SPDX license line at the top of each source file.",
+   "(B) As A, plus a Developer Certificate of Origin: every commit, AsmAI's own included, carries a Signed-off-by line.",
+   "(C) A contributor license agreement, signed before a first contribution.",
+   "(D) No outside contributions in v1: issues only."
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "What does a version number promise?",
+  "body": "Settled in round 1: any v1 release upgrades straight to any later one. Release candidates such as v1.0.0-rc.1 come first. A major release may drop retired settings. Certifying another platform takes a new release. Settled earlier: v1 launches when Linux is certified and the proving scenarios pass, and macOS follows when it is certified. Options:",
+  "rec": "A. The number then tells you, before you upgrade, whether anything beyond the three steps is coming. Moving a pin in a patch matters because providers update often, so requalifying a new pin will be the most common release.",
+  "options": [
+   "A: semantic versions with fixed meanings; only a major may need more than stop, upgrade, start",
+   "B: calendar versions, no promise in the number",
+   "C: semantic versions without fixed meanings"
+  ],
+  "points": [
+   "(A) Semantic versions with these meanings. v1.0.0 is the launch, and the candidates before it are v1.0.0-rc.N. A patch release (v1.0.1) fixes defects or moves a pinned provider version, and adds no behaviour. A minor release (v1.1.0) adds behaviour, settings or a certified platform. A major release (v2.0.0) is the only kind that may need more than stop, upgrade, start, for example to drop retired settings, and its release notes say what to do. Store migrations can come in any release, because they run by themselves. asmai doctor reports a newer release together with its kind.",
+   "(B) Calendar versions (2026.10.1), with no promise in the number.",
+   "(C) Semantic versions, with no fixed meanings."
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "Which words join the glossary?",
+  "body": "This ticket uses three words precisely that the glossary does not define. Store appears in many decisions, and backups, restores and migrations all act on exactly it. Release now has a precise shape. Upgrade needs keeping apart from the skill and pin changes it carries. Drafts, with no implementation details:",
+  "rec": "A. Each word is used across several decisions, and the Avoid lists stop 'build', 'database' and 'update' from creeping in with slightly different meanings.",
+  "options": [
+   "A: add all three as drafted",
+   "B: Release and Upgrade only",
+   "C: none"
+  ],
+  "points": [
+   "Release: A published version of AsmAI: its executables for the platforms it certifies, with its skill bundle, pinned provider versions and qualification record inside them. A release candidate is a release published for the proving scenarios before it is offered for install. Avoid: build (a development build is not a release).",
+   "Store: The factory's durable record, kept by the daemon alone: the current state of its jobs and agents, and the journal of everything that happened. Backups, restores and migrations act on the whole store. Avoid: database, state (when meaning the durable record).",
+   "Upgrade: Replacing the installed AsmAI with a later release: stop the factory, install the release, start it again. A running factory keeps its version until it is restarted, and skills and pinned providers change only through upgrades. Avoid: update, self-update."
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "Is the release decision recorded as an ADR?",
+  "body": "The draft of ADR 0009 is shown above the questions. A future reader will wonder why the qualification record is not a separate file, why macOS needs no Apple account, and why there is no Homebrew tap. ADR 0003 still says AsmAI installs from 'GitHub Releases, a Homebrew tap or an install script'. Options:",
+  "rec": "A. The release shape is costly to change once other people's scripts depend on it, it surprises without context, and it was a real choice. ADR 0003 would otherwise keep naming a channel that does not exist.",
+  "options": [
+   "A: record ADR 0009 as drafted, and add a dated line to ADR 0003",
+   "B: ADR 0009 only; leave ADR 0003 as it was",
+   "C: no ADR; the resolution comment holds it"
+  ],
+  "points": [
+   "(A) Record ADR 0009 as drafted, and add one dated line to ADR 0003's Consequences: the Homebrew tap was dropped and the install script is the only install channel (ADR 0009).",
+   "(B) Record ADR 0009 only, and leave ADR 0003 as it was.",
+   "(C) No ADR: the resolution comment on the ticket holds the decision."
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "How does the map change?",
+  "body": "Recording this resolution changes the map as follows. Nothing here starts implementation. Options:",
+  "rec": "A. The rename has no decision waiting on it, and the release that needs it comes after implementation starts. The Out of scope line stops a later session proposing Homebrew or registry packages again.",
+  "options": [
+   "A: as listed",
+   "B: as A, but renaming the repository becomes a task ticket now",
+   "C: as A, without the Out of scope line"
+  ],
+  "points": [
+   "(A) Decisions so far gains one line for this ticket, and Notes gains a pointer saying the license, releases and upgrades are settled here. Out of scope gains one line: Homebrew, package registries (npm, crates.io) and Apple Developer ID signing are not v1 channels, and AsmAI installs only through its install script from GitHub Releases. No new ticket: renaming the repository to talvor/asmai and building the release workflow are implementation steps, ordered by Choose the specification's structure and implementation sequence, which this resolution unblocks. No fog graduates, and the configuration-schema fog item is unchanged.",
+   "(B) As A, but renaming the repository becomes a task ticket now, before implementation.",
+   "(C) As A, without the Out of scope line."
+  ]
+ }
+]

@@ -1,0 +1,8 @@
+[
+ {
+  "id": "RECORDED",
+  "title": "Recorded on GitHub",
+  "body": "The resolution is posted on Choose license, release packaging and upgrade migration (https://github.com/talvor/AssemblyAI/issues/20#issuecomment-6004145724), and the ticket is closed. The map now has this ticket's line in Decisions so far, a pointer in Notes, and the Out of scope line for Homebrew, package registries and Apple Developer ID signing. No ticket was created. Choose the specification's structure and implementation sequence is now unblocked and is the last open ticket on the map. The glossary terms, ADR 0009, the ADR 0003 line and this board are kept in the worktree for archiving. Nothing more is needed from you here; you can end this session.",
+  "options": []
+ }
+]

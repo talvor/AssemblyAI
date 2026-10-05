@@ -1,0 +1,28 @@
+{
+ "round1": {
+  "Q1": "A: Apache-2.0",
+  "Q2": "A: notices generated, embedded and in every archive; asmai notices; permissive allow-list",
+  "Q3": "A: rename to talvor/asmai before the first release",
+  "Q4": "A: Linux x86_64 and macOS arm64 planned; publish only what the record certifies",
+  "Q5": "A: GitHub Actions from the tag, no C compiler, reproducible; checksums plus attestations",
+  "Q6": "A: no Developer ID; a formula in talvor/homebrew-tap installs the prebuilt executable. Note: \"I do not want to use homebrew, I want an install script that installs the latest build from github releases.\" (the note overrides the formula: no Homebrew tap; no Developer ID stands)",
+  "Q7": "A: qualify a commit, then release that commit plus its record; release candidates as prereleases; only the maintainer tags",
+  "Q8": "A: forward-only migrations at start, after a checked pre-migration backup; keep three; any v1 upgrades to any later one",
+  "Q9": "A: refuse and explain; asmai restore; never repair, replace or delete",
+  "Q10": "A: the running factory keeps its version; agents run the daemon's own copy; other versions only stop, status, doctor",
+  "Q11": "A: start offers to install the new pins at a terminal, refuses without one; keep the previous release's copies",
+  "Q12": "A: never rewritten; old names keep working within v1 with a warning; start refuses only what it cannot honour",
+  "Q13": "A: claim nothing on npm or crates.io; create the tap with the first release candidate. Note: \"No need to claim any names, using an install script to do the install\" (the note overrides the tap: nothing is claimed anywhere)"
+ },
+ "round2": {
+  "R2-Q1": "A: one curl command from the latest release; checksum always, attestation when gh can; ~/.local/bin; --version; no profile edits",
+  "R2-Q2": "A: no agreement and no sign-off; section 5 covers it; LICENSE, NOTICE and SPDX lines",
+  "R2-Q3": "A: semantic versions with fixed meanings; only a major may need more than stop, upgrade, start",
+  "R2-Q4": "A: add all three as drafted",
+  "R2-Q5": "A: record ADR 0009 as drafted, and add a dated line to ADR 0003",
+  "R2-Q6": "A: as listed"
+ },
+ "confirm": {
+  "CONFIRM": "Confirm and record"
+ }
+}

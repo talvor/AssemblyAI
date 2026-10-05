@@ -1,0 +1,222 @@
+[
+ {
+  "id": "Q1",
+  "title": "Which open-source license does AsmAI use?",
+  "body": "Settled: AsmAI v1 is open-source and user-operated. A hosted service, commercial distribution and resale of provider access are outside AsmAI's own direction, which is a direction for AsmAI, not a restriction on anyone else (Choose runtime adapters and authentication). The repository has no license today. What AsmAI ships inside its executable is permissive: the bundled skills are MIT. AsmAI never redistributes the providers: asmai providers install fetches Claude Code (no open-source license), Codex (Apache-2.0) and Lavish (MIT) from their official channels. Options:",
+  "rec": "A, with the copyright held by Phillip Hall. It is as permissive as MIT for users, and everything AsmAI bundles or depends on can sit under it. Its patent and contribution terms mean an outside pull request needs no separate contributor agreement. C and D only matter if you want to stop others shipping or hosting a changed AsmAI without publishing their changes, and nothing so far has asked for that. MIT is the close alternative if you prefer the shortest text.",
+  "options": [
+   "A: Apache-2.0",
+   "B: MIT",
+   "C: GPL-3.0",
+   "D: AGPL-3.0"
+  ],
+  "points": [
+   "(A) Apache-2.0: permissive, with an explicit patent licence from every contributor, contributions under the same terms without a separate agreement (its section 5), and no trademark rights in the AsmAI name (section 6). OpenRig and Codex use it.",
+   "(B) MIT: permissive and shortest, with no patent or contribution terms. The bundled skills, Lavish, Firstmate and no-mistakes use it.",
+   "(C) GPL-3.0: anyone who distributes a modified AsmAI must publish its source under the same license.",
+   "(D) AGPL-3.0: as C, and also anyone who runs a modified AsmAI as a service for others."
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "How do the license and notices travel with every copy?",
+  "body": "Settled: releases carry the upstream MIT notice for the bundled skills (Choose skill bundles and update policy). The MIT license requires its notice in every copy. The install script and the Homebrew tap install only the executable, so a notice file in an archive would not reach every installed copy. The executable also compiles in third-party Go modules (a SQLite driver, a terminal library and so on), each with its own notice. Options:",
+  "rec": "A. It meets the notice requirement on every install channel and keeps one self-contained file. The allow-list turns a dependency's license change into a decision for you rather than a surprise in a release. C fails the MIT condition for copies installed by the script or Homebrew.",
+  "options": [
+   "A: notices generated, embedded and in every archive; asmai notices; permissive allow-list",
+   "B: as A, without the allow-list",
+   "C: notices only in the archives and the repository"
+  ],
+  "points": [
+   "(A) The release build generates one third-party notices file from every module compiled in, plus the bundled skills' notice. That file and AsmAI's own LICENSE go in every archive and are embedded in the executable, and a new asmai notices command prints them. The build fails when a module's license is not on an allow-list of permissive licenses (MIT, BSD, Apache-2.0, ISC), so any other license needs your decision first.",
+   "(B) As A, without the allow-list check.",
+   "(C) The notices go only in the archives and the repository."
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "Where are releases published from?",
+  "body": "AsmAI's code lives in talvor/AssemblyAI, the repository that also holds this map. It is public. Every release URL, the install script's address, the Homebrew formula, and the identity that verifies a release's provenance carry the repository's name. Settled: assemblyai is never an identifier, because it belongs to AssemblyAI Inc. on npm and PyPI, and the asmai GitHub account is taken (Define CLI setup and management experience). GitHub redirects a renamed repository's old URLs, but only until someone creates a repository with the old name. Options:",
+  "rec": "A. The first release is when the name starts being copied into other people's scripts and package managers, so it is the last cheap moment to change it. asmai matches the executable, the packages and the decision to keep assemblyai out of identifiers. C separates the code from its planning history for no gain.",
+  "options": [
+   "A: rename to talvor/asmai before the first release",
+   "B: keep talvor/AssemblyAI",
+   "C: keep this repository for planning; new talvor/asmai for the code"
+  ],
+  "points": [
+   "(A) Rename talvor/AssemblyAI to talvor/asmai before the first release, so releases live at github.com/talvor/asmai/releases. The map's issues and history move with it.",
+   "(B) Keep talvor/AssemblyAI.",
+   "(C) Keep this repository for planning, and move AsmAI's code to a new talvor/asmai repository before the first release."
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "Which platforms does each release build?",
+  "body": "Settled: a platform is an operating system and CPU architecture, and Linux x86_64 is certified first. v1 launches when Linux is certified, and macOS follows when it is. Before each release the maintainer qualifies every certified platform on a real host of that platform, with the real pinned providers (Define v1 acceptance scenarios and evidence). An uncertified platform refuses to start agents. Windows is supported only as Linux under WSL (Choose factory hosting and lifecycle). Facts: macOS 26 is Apple's last release for Intel Macs. Homebrew moves Intel macOS to Tier 3 in September 2026 and drops it in September 2027. Options:",
+  "rec": "A. Every certified platform costs a full qualification run with real providers before every release, on hardware you have. Publishing an executable that refuses to start agents invites installs that cannot work. Linux arm64 can be added later by qualifying it; nothing in the build prevents it.",
+  "options": [
+   "A: Linux x86_64 and macOS arm64 planned; publish only what the record certifies",
+   "B: as A, plus Linux arm64",
+   "C: build all four every release; uncertified ones refuse to start agents",
+   "D: as A, but also publish planned platforms before they are certified"
+  ],
+  "points": [
+   "(A) The planned platforms are Linux x86_64 and macOS on Apple silicon (arm64). A release publishes an executable only for the platforms its qualification record certifies, so the first releases are Linux x86_64 only.",
+   "(B) As A, plus Linux arm64 (for example an ARM cloud server as a remote host). Every release would then need a real arm64 Linux host for qualification.",
+   "(C) Build all four (Linux x86_64 and arm64, macOS arm64 and Intel) in every release. The uncertified ones refuse to start agents.",
+   "(D) As A, but also publish executables for planned platforms that are not yet certified. They refuse to start agents."
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "How are releases built, and how can someone check one?",
+  "body": "Settled: releases go on GitHub Releases with checksums (Define CLI setup and management experience). Qualification never runs in hosted CI (Define v1 acceptance scenarios and evidence), but building is separate from qualifying. Facts: the store can use a SQLite driver that needs no C compiler, so one Linux machine can build every platform. The C library through cgo is faster but needs a C toolchain for each target. GitHub artifact attestations are free for public repositories. A GitHub Actions build records signed provenance (which repository, workflow and commit made each file) in Sigstore's public log, and anyone checks it with gh attestation verify. Nobody holds a key. Options:",
+  "rec": "A. Checksums alone only prove that a download matches a file on the same page. The attestation also proves that this repository's workflow built it from the tagged commit, with no signing key for you to protect or rotate. B adds a second signature that proves nothing more. C makes your key the thing to protect. D cannot be attested and depends on your machine.",
+  "options": [
+   "A: GitHub Actions from the tag, no C compiler, reproducible; checksums plus attestations",
+   "B: as A, plus a cosign signature on the checksums",
+   "C: as A, but the checksums signed with my GPG key instead of attestations",
+   "D: built on the maintainer's machine; checksums only"
+  ],
+  "points": [
+   "(A) GitHub Actions builds each release from its tag, with no C compiler and reproducible settings, so anyone can rebuild a release from its tag and get the same executables. It publishes one archive per platform, a SHA-256 checksums file, and an artifact attestation for every file.",
+   "(B) As A, plus a cosign signature on the checksums file.",
+   "(C) As A, but the checksums file is signed with the maintainer's own GPG key instead of attestations.",
+   "(D) The maintainer builds releases on their own machine and uploads them with checksums only."
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "How do macOS users get an executable that runs, and what is the Homebrew tap?",
+  "body": "Settled: a Homebrew tap is an install channel (Define CLI setup and management experience). Facts: Apple silicon runs only signed code, and Go's linker signs each macOS arm64 executable itself with an ad-hoc signature that needs no Apple account. Gatekeeper demands an Apple Developer ID signature and notarization only for a quarantined file. Browsers and Homebrew casks quarantine downloads; curl and Homebrew formulae do not. Homebrew 5.0 deprecated its flag for skipping quarantine, and in September 2026 it disables casks in its own cask repository that fail Gatekeeper. For prebuilt executables GoReleaser now generates casks rather than formulae. For unsigned ones it suggests a hook that strips quarantine, and warns that this circumvents Gatekeeper. A Developer ID costs Apple's yearly developer fee. Options:",
+  "rec": "A. Both v1 channels avoid quarantine, so the linker's signature is enough and nothing depends on an Apple account. B is the way forward if browser downloads or a cask ever matter. C makes every install compile AsmAI, and D bypasses a protection Homebrew itself is retiring.",
+  "options": [
+   "A: no Developer ID; a formula in talvor/homebrew-tap installs the prebuilt executable",
+   "B: Developer ID and notarization; a cask",
+   "C: as A, but the formula builds from source",
+   "D: a cask with a hook that strips quarantine"
+  ],
+  "points": [
+   "(A) No Apple Developer ID in v1. The tap is talvor/homebrew-tap (brew install talvor/tap/asmai). Its formula installs the release's prebuilt executable after checking its checksum, on macOS and on Linux, and the release workflow updates it. The install script, which uses curl, is the other channel. A macOS archive downloaded in a browser needs its quarantine cleared by hand, and the release notes say how.",
+   "(B) Sign every macOS executable with a Developer ID, notarize it, and ship a cask.",
+   "(C) As A, but the formula builds AsmAI from source with Go.",
+   "(D) A cask with a hook that strips quarantine."
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "How does a release get its qualification record, and who publishes it?",
+  "body": "Settled: the maintainer qualifies every certified platform before each release, and again whenever a pinned version changes. The release carries a qualification record; asmai start refuses anything it does not list, and asmai doctor shows it. There is no asmai qualify command (Define v1 acceptance scenarios and evidence). The executable is self-contained, so the record has to be inside it, but the record exists only after qualification has run. Options:",
+  "rec": "A. The record stays inside the one executable, and the check that nothing else changed means the code that ships is the code that was qualified. B adds a second file that every channel must install and keep in step with the executable. C proves v1 on builds no user can install.",
+  "options": [
+   "A: qualify a commit, then release that commit plus its record; release candidates as prereleases; only the maintainer tags",
+   "B: build first, qualify those files, publish the record as a separate file",
+   "C: as A, without release candidates"
+  ],
+  "points": [
+   "(A) Qualify a commit, then release that commit plus its record. The harness runs a development build of the candidate commit, which may start unqualified combinations and says so. The maintainer commits the record it produces and tags that commit. The release workflow checks that the record is the only change since the qualified commit, then builds and publishes. Release candidates (v1.0.0-rc.1) are GitHub prereleases used for the proving scenarios; the tap and the install script skip them unless asked. Only the maintainer tags releases; AsmAI's own agents never tag or publish one.",
+   "(B) Build the release first, qualify those exact files, and publish the record as a separate attested file that the install script and the formula install next to the executable.",
+   "(C) As A, but without release candidates: the proving scenarios run on development builds."
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "How does the store change shape between releases?",
+  "body": "Settled: the daemon is the only writer of an embedded SQLite store, and its journal is kept in full (Define work state and coordination contracts). Upgrading is stop, upgrade, start, with no hot upgrade and no self-update. You back up the state directory, and asmai backup <file> takes a consistent copy while the factory runs. Options:",
+  "rec": "A. Stop, upgrade, start stays three steps, including when the service starts the factory after a reboot, and the backup taken just before the change is the way back. B adds a step that a service start at boot cannot take. Writing and testing a reverse for every migration (C) costs more than restoring the backup taken just before it, and D turns every schema change into manual work for you.",
+  "options": [
+   "A: forward-only migrations at start, after a checked pre-migration backup; keep three; any v1 upgrades to any later one",
+   "B: as A, but only on an explicit asmai migrate",
+   "C: reversible migrations with asmai downgrade",
+   "D: no migrations; export from the old version and import into the new"
+  ],
+  "points": [
+   "(A) Forward-only migrations at start. Each release embeds numbered migrations, and the store records its schema version and the AsmAI version that last wrote it. When asmai start finds migrations pending, it first takes a pre-migration backup into the state directory's backups folder (the same way asmai backup does) and checks it. It then applies every pending migration in one transaction. If one fails, everything rolls back, and start refuses and names the backup. If the volume lacks space for the backup, start refuses before changing anything. The three newest pre-migration backups are kept, and asmai status counts them in disk use. Every release keeps all migrations since v1.0, so any v1 release upgrades straight to any later one.",
+   "(B) As A, but migrations wait for an explicit asmai migrate, and start refuses until it has run.",
+   "(C) Reversible migrations, with an asmai downgrade command.",
+   "(D) No migrations: a release that changes the store's shape needs an export from the old version and an import into the new one."
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "What does start do with a store it cannot use?",
+  "body": "The ticket names two cases, and two more come with them: (1) downgrade: the store was written by a newer schema than this executable knows, for example after reinstalling an older release; (2) unreadable: the file is not a SQLite database, fails SQLite's integrity check, or lacks AsmAI's tables; (3) lost: there is no store, but the state directory still holds AsmAI's clones, workspaces or recordings; (4) held: another AsmAI daemon of yours has the store open. Options:",
+  "rec": "A. Each case means something unusual happened to your data, and the factory cannot tell which copy you want. B and C quietly lose the work since the backup, or all history. Reconciliation already handles a store that knows less than the repositories and GitHub do, so a restore needs no recovery path of its own.",
+  "options": [
+   "A: refuse and explain; asmai restore; never repair, replace or delete",
+   "B: as A, but replace an unreadable store with the newest backup automatically",
+   "C: as A, but set an unreadable store aside and start empty automatically"
+  ],
+  "points": [
+   "(A) Refuse and explain; never repair, replace or delete. In all four cases asmai start refuses before starting any agent. asmai doctor names the case, the AsmAI version that last wrote the store, and the newest backups. A new asmai restore <file> (factory stopped) checks a backup's integrity and schema version, sets the current store aside as a dated broken copy instead of deleting it, and puts the backup in place. A downgrade is resolved by reinstalling the newer release, or by restoring a backup the older one can read. After a restore, every open assignment needs reconciliation at start, and commits pushed since the backup count as outside changes. A store is created fresh only when the state directory holds no AsmAI state at all.",
+   "(B) As A, but an unreadable store is replaced with the newest backup automatically, and you are told.",
+   "(C) As A, but an unreadable store is set aside automatically and the factory starts empty."
+  ]
+ },
+ {
+  "id": "Q10",
+  "title": "What happens if AsmAI is upgraded while the factory is running?",
+  "body": "Settled: upgrading is stop, upgrade, start, through the install channel (Define CLI setup and management experience). But nothing stops brew upgrade, or a rerun of the install script, while the factory runs, and the executable is also the agent CLI. Once the file is replaced, agents' asmai calls and your own commands would run the new version against the old daemon. Options:",
+  "rec": "A. An upgrade never disturbs running work, and the restart stays your step, as settled. B turns every upgrade into a hold across all jobs until you restart, and C is the hot upgrade that was ruled out.",
+  "options": [
+   "A: the running factory keeps its version; agents run the daemon's own copy; other versions only stop, status, doctor",
+   "B: every call from another version is refused, agents' too",
+   "C: the daemon notices, drains and restarts itself"
+  ],
+  "points": [
+   "(A) The running factory keeps its version. At start the daemon copies its own executable into the state directory, and every agent session runs that copy, so agents never meet another version. A command from a version other than the running daemon's does only stop, status and doctor. For anything else it says which version is installed, which is running, and to run asmai stop and then asmai start. The status line shows 'AsmAI vX installed; restart to apply'. The install script refuses to replace a running factory's executable unless given --force.",
+   "(B) As A, but every call from another version is refused, including agents' (no copy), so agents' calls fail and their work holds until the restart.",
+   "(C) The daemon notices that its executable changed, drains, and restarts itself on the new version."
+  ]
+ },
+ {
+  "id": "Q11",
+  "title": "How do newly pinned providers arrive with an upgrade?",
+  "body": "Settled: agents run AsmAI's own pinned copies of Claude Code, Codex and Lavish, installed with asmai providers install from official channels, and pins move by requalifying (ADR 0003). The daemon checks provider versions at start and refuses unqualified combinations before any dispatch (Choose factory hosting and lifecycle). A new release may pin new versions. Qualification case C5 shows that Codex hook trust survives an upgrade. Leaders load their store briefs at every start, so native session resume is only a convenience (Define work state and coordination contracts). Options:",
+  "rec": "A. For you at a terminal, stop, upgrade, start stays three steps, and nothing downloads without your confirmation. The kept copies make going back a reinstall, not a re-download. C runs provider installs inside a package manager's hook, where a failure is hard to see.",
+  "options": [
+   "A: start offers to install the new pins at a terminal, refuses without one; keep the previous release's copies",
+   "B: start always refuses until I run asmai providers install",
+   "C: the install script and the formula install them during the upgrade"
+  ],
+  "points": [
+   "(A) After an upgrade, asmai start lists the newly pinned versions. At a terminal it offers to install them, and continues once you confirm. Without a terminal, for example under the service, it refuses and names asmai providers install. The previous release's pinned copies are kept, so reinstalling that release needs no download, and older copies are removed. A Codex trust review the new version needs is named the same way.",
+   "(B) Start always refuses until you run asmai providers install yourself.",
+   "(C) The install script and the Homebrew formula also install the new provider copies during the upgrade."
+  ]
+ },
+ {
+  "id": "Q12",
+  "title": "What happens to your configuration file across upgrades?",
+  "body": "Settled: one TOML file at ~/.config/asmai/config.toml, which commands also edit. asmai config apply validates it, shows the change and asks, and each applied configuration is journaled (Define CLI setup and management experience). A later release may add, rename or retire settings. Options:",
+  "rec": "A. The file is yours and you edit it by hand, so an upgrade should not touch it. Keeping old names working within v1 keeps upgrades to three steps, and C can still be added if retired settings pile up.",
+  "options": [
+   "A: never rewritten; old names keep working within v1 with a warning; start refuses only what it cannot honour",
+   "B: start rewrites it automatically, keeping the old file",
+   "C: asmai config migrate shows a diff and applies after confirmation"
+  ],
+  "points": [
+   "(A) AsmAI never rewrites your file during an upgrade. Within v1 a new setting has a default, and a renamed or retired setting keeps working, with a warning in asmai doctor and asmai config check that names its replacement. Only a setting that can no longer be honoured makes asmai start refuse, naming the line and the fix. A major release may drop retired settings.",
+   "(B) asmai start rewrites the file into the new form automatically, keeping the old file beside it.",
+   "(C) A new asmai config migrate shows the rewrite as a diff and applies it after confirmation, like config apply."
+  ]
+ },
+ {
+  "id": "Q13",
+  "title": "When are the asmai names claimed on npm, crates.io and Homebrew?",
+  "body": "Settled: asmai is the name on every channel. On 2026-10-04 it was free on npm, crates.io and Homebrew, and 'the names are claimed when implementation starts' (Define CLI setup and management experience). AsmAI's channels are GitHub Releases, the Homebrew tap and the install script; it publishes nothing to npm or crates.io. Facts: npm's terms forbid publishing a package simply to reserve a name, and squatted names may be removed. crates.io's policy forbids crates that only reserve a name with no genuine function, and its team may delete them. A Homebrew tap needs no claim, because it is a repository of yours. The asmai name in Homebrew's own core repository cannot be claimed: it accepts only notable projects, built from source. Options:",
+  "rec": "A. Neither registry is an AsmAI channel, so a name there protects nothing AsmAI ships, and a placeholder breaks their rules. The README names the only channels, so an asmai package anywhere else is plainly not AsmAI's. B adds and maintains a whole channel only to hold a name.",
+  "options": [
+   "A: claim nothing on npm or crates.io; create the tap with the first release candidate",
+   "B: when implementation starts, a working npm installer (npx asmai); crates.io left alone",
+   "C: placeholders on npm and crates.io when implementation starts",
+   "D: placeholders now, as a task before implementation"
+  ],
+  "points": [
+   "(A) Claim nothing on npm or crates.io. The Homebrew tap is created with the first release candidate. If AsmAI ever ships on npm or crates.io, it takes the name then, or another if it is gone. This replaces 'claimed when implementation starts'.",
+   "(B) When implementation starts, publish a working npm package, an installer that fetches the release executable (npx asmai), as a fourth channel to maintain. crates.io is left alone.",
+   "(C) Publish placeholders on npm and crates.io when implementation starts, as planned.",
+   "(D) Publish placeholders now, as a task before implementation."
+  ]
+ }
+]

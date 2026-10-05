@@ -1,0 +1,5 @@
+session:
+  file: /home/phillip/.treehouse/assembly-ai-ee2f95/2/assembly-ai/.lavish/release-migration.html
+  status: ended
+  ended_by: agent
+next_step: "This Lavish Editor session for /home/phillip/.treehouse/assembly-ai-ee2f95/2/assembly-ai/.lavish/release-migration.html has ended. Stop polling. Deliver any remaining updates directly in this conversation, or run `lavish-axi /home/phillip/.treehouse/assembly-ai-ee2f95/2/assembly-ai/.lavish/release-migration.html` to open a fresh session if the user needs further visual review."
