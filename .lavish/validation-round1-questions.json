@@ -1,0 +1,103 @@
+[
+ {
+  "id": "Q1",
+  "title": "Is no-mistakes AsmAI's delivery pipeline?",
+  "body": "The facts above describe how no-mistakes works. It is a complete orchestrator for one person: it has its own daemon, store, checkouts, agents and push path. Adopting it as it is would clash with earlier decisions in three places. First, its agents run outside AsmAI's daemon-owned terminals (ADR 0001), so no worker cap, recording, input fence or skill list applies to them. Second, by default it runs your personal claude and codex, and its init writes ~/.claude (ADR 0003). Third, its rebase step and its pushes after checks pass rewrite and move the job branch outside the daemon's fast-forward on acceptance. That breaks the one-writer rule and the rule that the base is merged in unless repository instructions ask for a rebase (ADR 0005; Define concurrent repository work and integration). Options: (A) Not adopted in v1. AsmAI's own roles validate and deliver, and its proven ideas become design input: a fixed gate order, the job's intent handed to the reviewer, findings that challenge your intent sent to you, 'ready' never meaning merged, and a push that never discards others' commits. no-mistakes is not shipped. (B) Adopted for every repository job. AsmAI pins it like Lavish, and one Quality worker drives it as the single outer executor once the job branch is otherwise ready. The job branch belongs to the run while it is active, its agents are pointed at AsmAI's pinned providers, and its ask-user findings become decision requests. Round 2 would settle how its rebase, its later pushes and its agents fit the earlier decisions. (C) Optional per repository: A by default, with per-repository configuration able to switch on B for a repository already set up for it. (D) Local checks only: every run skips its push, PR and CI steps, its fix commits come back as a result, and AsmAI pushes and opens the PR. It still rebases, and its agents still run outside AsmAI.",
+  "rec": "A. Inside AsmAI, no-mistakes would be a second orchestrator owning the same branch, which the skills research warned against (Map Matt Pocock skills to factory roles). Fitting it in means either weakening ADRs 0001, 0003 and 0005 or maintaining an integration with a tool that has shipped 176 releases since April. Quality already owns independent validation, so AsmAI has the roles it needs. D keeps the rebase and the outside agents, and C doubles the paths to qualify. You can still run no-mistakes yourself on a delivered PR. A later job takes in any commits it adds, like any outside change.",
+  "options": [
+   "A: not adopted in v1; AsmAI's own roles validate and deliver, using its ideas",
+   "B: adopted for every repository job, driven by one Quality worker",
+   "C: optional per repository (A by default)",
+   "D: its local checks only; AsmAI pushes and opens the PR"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Who tests the work, and who reviews it?",
+  "body": "Settled: Engineering owns implementation. Quality owns independent review and validation, kept separate from Engineering's responsibility, and Coordination cannot mark failed validation as passed (Define roles and leader-worker contracts). Upstream implement ends with 'use /code-review', and code-review is on Quality's list only (Choose skill bundles and update policy). code-review reviews a diff on two axes: Standards (the repository's documented rules plus a code-smell baseline) and Spec (the originating issue or spec). Options: (A) Engineering workers write the tests along with the code (tdd) and run the repository's checks before submitting. Each result names the commands and their outcomes. Quality workers then validate independently. Each works read-only at a fixed commit in a clean workspace, re-runs the repository's checks and reviews on both axes: Standards against the repository instructions, Spec against the job's mandate and acceptance criteria. Quality never fixes anything: its findings go to the Engineering leader, who assigns the fix. The operating guide maps implement's 'use /code-review' onto this Quality review, not a self-review. (B) As A, and Quality also writes acceptance tests of its own from the job's criteria, on its own assignment branch. (C) As A, but a Quality worker may fix small findings itself on an assignment branch. (D) As A, plus an Engineering self-review with code-review before submitting, so code-review goes on Engineering's list too.",
+  "rec": "A. It keeps the role boundary in both directions: the author never certifies its own work, and the reviewer never becomes a second author, so every fix is reviewed by someone who did not write it. B doubles the test writing. C has Quality review its own fixes. D spends allowance on a review that is not independent, against worker caps of three per provider.",
+  "options": [
+   "A: Engineering tests its own work; Quality re-runs checks and reviews independently, never fixes",
+   "B: as A, and Quality also writes acceptance tests",
+   "C: as A, but Quality may fix small findings itself",
+   "D: as A, plus an Engineering self-review with code-review first"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "When does Quality validate?",
+  "body": "Settled: leaders may accept results against agreed, checkable criteria (Define delegated authority and human escalation). The job branch moves only when the daemon fast-forwards it to an accepted result, and it takes in the latest base before it is offered for review (Define concurrent repository work and integration). Options: (A) Once per delivery. Quality validates the job branch after its last accepted writing assignment and after it has taken in the latest base, before it is offered to you. It validates again after any later change, before the branch is offered again. The Engineering leader accepts individual assignments against their own criteria, and any leader may ask Quality to review a risky assignment earlier. (B) Every writing assignment, before its owning leader accepts it. (C) Both: every writing assignment, and the finished job branch.",
+  "rec": "A. The final validation sees the whole change with the base already taken in, which is what you will review. Reviewing every assignment multiplies dispatches against the worker caps without making that final check unnecessary. An earlier review on request covers the risky cases.",
+  "options": [
+   "A: once on the finished job branch, again after any later change; earlier on request",
+   "B: every writing assignment, before acceptance",
+   "C: both"
+  ]
+ },
+ {
+  "id": "Q4",
+  "title": "What must be true before a PR counts as a tested PR?",
+  "body": "The destination is delivery of tested pull requests, and only evidence tied to the current dispatch counts (Define work state and coordination contracts). Options: (A) All of the following. (1) Every writing assignment is accepted, and each result names the tests added and the checks run, with their outcomes, at its commit. (2) The job branch has taken in the latest base with no conflicts. (3) Quality has validated that exact head commit: the repository's checks were re-run and passed, and no blocking finding remains unresolved. (4) The job branch is pushed and CI on that head is green. A repository without CI says so, and the checks Quality ran stand in. (5) The PR body states the evidence and every gap, skipped check or exception. Any later commit makes the evidence stale, so (2) to (4) are repeated. A repository with no tests at all is stated as a gap; setting tests up is a distinct approach that comes to you. (B) As A, without waiting for CI; CI results are reported once they finish. (C) As A, plus screenshots or recordings for user-facing changes wherever the repository can produce them.",
+  "rec": "A. 'Tested' should mean that the exact commit you would merge was checked locally and by the forge, so a red build is never handed over as ready. B can deliver a PR that fails CI minutes later. C is better as a request inside a job's acceptance criteria, since the pr skill already asks for before-and-after evidence where available.",
+  "options": [
+   "A: accepted assignments, base taken in, Quality pass at that head, CI green on that head, gaps stated",
+   "B: as A, without waiting for CI",
+   "C: as A, plus screenshots or recordings for user-facing changes"
+  ]
+ },
+ {
+  "id": "Q5",
+  "title": "Where are review and validation evidence recorded?",
+  "body": "Settled: the journal is AsmAI's canonical record (Define work state and coordination contracts). A note that the tracker already holds, such as a resolution comment or a PR review, is not copied anywhere. Agents use your git identity and your gh credentials (Define concurrent repository work and integration), so anything they post on GitHub appears under your name. GitHub does not let the author of a PR approve it. Options: (A) In the journal, through results, Quality's report and acceptances, and summarized in the PR body. The pr skill's Evidence section gets a validation line naming the head commit Quality passed. No GitHub review is posted. (B) As A, plus Quality's report posted as a PR comment from your account, marked as AsmAI's. (C) As A, plus a report file committed on the job branch.",
+  "rec": "A. The PR body is where you will read it, and the journal holds the detail. A comment in your name can read as your own review, and a committed report goes stale with the next commit.",
+  "options": [
+   "A: journal, summarized in the PR body; no GitHub review in my name",
+   "B: as A, plus Quality's report as a PR comment",
+   "C: as A, plus a committed report file"
+  ]
+ },
+ {
+  "id": "Q6",
+  "title": "Where is the line between a tested PR and a merge?",
+  "body": "Settled: accepting a tested PR does not authorize merging. Merge, deployment and destructive changes outside the job need separate authorization unless an explicit standing grant covers them (Define delegated authority and human escalation). Automatic production deployment is out of scope. Options: (A) AsmAI never merges in v1. You merge on GitHub, a job's mandate ends at a tested PR, and no grant can authorize a merge in v1. This narrows the earlier authority policy, which allowed a merge under explicit authorization. (B) AsmAI merges only on your explicit word for that PR, in a witnessed message or a decision. A worker carries it out after checking that the evidence is still current. There are no standing merge grants. (C) As B, plus standing grants per repository, such as 'merge my PRs when CI is green and Quality passed'.",
+  "rec": "A. A merge is where the factory's work becomes your repository's history, often with a deployment behind it. GitHub already gives you the merge button, branch protection and required checks. A merge path in AsmAI is one more consequential action to qualify, for little gain. B or C can be added later without changing anything else decided here.",
+  "options": [
+   "A: AsmAI never merges in v1; I merge on GitHub",
+   "B: merges only on my explicit word for that PR",
+   "C: as B, plus standing merge grants per repository"
+  ]
+ },
+ {
+  "id": "Q7",
+  "title": "When does a job end, and what happens to its PR afterwards?",
+  "body": "Settled: a follow-up to a job whose PR is still open continues on that job branch and PR (Define concurrent repository work and integration). Cancelling a job leaves its PR open, and v1 has no notifications (Define operating limits and visibility). Concurrent jobs in one repository run without locks, so merging one PR can bring another into conflict. Options: (A) The job ends when its tested PR is delivered, and Coordination reports it with the link. Anything later is a follow-up job you ask for: your review comments, a conflict after another merge, or a CI failure on a moved base. AsmAI does not watch the PR after the job ends. (B) The job stays open until the PR is merged or closed. A CI failure or a conflict with the base gets a fix assignment automatically. Coordination brings you new review comments as a proposed follow-up. (C) As A, but AsmAI keeps showing each delivered PR's state (merged, closed, CI, conflict, new comments) in the status line, the catch-up and asmai status, without acting on it.",
+  "rec": "A. The PR is then in your hands, and a follow-up is one sentence to Coordination ('14: fix the conflict') that continues on the same branch and PR. B keeps spending allowance on PRs you may be about to close or rework. C adds a GitHub watcher, and GitHub already shows that state.",
+  "options": [
+   "A: the job ends when the tested PR is delivered; later changes are follow-up jobs",
+   "B: the job stays open until the PR is merged or closed, fixing CI and conflicts",
+   "C: as A, but AsmAI keeps showing delivered PRs' state"
+  ]
+ },
+ {
+  "id": "Q8",
+  "title": "What happens to Quality's findings?",
+  "body": "Settled: leaders reconcile disagreements against agreed requirements and evidence. Coordination owns unresolved cross-role trade-offs and cannot mark failed validation as passed (Define roles and leader-worker contracts). An assignment that reaches 5 dispatches without acceptance holds and is escalated (Define operating limits and visibility). no-mistakes sorts findings into auto-fix, ask-user and no-op. Options: (A) Quality marks each finding as blocking, advisory or needs-you. Blocking findings must be fixed, and the Engineering leader assigns the fix. Advisory findings are listed in the PR body, and no fix is required. A needs-you finding challenges your stated intent or a recorded decision, so it comes to you word for word. A blocking finding is cleared only by Quality's re-validation or by your decision. If the Engineering leader disputes one, the two leaders reconcile, and anything still unresolved comes to you. (B) As A, without advisory findings: every finding is either fixed or decided by you. (C) Quality's verdict is final, and disputes are not escalated.",
+  "rec": "A. It keeps routine fixes inside the factory and brings you only real choices. Advisory findings stay visible without stalling delivery. C would have one leader overrule another without your say, which the role contracts route to you.",
+  "options": [
+   "A: blocking, advisory or needs-you; disputes go leader to leader, then to me",
+   "B: every finding is fixed or decided by me; no advisory",
+   "C: Quality's verdict is final"
+  ]
+ },
+ {
+  "id": "Q9",
+  "title": "How much validation do notes jobs and jobs without a repository get?",
+  "body": "Settled: a repository job whose outcome is notes (research findings, a diagnosis log, a planning record) delivers a PR holding those notes. A job without a repository gets scratch workspaces and no PR (Define concurrent repository work and integration). Options: (A) Neither gets Quality validation unless the mandate asks for an independent check. The owning leader accepts against the mandate, and its acceptance is the completion evidence. A notes PR says 'notes only' in its body, and results link their artifacts. (B) Quality reviews every PR, notes included, on the Spec axis only. (C) As A for notes. Code made outside a repository, such as a script, gets Quality validation like repository code.",
+  "rec": "A. Planning records carry your own answers, and the Research leader already accepts research against its question, so an independent review adds little there. Where it matters, you can ask for one in the mandate.",
+  "options": [
+   "A: no Quality validation unless the mandate asks; the owning leader's acceptance is the evidence",
+   "B: Quality reviews every PR, notes included",
+   "C: as A, but Quality validates any code made outside a repository"
+  ]
+ }
+]

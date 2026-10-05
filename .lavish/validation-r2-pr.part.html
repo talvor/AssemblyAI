@@ -1,0 +1,11 @@
+<section class="card bg-base-300 p-5 mb-6">
+<h2 class="text-xl font-bold mb-1">Your question: can the leader raise the PR itself, from what its workers report?</h2>
+<p class="opacity-90 mb-3">Yes, and having several workers is actually the argument for it. Only the Engineering leader sees every accepted result in a job, along with Quality's report and the CI result. A delivery worker would need all of that passed to it in its assignment, and it would spend a dispatch and a slot under the cap. Four things need settling, though:</p>
+<ul class="list-disc ml-6 space-y-2 opacity-90 mb-4">
+<li><b>Writing the PR is either coordination or substantive work.</b> Leaders may keep coordination records, but substantive work runs as worker assignments (Define roles and leader-worker contracts). Assembling a PR from accepted results, evidence and CI is a record. Reading the whole diff to draw the change, or running the code to capture before-and-after output, is substantive work.</li>
+<li><b>One leader serves every job.</b> A long PR-writing turn for one job delays acceptances and decisions in every other job, and a large diff fills the leader's context.</li>
+<li><b>Summaries can miss things.</b> Results describe each assignment. Changes that arrive when the base is merged in, or during conflict resolution, may appear in no single worker's result.</li>
+<li><b>A new kind of action for a leader.</b> Until now, workers performed every git and GitHub action. A leader opening the PR records it as an effect like a worker would. If it crashes mid-action, its next start reconciles from the brief.</li>
+</ul>
+<p class="opacity-90">Option C below avoids all four. Each worker writes the PR section for its own part while the context is fresh: what changed, and the before-and-after evidence, in the pr skill's form. The leader then composes the PR from those sections plus Quality's report, judges the whole change's merge danger, and opens and updates the PR itself. The daemon still pushes the job branch (R2-Q2).</p>
+</section>

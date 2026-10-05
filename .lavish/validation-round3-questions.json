@@ -1,0 +1,35 @@
+[
+ {
+  "id": "R3-Q1",
+  "title": "How much does validation repeat after a later change?",
+  "body": "Settled: Quality validates the finished job branch, and again after any later change before it is offered (Q3). The job branch takes in the latest base before it is offered and before each later push (Define concurrent repository work and integration). After Quality passes, three kinds of later change can happen: a fix for a finding or a red build; a clean merge of a base that moved, with no conflicts and no edits; or a merge whose conflicts a worker resolved. Options: (A) Proportionate. Every later change re-runs the repository's checks at the new head. A fix or a resolved conflict is also reviewed on both axes, for what changed since the last validated commit, and Quality confirms that each earlier blocking finding is resolved. A clean base merge needs only the checks. (B) Full. Every later change gets a full validation of the whole job branch. (C) As A, but a clean base merge needs nothing beyond CI on the pushed head.",
+  "rec": "A. A clean merge changes no line the job wrote, so re-running the checks catches interactions with the new base without re-reviewing unchanged work. A fix is new code, so it is reviewed. C relies on CI, which may be narrower than the checks Quality runs and which some repositories lack.",
+  "options": [
+   "A: proportionate: checks always; review only fixes and resolved conflicts",
+   "B: full validation after every change",
+   "C: as A, but a clean base merge needs only CI"
+  ]
+ },
+ {
+  "id": "R3-Q2",
+  "title": "When does a job that keeps failing come to you?",
+  "body": "Settled: an assignment that reaches 5 dispatches without acceptance holds, and its owning leader escalates it to you with what was tried (Define operating limits and visibility). But each fix after a blocking finding or a red build is a new assignment, so that limit never notices a job that keeps failing validation or CI. Options: (A) The job's delivery holds after 3 failed validations of the same job. A failed validation means blocking findings, or red CI after its one judged re-run. The Engineering leader then escalates to you with the findings and what was tried, and other jobs continue. The number is a factory-wide setting. (B) No job-level limit; only the per-assignment limit applies. (C) As A, with 5.",
+  "rec": "A. Three rounds of fix and re-validation that still fail usually mean the approach or the requirements need your judgement. Another fix round would only spend more allowance.",
+  "options": [
+   "A: hold and escalate after 3 failed validations of a job",
+   "B: no job-level limit",
+   "C: as A, with 5"
+  ]
+ },
+ {
+  "id": "R3-Q3",
+  "title": "Record ADR 0007 as drafted?",
+  "body": "The draft is shown above. It records the choices that are hard to reverse and surprising without context. AsmAI delivers with its own roles rather than no-mistakes, which you already use. The daemon pushes the job branch and follows CI. The delivering leader opens the PR. AsmAI never merges. Options: (A) Record it as drafted. (B) Record it with the changes in my notes. (C) Do not record an ADR.",
+  "rec": "A. Without it, a future reader would wonder why the factory rebuilt a pipeline its user already has, and why the daemon, not an agent, pushes the job branch.",
+  "options": [
+   "A: record ADR 0007 as drafted",
+   "B: record it with the changes in my notes",
+   "C: no ADR"
+  ]
+ }
+]

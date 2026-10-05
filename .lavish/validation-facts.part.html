@@ -1,0 +1,13 @@
+<section class="card bg-base-300 p-5 mb-6">
+<h2 class="text-xl font-bold mb-1">Facts about no-mistakes</h2>
+<p class="text-sm opacity-70 mb-3">Checked on this host on 2026-10-05 against the installed copy and its official docs. These are observations, not qualification.</p>
+<ul class="list-disc ml-6 space-y-2 opacity-90">
+<li><b>What it is.</b> A separate product by Kun Chen, under the MIT licence (<a class="link" href="https://github.com/kunchenguid/no-mistakes">kunchenguid/no-mistakes</a>), not a Matt Pocock skill. The installed copy is v1.84.0, the latest stable release (26 September). There have been 176 releases since v1.0.0 in April, with daily prereleases (v1.87.1 on 4 October).</li>
+<li><b>Setup writes outside the repository.</b> <code>no-mistakes init</code> adds a <code>no-mistakes</code> remote to the repository and creates a bare gate repository under <code>~/.no-mistakes/repos</code>. It installs its skill into <code>~/.claude/skills</code> and <code>~/.agents/skills</code> and starts its own per-user daemon as a systemd or launchd service.</li>
+<li><b>A fixed pipeline in its own checkouts.</b> A push to the <code>no-mistakes</code> remote starts a run in a disposable checkout under <code>~/.no-mistakes/worktrees</code>. The steps run in a fixed order: intent → rebase → review → test → document → lint → push → PR → CI. A step can be skipped for one run but never removed. A second push to the same branch cancels the active run.</li>
+<li><b>Its own agents.</b> Each step runs one-shot claude or codex subprocesses, taking the first one found on <code>PATH</code> (here, your personal copies in <code>~/.nix-profile/bin</code>) unless a path override is configured. They run outside any terminal AsmAI owns.</li>
+<li><b>It rewrites and moves the branch.</b> The rebase step rebases the branch onto the fresh base, and fix rounds commit to the branch. The push is guarded so it never discards commits already on the target. It pushes, then opens or updates the PR.</li>
+<li><b>It keeps working after checks pass.</b> It watches the PR until it is merged or closed. On a merge conflict it rebases, validates again and re-pushes, and it can auto-fix CI failures.</li>
+<li><b>Human gates.</b> Review findings are never auto-fixed by default. An <i>ask-user</i> finding must go to the human word for word, unless the human has consented to <code>--yes</code>. <i>checks-passed</i> means ready for a human to review and merge, never merged.</li>
+</ul>
+</section>

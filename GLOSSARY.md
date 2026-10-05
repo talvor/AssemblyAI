@@ -86,6 +86,18 @@ _Avoid_: Worker branch
 The directory set aside for one assignment, where its worker works: the factory's own checkout of the job's repository, or an empty scratch directory for a job without one. A writing assignment's workspace has its own branch; a read-only one is fixed at the commit it examines. Writes outside it are effects.
 _Avoid_: Worktree, sandbox, checkout (when meaning an assignment's working copy)
 
+**Validation**:
+Quality's independent check of a job branch at one exact commit, re-running the repository's checks and reviewing the change against the repository instructions and the job's mandate. Validation never changes the work.
+_Avoid_: QA, testing (when meaning Quality's check)
+
+**Finding**:
+A problem that validation reports. A blocking finding must be fixed before delivery. An advisory finding is reported, and no fix is required. A needs-you finding challenges the user's stated intent or a recorded decision, so it goes to the user.
+_Avoid_: Issue, comment (when meaning a validation result)
+
+**Tested pull request**:
+A job's pull request whose exact head commit has passed validation and the repository's CI, with its base taken in and its evidence and gaps stated. It is ready for the user to review and merge, and the factory never merges it.
+_Avoid_: Ready PR, finished PR
+
 **Conversation**:
 The user's ongoing exchange with Coordination in its interactive terminal. Unlike an intervention, leaving it never pauses automated delivery.
 _Avoid_: Chat, session

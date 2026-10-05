@@ -1,0 +1,31 @@
+{
+ "round1": {
+  "Q1": "A: not adopted in v1; AsmAI's own roles validate and deliver, using its ideas. Note: \"Add this as an optional v2 feature\"",
+  "Q2": "A: Engineering tests its own work; Quality re-runs checks and reviews independently, never fixes",
+  "Q3": "A: once on the finished job branch, again after any later change; earlier on request",
+  "Q4": "A: accepted assignments, base taken in, Quality pass at that head, CI green on that head, gaps stated",
+  "Q5": "A: journal, summarized in the PR body; no GitHub review in my name",
+  "Q6": "A: AsmAI never merges in v1; I merge on GitHub",
+  "Q7": "A: the job ends when the tested PR is delivered; later changes are follow-up jobs",
+  "Q8": "A: blocking, advisory or needs-you; disputes go leader to leader, then to me",
+  "Q9": "A: no Quality validation unless the mandate asks; the owning leader's acceptance is the evidence"
+ },
+ "round2": {
+  "R2-Q1": "A: Engineering owns delivery (notes-only jobs: the notes' own leader). Asked first: \"For R2-Q1 I am leading towards B: Coordinator, but I want to understand if there are any downsides to this.\" (answered on the board, which added option C)",
+  "R2-Q2": "A: the daemon, when the delivery owner asks; never forced",
+  "R2-Q3": "A: once, at delivery: pushed, draft PR, ready when CI is green",
+  "R2-Q4": "C: workers write their part; the leader composes and opens it. Asked first: \"For R2-Q4, I am thinking that the leader should raise the PR with the information it receives from workers.  A job may require multiple workers to be involved.  Will this raise any issues?\" (answered on the board, which added option C)",
+  "R2-Q5": "A: the daemon watches; red goes to the Engineering leader, with one judged re-run allowed",
+  "R2-Q6": "A: declared per repository; otherwise wait, then hold and ask me",
+  "R2-Q7": "A: AsmAI's delivery always pushes; such an instruction is listed as a gap",
+  "R2-Q8": "A: add all three as written"
+ },
+ "round3": {
+  "R3-Q1": "A: proportionate: checks always; review only fixes and resolved conflicts",
+  "R3-Q2": "A: hold and escalate after 3 failed validations of a job",
+  "R3-Q3": "A: record ADR 0007 as drafted"
+ },
+ "confirm": {
+  "CONFIRM": "Confirm and record"
+ }
+}

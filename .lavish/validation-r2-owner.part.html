@@ -1,0 +1,21 @@
+<section class="card bg-base-300 p-5 mb-6">
+<h2 class="text-xl font-bold mb-1">Your question: what are the downsides of Coordination owning delivery?</h2>
+<p class="opacity-90 mb-3">There is a real case for B. The map's Notes already say Coordination "drives delivery", which my first recommendation underweighted. Coordination is also the only leader that always runs, so CI results never have to wake another leader. And every kind of job would deliver the same way. The downsides all come from one fact: Coordination does no substantive work. Every technical step still happens in Engineering or Quality, so with B, Coordination becomes a relay in the middle of that work.</p>
+<ul class="list-disc ml-6 space-y-2 opacity-90 mb-4">
+<li><b>An extra hop on every fix.</b> A blocking finding or a red build travels Quality → Coordination → Engineering, and the fix comes back the same way. With A it goes straight from Quality to Engineering. Each hop is another leader turn: more allowance, and more waiting.</li>
+<li><b>Your conversation shares the agent.</b> Coordination is the agent you talk to. Under B it also processes every verdict, CI result and refused push for every running job. Your keys still reach it, but more of its turns are delivery traffic rather than you.</li>
+<li><b>It judges what it cannot see well.</b> Deciding that a job branch is ready for validation means knowing that the planned work is complete and every assignment accepted. Engineering knows that first-hand. Coordination would rely on Engineering's word anyway.</li>
+<li><b>It sits in the middle of disputes.</b> In round 1 you chose that a disputed finding goes leader to leader and then to you (Q8). Under B, Coordination relays both sides of the dispute and then presents it to you.</li>
+</ul>
+<p class="opacity-90 mb-3">Option C, below, splits the work at the point where Quality passes. Engineering and Quality keep the technical loop: readiness, fixes and re-validation. Coordination owns everything you see from then on: the push, the PR, CI and the report. A red build goes back to Engineering once, and then returns to Coordination after Quality passes again.</p>
+<div class="overflow-x-auto"><table class="table table-sm">
+<thead><tr><th></th><th>A: Engineering</th><th>B: Coordination</th><th>C: split at Quality's pass</th></tr></thead>
+<tbody>
+<tr><td class="align-top">Decides the branch is ready for validation</td><td class="align-top">Engineering</td><td class="align-top">Coordination, on Engineering's word</td><td class="align-top">Engineering</td></tr>
+<tr><td class="align-top">Routes Quality's findings</td><td class="align-top">straight to Engineering</td><td class="align-top">through Coordination</td><td class="align-top">straight to Engineering</td></tr>
+<tr><td class="align-top">Asks for the push, owns the PR and CI</td><td class="align-top">Engineering</td><td class="align-top">Coordination</td><td class="align-top">Coordination</td></tr>
+<tr><td class="align-top">Writes the PR (pr skill)</td><td class="align-top">an Engineering worker</td><td class="align-top">a Coordination worker; pr moves to Coordination's worker list</td><td class="align-top">a Coordination worker; pr moves to Coordination's worker list</td></tr>
+<tr><td class="align-top">Extra handoffs per delivery</td><td class="align-top">none</td><td class="align-top">one per validation, finding and CI result</td><td class="align-top">one when Quality passes, one per red build</td></tr>
+<tr><td class="align-top">Notes-only jobs</td><td class="align-top">delivered by the notes' own leader</td><td class="align-top">delivered by Coordination</td><td class="align-top">delivered by Coordination</td></tr>
+</tbody></table></div>
+</section>

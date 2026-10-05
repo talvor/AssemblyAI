@@ -1,0 +1,12 @@
+[
+ {
+  "id": "CONFIRM",
+  "title": "Confirm the full resolution above?",
+  "body": "This is the complete resolution, built from your answers in rounds 1 to 3. If you confirm, I will post it on Choose validation and delivery ownership, close the ticket, and add a line to the map's Decisions so far. I will also add a pointer to the map's Notes, a v2 line for no-mistakes to Out of scope, and the fog changes listed under Map follow-through. Define v1 acceptance scenarios and evidence gets a short 'Narrowed by' section. No new ticket is created. If anything is wrong or missing, choose the second option and say what in the notes.",
+  "rec": "Confirm and record, if it matches what you decided.",
+  "options": [
+   "Confirm and record",
+   "Change something (see my notes)"
+  ]
+ }
+]
