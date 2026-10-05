@@ -1,0 +1,12 @@
+[
+ {
+  "id": "CONFIRM",
+  "title": "Confirm the full resolution above?",
+  "body": "This is the complete resolution, built from your answers in rounds 1 and 2. One point is my reading of your note rather than an option you chose. On R2-Q1 you chose B, and your note said you will set up a virtual machine on this host or elsewhere, and not to block on it until it is actually required. So the resolution says: S9 stays a launch requirement, and launch waits for it; its remote host is a virtual machine you set up, not necessarily a separate physical machine; and setting it up blocks nothing until S9 is about to run.\n\nIf you confirm, I will post the resolution on Define v1 acceptance scenarios and evidence and close it. On the map I will add its Decisions so far line and a Notes pointer, and remove the two fog items. I will also create 'Choose the specification's structure and implementation sequence' as a sub-issue blocked by Choose license, release packaging and upgrade migration. If anything is wrong or missing, choose the second option and say what in the notes.",
+  "rec": "Confirm and record, if it matches what you decided.",
+  "options": [
+   "Confirm and record",
+   "Change something (see my notes)"
+  ]
+ }
+]

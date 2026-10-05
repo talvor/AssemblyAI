@@ -98,6 +98,26 @@ _Avoid_: Issue, comment (when meaning a validation result)
 A job's pull request whose exact head commit has passed validation and the repository's CI, with its base taken in and its evidence and gaps stated. It is ready for the user to review and merge, and the factory never merges it.
 _Avoid_: Ready PR, finished PR
 
+**Qualification**:
+The recorded proof, by running the qualification cases with real provider CLIs, that one combination of pinned provider versions behaves as the factory relies on, on one platform.
+_Avoid_: Certification (for a combination), testing
+
+**Certified platform**:
+An operating system and CPU architecture on which a release's qualification has passed. Agents start only on certified platforms.
+
+**Qualification record**:
+The list a release carries of its qualified combinations, certified platforms and known limitations.
+
+**Known limitation**:
+A provider signal missing from a qualified combination, for which the factory's safe default stands in.
+
+**Proving scenario**:
+A real job run end to end on the proving ground whose evidence and the user's verdict show the factory is useful.
+_Avoid_: Acceptance scenario, acceptance test (acceptance is a leader's verdict on a result)
+
+**Proving ground**:
+The real repositories and tasks the proving scenarios run on.
+
 **Conversation**:
 The user's ongoing exchange with Coordination in its interactive terminal. Unlike an intervention, leaving it never pauses automated delivery.
 _Avoid_: Chat, session
