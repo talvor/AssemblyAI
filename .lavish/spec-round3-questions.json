@@ -1,0 +1,23 @@
+[
+ {
+  "id": "R3-Q1",
+  "title": "Which Mac runs the harness?",
+  "body": "R2-Q5 asked you to name the Mac the harness runs on, and none was named. With your R2-Q5 answer, the harness needs an Apple silicon Mac from the end of M1, with a separate OS user signed in to Claude Code and Codex.\n\nOptions: (A) A Mac I already have (name it in the notes). (B) One I will set up before M1 ends (say which in the notes if you know). (C) None yet: until a Mac is ready, the macOS harness runs wait and then run together on the first Mac available. Hosted macOS tests still run on every PR, and Linux is never held up.",
+  "rec": "A if you have one. Otherwise C, so that a missing Mac holds nothing up, like the remote scenario's virtual machine.",
+  "options": [
+   "A: a Mac I already have (named in my notes)",
+   "B: one I will set up before M1 ends",
+   "C: none yet; macOS harness runs wait for the first Mac available"
+  ]
+ },
+ {
+  "id": "CONFIRM",
+  "title": "Confirm the full resolution above?",
+  "body": "This is the complete resolution, built from your answers in rounds 1 and 2, with the Mac line taken from R3-Q1. Two points began as my reading of your Q10 note, and you confirmed both in R2-Q1: the new repository replaces the rename, and S1, S4 and the record of the proving scenarios belong to talvor/asmai.\n\nIf you confirm, I will post the resolution on Choose the specification's structure and implementation sequence and close it. On the map I will add its Decisions so far line and a Notes pointer, remove the last fog item, and correct the gist of Choose license, release packaging and upgrade migration, which still says the repository is renamed. I will also add a one-line comment on that ticket and on Define v1 acceptance scenarios and evidence, pointing at this change. The map will then have no open tickets and no fog. The board, the answers and the ADR 0008 line go to firstmate for archiving. If anything is wrong or missing, choose the second option and say what in the notes.",
+  "rec": "Confirm and record, if it matches what you decided.",
+  "options": [
+   "Confirm and record",
+   "Change something (see my notes)"
+  ]
+ }
+]
