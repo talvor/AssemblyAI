@@ -1,0 +1,56 @@
+[
+ {
+  "id": "R2-Q4",
+  "title": "Who writes and opens the PR, and what goes in it?",
+  "body": "Your question about the leader raising the PR is answered just above. Settled: the Engineering leader owns delivery, and the daemon pushes the job branch (R2-Q1, R2-Q2). Evidence is summarized in the PR body, and no GitHub review is posted in your name (Q5). The pr skill's template has Summary (the smallest view of the change), Evidence (before and after) and Merge Danger (one-way or two-way door, blast radius). Whoever writes the body applies the same content rules in every option. The body follows the repository's own PR template where it has one, and otherwise the pr skill's template. It adds an AsmAI section covering the job and its mandate, the head commit Quality passed, the checks and CI results, advisory findings and gaps. It links the originating issue with 'Closes #n' only when the mandate is to resolve that issue, and with 'Refs #n' otherwise. It is updated whenever the evidence changes, and a notes-only job gets a short 'notes only' body. Options: (A) A delivery worker. The Engineering leader assigns a worker with the pr skill, passing it all accepted results, Quality's report and the CI result. The worker reads the change at the head, writes the body, and opens or updates the PR with gh. (B) The leader alone. The Engineering leader writes the body from the results, Quality's report and CI, and opens and updates the PR itself, recording the effect. The pr skill moves to the leader's list. (C) Workers' sections, composed by the leader. Every writing assignment's result includes a PR section for its own part, in the pr skill's form: what changed, and before-and-after evidence. The leader composes the PR from those sections plus Quality's report and CI, judges the whole change's merge danger, and opens and updates the PR itself, recording the effect. The pr skill is on both the worker list and the leader's list. Changes that arrive when the base is merged in, or during conflict resolution, get their own section from the worker that made them.",
+  "rec": "C. It follows your leaning: the leader raises the PR from what its workers report. Each section is written while the worker still has the context and the evidence. The leader's turn stays short (it composes rather than reads the whole diff), and no extra dispatch is needed. B makes the leader read and run the change itself, against the role contract, in a turn that delays its other jobs. A costs a dispatch and a hand-over of everything the leader already holds.",
+  "options": [
+   "A: a delivery worker writes and opens it",
+   "B: the Engineering leader writes and opens it alone",
+   "C: workers write their part; the leader composes and opens it"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "Who waits for CI, and what happens when it fails?",
+  "body": "CI often takes many minutes. Settled: workers whose dispatch is in progress count against the cap of 3 per provider (Define operating limits and visibility). Options: (A) The daemon watches the checks on the pushed head through gh, using no worker or allowance. When they are green, it marks the PR ready, records the delivery, and Coordination reports it. When they are red, the Engineering leader, as delivery owner, receives the failing checks. It may re-run the failed jobs once if it judges the failure unrelated to the change, recorded as a delegated decision. Otherwise it assigns a fix, which goes through Quality again. A newer push replaces the old wait. (B) A worker waits for CI inside a delivery assignment. (C) As A, but nothing is re-run: every failure gets a fix assignment.",
+  "rec": "A. Waiting is not work and should not hold a slot under the cap. One recorded re-run covers flaky CI without hiding a real failure, because a second red result always gets a fix.",
+  "options": [
+   "A: the daemon watches; red goes to the Engineering leader, with one judged re-run allowed",
+   "B: a worker waits for CI",
+   "C: as A, never re-run"
+  ]
+ },
+ {
+  "id": "R2-Q6",
+  "title": "How does AsmAI know a repository has no CI?",
+  "body": "Round 1 settled that a repository without CI says so, and the checks Quality ran then stand in. An empty list of checks can also mean CI is slow, broken or not yet triggered. no-mistakes refuses to treat an empty list as green without an explicit no-CI declaration. Options: (A) Per-repository configuration declares 'no CI'. Coordination's repository setup asks when a repository is added, and you can change it later. Otherwise AsmAI waits for at least one check on the head. If none appears within 15 minutes (a factory-wide setting), the job holds and you are asked whether the repository has CI. (B) No check within 15 minutes counts as no CI, and the PR states it as a gap.",
+  "rec": "A. A broken CI trigger would otherwise turn into a quiet pass. The declaration is asked once per repository.",
+  "options": [
+   "A: declared per repository; otherwise wait, then hold and ask me",
+   "B: no checks within 15 minutes means no CI"
+  ]
+ },
+ {
+  "id": "R2-Q7",
+  "title": "What if a repository's instructions name another way to push or open PRs?",
+  "body": "For example, an AGENTS.md might say 'push through no-mistakes' or 'open PRs with scripts/release-pr'. Settled: repository instructions decide how work is done in a repository but never widen a mandate, and a conflict with the mandate is escalated (Define concurrent repository work and integration). AsmAI's own clone has only origin as a remote. Options: (A) AsmAI's delivery always pushes and opens the PR. Repository instructions shape what goes into the PR (templates, labels, checks to run) and Quality's Standards review, but never how the branch is pushed. An instruction that would hand the branch to another tool is listed as a gap in the PR body. (B) Each such instruction is escalated to you, per job. (C) AsmAI follows the repository's way of pushing.",
+  "rec": "A. Pushing through another tool would put a second writer on the job branch, the reason no-mistakes was not adopted. Listing it as a gap lets you run that tool yourself on the delivered PR.",
+  "options": [
+   "A: AsmAI's delivery always pushes; such an instruction is listed as a gap",
+   "B: escalate each one to me",
+   "C: follow the repository's way of pushing"
+  ]
+ },
+ {
+  "id": "R2-Q8",
+  "title": "Add these glossary terms?",
+  "body": "Round 1 introduced three terms that later tickets and the specification will use. Proposed entries: Tested pull request: a job's pull request whose exact head commit has passed validation and the repository's CI, with its base taken in and its evidence and gaps stated. It is ready for the user to review and merge, and the factory never merges it. Avoid: ready PR, finished PR. Validation: Quality's independent check of a job branch at one exact commit, re-running the repository's checks and reviewing the change against the repository instructions and the job's mandate. Validation never changes the work. Avoid: QA, testing (when meaning Quality's check). Finding: a problem that validation reports. A blocking finding must be fixed before delivery. An advisory finding is reported, and no fix is required. A needs-you finding challenges the user's stated intent or a recorded decision, so it goes to the user. Avoid: issue, comment (when meaning a validation result). Options: (A) Add all three as written. (B) Add them with the changes in my notes. (C) Do not add them.",
+  "rec": "A. Each is used precisely in this resolution and would otherwise be read loosely: 'tested', 'review' and 'issue' already mean other things.",
+  "options": [
+   "A: add all three as written",
+   "B: add them with the changes in my notes",
+   "C: do not add them"
+  ]
+ }
+]
