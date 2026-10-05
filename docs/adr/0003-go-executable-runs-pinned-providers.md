@@ -14,5 +14,6 @@ AsmAI ships as a single self-contained Go executable with SQLite built in. That 
 - Two things must still be qualified: that a pinned copy reuses the user's existing sign-in without a new login, and that Codex hook trust survives AsmAI upgrades.
 - Codex 0.157.0 cannot hide the user's personal skills from agent sessions, so skill isolation belongs to the skill-bundle decision.
 - Upgrades are deliberate. AsmAI upgrades through its install channel, with no self-update. Provider pins move by requalifying and running `asmai providers install`.
+- 2026-10-06: the Homebrew tap was dropped. The install script, fetching a release from GitHub Releases, is the only install channel (ADR 0009, [Choose license, release packaging and upgrade migration](https://github.com/talvor/AssemblyAI/issues/20)).
 
 Decided in [Define CLI setup and management experience](https://github.com/talvor/AssemblyAI/issues/9).
