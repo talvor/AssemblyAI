@@ -1,0 +1,56 @@
+[
+ {
+  "id": "R2-Q1",
+  "title": "How does accepted work reach the job branch?",
+  "body": "You chose one job branch, with each writing assignment on its own branch made from the job branch's tip. Something has to move accepted work onto the job branch, and someone has to resolve a conflict when two workers in one job touched the same lines. Options: (A) Before submitting its result, a worker takes in the job branch's current tip, so its branch already contains everything accepted so far. When the owning leader accepts the result with asmai accept, the daemon moves the job branch forward to the accepted commit, as part of recording the acceptance. If the job branch moved after the result was submitted, that move is refused and the work returns to the same worker to take in the new tip and submit again; this is not a rejection of its substance. Conflicts are therefore always resolved by a worker inside an assignment. (B) After each acceptance, the owning leader dispatches a separate merge assignment that merges the accepted branch into the job branch and resolves any conflict, as implement-spec's merger subagent does. (C) The owning leader merges accepted branches itself, conflicts included.",
+  "rec": "A. The job branch only ever moves forward to commits that were accepted exactly as reviewed, so nothing lands that nobody checked. Acceptance and the branch move are one recorded step. The worker who wrote the change is best placed to resolve its conflicts. B adds a dispatch for every acceptance, and C puts substantive work inside a leader, which the role contracts rule out.",
+  "options": [
+   "A: workers take in the tip first; the daemon fast-forwards the job branch on acceptance",
+   "B: a merge assignment after each acceptance",
+   "C: the leader merges, conflicts included"
+  ]
+ },
+ {
+  "id": "R2-Q2",
+  "title": "How does a leader look at a job's code?",
+  "body": "Leaders serve every job and repository, and they inspect context, plan and accept results themselves; substantive work runs as worker assignments. A leader planning or accepting work in a repository job needs to read its files and its repository instructions, but it has no workspace of its own. Options: (A) The daemon keeps one read-only view of each repository job at the job branch's tip, refreshed whenever the branch moves. Leaders read code and repository instructions there, and the job's brief points to it. Leaders never write in it. (B) Leaders read only what worker results report. Anything more than a glance is a research or review assignment. (C) Each leader reads the AsmAI clone directly with git commands.",
+  "rec": "A. Accepting against checkable criteria often means looking at the result itself, and a planning leader needs the repository's conventions before it writes an assignment. A gives that without a dispatch, and keeps leaders out of every writer's workspace. B makes every look a dispatch. C leaves leaders reading whatever happens to be checked out.",
+  "options": [
+   "A: one read-only view per job at the job branch tip, for leaders",
+   "B: leaders rely on worker results",
+   "C: leaders read the clone with git"
+  ]
+ },
+ {
+  "id": "R2-Q3",
+  "title": "When are workspaces removed?",
+  "body": "Workspaces use disk, and a crashed or cancelled assignment may leave evidence that reconciliation needs. Options: (A) A writing assignment's workspace and branch are removed once its work is on the job branch. A read-only workspace is removed when its assignment ends. A workspace whose assignment needs reconciliation is kept until the reconciliation is recorded. When an assignment is cancelled or abandoned, any uncommitted changes are saved as a commit on its branch, and that branch is kept until the job ends. When the job ends, everything local to it is removed; the pushed job branch stays on origin under the repository's own settings, such as GitHub deleting branches on merge. (B) Keep every workspace until you run a cleanup command. (C) As A, but cancelled and abandoned work is kept until you discard it, even after the job ends.",
+  "rec": "A. Work that is on the job branch has nothing left to lose. Reconciliation keeps its evidence, and cancelled work survives for the rest of its job, which is when a follow-up within the job could still use it. Disk limits belong to Define operating limits and visibility.",
+  "options": [
+   "A: remove when merged or ended; keep for reconciliation; cancelled work saved until the job ends",
+   "B: keep everything until I clean up",
+   "C: A, but cancelled work is kept until I discard it"
+  ]
+ },
+ {
+  "id": "R2-Q4",
+  "title": "Where do results that are not code live?",
+  "body": "Research notes, diagnosis logs, review reports and prototypes are evidence that results link to. Some jobs have no repository at all, and read-only and removed workspaces cannot hold them. Options: (A) Each job has an artifacts directory in AsmAI's state directory. Workers save deliverables that are not code there; results link to them; they stay with the job's records after it ends and are included in export and backup. A job without a repository gives each assignment an empty scratch workspace, and its deliverables are saved to the same artifacts directory. (B) Commit them to the repository on a side branch, as the research skill does with a research branch, and keep artifacts of jobs without a repository in scratch workspaces. (C) Keep them only as text inside the result.",
+  "rec": "A. Evidence outlives workspaces, and one place per job works the same with or without a repository. When the deliverable belongs in the repository, such as a research note you want committed, the job's outcome says so and it is ordinary writing work on the job branch.",
+  "options": [
+   "A: a per-job artifacts directory, kept with the job's records",
+   "B: committed to the repository on a side branch",
+   "C: text inside the result only"
+  ]
+ },
+ {
+  "id": "R2-Q5",
+  "title": "What happens to follow-up work on a PR that is still open?",
+  "body": "A job delivers its PR, and then you or a reviewer ask for changes. Follow-up work is a new job linked to the first. Options: (A) A follow-up to a job whose PR is still open continues on that job branch and PR. It takes over the branch, starting from origin's copy so your own fixups are included. A job branch belongs to one open job at a time. A follow-up after the PR was merged or closed starts from the base with a new job branch and PR. (B) Every follow-up gets a new job branch and PR, starting from the base, or from the earlier job branch when the PR is still open.",
+  "rec": "A. Review changes belong on the PR being reviewed. A second PR on top of an open one is the stacking you chose to leave out of v1.",
+  "options": [
+   "A: continue the open PR's branch; one open job per branch; fresh branch after merge or close",
+   "B: always a new branch and PR"
+  ]
+ }
+]

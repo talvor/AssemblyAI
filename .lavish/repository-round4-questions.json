@@ -1,0 +1,33 @@
+[
+ {
+  "id": "R4-Q1",
+  "title": "Where on the job branch do notes go?",
+  "body": "Your rule, as I read it: a note that its workflow already records in the issue tracker (a resolution comment on an issue, a review on the PR) is not copied anywhere; any other note (research findings, a diagnosis log) is committed to the job branch. Worker branches stay local, and only the job branch goes to origin. An assignment that adds notes is therefore a writing assignment like any other, and its evidence still names the commit it examined. Options: (A) Where the repository already keeps such notes, according to its repository instructions or existing folders, as the research skill does. If it has no convention, under docs/ by kind (docs/research/, docs/diagnosis/), and the result says where. (B) Always one fixed folder in every repository, such as .asmai/notes/<job>/.",
+  "rec": "A. Notes merged into the repository should look like the repository's own. This repository already keeps research under docs/research/. A fixed hidden folder would collect files nobody expects to find.",
+  "options": [
+   "A: the repository's convention; otherwise docs/<kind>/",
+   "B: one fixed folder such as .asmai/notes/<job>/"
+  ]
+ },
+ {
+  "id": "R4-Q2",
+  "title": "What does a repository job that changes no code deliver?",
+  "body": "Example: 'Research how our retry logic behaves under load' in a repository. With your rule its findings go on the job branch, and only the job branch goes to origin. The earlier authority decision says research-only and planning-only jobs authorize only those outcomes. Options: (A) It delivers like any other repository job: the job branch is pushed and opened as a PR holding only its notes, for you to review and merge. That becomes part of a research-only or planning-only job's mandate in a repository. (B) The job branch is pushed, but no PR is opened; you decide what to do with it. (C) The job branch stays local until you ask for it to be pushed.",
+  "rec": "A. A PR is how notes reach the default branch under review, and it keeps one delivery path for every repository job. When and by whom the PR is opened stays with Choose validation and delivery ownership.",
+  "options": [
+   "A: push the job branch and open a PR with the notes",
+   "B: push the job branch; no PR",
+   "C: keep it local until I ask"
+  ]
+ },
+ {
+  "id": "R4-Q3",
+  "title": "Where do throwaway prototypes go?",
+  "body": "A prototype answers a design question and is then thrown away. The prototype skill commits it to a throwaway branch kept out of main and records the verdict in the issue. Under your rules a worker branch stays local, and it is removed when the job ends. This map's own prototypes are kept in the repository: the conversation prototype is archived under .lavish/. Options: (A) The prototype goes on the job branch in the notes folder, never among the source files, alongside the question it settled and the verdict. (B) The prototype stays on its worker's local branch and disappears when the job ends. Only the verdict is recorded, in the tracker or as a note.",
+  "rec": "A. It follows your rule that notes not held by the tracker belong on the job branch, and it matches how this map keeps its prototypes. You can still drop the prototype from the PR before merging.",
+  "options": [
+   "A: on the job branch, in the notes folder",
+   "B: local only; only the verdict survives"
+  ]
+ }
+]

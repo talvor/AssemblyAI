@@ -62,6 +62,22 @@ A decision request carried to the user through Coordination when work requires t
 **Registered repository**:
 A repository the user has explicitly added to a factory. Jobs can target only registered repositories.
 
+**Repository instructions**:
+The instructions a registered repository gives agents, plus the user's own notes for it in the factory's configuration. They govern how work is done in that repository but never widen a mandate.
+_Avoid_: Repository rules, project settings
+
+**Job branch**:
+The one branch that carries a repository job's accepted work and becomes its pull request.
+_Avoid_: Integration branch, feature branch
+
+**Assignment branch**:
+The branch a writing assignment works on in its workspace, made from its job branch and kept on origin.
+_Avoid_: Worker branch
+
+**Workspace**:
+The directory set aside for one assignment, where its worker works: the factory's own checkout of the job's repository, or an empty scratch directory for a job without one. A writing assignment's workspace has its own branch; a read-only one is fixed at the commit it examines. Writes outside it are effects.
+_Avoid_: Worktree, sandbox, checkout (when meaning an assignment's working copy)
+
 **Conversation**:
 The user's ongoing exchange with Coordination in its interactive terminal. Unlike an intervention, leaving it never pauses automated delivery.
 _Avoid_: Chat, session
