@@ -92,12 +92,11 @@ This document specifies AsmAI's names, every command for the user and for agents
 
 21. **`asmai init`** is an interactive walkthrough, and every question it asks can also be answered by a flag, for a setup without prompts on a remote host ([AssemblyAI#9](https://github.com/talvor/AssemblyAI/issues/9)). Its steps:
     1. Platform certification: an uncertified platform is refused with what to do ([AssemblyAI#7](https://github.com/talvor/AssemblyAI/issues/7)).
-    2. Node 22 or newer ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
-    3. The pinned providers, installed after the user confirms ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
-    4. Sign-in: each pinned CLI's own status check reports the sign-in method only; an API-key or unknown method fails, and AsmAI prints the native command for the user to run and never starts a sign-in ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
-    5. Codex's hook trust review ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
-    6. Role staffing, and each provider's default model ([07](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/07-limits-holds-and-visibility.md)).
-    7. An offer to run `asmai service install`, and a suggestion to run `asmai repo add`.
+    2. The pinned providers, installed after the user confirms ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
+    3. Sign-in: each pinned CLI's own status check reports the sign-in method only; an API-key or unknown method fails, and AsmAI prints the native command for the user to run and never starts a sign-in ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
+    4. Codex's hook trust review ([03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
+    5. Role staffing, and each provider's default model ([07](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/07-limits-holds-and-visibility.md)).
+    6. An offer to run `asmai service install`, and a suggestion to run `asmai repo add`.
 22. **`asmai doctor`** re-runs the same checks without changing anything ([AssemblyAI#9](https://github.com/talvor/AssemblyAI/issues/9)). It also shows:
     - the qualification record and its known limitations, and a short read-only self-check of this host ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12), [11](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/11-qualification-and-proving.md));
     - a newer AsmAI release, with its kind ([AssemblyAI#20](https://github.com/talvor/AssemblyAI/issues/20));

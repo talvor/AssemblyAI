@@ -4,7 +4,7 @@ M8 turns the qualified code into a release: the release workflow and its attesta
 
 ## What it adds
 
-1. **The release workflow and attestations:** a release built in GitHub Actions from the commit that adds the qualification record to the qualified commit, checked to be the only change, reproducibly and without a C compiler, with checksums and an attestation for every file ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)).
+1. **The release workflow and attestations:** a release built in GitHub Actions from the commit that adds the qualification record to the qualified commit, checked to be the only change, reproducibly and without a C compiler, with checksums and an attestation for every file, refusing to publish without a Lavish build for every certified platform ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)).
 2. **The install script,** the only install channel ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)).
 3. **The running factory keeping its version,** through the daemon's copy of its executable at one fixed path, and the version guard ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md), [09](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/09-cli-and-configuration.md)).
 4. **New provider pins at start** ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)).
@@ -57,7 +57,7 @@ Where a rule arrives in parts, the table names the part this milestone delivers.
 | --- | --- | --- |
 | 8 | talvor/asmai | releases |
 | 9 | Certified platforms only | All |
-| 10 | The build | All |
+| 10 | The build | the release build |
 | 11 | A release is the qualified commit plus its record | All |
 | 12 | Development builds | All |
 | 13 | Release candidates | All |
@@ -117,7 +117,7 @@ The first release candidate ([AssemblyAI#27](https://github.com/talvor/AssemblyA
 
 1. All 47 cases pass on the candidate commit; the maintainer commits the qualification record and tags v1.0.0-rc.1.
 2. The release workflow confirms the record is the only change and publishes the Linux x86_64 archive, the checksums, the attestations and the install script as a GitHub prerelease.
-3. On this host the install script installs the release candidate with `--version v1.0.0-rc.1`, checking the checksum and the attestation; `asmai init` and `asmai start` run with the record enforced, and `asmai notices` prints the notices.
+3. On this host the install script installs the release candidate with `--version v1.0.0-rc.1`, checking the checksum and the attestation; `asmai init` (which installs the pinned providers, Lavish from its Lavish build) and `asmai start` run with the record enforced, and `asmai notices` prints the notices.
 4. A job on the fixture repository is delivered as a tested pull request.
 5. `asmai backup` takes a copy while the factory runs, and `asmai restore` puts it back with the factory stopped.
 

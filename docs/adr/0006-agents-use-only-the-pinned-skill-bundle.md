@@ -13,5 +13,6 @@ Each AsmAI release embeds one upstream release of Matt Pocock's skills, unchange
 - Patches are the visible exception, listed with their reasons and rechecked whenever the pin moves.
 - Hiding is qualified per provider version; whatever a pinned version cannot hide is listed by `asmai doctor`.
 - Skills the user adds through the configuration may replace a shipped skill for a role; they are copied when an agent starts and always shown as the user's and unqualified.
+- 2026-10-07: delivering the skills as a separate file beside the executable was reconsidered and not adopted. The bundle is small, and a second file would have to be kept in step with each release ([Lavish and skill delivery review](https://github.com/talvor/AssemblyAI/blob/main/.lavish/lavish-delivery-answers.json)).
 
 Decided in [Choose skill bundles and update policy](https://github.com/talvor/AssemblyAI/issues/17).

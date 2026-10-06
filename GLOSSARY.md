@@ -19,6 +19,10 @@ _Avoid_: Server, machine (when meaning the factory's execution host)
 A published version of AsmAI: its executables for the platforms it certifies, with its skill bundle, pinned provider versions and qualification record inside them. A release candidate is a release published for the proving scenarios before it is offered for install.
 _Avoid_: Build (a development build is not a release)
 
+**Lavish build**:
+AsmAI's pinned Lavish made into one executable for each certified platform, published when that pin moves and reused by every release that keeps it.
+_Avoid_: Lavish release, Lavish copy
+
 **Upgrade**:
 Replacing the installed AsmAI with a later release: stop the factory, install the release, start it again. A running factory keeps its version until it is restarted, and skills and pinned providers change only through upgrades.
 _Avoid_: Update, self-update

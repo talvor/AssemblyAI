@@ -38,7 +38,6 @@ Where a rule arrives in parts, the table names the part this milestone delivers.
 | --- | --- | --- |
 | 1 | Never the user's copies | Codex |
 | 2 | Installed on the user's command | Codex |
-| 3 | Node | All |
 | 4 | Only qualified combinations run | refusing versions that are not pinned |
 | 5 | A provider that updated itself | All |
 | 7 | Checking readiness | All |
@@ -116,7 +115,7 @@ Where a rule arrives in parts, the table names the part this milestone delivers.
 
 | Rule | | Part delivered here |
 | --- | --- | --- |
-| 7 | Providers are not redistributed | All |
+| 7 | Claude Code and Codex are not redistributed | Claude Code and Codex |
 
 ## Qualification cases
 

@@ -38,7 +38,7 @@ This document specifies what must pass before v1 launches and how it is shown: d
 
 ### The qualification record
 
-19. **What it holds:** the qualified combinations of pinned versions, the certified platforms, and the known limitations ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12)).
+19. **What it holds:** the qualified combinations of pinned versions, with each platform's Lavish digest, the certified platforms, and the known limitations ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12), [ADR 0010](https://github.com/talvor/AssemblyAI/blob/main/docs/adr/0010-lavish-is-a-deno-compiled-executable-built-per-pin.md)).
 20. **Inside the release.** The harness produces the record from a development build of the candidate commit; the maintainer commits it, and the release is that commit ([ADR 0009](https://github.com/talvor/AssemblyAI/blob/main/docs/adr/0009-a-release-is-the-qualified-commit-plus-its-record.md), [10](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)).
 21. **Enforced.** `asmai start` refuses anything outside the record, and `asmai doctor` shows it ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12), [ADR 0008](https://github.com/talvor/AssemblyAI/blob/main/docs/adr/0008-qualification-runs-real-provider-clis-on-real-hosts.md)).
 22. **A platform** is an operating system and CPU architecture, Linux x86_64 first ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12)).

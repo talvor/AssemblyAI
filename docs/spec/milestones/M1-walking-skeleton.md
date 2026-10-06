@@ -6,7 +6,7 @@ M1 is the walking skeleton: on Claude only, one job travels from the user's requ
 
 1. **The daemon, on Claude only:** `asmai start` and `stop`, the daemon, the store and its journal, daemon-owned terminals with hooks, nudges and `asmai inbox`, and attaching to the conversation ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
 2. **One job, end to end.** Coordination opens a job from the user's witnessed message and hands it to Engineering. One writing assignment works in a workspace of AsmAI's clone, and its acceptance fast-forwards the job branch. Quality validates the head. The daemon pushes, the Engineering leader opens a draft pull request, and the daemon watches CI and marks the pull request ready. Coordination reports the link ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [00](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/00-overview.md)).
-3. **What the skeleton needs to run,** in minimal real forms that M2 completes: `asmai providers install` for Claude Code only, `asmai repo add` to register the fixture repository, and the configuration file with only the fields M1 uses, namely Claude staffing for Coordination, Engineering and Quality and the fixture repository's entry. M2 adds Codex, `asmai init`, `doctor`, `config apply` and every other field ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M1-answers.json)).
+3. **What the skeleton needs to run,** in minimal real forms that M2 completes: `asmai providers install` for Claude Code only, with its version in the pins file, `asmai repo add` to register the fixture repository, and the configuration file with only the fields M1 uses, namely Claude staffing for Coordination, Engineering and Quality and the fixture repository's entry. M2 adds Codex, `asmai init`, `doctor`, `config apply` and every other field ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M1-answers.json)).
 4. **Leaders start when work arrives.** From M1 the daemon starts a role's leader when a message for its role arrives (02 rule 51). Stopping idle leaders and a leader's choice of provider (02 rules 52 and 53) come in M5 ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M1-answers.json)).
 5. **The harness**, in its own directory of talvor/asmai and built only into development builds, running M1's cases with the real pinned Claude Code under the harness's OS user ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [11](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/11-qualification-and-proving.md)).
 
@@ -90,7 +90,7 @@ Where a rule arrives in parts, the table names the part this milestone delivers;
 | Rule | | Part delivered here |
 | --- | --- | --- |
 | 1 | Never the user's copies | Claude Code |
-| 2 | Installed on the user's command | Claude Code |
+| 2 | Installed on the user's command | Claude Code, and the pins file |
 | 6 | Subscription only | All |
 | 8 | No API keys in sessions | All |
 | 9 | Passed per session only | Claude Code |
