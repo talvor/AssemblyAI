@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/04-conversation-and-lavish.md",
+ "name": "04 Conversation and Lavish",
+ "round": "Round 1",
+ "intro": "Your two ways of talking to the factory: the conversation with Coordination, with its focused job, one-line updates, catch-up, unsent text and second attach; and the Lavish server, which renders decision requests and collects your answers. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 05 Repositories and job branches.",
+ "questions": ".lavish/spec-doc-04-round1-questions.json",
+ "answers": ".lavish/spec-doc-04-answers.json",
+ "notes": [
+  "Rule 4: AssemblyAI#9 says the daemon never types into the conversation while you have unsent text, and AssemblyAI#10 says delivery never waits on whether you are present. The draft reads them together: a nudge waits only while you have text in the box, until you submit or leave.",
+  "Rule 15 lists what counts as leaving the conversation, gathered from AssemblyAI#10 (detach, the Ctrl-] menu, a newer attach) and S9 (an SSH drop leaves delivery running).",
+  "Rule 17 adds holds and their causes to the catch-up's contents from AssemblyAI#10, as AssemblyAI#14 requires.",
+  "How the daemon talks to the pinned Lavish to render pages and collect answers, and which port Lavish uses, are left to implementation; the forwarding command names the port.",
+  "Coordination's wording (one-liners, job tags, focus announcements) is not set here: 08 says what its instructions must contain, and the wording is written during implementation."
+ ],
+ "out": ".lavish/spec-doc-04.html"
+}

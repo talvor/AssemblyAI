@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "What happens when you send a Lavish page with some questions unanswered?",
+  "section": "Collecting answers",
+  "body": "Settled: the daemon renders a request's questions keyed to its version and can tell when every question has an answer; it collects what you send, word for word, and routes it to the owning leader; a new version reissues the page (AssemblyAI#10). The sources do not say what happens when you send some answers and leave other questions open, which happened in the planning rounds (AssemblyAI#11 round 4, for example).\n\nRule 29 in the draft is open until you answer.",
+  "rec": "A. The leader can act on what you did answer, and the rest stays visible as waiting on you; it is also how the planning rounds worked, where questions you left open were asked again. B leaves answers you already gave sitting unused, so work that depends only on them waits for questions it does not need.",
+  "options": [
+   "A: the daemon routes what you sent to the owning leader at once; the version stays pending, shown as partly answered, until every question has an answer or the leader issues a new version for the rest",
+   "B: the daemon keeps your answers until every question on the page has one, then routes them together"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 04 Conversation and Lavish?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 05 Repositories and job branches. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
