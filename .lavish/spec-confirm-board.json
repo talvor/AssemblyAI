@@ -1,0 +1,10 @@
+{
+ "doc": ".lavish/spec-confirm-summary.md",
+ "name": "The v1 specification",
+ "round": "Confirm the whole",
+ "intro": "Every document is accepted. This board lists all 21, what you decided on each, the four changes made to accepted documents since their review, and the checks run across the whole. Confirm it, and I push the branch and open the pull request.",
+ "questions": ".lavish/spec-confirm-questions.json",
+ "answers": ".lavish/spec-confirm-answers.json",
+ "notes": [],
+ "out": ".lavish/spec-confirm.html"
+}

@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 Which commands agents may run without a native permission prompt": "A: agents run inside the provider's qualified write guard, which keeps writes in the workspace; commands it allows, including git and gh with network access, run without a prompt, and anything it does not allow raises the native prompt and waits for you; the exact settings per provider version are qualified (C37)",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

@@ -1,0 +1,45 @@
+[
+ {
+  "id": "Q1",
+  "title": "How does M1 get its pinned Claude, its repository and its staffing?",
+  "section": "What it adds",
+  "body": "The milestone table leaves a gap. M1 runs a job on the fixture repository with a pinned Claude Code, and C3 (pinned copies reuse your sign-in) passes at M1's end. But `asmai providers install`, `asmai init`, `doctor` and the configuration file are listed in M2, and nothing lists `asmai repo add` at all. M1 needs a pinned Claude Code, the fixture repository registered, and a provider and model for Coordination, Engineering and Quality.\n\nThe draft's rule tables assume A.",
+  "rec": "A. Each piece is real code that stays, as vertical slices should be, and M2 widens it rather than replacing it. B builds stand-ins that M2 must remove, and C3 would then pass on a path users never take.",
+  "options": [
+   "A: M1 delivers the minimal real forms: `asmai providers install` for Claude Code only, `asmai repo add`, and the configuration file with only the fields M1 uses (Claude staffing for the three roles and the fixture repository's entry); M2 completes them with Codex, init, doctor, config apply and every field",
+   "B: M1 uses development-only stand-ins (a pinned path, a registration flag, built-in staffing) that M2 replaces with the real commands"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Do leaders start on demand from M1?",
+  "section": "What it adds",
+  "body": "The milestone table puts leaders on demand in M5 (02 rules 51 to 53, C31). Before M5, the skeleton still needs Coordination's, Engineering's and Quality's leaders running. The sources do not say how they start until then.\n\nThe draft's rule tables assume A: 02 rule 51 in M1, rules 52 and 53 in M5.",
+  "rec": "A. Starting a leader when work for its role arrives is the rule the factory keeps, and it is small; only stopping idle leaders and choosing their provider need M5's limits. B builds a start-up path M5 would replace.",
+  "options": [
+   "A: from M1 the daemon starts a role's leader when a message for its role arrives (02 rule 51); stopping idle leaders and a leader's provider choice (rules 52 and 53) come in M5",
+   "B: until M5 the daemon starts Coordination's, Engineering's and Quality's leaders with the factory and stops them when it stops"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How are demo paths recorded before M4?",
+  "section": "Demo path",
+  "body": "The end-of-milestone rule (AssemblyAI#27) keeps a terminal recording of each demo for you to watch. AsmAI's own per-dispatch recordings of agent terminals (03 rules 41 to 43) arrive in M4, so M1 to M3 cannot rely on them. They also record agents' terminals, not the terminal you would watch the demo in.",
+  "rec": "A. One way to record every demo, from M1 on, shows you what the demo looked like. B adds M4's recording work to the walking skeleton, which is meant to be the thinnest path to a tested PR.",
+  "options": [
+   "A: every milestone's demo is recorded with an ordinary terminal recorder running in the demo terminal; from M4 on, AsmAI's own per-dispatch recordings are kept alongside",
+   "B: move per-dispatch recording (03 rules 41 to 43) into M1, and record demos with it"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept M1 Walking skeleton?",
+  "body": "Accepting applies your answers above and any annotations. I then commit the document and start M2 Both providers and skills. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

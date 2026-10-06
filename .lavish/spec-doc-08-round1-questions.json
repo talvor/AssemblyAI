@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "Who delivers a repository-setup pull request?",
+  "section": "Repository setup",
+  "body": "The sources are silent on this. AssemblyAI#17: when you add a repository without `docs/agents/issue-tracker.md`, Coordination opens a setup job, a Coordination worker runs setup-matt-pocock-skills, and the files go on that job's branch and PR. AssemblyAI#18: the Engineering leader delivers a job that changes code, and a notes-only job is delivered by the leader whose notes they are (Planning or Research). Neither covers a Coordination job whose files are the repository's skill setup.\n\nRule 29 in the draft is open until you answer.",
+  "rec": "A. The files record your answers, and Coordination already owns the job, so it has the same shape as a notes job. B adds a handoff and a Quality review of documents that only write down what you decided.",
+  "options": [
+   "A: Coordination's leader delivers it like a notes-only job: no Quality validation unless asked, `asmai push`, a draft PR with a short body, marked ready when CI is green",
+   "B: Coordination hands delivery to the Engineering leader, and it is delivered like a code job, with Quality's validation"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 08 Skills and agent instructions?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 09 CLI and configuration. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/11-qualification-and-proving.md",
+ "name": "11 Qualification and proving",
+ "round": "Round 1",
+ "intro": "What must pass before v1 launches: development tests, the qualification harness and its separate OS user, fault injection and replay, the fixture repository, the 47 cases, the qualification record and doctor's self-check, and the nine proving scenarios with their checklists, verdicts and record. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start the milestone documents with M0 Groundwork.",
+ "questions": ".lavish/spec-doc-11-round1-questions.json",
+ "answers": ".lavish/spec-doc-11-answers.json",
+ "notes": [
+  "The case table (rule 24) gives each case's wording from AssemblyAI#12 with the document and milestone from 00's traceability table, so the two must stay in step; 00 keeps the short form.",
+  "Rule 28 and rule 38 carry AssemblyAI#27's proving-and-launch row, which has no milestone document of its own.",
+  "Rules 25 and 36 read \"AssemblyAI\" in AssemblyAI#12 as talvor/asmai, as AssemblyAI#27's comment on that ticket says.",
+  "Rule 12 does not list which cases depend on the provider; that split is part of the harness's design."
+ ],
+ "out": ".lavish/spec-doc-11.html"
+}

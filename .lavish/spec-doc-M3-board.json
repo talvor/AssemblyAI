@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/milestones/M3-decisions-and-planning.md",
+ "name": "M3 Decisions and planning",
+ "round": "Round 1",
+ "intro": "Decision requests, answer surfaces and grants; the Lavish server; the Planning and Research roles; notes delivery; jobs without a repository; and several assignments per job. One question comes from a silence in the end-of-milestone rule. When you accept it I commit it and start M4 Conversation and intervention.",
+ "questions": ".lavish/spec-doc-M3-round1-questions.json",
+ "answers": ".lavish/spec-doc-M3-answers.json",
+ "notes": [
+  "The demo path runs S2, S3 and S4 on the fixture repository: the Wayfinder ticket is one in the fixture repository's tracker, and the defect is one in the fixture repository. The real ones are for the proving scenarios on the release candidate.",
+  "Repository setup lands here because it asks you questions as decision requests, although the skill bundle that runs it arrives in M2.",
+  "A small correction to M2 is listed for the final board: its item 2 now says providers install covers Claude Code and Codex, with the pinned Lavish arriving here with the Lavish server, as the rule map has it.",
+  "Several assignments per job (the table's last M3 item) brings fixes after blocking findings or red CI, re-validation after a later change, a moved job branch returning work to its worker, and follow-up jobs."
+ ],
+ "out": ".lavish/spec-doc-M3.html"
+}

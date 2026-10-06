@@ -1,0 +1,14 @@
+{
+ "doc": "docs/spec/milestones/M4-conversation-and-intervention.md",
+ "name": "M4 Conversation and intervention",
+ "round": "Round 1",
+ "intro": "The status line, the focused job, the catch-up, unsent text and a second attach; take, release and the intervention record; the modal allow-list; and recordings with replay. The milestone table and the accepted documents settle it, so there is no question; review it and accept or annotate. When you accept it I commit it and start M5 Concurrency and limits.",
+ "questions": ".lavish/spec-doc-M4-round1-questions.json",
+ "answers": ".lavish/spec-doc-M4-answers.json",
+ "notes": [
+  "The demo path is S7's decision and intervention parts, as decided on the 00 board; pausing, resuming and cancelling jobs complete S7 in M5.",
+  "Ghostty is qualified locally from M4, with C9; over SSH it is qualified in M7, with C47.",
+  "The allow-list starts empty, so M4 delivers the mechanism and the hold; modals are added to it only as they are qualified."
+ ],
+ "out": ".lavish/spec-doc-M4.html"
+}

@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 How work continues after a clean asmai stop": "A: the next start runs each worker that stopped at a boundary again on the same provider, resuming its native session where possible, with a new dispatch that is a resumption; if its session cannot be resumed, its assignment needs reconciliation",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "doc": "docs/spec/milestones/M7-remote-hosts.md",
+ "name": "M7 Remote hosts",
+ "round": "Round 1",
+ "intro": "--host, Lavish through SSH port forwarding, plain ssh -t host asmai, and the virtual machine for S9. The milestone table and the accepted documents settle it, so there is no question; review it and accept or annotate. When you accept it I commit it and start M8 Release and upgrade.",
+ "questions": ".lavish/spec-doc-M7-round1-questions.json",
+ "answers": ".lavish/spec-doc-M7-answers.json",
+ "notes": [
+  "The virtual machine is set up in M7, when S9's demo is about to run, as AssemblyAI#12 allowed (setting it up blocks nothing until then).",
+  "The demo includes the remote host's reboot, so the service is installed on the virtual machine; S9's evidence is S8's for the remote host plus the forwarded Lavish answer and the SSH drop."
+ ],
+ "out": ".lavish/spec-doc-M7.html"
+}

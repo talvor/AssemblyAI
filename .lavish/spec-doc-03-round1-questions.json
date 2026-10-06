@@ -1,0 +1,24 @@
+[
+ {
+  "id": "Q1",
+  "title": "Which commands may agents run without a native permission prompt?",
+  "section": "Per-session settings",
+  "body": "Settled: AsmAI keeps the providers' native permission prompts and hook-trust review and never bypasses an approval (AssemblyAI#19, AssemblyAI#15); `asmai` is on each provider's allow-list (ADR 0002); and qualified provider write guards keep writes inside the workspace (AssemblyAI#11). Workers commit and push their own assignment branches (AssemblyAI#11), and the delivering leader opens the PR with gh (AssemblyAI#18).\n\nThe sources are silent on everything else an agent runs: git, gh, the repository's tests and builds. In the feasibility probe's manual mode, every such command raised a prompt, so a worker would stop at each one and wait for you, and nothing would move while you are away.\n\nRule 15 in the draft is open until you answer.",
+  "rec": "A. It is the write guard you chose in AssemblyAI#11, used as the line between what runs and what asks: work inside the workspace, including the pushes the mandate already covers, runs unattended, and anything that would leave it still reaches you as a native prompt. B stalls every job on routine commands. C makes you maintain a command list per role and still prompts for anything new.",
+  "options": [
+   "A: agents run inside the provider's qualified write guard, which keeps writes in the workspace; commands it allows, including git and gh with network access, run without a prompt, and anything it does not allow raises the native prompt and waits for you; the exact settings per provider version are qualified (C37)",
+   "B: manual permissions: every command other than `asmai` raises a native prompt, as in the feasibility probe",
+   "C: a per-role command allow-list in the configuration; everything else prompts"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 03 Provider sessions and terminals?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 04 Conversation and Lavish. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

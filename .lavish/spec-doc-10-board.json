@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/10-release-install-and-upgrade.md",
+ "name": "10 Release, install and upgrade",
+ "round": "Round 1",
+ "intro": "The license and notices, the build, the release workflow and its attestations, the install script, version numbers, upgrades, new provider pins, the configuration across releases, store migrations and restore. The sources settle all of it, so there is no question; review it and accept or annotate. When you accept it I commit it and start 11 Qualification and proving.",
+ "questions": ".lavish/spec-doc-10-round1-questions.json",
+ "answers": ".lavish/spec-doc-10-answers.json",
+ "notes": [
+  "Rule 8 and rule 36 carry AssemblyAI#27's changes to AssemblyAI#20: releases come from the new talvor/asmai repository rather than a renamed one, and migrations are kept from v1.0.0-rc.1, not only from v1.0, so a proving-scenario factory survives an upgrade to the next release candidate.",
+  "Rule 6 restates AssemblyAI#16's boundary on copying from Firstmate and OpenRig, because the license allow-list and notices live here.",
+  "Rule 17 is the final install rule: the Homebrew tap of AssemblyAI#9 was dropped by AssemblyAI#20 (and ADR 0003's dated line), and nothing is claimed on any registry.",
+  "Rules 29 to 31 also appear, briefly, in 09 rule 30, which points here."
+ ],
+ "out": ".lavish/spec-doc-10.html"
+}

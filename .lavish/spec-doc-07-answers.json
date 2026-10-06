@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 Which provider and model work falls back to": "A: one default model per provider in the configuration; falling back uses the other provider with its default model, for any role",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

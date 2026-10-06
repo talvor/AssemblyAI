@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/milestones/M0-groundwork.md",
+ "name": "M0 Groundwork",
+ "round": "Round 1",
+ "intro": "The first milestone document: talvor/asmai and its tracker, the Go module, hosted CI with the fake provider, license checks and notices, the fixture repository and the harness's OS users. One question is an ordering gap in AssemblyAI#27. When you accept it I commit it and start M1 Walking skeleton.",
+ "questions": ".lavish/spec-doc-M0-round1-questions.json",
+ "answers": ".lavish/spec-doc-M0-answers.json",
+ "notes": [
+  "The Rules delivered tables are generated from one map that assigns every rule of the eleven component documents to the milestone that delivers it, or to the proving-and-launch phase; a check confirms that no rule is left out. Where a rule arrives in parts, each milestone names the part it delivers. The map is kept as .lavish/milestone_allocation.py.",
+  "Each milestone document has the same sections: what it adds (from AssemblyAI#27's table), what it builds on, the rules delivered, its qualification cases, its demo path, its exit checks, and its sources.",
+  "M0 has no cases and no demo path in AssemblyAI#27's table, so its exit checks are the tickets, green CI on both platforms, and the two pieces of setup it delivers: the fixture repository's switchable CI and the harness's OS users.",
+  "The harness itself starts in M1, with the first cases; M0 sets up only its OS users, as the table says."
+ ],
+ "out": ".lavish/spec-doc-M0.html"
+}

@@ -1,0 +1,8 @@
+{
+ "round1": {
+  "Q1 When a notes-only pull request is delivered": "A: the same cycle as code: pushed, opened as a draft, marked ready when CI is green on its head (or straight away in a repository declared as having no CI); the job then ends",
+  "Q2 The delivery owner's push request": "A: `asmai push <job>`, for the delivery owner only; it pushes the job branch, or refuses and records an outside change",
+  "Q3 How the answer about CI becomes the no-CI declaration": "A: Coordination gives you the configuration change to make, as it does for `asmai repo add`; the declaration exists only in the configuration, and a held job resumes once you apply it",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

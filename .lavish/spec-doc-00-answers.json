@@ -1,0 +1,8 @@
+{
+ "round1": {
+  "Q1 Which milestone first makes S7 possible": "A: S7 is first possible at the end of M5; M4 makes its decision and intervention parts possible",
+  "Q2 Who the rules name": "A: \"the user\" in the factory's rules; \"Phillip\" only where a decision is about you personally",
+  "Q3 Who opens the draft PR in the walking skeleton": "A: keep AssemblyAI#18: in M1 the Engineering leader opens the draft PR; the M1 row was shorthand",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

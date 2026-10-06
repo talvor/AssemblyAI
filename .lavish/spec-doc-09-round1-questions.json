@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "Are the configuration's field names and layout right?",
+  "section": "The schema",
+  "body": "AssemblyAI#27 settled that this specification sets the configuration's field names (your answer to its Q4), and the map left them as the last fog. Rule 33 sets them in five tables: `[limits]`, `[logs]`, `[providers.<provider>]`, `[roles.<role>]` and `[repositories.<name>]`, with every field's type, default and meaning drawn from the decided settings, and rule 34 shows them written out.\n\nNothing about the settings themselves is new: each meaning and default comes from the cited ticket or from your answers on the 05, 06 and 07 boards. Only the names and their grouping are chosen here.",
+  "rec": "A, unless a name reads wrongly to you; put any renames in the notes and I will apply them across the documents.",
+  "options": [
+   "A: the names and layout as drafted",
+   "B: as drafted, with the renames or regrouping in my notes"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 09 CLI and configuration?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 10 Release, install and upgrade. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

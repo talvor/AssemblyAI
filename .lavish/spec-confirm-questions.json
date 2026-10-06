@@ -1,0 +1,12 @@
+[
+ {
+  "id": "CONFIRM",
+  "title": "Confirm the whole v1 specification?",
+  "body": "Confirming means the 21 documents above, with the four listed changes, are the v1 specification. I then push the branch fm/asmai-v1-spec and open a pull request to talvor/AssemblyAI, ready for review, for you to merge. If anything needs changing first, choose B and say what in the notes, or annotate the summary.",
+  "rec": "A, if the four changes read right to you.",
+  "options": [
+   "A: confirm the whole specification; push the branch and open the pull request",
+   "B: not yet: make the changes in my notes and annotations first"
+  ]
+ }
+]

@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 Who delivers a repository-setup pull request": "A: Coordination's leader delivers it like a notes-only job: no Quality validation unless asked, `asmai push`, a draft PR with a short body, marked ready when CI is green",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "doc": "docs/spec/00-overview.md",
+ "name": "00 Overview",
+ "round": "Round 1",
+ "intro": "The first document of the v1 specification, drafted from the closed map tickets, the ADRs and the glossary. Three questions come from places where the sources conflict or the documents need a convention; everything else is stated as already decided. When you accept it I commit it and start 01 Roles and decisions.",
+ "questions": ".lavish/spec-doc-00-round1-questions.json",
+ "answers": ".lavish/spec-doc-00-answers.json",
+ "notes": [
+  "File names: docs/spec/NN-name.md for the component documents and docs/spec/milestones/MN-name.md for the milestones, as linked in the Documents table.",
+  "Citations are inline links written AssemblyAI#N to the ticket, with each document's Sources section linking the resolution comments. They are full links rather than relative ones, so text copied into talvor/asmai tickets still leads back here.",
+  "The Document column of the case table places each case under the document whose rules it qualifies. Where a case touches two documents, the other one lists it among the cases it serves. Annotate any case you would place elsewhere.",
+  "Proving and launch has no milestone document, because the document list names M0 to M8. The Building v1 table describes the phase, and 11 specifies the proving scenarios and their record.",
+  "Building v1 restates the build order from AssemblyAI#27 (who builds it, tickets, the milestone table, the end of a milestone), because no component document covers how v1 is built. The milestone documents give each milestone's detail.",
+  "The user stories are grouped by the document that specifies them and summarize its rules; they add no rules of their own.",
+  "The research tickets (#2, #3, #4) contribute background only, so the traceability table points to no rules for them."
+ ],
+ "out": ".lavish/spec-doc-00.html"
+}

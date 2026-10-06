@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "Which provider and model does work fall back to?",
+  "section": "Choosing a provider",
+  "body": "Settled: each role has a provider and model for its leader and a default for its workers (AssemblyAI#9, AssemblyAI#15). Before first dispatch, and for a leader starting with no open work, work may use \"the other configured, compatible subscription provider/model\" automatically (AssemblyAI#15, AssemblyAI#14), including queued work when allowance runs out or a provider is unavailable. No ticket says where the model on the other provider comes from: the staffing settings name only one provider per role.\n\nRule 10 in the draft is open until you answer. In both options, compatible means in the qualified combination, signed in and not held.",
+  "rec": "B. It reads \"configured\" literally, as staffing is configured per role, and a role you have not given a fallback never moves to a model you did not choose for it; it holds instead, which is the safe default. A is less to set up, but it moves every role to the same model on the other provider, including roles where you would rather wait.",
+  "options": [
+   "A: one default model per provider in the configuration; falling back uses the other provider with its default model, for any role",
+   "B: per role, an optional fallback model on the other provider for its leader and for its workers; a role with none never falls back, and its work holds instead"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 07 Limits, holds and visibility?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 08 Skills and agent instructions. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

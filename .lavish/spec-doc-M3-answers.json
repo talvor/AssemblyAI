@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 Whether earlier milestones' cases run again at each milestone's end": "B: no: each milestone runs only its own cases (M2 also reruns M1's on Codex); all 47 run together in M8; M3 therefore has no harness check",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/milestones/M1-walking-skeleton.md",
+ "name": "M1 Walking skeleton",
+ "round": "Round 1",
+ "intro": "The walking skeleton: on Claude only, one job from your witnessed message to a tested pull request on the fixture repository. Three questions come from gaps in the milestone table; the rules table lists every rule M1 delivers, in whole or in part. When you accept it I commit it and start M2 Both providers and skills.",
+ "questions": ".lavish/spec-doc-M1-round1-questions.json",
+ "answers": ".lavish/spec-doc-M1-answers.json",
+ "notes": [
+  "The walking skeleton crosses most component documents, as AssemblyAI#27 found; the rules table is long because M1 starts every layer, often with only part of a rule.",
+  "M1 delivers Quality's validation and the three kinds of finding, but a fix after a blocking finding needs a second writing assignment, which M3 adds with several assignments per job; in M1's demo the change is small enough to pass first time.",
+  "M1 already watches red CI with one judged re-run, because C43 passes at M1's end; a fix for red CI is again M3's second assignment.",
+  "Dispatches and results survive a restart in M1 (C19), and a clean `asmai stop` continues work at the next start (02 rule 11, as decided on the 02 board); recovering an unclean stop is M6.",
+  "The M1 row's \"the daemon ... opens a draft PR\" is written as the Engineering leader opening it, as decided on the 00 board."
+ ],
+ "out": ".lavish/spec-doc-M1.html"
+}

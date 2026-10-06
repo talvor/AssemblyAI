@@ -1,0 +1,14 @@
+{
+ "doc": "docs/spec/milestones/M6-recovery.md",
+ "name": "M6 Recovery",
+ "round": "Round 1",
+ "intro": "Full reconciliation, generations and fencing, orphan termination, agent and daemon crashes, a reboot with the service installed, asmai stop draining, terminal disconnects, and crashes during delivery. The milestone table and the accepted documents settle it, so there is no question; review it and accept or annotate. When you accept it I commit it and start M7 Remote hosts.",
+ "questions": ".lavish/spec-doc-M6-round1-questions.json",
+ "answers": ".lavish/spec-doc-M6-answers.json",
+ "notes": [
+  "M1 already keeps dispatches correlated across a restart (C19) and continues work after a clean stop; M6 adds everything an unclean end needs.",
+  "Automatic retries of side-effect-free assignments sit here, with recovery, because they are the one case where work after a failure is redone without reconciliation.",
+  "The reboot case on the Mac exercises launchd; on Linux, the systemd user unit with linger."
+ ],
+ "out": ".lavish/spec-doc-M6.html"
+}

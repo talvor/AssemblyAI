@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/milestones/M5-concurrency-and-limits.md",
+ "name": "M5 Concurrency and limits",
+ "round": "Round 1",
+ "intro": "Worker caps and the queue, concurrent jobs and repositories, conflicts and outside commits, leaders on demand, allowance, provider failures, lost sign-in and holds, job pause, resume and cancel, the no-CI declaration and the 15-minute wait, the failed-validation limit and the disk floor. One question comes from a conflict between S5's checklist and the end-of-milestone rule. When you accept it I commit it and start M6 Recovery.",
+ "questions": ".lavish/spec-doc-M5-round1-questions.json",
+ "answers": ".lavish/spec-doc-M5-answers.json",
+ "notes": [
+  "The demo path completes S7 with pause, resume and cancel, as decided on the 00 board.",
+  "C28 is replayed from recorded payloads, because an allowance cannot be used up on purpose without spending your own usage (AssemblyAI#12); the replay mechanism arrives here.",
+  "Leaders already start when work arrives from M1 (decided on the M1 board); M5 adds stopping idle leaders and a leader's provider choice at its start.",
+  "The side-effect-free declaration and automatic retries are in M6, with recovery, because they replace reconciliation for work that may be retried."
+ ],
+ "out": ".lavish/spec-doc-M5.html"
+}

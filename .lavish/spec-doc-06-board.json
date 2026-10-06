@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/06-validation-and-delivery.md",
+ "name": "06 Validation and delivery",
+ "round": "Round 1",
+ "intro": "How work is tested, validated and delivered: Engineering's tests, Quality's validation and findings, the tested pull request, the daemon's push, the draft PR and its body, CI watching, the no-CI declaration, the failed-validation limit and the end of a job. One question is a conflict between AssemblyAI#9 and AssemblyAI#18; two come from silences. When you accept it I commit it and start 07 Limits, holds and visibility.",
+ "questions": ".lavish/spec-doc-06-round1-questions.json",
+ "answers": ".lavish/spec-doc-06-answers.json",
+ "notes": [
+  "Rule 14 states ADR 0007's \"a fixed order of checks\" as the order of the five tested-PR conditions; no ticket gives another order.",
+  "Rule 25 adds to the AsmAI section the rebase exception you decided on the 05 board.",
+  "Rule 27: for a PR opened with \"[not ready]\", marking it ready means removing that prefix, read from AssemblyAI#18's \"until then\".",
+  "Rules 40 and 41 apply the reconciliation rules of AssemblyAI#8 to the two crash cases C40 and C46: fetch origin before pushing again, and look for an existing PR before opening one.",
+  "Rule 21: the daemon learns which PR to follow from the leader's effect record; no ticket says how, and this needs no new command."
+ ],
+ "out": ".lavish/spec-doc-06.html"
+}
