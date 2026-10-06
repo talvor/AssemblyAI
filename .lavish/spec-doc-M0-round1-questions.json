@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "How does M0 start, before to-tickets can run in talvor/asmai?",
+  "section": "What it adds",
+  "body": "The sources leave an ordering gap. AssemblyAI#27 says you run to-tickets in talvor/asmai on each milestone document, and that M0 creates talvor/asmai and sets its tracker up for the skills. But to-tickets needs talvor/asmai to exist with its tracker already set up, so M0's first steps cannot be tickets of M0's own run.\n\nItem 2 of What it adds is open until you answer.",
+  "rec": "A. The implementation tickets then all live in talvor/asmai, as AssemblyAI#27 intends, and the hand steps are the few that make that possible. B puts M0's tickets in the planning repository, which AssemblyAI#27 keeps as the record of planning.",
+  "options": [
+   "A: you do M0's first steps by hand before running to-tickets: create talvor/asmai, copy the glossary and ADRs 0001 to 0009, run setup-matt-pocock-skills there and set up no-mistakes; to-tickets on M0 then covers the rest (the Go module, CI, the fake provider, notices, the fixture repository and the OS users)",
+   "B: M0's to-tickets run happens in talvor/AssemblyAI's tracker, and its tickets create talvor/asmai; from M1 on, to-tickets runs in talvor/asmai"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept M0 Groundwork?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start M1 Walking skeleton. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

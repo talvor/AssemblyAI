@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 How M0 starts before to-tickets can run in talvor/asmai": "A: you do M0's first steps by hand before running to-tickets: create talvor/asmai, copy the glossary and ADRs 0001 to 0009, run setup-matt-pocock-skills there and set up no-mistakes; to-tickets on M0 then covers the rest (the Go module, CI, the fake provider, notices, the fixture repository and the OS users)",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}
