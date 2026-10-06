@@ -1,0 +1,8 @@
+{
+ "round1": {
+  "Q1 How M1 gets its pinned Claude, its repository and its staffing": "A: M1 delivers the minimal real forms: `asmai providers install` for Claude Code only, `asmai repo add`, and the configuration file with only the fields M1 uses (Claude staffing for the three roles and the fixture repository's entry); M2 completes them with Codex, init, doctor, config apply and every field",
+  "Q2 Whether leaders start on demand from M1": "A: from M1 the daemon starts a role's leader when a message for its role arrives (02 rule 51); stopping idle leaders and a leader's provider choice (rules 52 and 53) come in M5",
+  "Q3 How demo paths are recorded before M4": "A: every milestone's demo is recorded with an ordinary terminal recorder running in the demo terminal; from M4 on, AsmAI's own per-dispatch recordings are kept alongside",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}
