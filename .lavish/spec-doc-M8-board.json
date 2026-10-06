@@ -1,0 +1,14 @@
+{
+ "doc": "docs/spec/milestones/M8-release-and-upgrade.md",
+ "name": "M8 Release and upgrade",
+ "round": "Round 1",
+ "intro": "The release workflow and attestations, the install script, the running factory keeping its version, new provider pins at start, store migrations, backups and restore, asmai notices, and the qualification record start enforces; C5, then all 47 cases together on the candidate commit, and the first release candidate. The milestone table and the accepted documents settle it, so there is no question; review it and accept or annotate. After it, one final board asks you to confirm the whole specification.",
+ "questions": ".lavish/spec-doc-M8-round1-questions.json",
+ "answers": ".lavish/spec-doc-M8-answers.json",
+ "notes": [
+  "The demo path is the first release candidate, the table's \"What it makes possible\"; its exit checks therefore include v1.0.0-rc.1 being published.",
+  "Store migrations are kept from v1.0.0-rc.1, so the first candidate has none to run yet; C5 and the harness exercise an upgrade between builds.",
+  "After M8 describes the proving-and-launch phase, which has no milestone document of its own; 11 specifies it."
+ ],
+ "out": ".lavish/spec-doc-M8.html"
+}
