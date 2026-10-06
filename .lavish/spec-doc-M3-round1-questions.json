@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "Do earlier milestones' cases run again at each milestone's end?",
+  "section": "Qualification cases",
+  "body": "The end-of-milestone rule (AssemblyAI#27) says a milestone's own qualification cases pass in the harness on Linux and have run on the Mac. M2 is told to rerun M1's cases on Codex, and M8 runs all 47 together on the candidate commit. The sources do not say whether the cases of earlier milestones run again at other milestones' ends. This matters first for M3, which has no cases of its own, and then for M4 to M7.",
+  "rec": "B. It is the rule as confirmed: development tests already guard every pull request against regressions, and M8 runs all 47 together on the candidate commit before any release. A catches a provider-level regression earlier, but every harness run uses your real allowance and time at each of six milestones.",
+  "options": [
+   "A: yes: at every milestone's end the harness runs every case passed so far, not only the milestone's own",
+   "B: no: each milestone runs only its own cases (M2 also reruns M1's on Codex); all 47 run together in M8; M3 therefore has no harness check"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept M3 Decisions and planning?",
+  "body": "Accepting applies your answer above, here and in M4 to M7, and any annotations. I then commit the document and start M4 Conversation and intervention. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
