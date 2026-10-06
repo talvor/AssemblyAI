@@ -1,0 +1,46 @@
+[
+ {
+  "id": "Q1",
+  "title": "A repository that asks for rebase, when pushes are never forced",
+  "section": "Keeping current and conflicts",
+  "body": "The sources conflict. AssemblyAI#11 says the job branch merges the base in unless the repository instructions ask for a rebase, and that pushed history is rewritten only when the repository instructions require it, and then with force-with-lease. AssemblyAI#18 and ADR 0007, decided later, say the daemon pushes the job branch with a plain push that is never forced, and that repository instructions never decide how the branch is pushed.\n\nThe job branch is first pushed at delivery (AssemblyAI#18), so a rebase before then needs no force. A rebase after it, for example to take in a moved base during review or in a follow-up job, would.\n\nRule 22 in the draft is open until you answer.",
+  "rec": "A. It keeps ADR 0007's \"never forced\" without an exception, still follows the repository's rebase convention for everything you have not seen yet, and says where it could not. B reopens the one push rule ADR 0007 made absolute, and a forced push on a PR under review rewrites the history you were reviewing. C ignores the convention even where following it costs nothing.",
+  "options": [
+   "A: never forced: a repository that asks for rebase has its job branch rebased by a worker until its first push; after that the base is merged in, and the PR body states the exception",
+   "B: AssemblyAI#11 stands as the one exception: when repository instructions require a rebase, the daemon pushes the rebased job branch with force-with-lease",
+   "C: always merge the base in; a rebase convention is listed as a gap in the PR body"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "How are one-at-a-time checks declared and run?",
+  "section": "Workspaces",
+  "body": "Settled: a repository whose checks cannot run side by side says so, and agents run those checks through an `asmai` command that takes turns per repository (AssemblyAI#11); AssemblyAI#27 lists one-at-a-time checks among the per-repository settings. The sources do not say what the declaration holds or name the command.\n\nRule 11 in the draft leaves both open.",
+  "rec": "A. The repository's checks (tests, lint, build) are what workers are already told to run, so one switch covers them without a list to keep in step with the repository. With B, a command missing from the list, or run with other arguments, runs side by side unnoticed. `asmai turn` says what it does; give another name in the notes if you prefer one.",
+  "options": [
+   "A: a per-repository switch; when it is on, agents run the repository's checks through `asmai turn -- <command>`, which waits until no other workspace of that repository is running one, then runs it and passes its exit status through",
+   "B: a per-repository list of the check commands that cannot run side by side; agents run those through `asmai turn -- <command>`, and anything else runs freely"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How are job and assignment branches named?",
+  "section": "The job branch",
+  "body": "No ticket names them. The job branch becomes the pull request's head branch, and assignment branches stay on origin until you delete them (AssemblyAI#11), so their names show in the PR and in the repository's branch list. Repository instructions decide how work is done in a repository (AssemblyAI#11), and some set a branch-naming convention.\n\nIn both options the slug comes from the job's title, and a follow-up that continues an open PR keeps its job branch.",
+  "rec": "A. The daemon can name the branch itself when it makes it, without an agent reading the instructions, and everything AsmAI made sits under `asmai/` for you to find and delete. B honours conventions on the branch reviewers see, at the cost of an agent supplying the name for each job.",
+  "options": [
+   "A: fixed names: the job branch is `asmai/job-<n>-<slug>`, and each assignment branch is `asmai/job-<n>/<assignment>`",
+   "B: as A, except that the job branch follows the repository's naming convention when its instructions give one"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 05 Repositories and job branches?",
+  "body": "Accepting applies your answers above and any annotations. I then commit the document and start 06 Validation and delivery. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

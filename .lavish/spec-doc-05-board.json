@@ -1,0 +1,15 @@
+{
+ "doc": "docs/spec/05-repositories-and-job-branches.md",
+ "name": "05 Repositories and job branches",
+ "round": "Round 1",
+ "intro": "How jobs work in repositories: the registry, AsmAI's own clone, workspaces and assignment branches, the job branch and its fast-forward on acceptance, keeping current, conflicts and outside commits, notes, the leaders' view, repository instructions, commit trailers and cleanup. One question is a conflict between AssemblyAI#11 and AssemblyAI#18; two come from silences. When you accept it I commit it and start 06 Validation and delivery.",
+ "questions": ".lavish/spec-doc-05-round1-questions.json",
+ "answers": ".lavish/spec-doc-05-answers.json",
+ "notes": [
+  "Rule 15 adds AssemblyAI#18's \"the daemon is the only party that ever moves the job branch\" to AssemblyAI#11's one-writer rule.",
+  "Rule 25 combines AssemblyAI#11 (fetch before every push; outside commits kept and merged) with AssemblyAI#18 (the daemon refuses the push, a worker merges the outside commits in, and the push is retried); 06 specifies the push itself.",
+  "Rule 37's last sentence is from AssemblyAI#18: repository instructions shape the PR and Quality's review, never how the branch is pushed.",
+  "The Codex skill folders and the clone's exclude file are specified in 08, and the no-CI declaration in 06; both are listed here only as per-repository settings and files."
+ ],
+ "out": ".lavish/spec-doc-05.html"
+}

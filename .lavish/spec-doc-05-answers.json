@@ -1,0 +1,8 @@
+{
+ "round1": {
+  "Q1 A repository that asks for rebase, when pushes are never forced": "A: never forced: a repository that asks for rebase has its job branch rebased by a worker until its first push; after that the base is merged in, and the PR body states the exception",
+  "Q2 How one-at-a-time checks are declared and run": "A: a per-repository switch; when it is on, agents run the repository's checks through `asmai turn -- <command>`, which waits until no other workspace of that repository is running one, then runs it and passes its exit status through",
+  "Q3 How job and assignment branches are named": "A: fixed names: the job branch is `asmai/job-<n>-<slug>`, and each assignment branch is `asmai/job-<n>/<assignment>`",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}
