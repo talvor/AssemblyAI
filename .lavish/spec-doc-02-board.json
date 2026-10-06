@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/02-daemon-and-store.md",
+ "name": "02 Daemon and store",
+ "round": "Round 1",
+ "intro": "The per-user daemon and its store: starting, stopping and the service; the store and journal; jobs; dispatch and assignment life cycles; the inbox and nudges; generations and fencing; effects; reconciliation; leaders on demand; and recovery. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 03 Provider sessions and terminals.",
+ "questions": ".lavish/spec-doc-02-round1-questions.json",
+ "answers": ".lavish/spec-doc-02-answers.json",
+ "notes": [
+  "Rule 7: AssemblyAI#7 says every start restores the leaders, written when every leader ran all the time. Under AssemblyAI#14's leaders on demand, the draft restores Coordination and every leader whose role has open work.",
+  "Rule 43: AssemblyAI#9's command list gives `asmai effect` to workers only. AssemblyAI#18 and ADR 0007 later have the delivering leader record the PR it opens as an effect, so 09's guard will let the delivering leader record effects too.",
+  "Rule 21 leaves when each kind of job ends to 06, which owns delivery, so the rule is stated once.",
+  "The silence timeout, drain timeout and automatic-retry count are listed here because rules here use them, and in 07, which owns the operating limits; 09 gives every field's name once.",
+  "The socket's path and the name of the session-credential variable are left to implementation: no ticket decides them, and nothing depends on them beyond the ASMAI_ prefix."
+ ],
+ "out": ".lavish/spec-doc-02.html"
+}

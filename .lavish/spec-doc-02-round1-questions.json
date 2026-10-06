@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "How does work continue after a clean `asmai stop`?",
+  "section": "Stopping",
+  "body": "The sources are silent on this. AssemblyAI#7 says only that an unclean stop recovers through reconciliation at the next start, and that pending decisions, grants and queued requests survive a stop. AssemblyAI#14 says resumptions after `asmai stop` do not count toward the 5-dispatch limit, which assumes work resumes after a stop. Nothing says how a worker whose session ended with the daemon continues.\n\nRule 11 in the draft holds option A, marked as proposed.",
+  "rec": "A. It is the reading AssemblyAI#14's counting rule assumes, and it keeps the clean and unclean stops of AssemblyAI#7 apart. With B, every planned restart, including every upgrade (stop, install, start), would cost a reconciliation of every running assignment.",
+  "options": [
+   "A: the next start runs each worker that stopped at a boundary again on the same provider, resuming its native session where possible, with a new dispatch that is a resumption; if its session cannot be resumed, its assignment needs reconciliation",
+   "B: after any stop, every assignment that was in progress needs reconciliation by its owning leader, as after a crash"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 02 Daemon and store?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 03 Provider sessions and terminals. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
