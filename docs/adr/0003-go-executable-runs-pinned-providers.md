@@ -15,5 +15,6 @@ AsmAI ships as a single self-contained Go executable with SQLite built in. That 
 - Codex 0.157.0 cannot hide the user's personal skills from agent sessions, so skill isolation belongs to the skill-bundle decision.
 - Upgrades are deliberate. AsmAI upgrades through its install channel, with no self-update. Provider pins move by requalifying and running `asmai providers install`.
 - 2026-10-06: the Homebrew tap was dropped. The install script, fetching a release from GitHub Releases, is the only install channel (ADR 0009, [Choose license, release packaging and upgrade migration](https://github.com/talvor/AssemblyAI/issues/20)).
+- 2026-10-07: Node is no longer a host prerequisite. Lavish runs as an executable AsmAI compiles with Deno whenever its pin moves, and the pinned versions of Claude Code, Codex and lavish-axi live in one committed pins file (ADR 0010).
 
 Decided in [Define CLI setup and management experience](https://github.com/talvor/AssemblyAI/issues/9).

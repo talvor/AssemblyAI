@@ -33,8 +33,8 @@ Nothing: M0 is the first milestone. Every later milestone builds on it.
 | 1 | Apache-2.0 | All |
 | 2 | In the repository | All |
 | 3 | Contributions | All |
-| 4 | Notices travel inside the executable | All |
-| 5 | A license allow-list | All |
+| 4 | Notices travel inside the executable | the executable's notices |
+| 5 | A license allow-list | compiled-in Go modules |
 | 6 | Copying from the references | All |
 | 8 | talvor/asmai | the repository |
 

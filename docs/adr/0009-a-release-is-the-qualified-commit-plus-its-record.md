@@ -16,5 +16,6 @@ Each AsmAI release carries a qualification record that `asmai start` enforces. T
 - Certifying another platform, such as macOS after Linux, takes a new release.
 - No Apple Developer ID is needed. curl sets no quarantine, and the Go linker's ad-hoc signature runs on Apple silicon. An archive downloaded in a browser needs its quarantine cleared by hand.
 - Every file is under Apache-2.0, with a generated third-party notices file embedded in the executable and printed by `asmai notices`.
+- 2026-10-07: a release does not build Lavish. It pins a separately published, attested Lavish build by digest in its pins file, and the release workflow checks that build exists for every certified platform (ADR 0010).
 
 Decided in [Choose license, release packaging and upgrade migration](https://github.com/talvor/AssemblyAI/issues/20).

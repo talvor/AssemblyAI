@@ -1,0 +1,14 @@
+{
+ "options": {
+  "L1": "AsmAI builds lavish-axi with deno compile; no Node on the host. Also accepts SIL OFL 1.1 for Lavish's vendored fonts, with the Deno runtime's licenses audited before M3",
+  "S1": "Keep the skill bundle embedded in the executable (no change)",
+  "T1": "Pin how the daemon runs Lavish in chapter 04: its own state directory and port, localhost only, telemetry off, the server in the foreground and restarted when it exits"
+ },
+ "round1": {
+  "asmai-delivery-decision": "L1.S1.T1",
+  "message": "I would like to lock in these answers, so go ahead and update the specs and other related docs as needed.\nHowever I want to make one adjustment.  The version of lavish-axi that is used should be pinned in a config file somewhere in the repo, along side the pinned versions of claude and codex.  Therefore we really only need to build the lavish executable when the pinned version changes, so we do not need to rebuild it for every asmai release."
+ },
+ "round2": {
+  "end": "OK all good."
+ }
+}

@@ -5,7 +5,7 @@ M3 brings the user into the factory's decisions and adds the roles and kinds of 
 ## What it adds
 
 1. **Decisions:** versioned decision requests, answer surfaces, witnessed-message attribution of answers and grants, delegated decision records, and reuse of recorded decisions at skills' human steps ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [01](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/01-roles-and-decisions.md), [08](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/08-skills-and-agent-instructions.md)).
-2. **The Lavish server,** with the pinned Lavish installed by `asmai providers install`, rendering decision requests and collecting answers ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [04](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/04-conversation-and-lavish.md), [03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
+2. **The Lavish build and server:** the first Lavish build and the workflow that makes one whenever the Lavish pin moves, the pinned Lavish build installed by `asmai providers install`, and the Lavish server rendering decision requests and collecting answers ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [04](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/04-conversation-and-lavish.md), [03](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/03-provider-sessions-and-terminals.md)).
 3. **The Planning and Research roles,** with their skills, including grilling and Wayfinder questions reaching the user in Lavish ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [01](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/01-roles-and-decisions.md), [08](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/08-skills-and-agent-instructions.md)).
 4. **Notes delivery,** including notes pull requests and repository setup for a newly added repository ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [05](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/05-repositories-and-job-branches.md), [06](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/06-validation-and-delivery.md), [08](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/08-skills-and-agent-instructions.md)).
 5. **Jobs without a repository,** in scratch workspaces ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [05](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/05-repositories-and-job-branches.md)).
@@ -68,6 +68,7 @@ Where a rule arrives in parts, the table names the part this milestone delivers.
 | --- | --- | --- |
 | 1 | Never the user's copies | Lavish |
 | 2 | Installed on the user's command | Lavish |
+| 3 | Lavish needs no Node | All |
 
 **[04 Conversation and Lavish](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/04-conversation-and-lavish.md)**
 
@@ -140,6 +141,15 @@ Where a rule arrives in parts, the table names the part this milestone delivers.
 | 35 | Uncovered steps | All |
 | 36 | Grilling and Wayfinder | All |
 | 37 | Required content, not wording | Planning's and Research's instructions, and decisions |
+
+**[10 Release, install and upgrade](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md)**
+
+| Rule | | Part delivered here |
+| --- | --- | --- |
+| 4 | Notices travel inside the executable | a Lavish build's notices |
+| 5 | A license allow-list | everything compiled into a Lavish build |
+| 7 | Claude Code and Codex are not redistributed | Lavish |
+| 10 | The build | Lavish builds |
 
 ## Qualification cases
 
