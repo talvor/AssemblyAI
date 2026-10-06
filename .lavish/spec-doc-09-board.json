@@ -1,0 +1,17 @@
+{
+ "doc": "docs/spec/09-cli-and-configuration.md",
+ "name": "09 CLI and configuration",
+ "round": "Round 1",
+ "intro": "Names, every command for you and for agents, the agent guard, output formats, addressing, init and doctor, and the configuration file with every field's name, type, default and meaning. The one question asks you to review the field names, which the specification sets; everything else is stated as already decided. When you accept it I commit it and start 10 Release, install and upgrade.",
+ "questions": ".lavish/spec-doc-09-round1-questions.json",
+ "answers": ".lavish/spec-doc-09-answers.json",
+ "notes": [
+  "Rule 10 adds to AssemblyAI#9's agent commands those that later decisions need: `asmai turn` and `asmai push` (named on the 05 and 06 boards), `asmai effect` for the delivery owner (AssemblyAI#18), and `asmai job pause|resume|cancel` for Coordination's leader, citing your witnessed message (AssemblyAI#14).",
+  "Rule 8 reads AssemblyAI#9's \"agents may run only coordination commands\" as refusing every other command to an agent, with factory-changing ones also printing the command for you.",
+  "Rule 21 step 6 adds each provider's default model to init's role-staffing step, because the 07 board made it a setting that fallback needs.",
+  "Role staffing has no built-in default: init sets it, and `asmai start` names the step if it is missing.",
+  "Rule 21 says every init question has a flag, from AssemblyAI#9's \"flags for a non-interactive setup\"; the flag names are left to implementation.",
+  "The example in rule 34 uses placeholders for models, a sample repository, and the Engineering role only."
+ ],
+ "out": ".lavish/spec-doc-09.html"
+}

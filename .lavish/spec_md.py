@@ -72,6 +72,15 @@ def render(md):
         if not line.strip():
             i += 1
             continue
+        if line.startswith("```"):
+            code = []
+            i += 1
+            while i < len(lines) and not lines[i].startswith("```"):
+                code.append(html.escape(lines[i]))
+                i += 1
+            i += 1
+            out.append('<pre class="code mb-4"><code>' + "\n".join(code) + "</code></pre>")
+            continue
         m = re.match(r"(#{1,4}) (.*)", line)
         if m:
             level = len(m.group(1))
