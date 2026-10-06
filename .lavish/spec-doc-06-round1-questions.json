@@ -1,0 +1,45 @@
+[
+ {
+  "id": "Q1",
+  "title": "When is a notes-only pull request delivered?",
+  "section": "Notes-only jobs and jobs without a repository",
+  "body": "Settled: a repository job whose outcome is notes delivers like any other, with its job branch pushed and opened as a PR holding its notes (AssemblyAI#11); it gets no Quality validation unless the mandate asks, its leader's acceptance is the completion evidence, and its body says \"notes only\" (AssemblyAI#18). The sources do not say whether it opens as a draft and waits for CI, as a code PR does, or is ready at once.\n\nRule 38 in the draft is open until you answer.",
+  "rec": "A. \"Delivers like any other\" reads as the same cycle, and a red check on a notes PR (a docs linter, a link checker) is something you would want to know before reviewing. The cost is a short wait on CI that uses no worker or allowance. B is quicker but can hand you a PR whose checks fail.",
+  "options": [
+   "A: the same cycle as code: pushed, opened as a draft, marked ready when CI is green on its head (or straight away in a repository declared as having no CI); the job then ends",
+   "B: opened ready for review at once, without waiting for CI; the job ends when it is opened"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "What is the delivery owner's push request called?",
+  "section": "The push",
+  "body": "Settled: the daemon pushes the job branch when the delivery owner asks (AssemblyAI#18). The agent command set in AssemblyAI#9 was decided before that and has no command for asking; no ticket names one.\n\nRule 17 leaves the name open.",
+  "rec": "A. It says exactly what the daemon does. Delivery has several steps that the leader drives itself (validation, the PR, CI), so a broader name such as B would promise more than the command does.",
+  "options": [
+   "A: `asmai push <job>`, for the delivery owner only; it pushes the job branch, or refuses and records an outside change",
+   "B: `asmai deliver <job>`"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "How does your answer about CI become the no-CI declaration?",
+  "section": "No CI",
+  "body": "The sources conflict. AssemblyAI#18 puts the no-CI declaration in the repository's configuration, has Coordination's repository setup ask about CI when a repository is added, and has the factory ask you after 15 minutes with no check. AssemblyAI#9 says agents may not change the factory's configuration: such a command refuses an agent and prints the command for you to run. Nothing says how an answer you give Coordination reaches the configuration.\n\nRule 31 is open until you answer.",
+  "rec": "A. The declaration then lives in one place, the configuration, and only you change it, as AssemblyAI#9 requires; Coordination already works this way for `asmai repo add`. B leaves two places that can disagree about one repository.",
+  "options": [
+   "A: Coordination gives you the configuration change to make, as it does for `asmai repo add`; the declaration exists only in the configuration, and a held job resumes once you apply it",
+   "B: your answer is recorded as a decision for that repository and counts as its declaration; a value you later set in the configuration takes precedence"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 06 Validation and delivery?",
+  "body": "Accepting applies your answers above and any annotations. I then commit the document and start 07 Limits, holds and visibility. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
