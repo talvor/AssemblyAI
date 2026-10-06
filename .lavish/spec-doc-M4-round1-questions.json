@@ -1,0 +1,12 @@
+[
+ {
+  "id": "ACCEPT",
+  "title": "Accept M4 Conversation and intervention?",
+  "body": "No question this time: the milestone table and the accepted documents settle M4. Accepting applies any annotations you make. I then commit the document and start M5 Concurrency and limits. If you would rather see changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
