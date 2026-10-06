@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/08-skills-and-agent-instructions.md",
+ "name": "08 Skills and agent instructions",
+ "round": "Round 1",
+ "intro": "The skill bundle and the operating guide, skill lists and the leaders' indexes, per-provider delivery and hiding, added and repository skills, repository setup, reuse of decisions at skills' human steps, and what each role's instructions, the operating guide, the indexes and the PR section in results must contain. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 09 CLI and configuration.",
+ "questions": ".lavish/spec-doc-08-round1-questions.json",
+ "answers": ".lavish/spec-doc-08-answers.json",
+ "notes": [
+  "Rule 37 is the required content of the instructions that AssemblyAI#27 asks this document for. Every item restates a rule already accepted in 01 to 07 or here, cited there; the wording is written during implementation and proved by the proving scenarios.",
+  "Rule 16 is AssemblyAI#17's table with AssemblyAI#18's changes: pr is added to the Engineering leader's list, and code-review stays on Quality's worker list only.",
+  "Rule 3 keeps no-mistakes apart from the not-shipped skills AssemblyAI#17 lets you add, because AssemblyAI#18 places it and says only that it is not shipped and on no list.",
+  "Rule 14 does not list the user-invoked skills: upstream marks them, so the pinned release fixes which they are.",
+  "Rule 2 records 27 skills at upstream v1.3.1, as checked when AssemblyAI#17 was decided; a release pins whichever upstream release it qualifies."
+ ],
+ "out": ".lavish/spec-doc-08.html"
+}

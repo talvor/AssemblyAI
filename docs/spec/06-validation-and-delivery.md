@@ -38,7 +38,7 @@ This document specifies how a job's work is tested, validated and delivered: Eng
 ### The delivery owner
 
 15. **Engineering owns code delivery.** The Engineering leader owns the delivery of a job that changes code. It decides when the job branch is ready and hands validation to Quality, receives Quality's findings directly, owns the pull request, and follows CI through to a tested pull request. Coordination reports each step to the user ([AssemblyAI#18](https://github.com/talvor/AssemblyAI/issues/18)).
-16. **Notes are delivered by their own leader.** A notes-only job is delivered by the leader whose notes they are, Planning or Research ([AssemblyAI#18](https://github.com/talvor/AssemblyAI/issues/18)).
+16. **Notes are delivered by their own leader.** A notes-only job is delivered by the leader whose notes they are, Planning or Research ([AssemblyAI#18](https://github.com/talvor/AssemblyAI/issues/18)). A repository-setup job is delivered the same way by Coordination's leader ([08](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/08-skills-and-agent-instructions.md), [answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-08-answers.json)).
 
 ### The push
 
