@@ -1,0 +1,17 @@
+{
+ "doc": "docs/spec/03-provider-sessions-and-terminals.md",
+ "name": "03 Provider sessions and terminals",
+ "round": "Round 1",
+ "intro": "How agents run: AsmAI's pinned provider copies and per-session settings, sign-in, the daemon-owned terminals and hook intake, the input fence and positive submission acknowledgment, the modal allow-list, the attach client and status line, taking and releasing an agent, and recordings. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 04 Conversation and Lavish.",
+ "questions": ".lavish/spec-doc-03-round1-questions.json",
+ "answers": ".lavish/spec-doc-03-answers.json",
+ "notes": [
+  "Rule 18 names the kinds of hook event, not exact hook names: which hooks each provider version emits is qualified (C7, C12, C15), and the probe saw them differ between Claude Code and Codex.",
+  "Rule 23 does not name the acknowledgment signal; the probe saw prompt-submission hooks from both providers, and C7 qualifies the signal for each version.",
+  "Rule 29 gathers the status line's contents from ADR 0004 with the holds and queue from AssemblyAI#14 and the restart notice from AssemblyAI#20.",
+  "Where AssemblyAI#7 says an agent at an unknown input state or with a self-updated CLI \"pauses\", the draft says it holds, per AssemblyAI#14. Detaching without releasing still leaves the agent \"paused\", because that stop is yours.",
+  "Recording retention is set here, because 03 owns recordings; 07 points here.",
+  "Where the pinned copies live on disk is left to implementation; no ticket decides it."
+ ],
+ "out": ".lavish/spec-doc-03.html"
+}
