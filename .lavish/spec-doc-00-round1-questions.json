@@ -1,0 +1,45 @@
+[
+ {
+  "id": "Q1",
+  "title": "Which milestone first makes S7 possible?",
+  "section": "Proving scenarios to milestones",
+  "body": "The sources conflict. The milestone table in AssemblyAI#27 says M4 makes S7 possible. But S7's checklist in AssemblyAI#12 includes one job paused and resumed and another cancelled, and job pause, resume and cancel are added in M5, not M4.\n\nM3 adds the decision requests S7 needs and M4 adds the intervention, so the whole of S7 can first run at the end of M5. This changes the scenario column here and in the M4 and M5 documents; it does not change what any milestone builds.",
+  "rec": "A. It keeps every milestone's content as you confirmed it and only corrects which milestone first makes S7 runnable. B moves work into M4, whose scope the table settled.",
+  "options": [
+   "A: S7 is first possible at the end of M5; M4 makes its decision and intervention parts possible",
+   "B: move job pause, resume and cancel from M5 into M4, so S7 is possible at M4 as the table says"
+  ]
+ },
+ {
+  "id": "Q2",
+  "title": "Who do the rules name: \"the user\" or \"Phillip\"?",
+  "section": "User stories",
+  "body": "The tickets mostly write \"Phillip\", because you answered them as the first customer. The glossary and some rules say \"the user\", and AsmAI is open source and user-operated (AssemblyAI#15). Every document needs one convention.\n\nThe draft says \"the user\" in the factory's rules. It keeps \"Phillip\" only where a decision is about you personally: the maintainer's work, building talvor/asmai (you run to-tickets and merge its PRs), the Mac, the fixture repository you own, and the verdicts in the proving scenarios.",
+  "rec": "A. The rules describe what AsmAI does for whoever runs it, which is what the glossary already says. The decisions that really are about you keep your name.",
+  "options": [
+   "A: \"the user\" in the factory's rules; \"Phillip\" only where a decision is about you personally",
+   "B: \"Phillip\" throughout, as in the tickets"
+  ]
+ },
+ {
+  "id": "Q3",
+  "title": "Who opens the draft PR in the walking skeleton?",
+  "section": "Building v1",
+  "body": "The wording conflicts. The M1 row in AssemblyAI#27 says \"the daemon pushes, opens a draft PR, watches CI and marks it ready\". AssemblyAI#18 and ADR 0007 settled that the daemon pushes, watches CI and marks the PR ready, while the Engineering leader composes the PR and opens it with gh, recording it as an effect. AssemblyAI#27 lists no change to that decision.\n\nThe draft's M1 row is worded neutrally until you answer.",
+  "rec": "A. B would build a path that a later milestone has to remove, and C46 (a leader-opened PR reconciled as an effect) assumes the leader opens it.",
+  "options": [
+   "A: keep AssemblyAI#18: in M1 the Engineering leader opens the draft PR; the M1 row was shorthand",
+   "B: in M1 only, the daemon opens the draft PR, and the Engineering leader takes this over in a later milestone"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 00 Overview?",
+  "body": "Accepting applies your answers above and any annotations. I then commit the document and start 01 Roles and decisions. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
