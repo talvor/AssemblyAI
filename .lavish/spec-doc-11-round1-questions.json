@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "Where does S3's Wayfinder ticket live?",
+  "section": "The proving ground",
+  "body": "The sources are silent on this. AssemblyAI#12 makes S3 the resolution of \"one real Wayfinder ticket of AsmAI's next map\", recorded in the tracker. AssemblyAI#27 moved S1's feature, S4's fix and the proving record to talvor/asmai, but did not mention S3. It also says talvor/AssemblyAI keeps the v1 planning record, and that after v1.0.0 changes are recorded in talvor/asmai. S3 needs a registered repository whose tracker holds the map.\n\nRule 27 in the draft is open until you answer.",
+  "rec": "A. AsmAI's next map is about the code and releases that live in talvor/asmai, and AssemblyAI#27 already moves AsmAI's later record there. B would add new planning to a repository that is meant to stay the record of v1's planning.",
+  "options": [
+   "A: talvor/asmai: the next map and its Wayfinder tickets are issues there, and S3 resolves one of them",
+   "B: talvor/AssemblyAI: the next map is charted beside the v1 map"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 11 Qualification and proving?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start the milestone documents with M0 Groundwork. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
