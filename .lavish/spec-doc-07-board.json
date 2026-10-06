@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/07-limits-holds-and-visibility.md",
+ "name": "07 Limits, holds and visibility",
+ "round": "Round 1",
+ "intro": "The operating limits and how you see what is happening: worker caps and the queue, allowance, provider failures and lost sign-in, fallback before first dispatch, holds, work that keeps failing, pausing, resuming and cancelling a job, timeouts, asmai status, disk and logs. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 08 Skills and agent instructions.",
+ "questions": ".lavish/spec-doc-07-round1-questions.json",
+ "answers": ".lavish/spec-doc-07-answers.json",
+ "notes": [
+  "Rule 22 gathers every hold the tickets define into one table, with where each is specified; AssemblyAI#14 renamed the factory's own stops from pauses to holds.",
+  "Rule 24 adds the resumption after a clean stop that you decided on the 02 board to the list of dispatches that do not count; AssemblyAI#14 already listed `asmai stop`.",
+  "Rule 14's last sentence comes from AssemblyAI#9: confirming a provider change in `asmai config apply` for an agent that already has work is the human decision AssemblyAI#15 requires. That is also how you make the change when Coordination itself is held (rule 17).",
+  "Rule 34 adds added and repository skills (AssemblyAI#17) and rule 39 adds the pre-migration backups (AssemblyAI#20) to the status contents listed in AssemblyAI#14.",
+  "Rule 35 does not list what counts as needing you; it means what the status line shows as waiting on you."
+ ],
+ "out": ".lavish/spec-doc-07.html"
+}
