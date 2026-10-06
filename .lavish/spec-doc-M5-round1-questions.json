@@ -1,0 +1,24 @@
+[
+ {
+  "id": "Q1",
+  "title": "Which repositories does M5's concurrency demo use?",
+  "section": "Demo path",
+  "body": "The sources conflict. M5 makes S5 possible, and S5's checklist needs dispatches overlapping in three repositories (AssemblyAI#12). But the end-of-milestone rule (AssemblyAI#27) runs every demo path on the fixture repository, and M0 creates only one.\n\nThe no-CI part needs no extra repository: the fixture repository's CI can be made absent and the repository declared as having no CI.",
+  "rec": "A. The demo then shows what S5 checks, before the proving scenarios, without touching real repositories. Two more small repositories are little setup. B runs a milestone demo on your real repositories before the release candidate exists. C leaves the three-repository overlap unseen until the proving scenarios.",
+  "options": [
+   "A: two more small fixture repositories Phillip owns, added in M5 for the demo, so it runs across three",
+   "B: the fixture repository plus otman and dev-setup, the proving ground's real repositories",
+   "C: concurrent jobs in the fixture repository only; the three-repository overlap waits for S5 on the release candidate"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept M5 Concurrency and limits?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start M6 Recovery. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
