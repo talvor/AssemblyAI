@@ -1,0 +1,12 @@
+[
+ {
+  "id": "ACCEPT",
+  "title": "Accept M2 Both providers and skills?",
+  "body": "No question this time: the milestone table and the accepted documents settle M2. Accepting applies any annotations you make. I then commit the document and start M3 Decisions and planning. If you would rather see changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]

@@ -1,0 +1,14 @@
+{
+ "doc": "docs/spec/milestones/M2-both-providers-and-skills.md",
+ "name": "M2 Both providers and skills",
+ "round": "Round 1",
+ "intro": "Codex sessions and mixed staffing, providers install, init and doctor, the full configuration file, the skill bundle with its delivery and hiding, and platform certification checks; M1's cases run again on Codex. The milestone table and the accepted documents settle it, so there is no question; review it and accept or annotate. When you accept it I commit it and start M3 Decisions and planning.",
+ "questions": ".lavish/spec-doc-M2-round1-questions.json",
+ "answers": ".lavish/spec-doc-M2-answers.json",
+ "notes": [
+  "The demo path reads the table's \"S1's skeleton with each role on either provider\" as M1's path run with the roles mixed across providers in one job, and with each of the three roles on Codex in at least one run and on Claude in at least one.",
+  "M2 completes the minimal forms M1 built (Claude-only providers install, repo add and the configuration fields M1 uses), as decided on the M1 board.",
+  "Repository setup needs decision requests, so it is in M3 even though the skill bundle that runs it arrives here."
+ ],
+ "out": ".lavish/spec-doc-M2.html"
+}
