@@ -1,0 +1,16 @@
+{
+ "doc": "docs/spec/01-roles-and-decisions.md",
+ "name": "01 Roles and decisions",
+ "round": "Round 1",
+ "intro": "Who does what and who decides what: the five roles, leaders and workers, handoffs, assignments and acceptance, mandates and grants, delegated decisions, escalation, versioned decision requests, answer surfaces and witnessed messages. One question comes from a silence in the sources; everything else is stated as already decided. When you accept it I commit it and start 02 Daemon and store.",
+ "questions": ".lavish/spec-doc-01-round1-questions.json",
+ "answers": ".lavish/spec-doc-01-answers.json",
+ "notes": [
+  "Rules are numbered within each document so later documents and tickets can cite them (for example 01 rule 22).",
+  "Where AssemblyAI#6 says work \"pauses\" for a pending decision or withdrawn authority, the draft says it \"waits\" or is \"stopped\", because AssemblyAI#14 reserves pause for the user and hold for the factory's limits.",
+  "Final rules only: merging follows AssemblyAI#18 (never in v1, no grant can allow it), which narrowed AssemblyAI#6; a leader's automatic provider choice follows AssemblyAI#14, which widened AssemblyAI#15; Lavish is for reviews and questions, not the whole conversation (AssemblyAI#15 superseded the browser-first wording in AssemblyAI#5).",
+  "The spending budget is not a configuration setting: the default limits you approved in AssemblyAI#14 (round 2) do not list it, and your answer there was \"spending budget zero unless granted\".",
+  "The store record fields are what the cited rules require a record to hold; 02 specifies the store itself, and 09 the exact command syntax."
+ ],
+ "out": ".lavish/spec-doc-01.html"
+}

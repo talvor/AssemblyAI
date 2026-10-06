@@ -1,0 +1,6 @@
+{
+ "round1": {
+  "Q1 How is a grant recorded": "A: you give a grant in words; a leader records it with `asmai decision record` at its scope, citing your words (Coordination for one given in the conversation, the requesting leader for one given in an answer), and the daemon refuses it without a valid citation",
+  "ACCEPT": "A: accept, with my answers and annotations applied"
+ }
+}

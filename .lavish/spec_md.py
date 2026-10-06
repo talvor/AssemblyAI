@@ -27,7 +27,7 @@ def inline(t):
     t = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", t)
     t = re.sub(r"(?<![\w*])_([^_]+)_(?![\w*])", r"<i>\1</i>", t)
     t = re.sub(r"\x00(\d+)\x00", lambda m: f"<code>{codes[int(m.group(1))]}</code>", t)
-    return t
+    return t.replace("\\|", "|")
 
 
 LIST_ITEM = re.compile(r"(\s*)(- |\d+\. )(.*)")

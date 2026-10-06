@@ -1,0 +1,23 @@
+[
+ {
+  "id": "Q1",
+  "title": "How is a grant recorded?",
+  "section": "Grants and reuse of approvals",
+  "body": "The sources are silent on this. AssemblyAI#9's command set gives you `asmai grants` and `asmai grant revoke <id>` but no command that creates a grant, and gives leaders `asmai decision record`. AssemblyAI#10 says a grant attributed to you must cite your witnessed message (or, per AssemblyAI#12, a Lavish answer). Nothing says who records it.\n\nThe draft's interface table assumes A.",
+  "rec": "A. It keeps the command set from AssemblyAI#9, and every grant has your own words behind it, on the same path as every other record attributed to you. B adds a second way to grant authority that bypasses Coordination's record of the conversation.",
+  "options": [
+   "A: you give a grant in words; a leader records it with `asmai decision record` at its scope, citing your words (Coordination for one given in the conversation, the requesting leader for one given in an answer), and the daemon refuses it without a valid citation",
+   "B: add a command for you, `asmai grant <scope> …`, besides granting in the conversation"
+  ]
+ },
+ {
+  "id": "ACCEPT",
+  "title": "Accept 01 Roles and decisions?",
+  "body": "Accepting applies your answer above and any annotations. I then commit the document and start 02 Daemon and store. If you would rather see the changes first, choose another round.",
+  "rec": "A, unless your annotations change substance.",
+  "options": [
+   "A: accept, with my answers and annotations applied",
+   "B: show me another round with the changes"
+  ]
+ }
+]
