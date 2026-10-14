@@ -295,7 +295,7 @@ Each component document lists the qualification cases and proving scenarios its 
 | [09 CLI and configuration](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/09-cli-and-configuration.md) | Names, human and agent commands and the agent guard, output formats, addressing, `asmai init` and `doctor`, the configuration file and its schema, `config apply` |
 | [10 Release, install and upgrade](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/10-release-install-and-upgrade.md) | License and notices, the build, the release workflow and attestations, the install script, version numbers, upgrades, provider pins, configuration across releases, store migrations and restore |
 | [11 Qualification and proving](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/11-qualification-and-proving.md) | The harness, the separate OS user, fault injection and replay, the fixture repository, the 47 cases, the qualification record and doctor's self-check, the proving scenarios, their checklists and record |
-| [milestones/M0](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M0-groundwork.md) to [M8](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M8-release-and-upgrade.md) | Which rules of which component documents each milestone delivers, its exit checks, and the cases and demo path that close it |
+| [milestones/M0](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M0-groundwork.md) to [M8](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M8-release-and-upgrade.md), and [MC](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md) outside their order | Which rules of which component documents each milestone delivers, its exit checks, and the cases and demo path that close it |
 
 Each component document has the same sections: rules; interfaces (commands, store records, files); settings and defaults; failure handling; the qualification cases and proving scenarios it serves; and its sources ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
 
@@ -303,13 +303,13 @@ Each component document has the same sections: rules; interfaces (commands, stor
 
 - **Who builds it.** Firstmate crews implement the tickets with the implement and tdd skills, each ticket a PR in talvor/asmai gated by no-mistakes, which Phillip merges. AsmAI first works on its own code at the release candidate, in the proving scenarios. Phillip may try development builds on side tasks at any time ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
 - **Tickets.** Phillip runs to-tickets in talvor/asmai on the milestone documents, in order, one milestone at a time. Its tickets are vertical slices that link into the component documents, each blocked by tickets of its own run or by the previous milestone ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
-- **Order.** A walking skeleton first, then milestones that widen it toward the proving scenarios, with the qualification harness growing at each step. Between them the milestones cover all 47 cases ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)):
+- **Order.** A walking skeleton first, then milestones that widen it toward the proving scenarios, with the qualification harness growing at each step. Between them the milestones, MC included, cover all 47 cases ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)):
 
 | Milestone | What it adds | Cases that pass at its end | What it makes possible |
 | --- | --- | --- | --- |
 | [M0 Groundwork](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M0-groundwork.md) | talvor/asmai with the copied glossary and ADRs, its tracker and no-mistakes gating; the Go module `github.com/talvor/asmai`; hosted CI on Linux and macOS with the fake provider, the license allow-list and generated notices; the fixture repository and the harness's separate OS users on this host and the Mac | None | Every later milestone |
 | [M1 Walking skeleton](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M1-walking-skeleton.md) | On Claude only: `asmai start` and `stop`, the daemon, store and journal, daemon-owned terminals with hooks, nudges and `asmai inbox`, attaching to the conversation. Coordination opens a job from the user's witnessed message and hands it to Engineering; one writing assignment in a workspace of AsmAI's clone; acceptance fast-forwards the job branch; Quality validates the head; the daemon pushes, the Engineering leader opens a draft PR, and the daemon watches CI and marks it ready; the link is reported | C3, C4, C7, C11, C19, C36, C37, C41, C42, C43, C45 | A tested PR on the fixture repository, end to end |
-| [M2 Both providers and skills](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M2-both-providers-and-skills.md) | Codex sessions and mixed staffing; `providers install`, `init` and `doctor`; the configuration file; the skill bundle, its delivery and hiding; platform certification checks; M1's cases rerun on Codex | C1, C2, C33, C34, C35 | S1's skeleton with each role on either provider |
+| [M2 Skills](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M2-skills.md) | `init` and `doctor`; the configuration file; the skill bundle, its delivery and hiding on Claude Code; platform certification checks | C1, C2, C33, C34 | S1's skeleton with the skill bundle |
 | [M3 Decisions and planning](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M3-decisions-and-planning.md) | Decision requests, answer surfaces and grants; the Lavish build and server, rendering and answer collection; Planning and Research; notes delivery; jobs without a repository; several assignments per job | None new | The full S1 path, S2, S3, S4 |
 | [M4 Conversation and intervention](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M4-conversation-and-intervention.md) | The status line, focused job, catch-up, unsent text and second attach; take, release and intervention records; the modal allow-list; recordings and replay | C6, C8, C9, C10, C12, C13, C14 | S7's decision and intervention parts |
 | [M5 Concurrency and limits](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M5-concurrency-and-limits.md) | Worker caps and the queue; concurrent jobs and repositories; conflicts and outside commits; leaders on demand; allowance, provider failures, lost sign-in and holds; job pause, resume and cancel; the no-CI declaration and the 15-minute wait; the failed-validation limit; the disk floor | C26 to C32, C38, C39, C44 | S5, S6, S7 |
@@ -318,8 +318,15 @@ Each component document has the same sections: rules; interfaces (commands, stor
 | [M8 Release and upgrade](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M8-release-and-upgrade.md) | The release workflow and attestations; the install script; the running factory keeping its version; new provider pins at start; store migrations, backups and `asmai restore`; `asmai notices`; the qualification record that `start` enforces | C5, then all 47 together on the candidate commit | The first release candidate |
 | Proving and launch | S1 to S9 on the release candidate, with Phillip's verdicts; AsmAI builds the v2 notify command (S1) and fixes a real defect (S4) in talvor/asmai | All 47 on Linux x86_64 | v1.0.0 on Linux; macOS certified by a later release |
 
+- **Codex Provider sits outside the order.** [MC Codex provider](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md) has no number, so that it can be inserted at any time after M2 and later milestones keep theirs ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)):
+
+| Milestone | What it adds | Cases that pass at its end | What it makes possible | Prerequisites |
+| --- | --- | --- | --- | --- |
+| [MC Codex provider](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md) | Codex sessions and mixed staffing; Codex in `providers install`, `init`, `doctor` and the configuration file; the skill bundle's delivery and hiding on Codex; Codex's provider checks; M1's cases rerun on Codex | C35, and C3, C4, C7, C11, C19, C36, C37, C41, C42, C43 and C45 again on Codex | S1's skeleton with each role on either provider | M1 and M2 |
+
+- **What assumes Codex.** Without MC, the factory runs on Claude Code alone. The cases that depend on a second provider (C9 and C27 for each provider, C30), M8's C5 and its all-47 run, and the proving scenarios that run each role on Codex and mix providers in S1 need MC, which has to be inserted before M8 can end. [MC](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md) lists each assumption and the questions it leaves open.
 - **Two corrections to the table in [AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)**, made in review of this document ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-00-answers.json)): S7 needs job pause, resume and cancel, which M5 adds, so the whole of S7 is first possible at M5's end; and in M1, as everywhere, the Engineering leader opens the PR, as [AssemblyAI#18](https://github.com/talvor/AssemblyAI/issues/18) and [ADR 0007](https://github.com/talvor/AssemblyAI/blob/main/docs/adr/0007-asmai-delivers-tested-prs-with-its-own-roles.md) decided.
-- **The end of a milestone.** A milestone ends when its tickets are closed, the development tests are green on both platforms, its qualification cases pass in the harness on Linux and have run on the Mac, and its demo path has run once on the fixture repository, with the terminal recording kept for Phillip to watch. A macOS failure becomes a ticket in the next milestone and never holds up the Linux release candidate ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)). The demo is recorded with an ordinary terminal recorder running in the demo terminal; from M4 on, AsmAI's own per-dispatch recordings are kept alongside ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M1-answers.json)). Each milestone runs only its own cases; M2 also reruns M1's on Codex, and all 47 run together in M8 ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M3-answers.json)).
+- **The end of a milestone.** A milestone ends when its tickets are closed, the development tests are green on both platforms, its qualification cases pass in the harness on Linux and have run on the Mac, and its demo path has run once on the fixture repository, with the terminal recording kept for Phillip to watch. A macOS failure becomes a ticket in the next milestone and never holds up the Linux release candidate ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)). The demo is recorded with an ordinary terminal recorder running in the demo terminal; from M4 on, AsmAI's own per-dispatch recordings are kept alongside ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M1-answers.json)). Each milestone runs only its own cases; MC also reruns M1's on Codex, and all 47 run together in M8 ([answers](https://github.com/talvor/AssemblyAI/blob/main/.lavish/spec-doc-M3-answers.json)).
 - **The Mac** is one Phillip already has. M0 sets it up with the harness's separate OS user ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
 - **Launch.** v1 launches when Linux is certified and every proving scenario has passed. macOS follows when it is certified. Nothing a burn-in period would find holds up the launch; it becomes a fix in a later release ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12)).
 
@@ -348,7 +355,7 @@ Each component document has the same sections: rules; interfaces (commands, stor
 | [AssemblyAI#18 Choose validation and delivery ownership](https://github.com/talvor/AssemblyAI/issues/18) | 06; 08 (operating-guide mappings, PR section); 01 (findings that need the user) |
 | [AssemblyAI#19 Validate interactive CLI coordination and intervention](https://github.com/talvor/AssemblyAI/issues/19) | 03, 02 |
 | [AssemblyAI#20 Choose license, release packaging and upgrade migration](https://github.com/talvor/AssemblyAI/issues/20) | 10 |
-| [AssemblyAI#27 Choose the specification's structure and implementation sequence](https://github.com/talvor/AssemblyAI/issues/27) | 00; 11 (development tests, the harness); M0 to M8 |
+| [AssemblyAI#27 Choose the specification's structure and implementation sequence](https://github.com/talvor/AssemblyAI/issues/27) | 00; 11 (development tests, the harness); M0 to M8 and MC |
 
 ### Qualification cases to documents and milestones
 
@@ -390,7 +397,7 @@ Each case is listed under the document whose rules it qualifies; other documents
 | C32 | Below the free-space floor no new workspace is created | 07 | M5 |
 | C33 | Personal, provider built-in and repository skills are hidden | 08 | M2 |
 | C34 | Per-session skill delivery works with Claude's namespaced plugin skills | 08 | M2 |
-| C35 | Codex finds the skills written into its workspace | 08 | M2 |
+| C35 | Codex finds the skills written into its workspace | 08 | MC |
 | C36 | Instruction files load without the repository's provider configuration | 05 | M1 |
 | C37 | Provider write guards are switched on | 05 | M1 |
 | C38 | Concurrent jobs in one repository | 05 | M5 |
@@ -404,7 +411,7 @@ Each case is listed under the document whose rules it qualifies; other documents
 | C46 | A leader-opened PR reconciled as an effect, including a crash between the push and the PR | 06 | M6 |
 | C47 | Remote use over SSH: `--host`, Lavish through port forwarding, and plain `ssh -t host asmai` | 09 | M7 |
 
-All 47 run together on the candidate commit in M8, and again on Linux x86_64 for the launch ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)).
+All 47 run together on the candidate commit in M8, and again on Linux x86_64 for the launch ([AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27)). MC reruns M1's cases C3, C4, C7, C11, C19, C36, C37, C41, C42, C43 and C45 on Codex; they keep M1 as the milestone at whose end they first pass.
 
 ### Proving scenarios to milestones
 
@@ -412,7 +419,7 @@ Every scenario runs for the record on the release candidate, after M8. The miles
 
 | Scenario | First possible at the end of |
 | --- | --- |
-| S1 Feature to tested PR | M3 (its skeleton at M2) |
+| S1 Feature to tested PR | M3 and MC (its skeleton at M2) |
 | S2 Research | M3 |
 | S3 Planning | M3 |
 | S4 Diagnosis | M3 |
