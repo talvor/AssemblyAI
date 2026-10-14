@@ -46,7 +46,7 @@ This document specifies what must pass before v1 launches and how it is shown: d
 
 ### The 47 qualification cases
 
-24. **All 47 are the v1 qualification cases.** Each is listed with the documents whose rules it qualifies and the milestone at whose end it first passes; all 47 run together on the candidate commit in M8 and again on Linux x86_64 for the launch ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12), [AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [00](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/00-overview.md)).
+24. **All 47 are the v1 qualification cases.** Each is listed with the documents whose rules it qualifies and the milestone at whose end it first passes; all 47 run together on the candidate commit in M8 and again on Linux x86_64 for the launch. MC (the Codex provider milestone) sits outside the numbered order: it passes C35 and reruns M1's cases on Codex, and has to be inserted before M8 can end ([AssemblyAI#12](https://github.com/talvor/AssemblyAI/issues/12), [AssemblyAI#27](https://github.com/talvor/AssemblyAI/issues/27), [00](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/00-overview.md), [MC](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md)).
 
 | Case | What is qualified | Document | Milestone |
 | --- | --- | --- | --- |
@@ -90,7 +90,7 @@ This document specifies what must pass before v1 launches and how it is shown: d
 | **Skills** | | | |
 | C33 | Personal, provider built-in and repository skills are hidden, including Claude's built-in code-review next to the shipped one | 08 | M2 |
 | C34 | Per-session skill delivery works although Claude namespaces plugin skills and upstream skills call each other by bare name | 08 | M2 |
-| C35 | Codex finds the skills written into its workspace | 08 | M2 |
+| C35 | Codex finds the skills written into its workspace | 08 | MC |
 | **Repository work** | | | |
 | C36 | Instruction files load without the repository's provider configuration | 05 | M1 |
 | C37 | Provider write guards are switched on | 05 | M1 |

@@ -13,7 +13,7 @@ M3 brings the user into the factory's decisions and adds the roles and kinds of 
 
 ## Builds on
 
-[M2 Both providers and skills](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M2-both-providers-and-skills.md): both providers, the configuration, and the skill bundle with its operating guide.
+[M2 Skills](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/M2-skills.md): the setup commands, the configuration, and the skill bundle with its operating guide. M3 does not need Codex: [MC Codex provider](https://github.com/talvor/AssemblyAI/blob/main/docs/spec/milestones/MC-codex-provider.md) can be inserted before or after it.
 
 ## Rules delivered
 
